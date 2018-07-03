@@ -1,44 +1,30 @@
-inherit_gem:
-  rubocop-rails:
-    - config/rails.yml
 AllCops:
+  Include:
+    - Rakefile
+    - config.ru
   Exclude:
-    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
     - 'db/**/*'
     - 'config/**/*'
-    - 'node_modules/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
-    - 'tmp/**/*'
-    - 'test/**/*'
+    - 'bin/**/*'
+    - 'tmp/*'
+    - 'Guardfile'
+    - 'Gemfile'
+    - 'node_modules/**/*' #webpacker & rails 5.1 
 
-ConditionalAssignment:
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120 #default is 80
+  
+Rails/Output:
+  Exclude:
+    - 'db/*.rb'
+
+Style/ClassAndModuleChildren:
   Enabled: false
-StringLiterals:
-  Enabled: false
-RedundantReturn:
-  Enabled: false
-Documentation:
-  Enabled: false
-WordArray:
-  Enabled: false
-AbcSize:
-  Enabled: false
-MutableConstant:
-  Enabled: false
-SignalException:
-  Enabled: false
-Casecmp:
-  Enabled: false
-CyclomaticComplexity:
-  Enabled: false
-MethodMissing:
-  Enabled: false
-Style/FrozenStringLiteralComment:
-  Enabled: false
-LineLength:
-  Max: 120
-Style/EmptyMethod:
-  Enabled: false
-Bundler/OrderedGems:
+
+Style/Documentation:
   Enabled: false

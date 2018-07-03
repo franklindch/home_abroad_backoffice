@@ -9,17 +9,25 @@
         th Header
     tbody
       tr
-        td 1,001
-        td Lorem
-        td ipsum
-        td dolor
-        td sit
+        #accordion.accordion
+          .card
+            #headingOne.card-header
+              a.btn.btn-link aria-controls="collapseOne" aria-expanded="true" data-target="#collapseOne" data-toggle="collapse" type="button" 
+                td 1,001
+                td Lorem
+                td ipsum
+                td 
+                    i.fa.fas.fa-edit
+                td 
+                    i.fa.far.fa-trash-alt
+              = render 'shared/components/collapse'
+
       tr
         td 1,002
         td amet
         td consectetur
         td adipiscing
-        td elit
+        td 
       tr
         td 1,003
         td Integer

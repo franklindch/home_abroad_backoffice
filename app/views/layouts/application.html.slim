@@ -7,11 +7,11 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
-    = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css', integrity: 'sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4', crossorigin: 'anonymous'
     / = stylesheet_pack_tag 'application', media: 'all'
     /! Uncomment if you import CSS in app/javascript/packs/application.js
   body
-    = render 'shared/components/navbar/top_navbar'
+    - if user_signed_in?
+        = render 'shared/components/navbar/top_navbar'
     .page-wrapper
         .container-fluid
             = yield

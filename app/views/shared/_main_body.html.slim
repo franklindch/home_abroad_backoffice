@@ -1,6 +1,9 @@
 main.col-md-9.ml-sm-auto.col-lg-10.px-4 role="main" 
-	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.main-body
     	h1.h2 Dashboard
-		input.form-control.form-control-dark.w-100 aria-label="Search" placeholder="Trouver une famille" type="text"
-        button.btn.btn-sm.btn-outline-secondary Créer une famille
+		input.form-control.form-control-dark aria-label="Search" placeholder="Trouver une famille" type="text"
+		.btn-group
+	        button.btn.btn-sm.btn-primary.button
+	        	i.fa.fas.fa-plus-circle.d-flex.justify-content-around Créer une famille
+	        button.btn.btn-sm.btn-outline-primary.button Retour
     = render 'shared/components/table'

@@ -4,7 +4,6 @@ AllCops:
     - config.ru
   Exclude:
     - 'vendor/**/*'
-    - 'Gemfile'
     - 'db/**/*'
     - 'config/**/*'
     - 'bin/**/*'
@@ -17,7 +16,7 @@ Rails:
   Enabled: true
 
 Metrics/LineLength:
-  Max: 120 #default is 80
+  Max: 100 #default is 80
   
 Rails/Output:
   Exclude:

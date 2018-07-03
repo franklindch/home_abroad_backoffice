@@ -1,0 +1,19 @@
+section
+  .row
+    .col-md-4.mx-auto
+      .card.mt-5
+        .card-header
+          h2 Se connecter
+        .card-body
+          = simple_form_for(resource,\
+            as: resource_name,
+            url: session_path(resource_name)) do |f|
+            .form-inputs
+              = f.input :email, required: false, autofocus: true
+              = f.input :password, required: false
+              - if devise_mapping.rememberable?
+                = f.input :remember_me, as: :boolean
+            .form-actions
+              = f.button :submit, "Valider", class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Chargement..."} 
+
+          / = render 'devise/shared/links'

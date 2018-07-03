@@ -3,7 +3,7 @@ html
   head
     meta charset="UTF-8" /
     meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" /
-    title TODO
+    title Home_abroad_backoffice
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
@@ -11,14 +11,9 @@ html
     / = stylesheet_pack_tag 'application', media: 'all'
     /! Uncomment if you import CSS in app/javascript/packs/application.js
   body
-    = render 'shared/components/top_navbar'
-    .container-fluid
-        .row
-            .col-12.col-md-3
-                = render 'shared/components/left_navbar'
-            .col-12.col-md-9
-                = render 'shared/main_body'
-    / = render 'shared/flashes'
-    = yield
+    = render 'shared/components/navbar/top_navbar'
+    .page-wrapper
+        .container-fluid
+            = yield
     = javascript_include_tag 'application'
     = javascript_pack_tag 'application'

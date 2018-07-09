@@ -1,7 +1,7 @@
 nav.navbar.fixed-top.flex-md-nowrap.p-0
-  a.navbar-brand.col-sm-3.col-md-2.mr-0 href="#" Backoffice Home Abroad
-  input.form-control.form-control-dark.w-100 aria-label="Search" placeholder="Search" type="text"
+  a.navbar-brand.col-sm-3.col-md-2.mr-0 href="/dashboard/families" Backoffice Home Abroad
+  / input.form-control.form-control-dark.w-100 aria-label="Search" placeholder="Search" type="text"
   ul.navbar-nav.px-3
     li.nav-item.text-nowrap
-    = link_to destroy_user_session_path do
+    = link_to destroy_user_session_path, method: :delete do
       .nav-link href="#" Se déconnecter

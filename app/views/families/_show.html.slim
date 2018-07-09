@@ -1,0 +1,14 @@
+h1.h2 = "Famille #{@family.id}, #{@family.name}"
+.btn-toolbar.mb-2.mb-md-0
+  .btn-group.mr-2.d-flex.justify-content-around
+		= link_to ('<i class="fa fas fa-plus-circle justify-content-around">Créer une famille</i>').html_safe, new_family_path, class: 'btn btn-sm btn-primary button align-self-center'
+		= link_to 'Retour', :back, class: 'btn btn-sm btn-outline-primary button align-self-center'
+
+.card style=("width: 18rem;") 
+  .card-body
+    h5.card-title Card title
+    h6.card-subtitle.mb-2.text-muted Card subtitle
+    p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+    a.card-link href="#"  Card link
+    a.card-link href="#"  Another link
+		= link_to 'Créer le PDF associé', family_path(@family, format: :pdf, family: @family), class: 'btn btn-primary'

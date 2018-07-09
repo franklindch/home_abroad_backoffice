@@ -1,24 +1,24 @@
 nav.col-md-2.d-none.d-md-block.bg-light.sidebar
   .sidebar-sticky
     ul.nav.flex-column
-      a.nav-link.align-self-center href="#" 
+      a.item href="#" 
         li.nav-item
           span data-feather="home" Clients
           i.fa.far.fa-user-circle.icon
-      a.nav-link.align-self-center href="#" 
+      a.item href="#" 
         li.nav-item
           span data-feather="file" Familles
           i.fa.fas.fa-users.icon
-      a.nav-link.align-self-center href="#" 
+      a.item href="#" 
         li.nav-item
           span data-feather="bar-chart-2" Vols
           i.fa.fas.fa-plane.icon
-      a.nav-link.align-self-center href="#" 
+      a.item href="#" 
         li.nav-item
           span data-feather="shopping-cart" Partenaires
           i.fa.fas.fa-handshake.icon
-      a.nav-link.align-self-center href="#" 
+      a.item href="#" 
         li.nav-item
           span data-feather="users" Séjours
           i.fa.fas.fa-location-arrow.icon
-      button.olivier
+      = link_to 'Famille', family_path(id: 2), remote: true

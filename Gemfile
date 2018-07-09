@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.4.4'
+ruby '2.4.3'
 
 gem 'devise'
 gem 'devise-i18n'

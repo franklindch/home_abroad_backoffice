@@ -9,12 +9,11 @@ section
             .form-inputs
             	.container-fluid
             		.row
-            			.col-md-6
+            			.col-md-12
 			              = f.input :name, label: 'Nom de famille'
 			              = f.select :family_situation, Family.family_situations.keys
 			              = f.input :address_1, label: 'Adresse principale'
 			              = f.input :address_2, label: 'Adresse secondaire si besoin', required: false
-            			.col-md-6
 			              = f.input :zip_code, label: 'Code Postal'
 			              = f.input :phone, label: 'Téléphone fixe'
 			              = f.input :fax, label: 'Fax si besoin', required: false

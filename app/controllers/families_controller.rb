@@ -46,8 +46,8 @@ class FamiliesController < ApplicationController
                layout: 'pdf'
       end
     end
-    # respond_to do |format|
     #   format.js
+    # respond_to do |format|
     #   format.html
     # end
   end

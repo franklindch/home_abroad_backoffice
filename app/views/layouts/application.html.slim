@@ -14,6 +14,8 @@ html
         = render 'shared/components/navbar/top_navbar'
     .page-wrapper
         .container-fluid
+            .row.margin-top-navbar.pet
             = yield
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&libraries=places", defer: 'defer', async: true 
     = javascript_include_tag 'application'
     = javascript_pack_tag 'application'

@@ -1,0 +1,9 @@
+tr class='collapse' id='collapse#{client.id}'data-parent="#accordion" aria-labelledby="heading#{client.id}"
+	td colspan="6"
+		.card
+			.card-body.d-flex.justify-content-around
+				p oliiviiiier
+			  	= link_to ('<p>Peter<i class="fa fas fa-edit></i></p>').html_safe, edit_client_path(client), class: 'btn btn-primary text-center'
+			  	p dzdz
+			  	= link_to ('<i class="fa far fa-trash-alt></i>').html_safe, client_path(client), method: :delete, class: 'btn btn-sm btn-primary', data: {confirm: "Êtes-vous sûr?"}
+  	/ = link_to 'Plus de détails', client_path(client), class: 'btn btn-primary'

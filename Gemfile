@@ -3,6 +3,11 @@
 source 'https://rubygems.org'
 ruby '2.4.3'
 
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
+gem 'country_select'
+gem 'cocoon'
 gem 'devise'
 gem 'devise-i18n'
 gem 'figaro'

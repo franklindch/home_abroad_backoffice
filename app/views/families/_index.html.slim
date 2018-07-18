@@ -2,9 +2,9 @@
 main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div role="main" 
 	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-1.mb-2
 	  h1.h2 Toutes les familles
-	  .btn-toolbar
-	    .btn-group
-				= link_to ('<i class="fa fas fa-plus-circle">Créer une famille</i>').html_safe, new_family_path, class: 'btn btn-primary'
+	  .btn-toolbar.mb-2.mb-md-0
+	    .btn-group.mr-2.d-flex.justify-content-around
+				= link_to ('<i class="fa fas fa-plus-circle d-flex justify-content-between w-100">Créer une famille</i>').html_safe, new_family_path, class: 'btn btn-primary'
 				= link_to 'Retour', :back, class: 'btn btn-outline-primary'
   	.form-inline.pb-4.mb-5.border-bottom
 	    = form_tag families_path, method: :get do
@@ -18,4 +18,4 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div role="main"
   	= link_to 'Fiche Inscrit', inscription_details_path(format: :pdf), class: 'btn btn-primary'
 		
 	.d-flex.justify-content-center
-			/ = render 'shared/components/table/table', families: @families.order('created_at ASC')
+		= render 'shared/components/table/table', families: @families.order('created_at ASC')

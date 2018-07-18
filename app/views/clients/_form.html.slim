@@ -1,0 +1,34 @@
+section
+  .row.margin-top-navbar
+    .col-md-6.mx-auto
+      .card.mt-5
+        .card-header
+          h2 Formulaire Client
+        .card-body
+          = simple_form_for @client do |f|
+            .form-inputs
+            	.container-fluid
+            		.row
+            			.col-md-12
+                    = f.input :last_name, label: 'Nom de famille'
+                    / - if 
+                    = f.association :family, as: :radio_buttons
+			              = f.input :first_name, label: 'Prénom'
+                    = f.input :gender, as: :radio_buttons, collection: [['0', 'Homme'], ['1', 'Femme']], label_method: :second, value_method: :first, checked: 0
+                    = f.input :birth_date
+                    = f.input :age
+                    = f.input :age_category, label: 'Catégories d\'âge'
+
+                    = f.input :email, label: 'Adresse principale'
+                    = f.input :phone_number, label: 'Adresse principale'
+                    = f.input :passport_number, label: 'Adresse principale'
+                    = f.input :country_of_issue, selected: ' France'
+                    = f.input :nationality
+                    = f.select :language_level, Client.language_levels.keys
+                    = f.input :preferred_hobbies
+                    = f.input :medical_issue
+                    = f.input :smoker
+			              = f.input :comment
+
+            .form-actions.text-center
+              = f.button :button, "Valider", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin'></i>Chargement".html_safe} 

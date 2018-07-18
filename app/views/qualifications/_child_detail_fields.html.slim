@@ -1,0 +1,14 @@
+.nested-fields.form-inline
+  .field.form-group
+    = f.label :first_name
+    = f.text_field :first_name
+  .field.form-group
+    = f.label :last_name
+    = f.text_field :last_name
+  .field.form-group
+    = f.label :age
+    = f.text_field :age
+  .field.form-group
+    = f.label :comment
+    = f.text_field :comment
+    = link_to_remove_association "Supprimer", f

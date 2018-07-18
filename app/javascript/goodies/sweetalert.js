@@ -5,8 +5,8 @@ function bindSweetAlertButtonDemo() {
   if (swalButton) { // protect other pages
     swalButton.addEventListener('click', () => {
       swal({
-        title: "A nice alert",
-        text: "This is a great alert, isn't it?",
+        title: "Confirmé!",
+        text: "La famille vient d'être correctement ajoutée.",
         icon: "success"
       });
     });

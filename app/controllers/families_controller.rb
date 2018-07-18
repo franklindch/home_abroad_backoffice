@@ -3,20 +3,20 @@ class FamiliesController < ApplicationController
   before_action :retrieve_family, only: [:edit, :update, :destroy, :show]
   def new
     @family = Family.new
+    @qualification = Qualification.new
   end
 
   def create
     @family = Family.new(family_params)
     if @family.save
-      FamilyMailer.with(family: @family).welcome_email.deliver_now
-      redirect_to families_path
+      # FamilyMailer.with(family: @family).welcome_email.deliver_now
+      redirect_to family_qualification_path(@family)
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @family.update(family_params)
@@ -29,6 +29,11 @@ class FamiliesController < ApplicationController
   end
 
   def index
+    @families = Family.order(:name).page params[:page]
+    respond_to do |format|
+      format.html
+      format.js
+    end
     if params[:query].present?
       @families = Family.search_by_name(params[:query])
     else
@@ -83,6 +88,8 @@ class FamiliesController < ApplicationController
   end
 
   def family_params
-    params.require(:family).permit(:name, :family_situation, :address_1, :address_2, :zip_code, :phone, :fax, :city)    
+    params.require(:family).permit(
+      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :fax, :city
+    )    
   end
 end

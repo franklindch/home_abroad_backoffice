@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717110903) do
+ActiveRecord::Schema.define(version: 20180717144444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20180717110903) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "qualification_id"
+    t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -90,6 +92,7 @@ ActiveRecord::Schema.define(version: 20180717110903) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
   add_foreign_key "families", "qualifications"
   add_foreign_key "qualifications", "child_details"

@@ -3,14 +3,20 @@
 Rails.application.routes.draw do
 	scope '/dashboard' do
 		resources :families
+    resources :clients
+    get 'static', to: 'excels#static'
     get 'inscription_details', to: 'families#inscription_details'
-	end
+  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
   devise_scope :user do
-  	root to: "devise/sessions#new"
-	end
+    root to: "devise/sessions#new"
+  end
+
+  get 'all_families', to: 'excels#all_families'
+  get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
+  post "families/:id/qualification", to: "qualifications#create"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

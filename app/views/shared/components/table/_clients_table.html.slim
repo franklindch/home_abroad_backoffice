@@ -1,0 +1,34 @@
+- if clients.empty?
+  .card
+    .card-body
+      p Aucun client trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-striped.table-sm.table-hover
+      thead
+        tr
+          th Nom
+          th Téléphone
+          th Adresse
+          th Code Postal
+          th Ville
+          th Création
+      tbody
+      - clients.each do |client|
+        div id="accordion"
+          tr data-toggle="collapse" data-target="#collapse#{client.id}" aria-expanded="true" aria-controls="#collapse#{client.id}" id="heading#{client.id}"
+            td
+              span = client.first_name
+            td
+              span = client.last_name
+            td
+              span = client.gender
+            td
+              span = client.age_category
+            td
+              span = client.email
+            td
+              span = client.created_at.strftime('%A %d %B %Y')
+            
+
+          = render 'shared/components/collapse'

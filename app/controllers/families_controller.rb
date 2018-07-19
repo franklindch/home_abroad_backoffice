@@ -34,8 +34,9 @@ class FamiliesController < ApplicationController
       format.html
       format.js
     end
+    
     if params[:query].present?
-      @families = Family.search_by_name(params[:query])
+      @families = Family.search_by_name(params[:query]).page params[:query]
     else
       @families = Family.order(:name).page params[:page]
     end

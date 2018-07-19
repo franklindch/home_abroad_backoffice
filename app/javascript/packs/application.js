@@ -1,7 +1,9 @@
 import "bootstrap";
-import { bindSweetAlertButtonDemo } from '../goodies/sweetalert';
-import { initAutocomplete } from '../goodies/place_autocomplete';
-import { fillInAddress } from '../goodies/place_autocomplete';
+import { bindSweetAlertButtonDemo } from '../libraries/sweetalert';
+import { initAutocomplete } from '../libraries/place_autocomplete';
+import { fillInAddress } from '../libraries/place_autocomplete';
+import { activeLink } from '../style/active_link';
 bindSweetAlertButtonDemo();
 initAutocomplete();
 fillInAddress();
+activeLink();

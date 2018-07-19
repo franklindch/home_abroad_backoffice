@@ -2,8 +2,12 @@
 
 Rails.application.routes.draw do
 	scope '/dashboard' do
-		resources :families
-    resources :clients
+    resources :clients, only: [:new, :index, :create]
+    resources :families do
+      resources :clients, only: [:edit, :update, :destroy, :show]
+    end
+
+    # post '/dashboard/clients', to: 'clients#create'
     get 'static', to: 'excels#static'
     get 'inscription_details', to: 'families#inscription_details'
   end

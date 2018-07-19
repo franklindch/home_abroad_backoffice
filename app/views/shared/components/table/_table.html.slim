@@ -1,6 +1,9 @@
 - if @families
 	= paginate @families
-  = render 'shared/components/table/families_table', families: @families.order('created_at ASC')
+  	= render 'shared/components/table/families_table', families: @families.order('created_at DESC')
 - elsif @clients
 	= paginate @clients
-  = render 'shared/components/table/clients_table', clients: @clients.order('created_at ASC')
+  	= render 'shared/components/table/clients_table', clients: @clients.order('created_at ASC')
+/ - elsif @clients
+/ 	= paginate @clients
+/   	= render 'shared/components/table/clients_table', clients: @clients.order('created_at ASC')

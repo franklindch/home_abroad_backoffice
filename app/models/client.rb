@@ -2,8 +2,8 @@ class Client < ApplicationRecord
   include PgSearch
   belongs_to :family
 
-  pg_search_scope :search_by_name, 
-  				against: [:first_name, :last_name],
+  pg_search_scope :search_by_last_name, 
+  				against: [:first_name],
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}

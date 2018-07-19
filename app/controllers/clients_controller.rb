@@ -1,17 +1,22 @@
 class ClientsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
+	before_action :retrieve_family, only: [:edit, :update, :destroy, :show, :create]
+
 	def new
-	  @client = Client.new
+		@families = Family.all
+		if params[:child_detail_id]
+			search_for_child_detail
+		else
+			@client = Client.new
+		end
 	end
 
 	def create
 	  @client = Client.new(client_params)
-	  if @client.save
-	    redirect_to clients_path
-	  else
-	    render :new
-	  end
+	  @client.family = @family
+	  @client.save
+	  render :show
 	end
 
 	def edit
@@ -28,15 +33,16 @@ class ClientsController < ApplicationController
 	end
 
 	def index
+		@clients = Client.order(:last_name).page params[:page]
 		respond_to do |format|
-			format.html
+			format.htmlx
 	    format.js
-	  end
+	  end	
 
 	  if params[:query].present?
-	    @clients = Client.search_by_name(params[:query])
+	    @clients = Client.search_by_last_name(params[:query]).page params[:page]
 	  else
-	    @clients = Client.order(:name).page params[:page]
+	    @clients = Client.order(:last_name).page params[:page]
 	  end
 	end
 
@@ -54,13 +60,26 @@ class ClientsController < ApplicationController
 
 	private
 
+	def search_for_child_detail
+		child_detail = ChildDetail.find(params[:child_detail_id])
+	  @client = Client.new(first_name: child_detail.first_name, last_name: child_detail.last_name, age: child_detail.age)
+	  respond_to do |format|
+	    format.html # new.html.erb
+	    format.xml  { render xml: @client }
+	  end
+	end
+
 	def retrieve_client
 	  @client = Client.find(params[:id])
 	end
 
+	def retrieve_family
+	  @family = Family.find(params[:client][:family_id])
+	end
+
 	def client_params
 	  params.require(:client).permit(
-	  	:age_category, :gender, :first_name, :last_name, :birth_date, :age, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :language_level, :preferred_hobbies, :smoker?, :medical_issue, :comment
+	  	:age_category, :gender, :first_name, :last_name, :birth_date, :age, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :language_level, :preferred_hobbies, :smoker?, :medical_issue, :comment, :family_id
 	  )    
 	end
 end

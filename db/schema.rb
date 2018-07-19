@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717144444) do
+ActiveRecord::Schema.define(version: 20180719102619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,8 +71,6 @@ ActiveRecord::Schema.define(version: 20180717144444) do
     t.boolean "client?", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "child_detail_id"
-    t.index ["child_detail_id"], name: "index_qualifications_on_child_detail_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,5 +93,4 @@ ActiveRecord::Schema.define(version: 20180717144444) do
   add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
   add_foreign_key "families", "qualifications"
-  add_foreign_key "qualifications", "child_details"
 end

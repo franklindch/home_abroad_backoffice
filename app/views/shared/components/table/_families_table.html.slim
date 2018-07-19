@@ -15,20 +15,19 @@
           th Création
       tbody
       - families.each do |family|
-        div id="accordion"
-          tr data-toggle="collapse" data-target="#collapse#{family.id}" aria-expanded="true" aria-controls="#collapse#{family.id}" id="heading#{family.id}"
-            td
-              span = family.name
-            td
-              span = family.phone
-            td
-              span = family.address_1
-            td
-              span = family.zip_code
-            td
-              span = family.city
-            td
-              span = family.created_at.strftime('%A %d %B %Y')
+        tr data-toggle="modal" data-target="#modal#{family.id}"
+          td
+            span = family.name
+          td
+            span = family.phone
+          td
+            span = family.address_1
+          td
+            span = family.zip_code
+          td
+            span = family.city
+          td
+            span = family.created_at.strftime('%A %d %B %Y')
             
 
-          = render 'shared/components/collapse', family: family
+          = render 'shared/components/modal/family_modal', family: family

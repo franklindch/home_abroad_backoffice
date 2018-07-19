@@ -8,12 +8,9 @@ class QualificationsController < ApplicationController
 
 	def create
 	  @qualification = Qualification.new(qualification_params)
-	  if @qualification.save
-	  	@family.qualification = @qualification
-	    redirect_to families_path
-	  else
-	    render :new
-	  end
+	  @qualification.save
+	  @family.update_columns(qualification_id: @qualification.id)
+    redirect_to families_path
 	end
 
 	private

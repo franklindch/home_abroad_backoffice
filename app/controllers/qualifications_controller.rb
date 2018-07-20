@@ -1,6 +1,7 @@
 class QualificationsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_family, only: [:new, :edit, :create]
+
 	def new
 	  @qualification = Qualification.new
 	  create_child_details
@@ -8,6 +9,7 @@ class QualificationsController < ApplicationController
 
 	def create
 	  @qualification = Qualification.new(qualification_params)
+	  @qualification.status = STATUSES[1]
 	  @qualification.save
 	  @family.update_columns(qualification_id: @qualification.id)
     redirect_to families_path

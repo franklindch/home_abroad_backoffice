@@ -1,6 +1,7 @@
 class FamiliesController < ApplicationController
   before_action :authenticate_user!
   before_action :retrieve_family, only: [:edit, :update, :destroy, :show]
+
   def new
     @family = Family.new
     @qualification = Qualification.new
@@ -23,20 +24,20 @@ class FamiliesController < ApplicationController
     redirect_to families_path
   end
 
-  def delete
+  def destroy
     @family.destroy
     redirect_to families_path
   end
 
   def index
-    @families = Family.order(:name).page params[:page]
+    @families = Family.order(:name).page(params[:page])
     respond_to do |format|
       format.html
       format.js
     end
     
     if params[:query].present?
-      @families = Family.search_by_name(params[:query]).page params[:query]
+      @families = Family.search_by_name(params[:query]).page(params[:query])
     else
       @families = Family.order(:name).page params[:page]
     end
@@ -52,10 +53,6 @@ class FamiliesController < ApplicationController
                layout: 'pdf'
       end
     end
-    #   format.js
-    # respond_to do |format|
-    #   format.html
-    # end
   end
 
   def inscription_details
@@ -85,7 +82,7 @@ class FamiliesController < ApplicationController
   end
 
   def retrieve_family
-    @family = Family.find(params[:id])
+    @family ||= Family.find(params[:id])
   end
 
   def family_params

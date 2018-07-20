@@ -45,7 +45,7 @@
   background-color: $purple-hard;
   a {
     color: white;
-    height: 10vh;
+    height: 6vh;
     text-decoration: none;
   }
   a:hover {
@@ -55,10 +55,6 @@
 }
 
 .icon {
-  margin-left: 30px;
+  padding-left: 40px;
   margin-right: 120px;
-}
-
-.active {
-  background-color: black;
 }

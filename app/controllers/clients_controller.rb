@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
-	before_action :retrieve_family, only: [:edit, :update, :destroy, :show, :create]
+	before_action :retrieve_family, only: [:edit, :update, :destroy, :create]
 
 	def new
 		@families = Family.all
@@ -16,7 +16,8 @@ class ClientsController < ApplicationController
 	  @client = Client.new(client_params)
 	  @client.family = @family
 	  @client.save
-	  render :show
+	  @family.qualification.update_columns(status: STATUSES[2])
+	  redirect_to family_client_path(@family, @client)
 	end
 
 	def edit
@@ -27,7 +28,7 @@ class ClientsController < ApplicationController
 	  redirect_to clients_path
 	end
 
-	def delete
+	def destroy
 	  @client.destroy
 	  redirect_to clients_path
 	end
@@ -35,7 +36,7 @@ class ClientsController < ApplicationController
 	def index
 		@clients = Client.order(:last_name).page params[:page]
 		respond_to do |format|
-			format.htmlx
+			format.html
 	    format.js
 	  end	
 
@@ -70,11 +71,11 @@ class ClientsController < ApplicationController
 	end
 
 	def retrieve_client
-	  @client = Client.find(params[:id])
+	  @client ||= Client.find(params[:id])
 	end
 
 	def retrieve_family
-	  @family = Family.find(params[:client][:family_id])
+	  @family ||= Family.find(params[:client][:family_id])
 	end
 
 	def client_params

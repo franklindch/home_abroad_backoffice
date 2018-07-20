@@ -8,23 +8,65 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts 'Cleaning database...'
-Restaurant.destroy_all
+# frank@frank.com / franklin
 
-puts 'Creating restaurants...'
-restaurants_attributes = [
+puts 'Cleaning database...'
+Family.destroy_all
+
+puts 'Creating qualifications...'
+qualifications_attributes = [
   {
-    name:         'Dishoom',
-    address:      '7 Boundary St, London E2 7JE',
-    description:  'Buzzy destination for Indian street food in Bombay-style vintage decor.',
-    stars:        5
+    comment:      'Besoin d\'informations sur les séjours Australie',
+    status:       'Prospect'
   },
   {
-    name:         'Pizza East',
-    address:      '56A Shoreditch High St, London E1 6PQ',
-    description:  'Pizzeria with industrial looks, serving rustic pizza and antipasti.',
-    stars:        4
+    comment:      'Besoin d\'informations sur les tarifs Home Abroad. Pas très clair sur le site visiblement.',
+    status:       'Prospect'
+  },
+  {
+    comment:      'Veut qu\'on l\'aide pour sa fille bérénice',
+    status:       'Client'
   }
 ]
-Restaurant.create!(restaurants_attributes)
+
+Qualification.create!(qualifications_attributes)
+
+puts 'Creating families...'
+families_attributes = [
+  {
+    name:                     'Bernard',
+    family_situation:         'engaged',
+    address_1:                '12 rue de Rivoli',
+    address_2:                '',
+    zip_code:                 '75001',
+    phone:                    '0132244628',
+    fax:                      '',
+    city:                     'Paris'
+  },
+  {
+    name:                     'Dupuis',
+    family_situation:         'engaged',
+    address_1:                '191 rue Saint-Honoré',
+    address_2:                '',
+    zip_code:                 '75001',
+    phone:                    '0115224698',
+    fax:                      '',
+    city:                     'Paris'
+  },
+  {
+    name:                     'Lefranc',
+    family_situation:         'celib',
+    address_1:                '34 rue oudinot',
+    address_2:                '',
+    zip_code:                 '75007',
+    phone:                    '017839203°',
+    fax:                      '',
+    city:                     'Paris'
+  }
+]
+
+15.times do
+  Family.create!(families_attributes)
+end
 puts 'Finished!'
+

@@ -1,3 +1,5 @@
+= qualification = family.qualification
+
 .modal.fade id="modal#{family.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{family.id}Title"
   .modal-dialog.modal-dialog-centered role="document" 
     .modal-content
@@ -12,16 +14,18 @@
       			.card
       				.card-body
       					.card-text
-					      - if family.qualification == nil
-					      	p olivier, pas de qualification associée à cette famille
+      					
+					      - if qualification == nil
+					      	p Pas de qualification associée à cette famille
 
-					      - elsif family.qualification.prospect?
-			      			p = family.qualification.comment
 
-	      					- if family.qualification.child_details == []
+					      - elsif qualification.status == STATUSES[1]
+			      			p = qualification.comment
+
+	      					- if qualification.child_details == []
 	      							p Vous n'aviez pas préciser d'informations sur les enfants de cette famille
 					      	- else
-					      		- family.qualification.child_details.each do |child_detail|
+					      		- qualification.child_details.each do |child_detail|
 					      			.row
 					      				.col-md-12
 					      					.card
@@ -30,7 +34,10 @@
 										        	= "#{child_detail.first_name} #{child_detail.last_name.upcase} | #{child_detail.age} ans"
 										        	= child_detail.comment
 										        	= link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id) , class: 'btn btn-primary'
-										        	br
+
+								/ - elsif qualification.status == STATUSES[2]
+								/ 	p = family.clients
+					
       .modal-footer
       	/ p Vous pouvez ajouter ajouter un nouveau client à cette famille
         / button.btn.btn-secondary  type="button" Ajouter nouveau client

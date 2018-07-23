@@ -9,8 +9,7 @@ class PartnerCompaniesController < ApplicationController
 	def create
 	  @partner_company = PartnerCompany.new(partner_company_params)
 	  if @partner_company.save
-	    # partner_companyMailer.with(partner_company: @partner_company).welcome_email.deliver_now
-	    redirect_to partner_company_path(@partner_company)
+	    redirect_to partner_companies_path
 	  else
 	    render :new
 	  end
@@ -41,10 +40,6 @@ class PartnerCompaniesController < ApplicationController
 	    @partner_companies = PartnerCompany.order(:name).page params[:page]
 	  end
 	end
-
-	def show
-	end
-
 
 	private
 

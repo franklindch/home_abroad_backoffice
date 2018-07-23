@@ -8,6 +8,8 @@ class Family < ApplicationRecord
 						tsearch: { prefix: true, negation: true, any_word: true}
 					}
 
-	enum family_situation: { engaged: 0, celib: 1 }
-	paginates_per 10
+	enum family_situation: { Maries: 1, Divorces: 2, En_couple: 3 }
+	# paginates_per 10
+	# validates :name, :family_situation, :address_1, :city, :zip_code, :phone, presence: true
+	# validates :phone, uniqueness: true
 end

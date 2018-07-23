@@ -1,14 +1,26 @@
-.nested-fields.form-inline
-  .field.form-group
-    = f.label :first_name
+.nested-fields.form-row.mt-3.border-bottom.pb-3
+  .field.form-group.col-md-3
+    = f.label :first_name, label: 'Prénom'
     = f.text_field :first_name
-  .field.form-group
-    = f.label :last_name
+  .field.form-group.col-md-3
+    = f.label :last_name, label: 'Nom de famille'
     = f.text_field :last_name
-  .field.form-group
-    = f.label :age
+  .field.form-group.col-md-3
+    = f.label :age, label: 'Âge'
     = f.text_field :age
-  .field.form-group
-    = f.label :comment
+  .field.form-group.col-md-3
+    = f.label :email, label: 'Email'
+    = f.text_field :email
+  .field.form-group.col-md-3
+    = f.label :school, label: 'Etablissement Scolaire'
+    = f.text_field :school
+  .field.form-group.col-md-3
+    = f.label :school_grade, label: 'Email'
+    = f.text_field :school_grade
+  .field.form-group.col-md-3
+    = f.label :gender, label: 'Sexe'
+    = f.text_field :gender
+  .field.form-group.col-md-3
+    = f.label :comment, label: 'Commentaire'
     = f.text_field :comment
-    = link_to_remove_association "Supprimer", f
+  = link_to_remove_association "Supprimer", f

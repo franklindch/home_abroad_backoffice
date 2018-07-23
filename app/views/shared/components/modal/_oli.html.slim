@@ -1,0 +1,48 @@
+.modal-header
+  h5.modal-title id='modal#{family.id}LongTitle' Informations sur la famille #{family.name.capitalize}
+  button.close aria-label="Close" data-dismiss="modal" type="button" 
+    span aria-hidden="true"  &times; 
+
+.modal-body
+	.row
+		.col-md-12
+			.card
+				.card-body
+					.card-text
+					- if qualification == nil
+						p Pas de qualification associée à cette famille
+						= link_to 'Ajouter un client', new_client_path, class: 'btn btn-primary'
+
+					- elsif qualification.status == STATUSES[1]
+						h4 = Qualification
+						p = qualification.comment
+
+						h4 Enfants de la famille
+						- if qualification.child_details == []
+							p Vous n'aviez pas précisé d'informations sur les enfants de cette famille. 
+							.mt-2
+						  	= link_to 'Ajouter un client', new_client_path, class: 'btn btn-primary'
+						- else
+							- qualification.child_details.each do |child_detail|
+								.row
+									.col-md-12
+									ul
+										li
+						        	= "#{child_detail.first_name} #{child_detail.last_name.upcase} | #{child_detail.age} ans"
+						        	= child_detail.comment
+						        	br
+						        	= link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
+
+					- elsif qualification.status == STATUSES[2]
+						- family.clients.each do |client|
+							.row
+								.col-md-12
+								ul
+									li
+										= "#{client.first_name} #{client.last_name.upcase} | #{client.age} ans"
+				        	= link_to 'Vers sa fiche client', family_client_path(family, client)
+				        	br
+					- else
+						p rien
+.modal-footer
+	button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

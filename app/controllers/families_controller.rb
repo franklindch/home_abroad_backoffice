@@ -87,7 +87,7 @@ class FamiliesController < ApplicationController
 
   def family_params
     params.require(:family).permit(
-      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :fax, :city
+      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :email, :city
     )    
   end
 end

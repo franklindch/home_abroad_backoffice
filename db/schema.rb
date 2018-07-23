@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180720130301) do
+ActiveRecord::Schema.define(version: 20180723191605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 20180720130301) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
+    t.string "email"
+    t.integer "gender"
+    t.integer "school_grade"
+    t.string "school"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
@@ -54,6 +58,19 @@ ActiveRecord::Schema.define(version: 20180720130301) do
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.boolean "main_contact"
+    t.string "job_position"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.bigint "partner_company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partner_company_id"], name: "index_employees_on_partner_company_id"
+  end
+
   create_table "families", force: :cascade do |t|
     t.string "name"
     t.integer "family_situation"
@@ -61,11 +78,18 @@ ActiveRecord::Schema.define(version: 20180720130301) do
     t.string "address_2"
     t.integer "zip_code"
     t.string "phone"
-    t.string "fax"
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
+    t.string "email"
+    t.string "country_of_residence"
+    t.string "father_name"
+    t.string "mother_name"
+    t.string "mother_phone"
+    t.string "father_phone"
+    t.string "mother_email"
+    t.string "father_email"
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
   end
 
@@ -87,6 +111,11 @@ ActiveRecord::Schema.define(version: 20180720130301) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.integer "refered_by"
+    t.integer "data_entry_responsible"
+    t.integer "commercial_responsible"
+    t.integer "contact_mode"
+    t.string "reference_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,5 +137,6 @@ ActiveRecord::Schema.define(version: 20180720130301) do
 
   add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
+  add_foreign_key "employees", "partner_companies"
   add_foreign_key "families", "qualifications"
 end

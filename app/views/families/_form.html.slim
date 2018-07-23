@@ -10,13 +10,28 @@ section
             	.container-fluid
             		.row
             			.col-md-12
-			              = f.input :name, label: 'Nom de famille'
-			              = f.select :family_situation, Family.family_situations.keys
-			              = f.input :address_1, label: 'Adresse principale'
-			              = f.input :address_2, label: 'Adresse secondaire si besoin', required: false
-			              = f.input :city, label: 'Ville de résidence'
+                    = f.input :name, label: 'Nom de famille'
+                    = f.input :family_situation, collection: Family.family_situations.keys, label: 'Situation familiale'
+                    = f.input :address_1, label: 'Adresse principale'
+                    = f.input :address_2, label: 'Complément d\'adresse'
+                    = f.input :city, label: 'Ville de résidence'
                     = f.input :zip_code, label: 'Code Postal'
-                    = f.input :phone, label: 'Téléphone fixe'
-                    = f.input :fax, label: 'Fax si besoin', required: false
+                    / = f.input :country_of_residence, priority: 'France'
+                    = f.input :email, label: 'Email'
+                    = f.input :phone, label: 'Téléphone fixe', as: :tel
+            .form-inputs
+              .container-fluid
+                .row
+                  .col-md-6
+                    h4.mt-3 Père
+                    = f.input :father_name, label: 'Nom'
+                    = f.input :father_phone, label: 'Tél'
+                    = f.input :father_email, label: 'Email'
+                  .col-md-6
+                    h4.mt-3 Mère
+                    = f.input :mother_name, label: 'Nom'
+                    = f.input :mother_phone, label: 'Tél'
+                    = f.input :mother_email, label: 'Email'
+
             .form-actions.text-center
               = f.button :button, "Valider et qualifier la famille", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 

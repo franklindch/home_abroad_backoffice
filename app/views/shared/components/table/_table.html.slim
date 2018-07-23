@@ -4,3 +4,6 @@
 - elsif @clients
   	= render 'shared/components/table/clients_table', clients: @clients.order('created_at ASC')
 		= paginate @clients
+- elsif @partner_companies
+  	= render 'shared/components/table/partner_companies_table', partner_companies: @partner_companies.order('created_at ASC')
+		= paginate @partner_companies

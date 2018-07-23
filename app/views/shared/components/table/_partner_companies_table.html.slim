@@ -1,0 +1,42 @@
+- if partner_companies.empty?
+  .card
+    .card-body
+      p Aucun partenaire trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-striped.table-sm.table-hover
+      thead
+        tr
+          th Nom
+          th Nature
+          th Email
+          th Téléphone
+          th Adresse
+          th Code Postal
+          th Ville
+          th Pays
+          th Création
+      tbody
+      - partner_companies.each do |partner_company|
+        tr data-toggle="modal" data-target="#modal#{partner_company.id}"
+          td
+            span = partner_company.name
+          td
+            span = partner_company.type
+          td
+            span = partner_company.email
+          td
+            span = partner_company.phone_number
+          td
+            span = partner_company.address
+          td
+            span = partner_company.zip_code
+          td
+            span = partner_company.city
+          td
+            span = partner_company.country
+          td
+            span = partner_company.created_at.strftime('%A %d %B %Y')
+            
+
+          = render 'shared/components/modal/partner_company_modal', partner_company: partner_company

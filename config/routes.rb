@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 	scope '/dashboard' do
     resources :clients, only: [:new, :index, :create]
     resources :families do
-      resources :clients, only: [:edit, :update, :destroy, :show]
+      resources :clients, only: [:edit, :create, :update, :destroy, :show]
+    end
+    resources :partner_companies, only: [:new, :index, :create] do 
+      resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
     # post '/dashboard/clients', to: 'clients#create'

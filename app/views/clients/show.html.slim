@@ -1,31 +1,34 @@
 = render 'shared/components/navbar/left_navbar'
 main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div role="main" 
 	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-1.mb-2
-	  h1.h2
-	  = "#{@client.first_name} #{@client.last_name.upcase}"
+	  h1.h2 = "#{@client.first_name} #{@client.last_name.upcase}"
 	  .btn-toolbar.mb-2.mb-md-0
 	    .btn-group.mr-2.d-flex.justify-content-around
 				= link_to ('<i class="fa fas fa-plus-circle d-flex justify-content-between w-100">Ajouter un séjour</i>').html_safe, new_client_path, class: 'btn btn-primary'
 	.row
-		.col-md-6
-			.card
+		.col-md-4
+			.d-flex.justify-content-center
+			.card.mt-5
 			  h5.card-header Informations personnelles
 			  .card-body
-			    p.card-text
-			    	p = @client.gender
+			  	h5.card-title Special title treatment
+			  	.card-text
+				    p = @client.gender
 			    	p = "#{@client.age_category} | #{@client.age}"
 			    	p = @client.email
 			    	p = @client.phone_number
-			    a.btn.btn-primary href="#" Plus d'informations
-		.col-md-6
+				    a.btn.btn-primary href="#"  Plus d'informations
+
+		.col-md-4
 			.d-flex.justify-content-center
-				= render 'shared/components/table/table'
 			.card.mt-5
 			  h5.card-header Séjour 2018
 			  .card-body
 			    h5.card-title Special title treatment
 			    p.card-text With supporting text below as a natural lead-in to additional content.
 			    a.btn.btn-primary href="#"  Plus d'informations
-		= link_to 'Supprimer le client', family_client_path(@client), class: 'btn btn-outline-primary', method: :delete
-		= link_to 'Facture', family_path(Family.first, format: :pdf, family: Family.first), class: 'btn btn-primary'
-		= link_to 'Fiche Inscrit', inscription_details_path(format: :pdf), class: 'btn btn-primary'
+
+		.col-md-4
+			= link_to 'Supprimer le client', family_client_path(@client), class: 'btn btn-outline-primary', method: :delete
+			= link_to 'Facture', family_path(Family.first, format: :pdf, family: Family.first), class: 'btn btn-primary'
+			= link_to 'Fiche Inscrit', inscription_details_path(format: :pdf), class: 'btn btn-primary'

@@ -1,0 +1,38 @@
+- employees = partner_company.employees
+
+.modal.fade id="modal#{partner_company.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{partner_company.id}Title"
+  .modal-dialog.modal-dialog-centered role="document" 
+    .modal-content
+      .modal-header
+        h5.modal-title id='modal#{partner_company.id}LongTitle' Informations sur le partenaire #{partner_company.name}
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times; 
+
+      .modal-body
+      	.row
+      		.col-md-12
+      			.card
+      				.card-body
+      					.card-text
+      					
+					      - if employees == nil
+					      	p Pas d'employers associés à ce partenaire
+
+
+					      - else
+					      	- employees.each do |employee|
+				      			p = employee.main_contact
+				      			p = employee.job_position
+				      			p = employee.first_name
+				      			p = employee.last_name
+				      			p = qualification.phone_number
+				      			p = qualification.email
+				      			=	link_to 'Ajouter un employer', new_client_path(partner_company) , class: 'btn btn-primary'
+				      			=	link_to 'Editer', new_client_path(partner_company) , class: 'btn btn-primary'
+				      			=	link_to 'Suprrimer', new_client_path(partner_company) , class: 'btn btn-primary'
+				      			br
+					
+      .modal-footer
+      	/ p Vous pouvez ajouter ajouter un nouveau client à cette famille
+        / button.btn.btn-secondary  type="button" Ajouter nouveau client
+        button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

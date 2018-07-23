@@ -1,10 +1,17 @@
-main.col-md-9.ml-sm-auto.col-lg-10.px-4 role="main" 
-	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.main-body
-    	h1.h2 = families if families
-    	h1.h2 = olivier if olivier
-
-		input.form-control.form-control-dark aria-label="Search" placeholder="Trouver une famille" type="text"
-		.btn-group
-			= link_to ('<i class="fa fas fa-plus-circle d-flex justify-content-around>Créer une famille</i>').html_safe, class: 'btn btn-sm btn-primary button'
-      button.btn.btn-sm.btn-outline-primary.button Retour
-    = render 'shared/components/table', collection: @families
+= render 'shared/components/navbar/left_navbar'
+main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div role="main" 
+	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-1.mb-2
+	  h1.h2 = "Tous les #{model}s"
+	  .btn-toolbar.mb-2.mb-md-0
+	    .mr-2.d-flex.justify-content-around
+				= create_a_model(model)
+				= link_to 'Retour', :back, class: 'btn btn-outline-primary'
+  	.form-inline.pb-4.mb-5.border-bottom
+	    = form_tag clients_path, method: :get do
+	      = text_field_tag :query,
+	        params[:query],
+	        class: "form-control",
+	        placeholder: "Rechercher un #{model}"
+	      = submit_tag :Entrer, class: 'btn btn-primary'
+	.d-flex.justify-content-center
+		= render 'shared/components/table/table'

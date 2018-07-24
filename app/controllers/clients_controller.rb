@@ -18,6 +18,7 @@ class ClientsController < ApplicationController
 	  @client.save
 	  @family.qualification.update_columns(status: STATUSES[2])
 	  redirect_to family_client_path(@family, @client)
+	  flash[:success] = 'Client créé avec succès !'
 	end
 
 	def edit
@@ -41,7 +42,7 @@ class ClientsController < ApplicationController
 	  end	
 
 	  if params[:query].present?
-	    @clients = Client.search_by_last_name(params[:query]).page params[:page]
+	    @clients = Client.search_by_full_name(params[:query]).page params[:page]
 	  else
 	    @clients = Client.order(:last_name).page params[:page]
 	  end

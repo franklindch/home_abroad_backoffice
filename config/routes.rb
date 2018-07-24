@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
+    resources :travels
+    resources :attendants
+
     # post '/dashboard/clients', to: 'clients#create'
     get 'static', to: 'excels#static'
     get 'inscription_details', to: 'families#inscription_details'

@@ -1,0 +1,6 @@
+/ - attendant = travel.attendant && partner_company = travel.partner_company
+
+.modal.fade id="modal#{attendant.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{attendant.id}Title"
+  .modal-dialog.modal-dialog-centered role="document" 
+    .modal-content
+	   	/ = render 'travels/travel_details', attendant: attendant, partner_company: partner_company

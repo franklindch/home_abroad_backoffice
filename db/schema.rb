@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723191605) do
+ActiveRecord::Schema.define(version: 20180724144613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendants", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "camps", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -118,6 +128,43 @@ ActiveRecord::Schema.define(version: 20180723191605) do
     t.string "reference_name"
   end
 
+  create_table "travel_attendants", force: :cascade do |t|
+    t.bigint "travel_id"
+    t.bigint "attendant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendant_id"], name: "index_travel_attendants_on_attendant_id"
+    t.index ["travel_id"], name: "index_travel_attendants_on_travel_id"
+  end
+
+  create_table "travel_details", force: :cascade do |t|
+    t.integer "type"
+    t.boolean "correspondence"
+    t.integer "mode"
+    t.time "meeting_time"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "departure_location"
+    t.string "arrival_location"
+    t.bigint "partner_company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "travel_id"
+    t.string "reference"
+    t.index ["partner_company_id"], name: "index_travel_details_on_partner_company_id"
+    t.index ["travel_id"], name: "index_travel_details_on_travel_id"
+  end
+
+  create_table "travels", force: :cascade do |t|
+    t.integer "capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "type"
+    t.string "travel_code"
+    t.bigint "attendant_id"
+    t.index ["attendant_id"], name: "index_travels_on_attendant_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -139,4 +186,9 @@ ActiveRecord::Schema.define(version: 20180723191605) do
   add_foreign_key "clients", "families"
   add_foreign_key "employees", "partner_companies"
   add_foreign_key "families", "qualifications"
+  add_foreign_key "travel_attendants", "attendants"
+  add_foreign_key "travel_attendants", "travels"
+  add_foreign_key "travel_details", "partner_companies"
+  add_foreign_key "travel_details", "travels"
+  add_foreign_key "travels", "attendants"
 end

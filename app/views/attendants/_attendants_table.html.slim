@@ -1,0 +1,31 @@
+- if @attendants.empty?
+  .card
+    .card-body
+      p Aucun accompagnateur trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-striped.table-sm.table-hover
+      thead
+        tr
+          th Prénom
+          th Nom
+          th Âge
+          th Email
+          th Téléphone
+
+      tbody
+      - @attendants.each do |attendant|
+        tr data-toggle="modal" data-target="#modal#{attendant.id}"
+          td
+            span = attendant.first_name
+          td
+            span = attendant.last_name
+          td
+            span = attendant.age
+          td
+            span = attendant.email
+          td
+            span = attendant.phone
+            
+
+          = render 'attendants/attendant_modal', attendant: attendant

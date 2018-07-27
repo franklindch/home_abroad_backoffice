@@ -1,2 +1,4 @@
-<h1>Travels#edit</h1>
-<p>Find me in app/views/travels/edit.html.erb</p>
+- if @language_stays
+	= render 'travels/form/with_language_stay', travel: @travel, language_stays: @language_stays
+-else
+	= render 'travels/form/without_language_stay', travel: @travel

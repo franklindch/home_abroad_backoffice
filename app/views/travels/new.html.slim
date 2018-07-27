@@ -1,1 +1,4 @@
-= render 'travels/form', travel: @travel
+- if params[:client]
+	= render 'travels/form/other_travel', travel: @travel
+- else
+	= render 'travels/form/travel_group', travel: @travel

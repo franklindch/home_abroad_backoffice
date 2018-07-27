@@ -12,6 +12,7 @@ class FamiliesController < ApplicationController
     if @family.save
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
       redirect_to family_qualification_path(@family)
+      flash[:alert] = "Cet établissement ne semble pas être un bar ou restaurant, ou l'établissement est peut-être définitivement fermé. Veuillez en entrer un autre"
     else
       render :new
     end
@@ -87,7 +88,7 @@ class FamiliesController < ApplicationController
 
   def family_params
     params.require(:family).permit(
-      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :email, :city
+      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :email, :city, :qualification_id
     )    
   end
 end

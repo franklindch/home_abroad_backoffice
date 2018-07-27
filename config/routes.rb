@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
 	scope '/dashboard' do
-    resources :clients, only: [:new, :index, :create]
+    resources :clients, only: [:new, :index, :create, :update]
     resources :families do
       resources :clients, only: [:edit, :create, :update, :destroy, :show]
     end
@@ -10,8 +10,16 @@ Rails.application.routes.draw do
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
+    resources :clients, only: [:show] do 
+      resources :language_stays, only: [:new, :create, :edit, :update, :destroy]
+    end
+
+    resources :language_stays, only: [:show] do 
+      resources :invoices, only: [:new, :create, :edit, :update, :destroy]
+    end
     resources :travels
     resources :attendants
+    resources :programs
 
     # post '/dashboard/clients', to: 'clients#create'
     get 'static', to: 'excels#static'

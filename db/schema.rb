@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180724144613) do
+ActiveRecord::Schema.define(version: 20180726133727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 20180724144613) do
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
+  create_table "correspondences", force: :cascade do |t|
+    t.string "reference"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "departure_location"
+    t.string "arrival_location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "travel_detail_id"
+    t.index ["travel_detail_id"], name: "index_correspondences_on_travel_detail_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.boolean "main_contact"
     t.string "job_position"
@@ -103,6 +115,31 @@ ActiveRecord::Schema.define(version: 20180724144613) do
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.integer "application_fee_price_cents"
+    t.integer "language_stay_price_cents"
+    t.integer "travel_price_cents"
+    t.integer "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "language_stay_id"
+    t.index ["language_stay_id"], name: "index_invoices_on_language_stay_id"
+  end
+
+  create_table "language_stays", force: :cascade do |t|
+    t.integer "data_entry_responsible"
+    t.integer "commercial_responsible"
+    t.integer "duration"
+    t.string "activities"
+    t.boolean "fee"
+    t.bigint "program_id"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_language_stays_on_client_id"
+    t.index ["program_id"], name: "index_language_stays_on_program_id"
+  end
+
   create_table "partner_companies", force: :cascade do |t|
     t.string "type"
     t.string "name"
@@ -114,6 +151,19 @@ ActiveRecord::Schema.define(version: 20180724144613) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.integer "nature"
+    t.string "explicit_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip_code"
+    t.string "country_of_establishment"
+    t.bigint "partner_company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partner_company_id"], name: "index_programs_on_partner_company_id"
   end
 
   create_table "qualifications", force: :cascade do |t|
@@ -128,18 +178,9 @@ ActiveRecord::Schema.define(version: 20180724144613) do
     t.string "reference_name"
   end
 
-  create_table "travel_attendants", force: :cascade do |t|
-    t.bigint "travel_id"
-    t.bigint "attendant_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["attendant_id"], name: "index_travel_attendants_on_attendant_id"
-    t.index ["travel_id"], name: "index_travel_attendants_on_travel_id"
-  end
-
   create_table "travel_details", force: :cascade do |t|
-    t.integer "type"
-    t.boolean "correspondence"
+    t.integer "nature"
+    t.boolean "is_correspondence"
     t.integer "mode"
     t.time "meeting_time"
     t.time "start_time"
@@ -159,10 +200,14 @@ ActiveRecord::Schema.define(version: 20180724144613) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "type"
+    t.integer "nature", default: 0
     t.string "travel_code"
     t.bigint "attendant_id"
+    t.bigint "language_stay_id"
+    t.bigint "travel_group_id"
     t.index ["attendant_id"], name: "index_travels_on_attendant_id"
+    t.index ["language_stay_id"], name: "index_travels_on_language_stay_id"
+    t.index ["travel_group_id"], name: "index_travels_on_travel_group_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -184,11 +229,16 @@ ActiveRecord::Schema.define(version: 20180724144613) do
 
   add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
+  add_foreign_key "correspondences", "travel_details"
   add_foreign_key "employees", "partner_companies"
   add_foreign_key "families", "qualifications"
-  add_foreign_key "travel_attendants", "attendants"
-  add_foreign_key "travel_attendants", "travels"
+  add_foreign_key "invoices", "language_stays"
+  add_foreign_key "language_stays", "clients"
+  add_foreign_key "language_stays", "programs"
+  add_foreign_key "programs", "partner_companies"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travels"
   add_foreign_key "travels", "attendants"
+  add_foreign_key "travels", "language_stays"
+  add_foreign_key "travels", "travels", column: "travel_group_id"
 end

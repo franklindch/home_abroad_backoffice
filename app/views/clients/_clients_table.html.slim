@@ -29,6 +29,8 @@
               span = client.email
             td
               span = client.created_at.strftime('%A %d %B %Y')
+            td
+              span = link_to 'client', family_client_path(client.family, client)
             
 
           = render 'clients/client_modal', client: client

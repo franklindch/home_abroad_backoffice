@@ -9,28 +9,31 @@
         tr
           th Nom
           th Statut
+          th Email
           th Téléphone
           th Adresse
           th Code Postal
           th Ville
-          th Création
+          th Pays
       tbody
       - families.each do |family|
         tr data-toggle="modal" data-target="#modal#{family.id}"
           td
-            span = family.name
+            span = family&.name
           td
-            span = family.qualification.status if family.qualification
+            span = family&.qualification.status if family.qualification
           td
-            span = family.phone
+            span = family&.email
           td
-            span = family.address_1
+            span = number_to_phone(family&.phone)
           td
-            span = family.zip_code
+            span = family&.address_1
           td
-            span = family.city
+            span = family&.zip_code
           td
-            span = family.created_at.strftime('%A %d %B %Y')
+            span = family&.city
+          td
+            span = family&.country_of_residence
             
 
           = render 'families/family_modal', family: family

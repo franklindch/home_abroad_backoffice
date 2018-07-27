@@ -8,8 +8,11 @@
   	= render 'partner_companies/partner_companies_table', partner_companies: @partner_companies.order('created_at ASC')
 		= paginate @partner_companies
 - elsif @travels
-  	= render 'travels/travels_table', partner_companies: @travels.order('created_at ASC')
+  	= render 'travels/travels_table', travels: @travels.order('created_at ASC')
 		= paginate @travels
 - elsif @attendants
   	= render 'attendants/attendants_table', attendants: @attendants.order('created_at ASC')
 		= paginate @attendants
+- elsif @programs
+  	= render 'programs/programs_table', programs: @programs.order('created_at ASC')
+		= paginate @programs

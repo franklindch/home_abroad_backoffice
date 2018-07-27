@@ -1,5 +1,12 @@
 STATUSES = [
-	'Dormant',
+	'Dormante',
 	'Prospect',
-	'Client'
+	'Cliente'
+]
+
+HOME_ABROAD_EMPLOYEES = [
+	'Christine',
+	'Jeanne',
+	'Jéremy',
+	'Olivia'
 ]

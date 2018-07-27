@@ -1,7 +1,6 @@
 class Attendant < ApplicationRecord
 	include PgSearch
-	has_many :travels, through: :travel_attendants
-	has_many :travels
+	has_many :travels, dependent: :destroy
 
 	pg_search_scope :search_by_full_name, 
 					against: [:first_name, :last_name],

@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
-	before_action :retrieve_family, only: [:edit, :update, :destroy, :create]
+	before_action :retrieve_family, only: [:update, :destroy, :create]
 
 	def new
 		@families = Family.all
@@ -17,8 +17,7 @@ class ClientsController < ApplicationController
 	  @client.family = @family
 	  @client.save
 	  @family.qualification.update_columns(status: STATUSES[2])
-	  redirect_to family_client_path(@family, @client)
-	  flash[:success] = 'Client créé avec succès !'
+	  redirect_to new_client_language_stay_path(@client)
 	end
 
 	def edit
@@ -26,7 +25,7 @@ class ClientsController < ApplicationController
 
 	def update
 	  @client.update(client_params)
-	  redirect_to clients_path
+	  redirect_to client_path(@client)
 	end
 
 	def destroy
@@ -63,8 +62,9 @@ class ClientsController < ApplicationController
 	private
 
 	def search_for_child_detail
-		child_detail = ChildDetail.find(params[:child_detail_id])
-	  @client = Client.new(first_name: child_detail.first_name, last_name: child_detail.last_name, age: child_detail.age)
+		@child_detail = ChildDetail.find(params[:child_detail_id])
+		@family = @child_detail.qualification.family
+	  @client = Client.create!(family: @family, first_name: @child_detail.first_name, last_name: @child_detail.last_name, age: @child_detail.age, gender: @child_detail.gender)
 	  respond_to do |format|
 	    format.html # new.html.erb
 	    format.xml  { render xml: @client }
@@ -85,3 +85,6 @@ class ClientsController < ApplicationController
 	  )    
 	end
 end
+
+
+

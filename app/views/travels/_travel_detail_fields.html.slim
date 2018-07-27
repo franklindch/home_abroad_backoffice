@@ -1,20 +1,23 @@
-.form-inputs
-  .container-fluid
-    .row
-      .col-md-12
-        = f.input :correspondence, label: 'Avec correspondance ?'
-        = f.input :mode, collection: TravelDetail.modes.keys, label: 'Mode de transport', selected: 0
-        = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false
-        = f.input :reference, label: 'Référence'
-    .row
-      .col-md-6
-        h4.mt-3 Départ
-        = f.input :departure_location, label: 'Ville de départ'
-        = f.input :start_time, label: 'Heure de départ'
-        = f.input :meeting_time, label: 'Heure de rendez-vous'
-        / = f.input :father_name, label: 'Nom'
-      .col-md-6
-        h4.mt-3 Arrivée
-        = f.input :arrival_location, label: 'Ville d\'arrivée'
-        = f.input :end_time, label: 'Heure d\'arrivée'
-        / = f.input :end_time, label: 'Heure d\'arrivée'
+= f.input :nature, collection: TravelDetail.natures.keys, selected: 0
+= f.input :is_correspondence, label: 'Avec correspondance ?'
+= f.input :mode, collection: TravelDetail.modes.keys, label: 'Mode de transport', selected: 0
+= f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false
+= f.input :reference, label: 'Référence'
+
+
+h4.mt-3 Départ
+= f.input :departure_location, label: 'Ville de départ'
+= f.input :start_time, label: 'Heure de départ'
+= f.input :meeting_time, label: 'Heure de rendez-vous'
+/ = f.input :father_name, label: 'Nom'
+h4.mt-3 Arrivée
+= f.input :arrival_location, label: 'Ville d\'arrivée'
+= f.input :end_time, label: 'Heure d\'arrivée'
+/ = f.input :end_time, label: 'Heure d\'arrivée'
+
+.child_details_section.pt-3
+  .correspondence
+  h3.mt-3 Correspondance
+  .child_details.mt-3
+    = f.simple_fields_for :correspondences do |correspondence|
+      = render 'travels/correspondence_fields', f: correspondence

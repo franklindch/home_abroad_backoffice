@@ -1,5 +1,5 @@
 section
-  .row.margin-top-navbar
+  .row.margin-top-navbar-form
     .col-md-6.mx-auto
       .card.mt-5
         .card-header
@@ -10,20 +10,20 @@ section
             	.container-fluid
             		.row
             			.col-md-12
+                    p.mb-5 Lors de la création de la qualification, le champ 'Nom de famille' est obligatoire. Vous pourrez revenir plus tard sur le formulaire pour compléter les autres champs.
+                    = f.input :refered_by, collection: Qualification.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
+                    = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de contact', selected: 0
+                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: Qualification.data_entry_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
+                    = f.input :commercial_responsible, label: 'Responsable commercial', collection: Qualification.commercial_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
+                    = f.input :status, collection: Qualification::STATUSES, selected: 1, label: 'Statut'
+                    = f.input :reference_name, label: 'Référence'
                     = f.input :comment, placeholder: 'Quel commentaire général à faire sur le prospect?', label: false
-                    = f.input :refered_by, collection: Qualification.refered_bies.keys, label: 'Référence'
-                    = f.input :contact_mode, collection: Qualification.contact_modes.keys, label: 'Mode de contact'
-                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: Qualification.data_entry_responsibles.keys
-                    = f.input :commercial_responsible, label: 'Responsable commercial', collection: Qualification.commercial_responsibles.keys
-                    = f.input :status, collection: Qualification::STATUSES
                     .child_details_section.pt-3
-                      h3.mt-3 Informations sur les enfants
+                      h5.mb-3 ... et sur les enfants
                       .child_details.mt-3
                         = f.simple_fields_for :child_details do |child_detail|
                           / = render 'qualifications/child_detail_fields', f: child_detail
                         .links.form-inline.mt-3
                           = link_to_add_association 'Ajouter', f, :child_details
-                        .form-actions.text-center
-                          = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 
-                    / = f.input :address_1, label: 'Adresse principale'
-                    / = f.input :address_2, label: 'Adresse secondaire si besoin', required: false
+                    .form-actions.text-center
+                      = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 

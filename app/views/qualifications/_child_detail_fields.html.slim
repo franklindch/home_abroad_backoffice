@@ -1,26 +1,27 @@
-.nested-fields.form-row.mt-3.border-bottom.pb-3
+.nested-fields.form-row.mt-5.border-bottom.pb-3
   .field.form-group.col-md-3
-    = f.label :first_name, label: 'Prénom'
-    = f.text_field :first_name
+    = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
+
   .field.form-group.col-md-3
-    = f.label :last_name, label: 'Nom de famille'
-    = f.text_field :last_name
+    = f.input :first_name, label: 'Prénom'
+
   .field.form-group.col-md-3
-    = f.label :age, label: 'Âge'
-    = f.text_field :age
+    = f.input :last_name, label: 'Nom de famille'
+
   .field.form-group.col-md-3
-    = f.label :email, label: 'Email'
-    = f.text_field :email
+    = f.input :age, label: 'Âge', collection: 10..28, selected: 0
+
   .field.form-group.col-md-3
-    = f.label :school, label: 'Etablissement Scolaire'
-    = f.text_field :school
+    = f.input :email, label: 'Email'
+
   .field.form-group.col-md-3
-    = f.label :school_grade, label: 'Email'
-    = f.text_field :school_grade
+    = f.input :school, label: 'Etablissement Scolaire'
+  
   .field.form-group.col-md-3
-    = f.label :gender, label: 'Sexe'
-    = f.text_field :gender
-  .field.form-group.col-md-3
-    = f.label :comment, label: 'Commentaire'
-    = f.text_field :comment
-  = link_to_remove_association "Supprimer", f
+    = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire', selected: 0
+  
+  .field.form-group.col-md-12
+    = f.input :comment, label: 'Commentaire'
+
+  .field.form-group.col-md-4
+    = link_to_remove_association "Supprimer", f

@@ -1,0 +1,21 @@
+section
+  .row.margin-top-navbar
+    .col-md-6.mx-auto
+      .card.mt-5
+        .card-header
+          h2 Formulaire Séjour linguistique
+        .card-body
+          = simple_form_for @program do |f|
+            .form-inputs
+            	.container-fluid
+            		.row
+            			.col-md-12
+                    = f.input :nature, collection: Program.natures.keys, label: 'Type'
+                    = f.input :explicit_name, label: 'Nom'
+                    = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner le partenaire rataché...", label: false
+                    = f.input :address, label: 'Adresse'
+                    = f.input :city, label: 'Ville'
+                    = f.input :zip_code, label: 'Code Postal'
+                    / = f.input :country_of_establishment, selected: 'France'
+            .form-actions.text-center
+              = f.button :button, "Valider le séjour", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 

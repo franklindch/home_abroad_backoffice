@@ -13,6 +13,7 @@ class QualificationsController < ApplicationController
 	  @qualification.save
 	  @family.update_columns(qualification_id: @qualification.id)
     redirect_to families_path
+    flash[:alert] = "Cet établissement ne semble pas être un bar ou restaurant, ou l'établissement est peut-être définitivement fermé. Veuillez en entrer un autre"
 	end
 
 	private

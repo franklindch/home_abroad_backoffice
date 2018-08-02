@@ -9,11 +9,13 @@ class InvoicesController < ApplicationController
 
 	def create
 	  @invoice = Invoice.new(invoice_params)
-	  @invoice.language_stay_id = @language_stay
+	  @invoice.language_stay = @language_stay
 	  client = @language_stay.client
 	  if @invoice.save
+	  	flash[:notice] = "Facture ajouté avec succès !"
 	    redirect_to client_path(client)
 	  else
+	  	flash[:alert] = "Merci de lire les messages d'erreur."
 	    render :new
 	  end
 	end
@@ -34,12 +36,15 @@ class InvoicesController < ApplicationController
 
 	def retrieve_language_stay
 		@language_stay ||= LanguageStay.find(params[:language_stay_id])
-		
+	end
+
+	def retrieve_invoice
+		@invoice ||= Invoice.find(params[:id])
 	end
 
 	def invoice_params
 	  params.require(:invoice).permit(
-	    :name, :invoice_situation, :address_1, :address_2, :zip_code, :phone, :email, :city, :language_stay_id
+	    :application_fee_price_cents, :language_stay_price_cents, :travel_price_cents, :total_price, :language_stay_id
 	  )    
 	end
 end

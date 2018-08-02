@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
 	before_action :authenticate_user!
+	skip_before_action :verify_authenticity_token
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
 	before_action :retrieve_family, only: [:update, :destroy, :create]
 
@@ -15,9 +16,16 @@ class ClientsController < ApplicationController
 	def create
 	  @client = Client.new(client_params)
 	  @client.family = @family
-	  @client.save
-	  @family.qualification.update_columns(status: STATUSES[2])
-	  redirect_to new_client_language_stay_path(@client)
+	  associate_age(client_params)
+
+	  if @client.save
+		  @family.qualification.update_columns(status: "Cliente")
+		  flash[:notice] = "Client ajouté avec succès !"
+		  redirect_to new_client_language_stay_path(@client)
+		else
+			flash[:alert] = "Merci de lire les messages d'erreurs."
+			render :new
+		end
 	end
 
 	def edit
@@ -29,8 +37,10 @@ class ClientsController < ApplicationController
 	end
 
 	def destroy
-	  @client.destroy
-	  redirect_to clients_path
+	 	@client.destroy
+	 	respond_to do |format|
+	 	  format.js { redirect_to clients_path, alert: "You cannot do that" }
+	 	end
 	end
 
 	def index
@@ -76,15 +86,21 @@ class ClientsController < ApplicationController
 	end
 
 	def retrieve_family
-	  @family ||= Family.find(params[:client][:family_id])
+		if params[:client]
+	  	@family ||= Family.find(params[:client][:family_id])
+	  else
+	  	@family ||= Family.find(params[:family_id])
+	  end
+	end
+
+	def associate_age(client_params)
+		birth_date_format = get_birth_date(client_params)
+		@client.age = @client.get_age(birth_date_format)
 	end
 
 	def client_params
 	  params.require(:client).permit(
-	  	:age_category, :gender, :first_name, :last_name, :birth_date, :age, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :language_level, :preferred_hobbies, :smoker?, :medical_issue, :comment, :family_id
-	  )    
+	  	:age_category, :gender, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :age, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
+	  )
 	end
 end
-
-
-

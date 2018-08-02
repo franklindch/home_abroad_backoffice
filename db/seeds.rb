@@ -11,18 +11,18 @@
 # frank@frank.com / franklin
 
 puts 'Cleaning database...'
-Family.destroy_all
-Attendant.destroy_all
-Camp.destroy_all
-ChildDetail.destroy_all
-Client.destroy_all
-Correspondence.destroy_all
-Employee.destroy_all
-PartnerCompany.destroy_all
-Program.destroy_all
 Qualification.destroy_all
-TravelDetail.destroy_all
-Travel.destroy_all
+Family.destroy_all
+
+# Attendant.destroy_all
+# Camp.destroy_all
+# Client.destroy_all
+# Correspondence.destroy_all
+# Employee.destroy_all
+# PartnerCompany.destroy_all
+# Program.destroy_all
+# TravelDetail.destroy_all
+# Travel.destroy_all
 
 puts 'Creating attendants...'
 attendants_attributes = [

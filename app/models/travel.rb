@@ -7,6 +7,7 @@ class Travel < ApplicationRecord
   belongs_to :attendant, optional: true
   belongs_to :travel, optional: true
 
+  # validates :travel_group_id, if: :travel_group_id_params
 
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
@@ -16,8 +17,14 @@ class Travel < ApplicationRecord
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}
-  enum nature: { Groupe: 0, Groupe_décalé: 1, Pre_acheminement: 2, Post_acheminement: 3, Indépendant: 4, Individuel: 5 }
+  enum nature: { Groupe: 0, Groupe_décalé: 1, Pré_acheminement: 2, Post_acheminement: 3, Indépendant: 4, Individuel: 5 }
   # validate :coverimage_size
+
+  private
+
+  def travel_group_id_params
+    params[:travel][:travel_group_id]
+  end
 
    # private
 

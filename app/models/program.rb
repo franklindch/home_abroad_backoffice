@@ -1,6 +1,5 @@
 class Program < ApplicationRecord
 	include PgSearch
-  belongs_to :partner_company
   has_many :language_stays, dependent: :destroy
 
   pg_search_scope :search_by_explicit_name, 
@@ -16,7 +15,13 @@ class Program < ApplicationRecord
   	adventure_trip: 4,
   	volontariat: 5,
   	enrichment_camp: 6,
-  	echange: 7,
+    echange: 7,
+    scolarité: 8,
+    scolarité: 9,
+    scolarité: 10,
+    scolarité: 11,
+    scolarité: 12,
+    scolarité: 13,
   	scolarité: 8,
   }
 end

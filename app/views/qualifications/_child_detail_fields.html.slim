@@ -19,9 +19,15 @@
   
   .field.form-group.col-md-3
     = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire', selected: 0
+
+  .field.form-group.col-md-3
+    = f.input :duration, label: 'Durée envisagée (en semaines)'
+
+  .field.form-group.col-md-3
+    = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois'
   
   .field.form-group.col-md-12
-    = f.input :comment, label: 'Commentaire'
+    = f.input :comment, label: 'Remarque'
 
   .field.form-group.col-md-4
     = link_to_remove_association "Supprimer", f

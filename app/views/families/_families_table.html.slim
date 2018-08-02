@@ -4,7 +4,7 @@
       p Aucune famille trouvée pour cette recherche, merci de réessayer.
 - else
   .table-responsive
-    table.table.table-striped.table-sm.table-hover
+    table.table.table-sm.table-hover.cursor-pointer
       thead
         tr
           th Nom
@@ -13,8 +13,7 @@
           th Téléphone
           th Adresse
           th Code Postal
-          th Ville
-          th Pays
+
       tbody
       - families.each do |family|
         tr data-toggle="modal" data-target="#modal#{family.id}"
@@ -30,10 +29,6 @@
             span = family&.address_1
           td
             span = family&.zip_code
-          td
-            span = family&.city
-          td
-            span = family&.country_of_residence
             
 
           = render 'families/family_modal', family: family

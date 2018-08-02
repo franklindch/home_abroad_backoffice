@@ -7,19 +7,18 @@ section
         .card-body
           = simple_form_for @qualification, url: :family_qualification do |f|
             .form-inputs
-            	.container-fluid
-            		.row
-            			.col-md-12
-                    p.mb-5 Lors de la création de la qualification, le champ 'Nom de famille' est obligatoire. Vous pourrez revenir plus tard sur le formulaire pour compléter les autres champs.
+              .container-fluid
+                .row
+                  .col-md-12
                     = f.input :refered_by, collection: Qualification.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
-                    = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de contact', selected: 0
+                    = f.input :reference_name, label: 'Nom Référence'
+                    = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact', selected: 0
                     = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: Qualification.data_entry_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
-                    = f.input :commercial_responsible, label: 'Responsable commercial', collection: Qualification.commercial_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
-                    = f.input :status, collection: Qualification::STATUSES, selected: 1, label: 'Statut'
-                    = f.input :reference_name, label: 'Référence'
-                    = f.input :comment, placeholder: 'Quel commentaire général à faire sur le prospect?', label: false
+                    / = f.input :status, collection: Qualification.statuses.keys.map { |w| [w.humanize, w] }, selected: 1, label: 'Statut'
+                    = f.hidden_field :status, value: 'Prospect'
+                    = f.input :comment, placeholder: 'Quel commentaire général à faire ?', label: false
                     .child_details_section.pt-3
-                      h5.mb-3 ... et sur les enfants
+                      h4.mt-4.mb-4 Renseignez ci-dessous les souhaits des enfants de cette famille.
                       .child_details.mt-3
                         = f.simple_fields_for :child_details do |child_detail|
                           / = render 'qualifications/child_detail_fields', f: child_detail

@@ -74,6 +74,8 @@ class ProgramsController < ApplicationController
 	end
 
 	def program_params
-	  params.require(:program).permit(:nature, :explicit_name, :address, :city, :zip_code, :country_of_establishment, :partner_company_id)
+	  params.require(:program).permit(
+	  	:nature, :explicit_name, :address, :zip_code
+	  )
 	end
 end

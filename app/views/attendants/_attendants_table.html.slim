@@ -4,7 +4,7 @@
       p Aucun accompagnateur trouvé pour cette recherche, merci de réessayer.
 - else
   .table-responsive
-    table.table.table-striped.table-sm.table-hover
+    table.table.table-sm.table-hover
       thead
         tr
           th Prénom
@@ -26,6 +26,3 @@
             span = attendant.email
           td
             span = attendant.phone
-            
-
-          = render 'attendants/attendant_modal', attendant: attendant

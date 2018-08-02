@@ -13,31 +13,31 @@ class TravelsController < ApplicationController
 
   def create
     @travel = Travel.new(travel_params)
-    while params[:travel_group_id]
+
+    while params[:travel][:travel_group_id]
       retrieve_travel_group
       @travel.travel_group_id = @travel_group
+      # retrieve_attendant
+      # @travel.attendant_id = @attendant
+      # @travel.update_columns(attendant_id: @attendant.id)
     end
+
     @language_stays = LanguageStay.all
-    if @travel.save
-      if params[:language_stay_id]
-        retrieve_language_stay
-        client = @language_stay.client
-        @invoice.language_stay = @language_stay
-        redirect_to client_path(client)
-      else
-        retrieve_attendant
-        @travel.attendant_id = @attendant
-        @travel.update_columns(attendant_id: @attendant.id)
-        redirect_to travels_path
-      end
+
+    if @travel.save && params[:language_stay_id]
+      retrieve_language_stay
+      client = @language_stay.client
+      @invoice.language_stay = @language_stay
+      flash[:notice] = "Voyage créé avec succès !"
+      redirect_to client_path(client)
     else
+      flash[:alert] = "Merci de lire les messages d'erreur !"
       render :new
     end
   end
 
 
-  def edit
-  end
+  def edit; end
 
   def update
   end
@@ -78,6 +78,6 @@ class TravelsController < ApplicationController
   end
 
   def retrieve_travel_group
-    @travel_group ||= Travel.find(params[:travel_group_id])
+    @travel_group ||= Travel.find(params[:travel_group_id]) if params[:travel_group_id]
   end
 end

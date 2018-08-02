@@ -4,7 +4,7 @@
       p Aucun voyage trouvé pour cette recherche, merci de réessayer.
 - else
   .table-responsive
-    table.table.table-striped.table-sm.table-hover
+    table.table.table-sm.table-hover
       thead
         tr
           th Type
@@ -17,7 +17,7 @@
       - @travels.each do |travel|
         tr data-toggle="modal" data-target="#modal#{travel.id}"
           td
-            span = travel&.nature
+            span = travel&.nature&.humanize
           td
             span = travel&.capacity
           td
@@ -28,8 +28,3 @@
             span = link_to "#{travel&.travel_details[0]&.nature}"
           td
             span = link_to "#{travel&.travel_details[1]&.nature}"
-          / td
-          /   span = link_to "#{travel.partner_company.name}", clients_path
-            
-
-          / = render 'travels/travel_modal', travel: travel

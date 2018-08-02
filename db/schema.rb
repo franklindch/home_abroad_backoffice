@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180726133727) do
+ActiveRecord::Schema.define(version: 20180802073035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "child_detail_language_stays", force: :cascade do |t|
+    t.bigint "potential_language_stay_id"
+    t.bigint "child_detail_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_detail_id"], name: "index_child_detail_language_stays_on_child_detail_id"
+    t.index ["potential_language_stay_id"], name: "index_child_detail_language_stays_on_potential_language_stay_id"
+  end
+
   create_table "child_details", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -42,11 +51,13 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.integer "gender"
     t.integer "school_grade"
     t.string "school"
+    t.integer "duration"
+    t.integer "month"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "age_category"
+    t.integer "age_category"
     t.string "gender"
     t.string "first_name"
     t.string "last_name"
@@ -57,14 +68,21 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.string "passport_number"
     t.string "country_of_issue", default: "France"
     t.string "nationality", default: "French"
-    t.integer "language_level"
+    t.integer "first_language_level"
     t.string "preferred_hobbies"
     t.string "medical_issue"
-    t.boolean "smoker?", default: false
+    t.boolean "smoker", default: false
     t.text "comment"
     t.bigint "family_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address_1"
+    t.string "address_2"
+    t.integer "zip_code"
+    t.date "passport_expiration_date"
+    t.integer "second_language_level"
+    t.integer "first_language"
+    t.integer "second_language"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -100,12 +118,10 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.string "address_2"
     t.integer "zip_code"
     t.string "phone"
-    t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.string "email"
-    t.string "country_of_residence"
     t.string "father_name"
     t.string "mother_name"
     t.string "mother_phone"
@@ -123,6 +139,9 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "language_stay_id"
+    t.integer "transfer_price_cents"
+    t.integer "option_1_price_cents"
+    t.integer "option_2_price_cents"
     t.index ["language_stay_id"], name: "index_invoices_on_language_stay_id"
   end
 
@@ -136,7 +155,20 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "partner_company_id"
+    t.string "phone_during_stay"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "location"
+    t.string "transfer"
+    t.string "pension"
+    t.string "accomodation"
+    t.string "option_1"
+    t.string "option_2"
+    t.integer "class_hours"
+    t.text "precisions"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
+    t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
   end
 
@@ -146,9 +178,15 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.string "email"
     t.string "phone_number"
     t.string "address"
-    t.string "city"
     t.string "zip_code"
-    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "potential_language_stays", force: :cascade do |t|
+    t.integer "nature"
+    t.string "countries"
+    t.string "partner_companies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -157,23 +195,18 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.integer "nature"
     t.string "explicit_name"
     t.string "address"
-    t.string "city"
     t.string "zip_code"
-    t.string "country_of_establishment"
-    t.bigint "partner_company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["partner_company_id"], name: "index_programs_on_partner_company_id"
   end
 
   create_table "qualifications", force: :cascade do |t|
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
+    t.integer "status"
     t.integer "refered_by"
     t.integer "data_entry_responsible"
-    t.integer "commercial_responsible"
     t.integer "contact_mode"
     t.string "reference_name"
   end
@@ -227,6 +260,8 @@ ActiveRecord::Schema.define(version: 20180726133727) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "child_detail_language_stays", "child_details"
+  add_foreign_key "child_detail_language_stays", "potential_language_stays"
   add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
   add_foreign_key "correspondences", "travel_details"
@@ -234,8 +269,8 @@ ActiveRecord::Schema.define(version: 20180726133727) do
   add_foreign_key "families", "qualifications"
   add_foreign_key "invoices", "language_stays"
   add_foreign_key "language_stays", "clients"
+  add_foreign_key "language_stays", "partner_companies"
   add_foreign_key "language_stays", "programs"
-  add_foreign_key "programs", "partner_companies"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travels"
   add_foreign_key "travels", "attendants"

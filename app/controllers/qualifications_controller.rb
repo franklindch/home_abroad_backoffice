@@ -9,11 +9,10 @@ class QualificationsController < ApplicationController
 
 	def create
 	  @qualification = Qualification.new(qualification_params)
-	  @qualification.status = STATUSES[1]
 	  @qualification.save
 	  @family.update_columns(qualification_id: @qualification.id)
     redirect_to families_path
-    flash[:alert] = "Cet établissement ne semble pas être un bar ou restaurant, ou l'établissement est peut-être définitivement fermé. Veuillez en entrer un autre"
+    flash[:noce] = "Qualification associée avec succès à la famille !"
 	end
 
 	private
@@ -30,7 +29,10 @@ class QualificationsController < ApplicationController
 
 	def qualification_params
 		params.require(:qualification).permit(
-		  :comment, child_details_attributes: [:id, :first_name, :last_name, :age, :comment, :_destroy]
+		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :status,
+		  child_details_attributes: [
+		  	:id, :first_name, :last_name, :age, :comment, :_destroy
+		  ]
 		)
 	end
 end

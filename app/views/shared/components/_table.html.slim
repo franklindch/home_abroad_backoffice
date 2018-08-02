@@ -16,3 +16,5 @@
 - elsif @programs
   	= render 'programs/programs_table', programs: @programs.order('created_at ASC')
 		= paginate @programs
+
+		/ .created_at.strftime('%A %d %B %Y')

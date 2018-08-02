@@ -1,56 +1,57 @@
 .modal-header
-  h5.modal-title id='modal#{family.id}LongTitle' Informations sur la famille #{family&.name.capitalize}
-  button.close aria-label="Close" data-dismiss="modal" type="button" 
-    span aria-hidden="true"  &times; 
+	h4.modal-title id='modal#{family.id}LongTitle' = "Informations sur la famille #{family&.name.capitalize}"
+	button.close aria-label="Close" data-dismiss="modal" type="button" 
+		span aria-hidden="true"  &times; 
 
 .modal-body
 	- if qualification == nil
 		p Pas de qualification associée à cette famille
 
-	- elsif qualification.status == STATUSES[1]
-		h6 = "Statut: #{qualification&.status}" if qualification.status
-		p = "Commentaire - #{qualification&.comment}" if qualification.comment
-		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by
+	- elsif qualification.status == 'Prospect'
+		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
+		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
+		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
 		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
-		p = "Responsable Commercial - #{qualification&.commercial_responsible}" if qualification.commercial_responsible
-		p = "Mode de contact - #{qualification&.contact_mode}" if qualification.contact_mode
-		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name
+		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
+		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
 
 		- if child_details.empty?
 			p Aucun complément d'information renseigné sur l'un des enfants.
 			p = link_to 'Ajouter un client à cette famille', new_client_path, class: 'btn btn-primary'
 
 		- else
-			h6 Enfants de la famille
+			h5.mt-4.border-top.pt-4 Enfants de la famille
 			- qualification.child_details.each do |child_detail|
-				p = "- #{child_detail.first_name} #{child_detail.last_name.upcase} | #{child_detail.age} ans | Commentaire: #{child_detail&.comment}"
-	        	= link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id), class: 'pl-4'
+				.card.mt-3
+					.card-body
+						h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
+						h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
+						p.card-text = "Commentaire: #{child_detail.comment}"
+						p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
 
-
-	- elsif qualification.status == STATUSES[1]
-		h6 = "Statut: #{qualification&.status}" if qualification.status
-		p = "Commentaire - #{qualification&.comment}" if qualification.comment
-		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by
+	- elsif qualification.status == 'Cliente'
+		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
+		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
+		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
 		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
-		p = "Responsable Commercial - #{qualification&.commercial_responsible}" if qualification.commercial_responsible
-		p = "Mode de contact - #{qualification&.contact_mode}" if qualification.contact_mode
-		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name
+		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
+		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
 
 	- else
-		h6 = "Statut: #{qualification&.status}" if qualification.status
-		p = "Commentaire - #{qualification&.comment}" if qualification.comment
-		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by
+		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
+		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
+		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
 		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
-		p = "Responsable Commercial - #{qualification&.commercial_responsible}" if qualification.commercial_responsible
-		p = "Mode de contact - #{qualification&.contact_mode}" if qualification.contact_mode
-		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name
-		- family.clients.each do |client|
-			.row
-				.col-md-12
-				ul
-					li
-						= "#{client&.first_name} #{client&.last_name&.upcase} | #{client&.age} ans"
-        		= link_to 'Vers sa fiche client', family_client_path(family, client), class: 'pl-4'
+		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
+		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
+		
+	- family.clients.each do |client|
+		.card.mt-3
+			.card-body
+				h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
+				h6.card-subtitle.mb-2.text-muted = "#{client.age} ans"
+				p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)
+				
 
 
 .modal-footer

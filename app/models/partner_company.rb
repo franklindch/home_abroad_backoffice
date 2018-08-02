@@ -2,7 +2,6 @@ class PartnerCompany < ApplicationRecord
 	include PgSearch
 	has_many :employees, dependent: :destroy
 	has_many :travel_details, dependent: :destroy
-	has_many :programs, dependent: :destroy
 
 	pg_search_scope :search_by_name, 
 					against: [:name],

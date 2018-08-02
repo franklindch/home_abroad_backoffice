@@ -9,7 +9,7 @@ class Family < ApplicationRecord
 						tsearch: { prefix: true, negation: true, any_word: true}
 					}
 
-	enum family_situation: { Mariés: 1, Divorcés: 2, En_couple: 3 }
+	enum family_situation: { Mariés: 1, Divorcés: 2, En_couple: 3, Veuf: 4, Vie_maritale: 5, Célibataire: 6 }
 	# paginates_per 10
 	# validates :name, :family_situation, :address_1, :city, :zip_code, :phone, presence: true
 	# validates :phone, uniqueness: true

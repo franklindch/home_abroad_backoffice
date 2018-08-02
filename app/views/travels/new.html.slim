@@ -1,4 +1,4 @@
-- if params[:client]
+- if params[:client] || params[:language_stay]
 	= render 'travels/form/other_travel', travel: @travel
 - else
 	= render 'travels/form/travel_group', travel: @travel

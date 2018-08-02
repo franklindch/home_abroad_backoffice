@@ -10,26 +10,26 @@ section
             	.container-fluid
             		.row
             			.col-md-4
-                    p.mb-5 Lors de la création de la famille, le champs 'Nom de famille' est obligatoire. Vous pourrez revenir plus tard sur le formulaire pour compléter les autres champs.
                     = f.input :name, label: 'Nom de famille'
                     = f.input :email, label: 'Email'
                     = f.input :phone, label: 'Téléphone fixe', as: :tel
-                    = f.input :address_1, label: 'Adresse principale'
+                    h4.mt-4.mb-4 Informations secondaires, vous pourrez y revenir plus tard :
+                    = f.input :address_1, label: 'Adresse principale', input_html: {class: 'google_map'}
                     = f.input :address_2, label: 'Complément d\'adresse'
-                    = f.input :city, label: 'Ville de résidence'
+                    / = f.input :country_of_residence, label: 'Pays de résidence', priority: ["FR", "GB", "IT"]
                     = f.input :zip_code, label: 'Code Postal'
-                    = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale', selected: 0
+                    = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale'
                     / = f.input :country_of_residence, priority: 'France'
             .form-inputs
               .container-fluid
                 .row
                   .col-md-6
-                    h4.mt-3 Père
+                    h4.mt-3.text-center Père
                     = f.input :father_name, label: 'Nom complet'
                     = f.input :father_phone, label: 'Tél'
                     = f.input :father_email, label: 'Email'
                   .col-md-6
-                    h4.mt-3 Mère
+                    h4.mt-3.text-center Mère
                     = f.input :mother_name, label: 'Nom complet'
                     = f.input :mother_phone, as: :tel, label: 'Tél'
                     = f.input :mother_email, as: :tel, label: 'Email'

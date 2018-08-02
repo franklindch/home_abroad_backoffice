@@ -1,6 +1,22 @@
 class ChildDetail < ApplicationRecord
 	belongs_to :qualification
-	has_one :family, through: :qualification
+	has_one :family, dependent: :destroy, through: :qualification
+	has_many :potential_language_stays, through: :child_detail_language_stays
+
 	enum gender: { Masculin: 1, Féminin: 2 }
-	enum school_grade: { Prépa: 0, Césure: 1, Terminale: 2, Première: 3, Seconnde: 4, Troisième: 5, Quatrième: 6, Cinquième: 7, Sixième: 8 }
+	enum school_grade: { Prépa: 0, Césure: 1, Terminale: 2, Première: 3, Seconde: 4, Troisième: 5, Quatrième: 6, Cinquième: 7, Sixième: 8 }
+	enum month: { 
+		Janvier: 0, 
+		Février: 1, 
+		Mars: 2, 
+		Avril: 3, 
+		Mai: 4, 
+		Juin: 5, 
+		Juillet: 6, 
+		Août: 7, 
+		Septembre: 8, 
+		Octobre: 9, 
+		Novembre: 10, 
+		Décembre: 11
+	}
 end

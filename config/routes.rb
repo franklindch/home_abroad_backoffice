@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 	scope '/dashboard' do
     resources :clients, only: [:new, :index, :create, :update]
     resources :families do
-      resources :clients, only: [:edit, :create, :update, :destroy, :show]
+      resources :clients, only: [:edit, :create, :update, :destroy, :show, :new]
     end
     resources :partner_companies, only: [:new, :index, :create] do 
       resources :employees, only: [:new, :create, :edit, :update, :destroy]

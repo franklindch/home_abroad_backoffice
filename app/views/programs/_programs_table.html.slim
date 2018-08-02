@@ -4,30 +4,22 @@
       p Aucun partenaire trouvé pour cette recherche, merci de réessayer.
 - else
   .table-responsive
-    table.table.table-striped.table-sm.table-hover
+    table.table.table-sm.table-hover
       thead
         tr
           th Type
           th Nom
           th Adresse
           th Code Postal
-          th Ville
-          th Pays
-          th Organisme étranger
+          
       tbody
       - programs.each do |program|
         tr data-toggle="modal" data-target="#modal#{program.id}"
           td
-            span = program.nature
+            span = program.nature.humanize
           td
             span = program.explicit_name
           td
             span = program.address
           td
             span = program.zip_code
-          td
-            span = program.city
-          td
-            span = program.country_of_establishment
-          td
-            span = program.partner_company.name

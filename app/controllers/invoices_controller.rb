@@ -5,6 +5,7 @@ class InvoicesController < ApplicationController
 
 	def new
 	  @invoice = Invoice.new
+	  create_payments
 	end
 
 	def create
@@ -12,7 +13,7 @@ class InvoicesController < ApplicationController
 	  @invoice.language_stay = @language_stay
 	  client = @language_stay.client
 	  if @invoice.save
-	  	flash[:notice] = "Facture ajouté avec succès !"
+	  	flash[:notice] = "Facture ajoutée avec succès !"
 	    redirect_to client_path(client)
 	  else
 	  	flash[:alert] = "Merci de lire les messages d'erreur."
@@ -34,6 +35,12 @@ class InvoicesController < ApplicationController
 
 	private
 
+	def create_payments
+		2.times do
+		  @invoice.payments.build
+		end
+	end
+
 	def retrieve_language_stay
 		@language_stay ||= LanguageStay.find(params[:language_stay_id])
 	end
@@ -44,7 +51,10 @@ class InvoicesController < ApplicationController
 
 	def invoice_params
 	  params.require(:invoice).permit(
-	    :application_fee_price_cents, :language_stay_price_cents, :travel_price_cents, :total_price, :language_stay_id
+	    :application_fee_price_cents, :language_stay_price_cents, :travel_price_cents, :total_price, :language_stay_id,
+	    payments_attributes: [
+	    	:id, :amount_price_cents, :nature, :comment, :_destroy
+	    ]
 	  )    
 	end
 end

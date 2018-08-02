@@ -14,6 +14,7 @@
           th Adresse
           th Code Postal
           th Création
+          th
       tbody
       - partner_companies.each do |partner_company|
         tr data-toggle="modal" data-target="#modal#{partner_company.id}"
@@ -31,6 +32,8 @@
             span = partner_company.zip_code
           td
             span = partner_company.created_at.strftime('%A %d %B %Y')
+          th
+            span = link_to 'Ajouter un employer', new_partner_company_employee_path(partner_company)
             
 
           = render 'partner_companies/partner_company_modal', partner_company: partner_company

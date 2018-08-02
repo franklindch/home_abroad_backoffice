@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802073035) do
+ActiveRecord::Schema.define(version: 20180802143221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,16 @@ ActiveRecord::Schema.define(version: 20180802073035) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "nature"
+    t.integer "amount_price_cents"
+    t.text "comment"
+    t.bigint "invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_payments_on_invoice_id"
+  end
+
   create_table "potential_language_stays", force: :cascade do |t|
     t.integer "nature"
     t.string "countries"
@@ -271,6 +281,7 @@ ActiveRecord::Schema.define(version: 20180802073035) do
   add_foreign_key "language_stays", "clients"
   add_foreign_key "language_stays", "partner_companies"
   add_foreign_key "language_stays", "programs"
+  add_foreign_key "payments", "invoices"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travels"
   add_foreign_key "travels", "attendants"

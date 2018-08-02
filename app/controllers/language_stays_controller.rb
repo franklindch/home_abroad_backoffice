@@ -18,7 +18,6 @@ class LanguageStaysController < ApplicationController
 	  	flash[:notice] = "Séjour ajouté avec succès !"
 	    redirect_to client_path(@client)
 	  else
-	  	raise
 	  	flash[:alert] = 'Merci de lire les messages d\'erreur'
 	    render :new
 	  end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :families do
       resources :clients, only: [:edit, :create, :update, :destroy, :show, :new]
     end
+    # resources :employees, only: [:index]
     resources :partner_companies, only: [:new, :index, :create] do 
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end

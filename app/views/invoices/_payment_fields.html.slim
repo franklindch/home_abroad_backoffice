@@ -1,0 +1,13 @@
+.nested-fields.form-row.mt-3
+  .field.form-group.col-md-3
+    = f.input :nature, collection: Payment.natures.keys.map { |w| [w.humanize, w] }, selected: 0, label: 'Type'
+
+  .field.form-group.col-md-3
+    = f.input :amount_price_cents, label: 'Montant'
+  
+.row.border-bottom.pb-3
+  .field.form-group.col-md-12
+    = f.input :comment, label: 'Commentaire'
+    
+  .field.form-group.col-md-4
+    = link_to_remove_association "Supprimer", f

@@ -28,8 +28,7 @@ class ClientsController < ApplicationController
 		end
 	end
 
-	def edit
-	end
+	def edit; end
 
 	def update
 	  @client.update(client_params)
@@ -39,7 +38,7 @@ class ClientsController < ApplicationController
 	def destroy
 	 	@client.destroy
 	 	respond_to do |format|
-	 	  format.js { redirect_to clients_path, alert: "You cannot do that" }
+	 	  format.js { redirect_to clients_path }
 	 	end
 	end
 

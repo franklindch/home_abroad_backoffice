@@ -25,11 +25,9 @@
 				      			p = employee.job_position
 				      			p = employee.first_name
 				      			p = employee.last_name
-				      			p = qualification.phone_number
-				      			p = qualification.email
-				      			=	link_to 'Ajouter un employer', new_client_path(partner_company) , class: 'btn btn-primary'
-				      			=	link_to 'Editer', new_client_path(partner_company) , class: 'btn btn-primary'
-				      			=	link_to 'Suprrimer', new_client_path(partner_company) , class: 'btn btn-primary'
+
+				      			p =	link_to 'Editer', edit_partner_company_employee_path(employee.partner_company, employee) , class: 'btn btn-primary'
+				      			p =	link_to 'Suprrimer', partner_company_employee_path(employee.partner_company, employee), method: :delete , class: 'btn btn-primary'
 				      			br
 					
       .modal-footer

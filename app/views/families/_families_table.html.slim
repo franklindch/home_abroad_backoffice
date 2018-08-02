@@ -9,6 +9,7 @@
         tr
           th Nom
           th Statut
+          th Nombre d'enfants
           th Email
           th Téléphone
           th Adresse
@@ -21,6 +22,8 @@
             span = family&.name
           td
             span = family&.qualification.status if family.qualification
+          td
+            span = family&.qualification.child_details.count if family.qualification && family.qualification.child_details != nil
           td
             span = family&.email
           td

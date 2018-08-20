@@ -7,5 +7,11 @@ class Qualification < ApplicationRecord
 	enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
 	enum contact_mode: { Appel_entrant: 1, Webcontact: 2, Par_Office: 3, Email_en_direct: 4, Visite: 5 }
 	enum status: { Prospect: 1, Cliente: 2, Dormante: 3 }
-	# enum commercial_responsible: HOME_ABROAD_EMPLOYEES 
+
+	validates :refered_by, :contact_mode, :data_entry_responsible, presence: true
+	# enum commercial_responsible: HOME_ABROAD_EMPLOYEES
+
+	def check_if_family_is_client?
+		update_columns(status: 'Cliente') if qualification.child_details { |child_detail| child_detail.client = true }
+	end
 end

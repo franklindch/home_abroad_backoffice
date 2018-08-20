@@ -10,8 +10,7 @@ section
             	.container-fluid
             		.row
             			.col-md-12
-                    = f.input :explicit_name, label: 'Nom'
-                    = f.input :nature, collection: Program.natures.keys.map { |w| [w.humanize, w] }, label: 'Type', selected: 0
+                    = f.input :name, label: 'Nom'
                     = f.input :address, label: 'Adresse'
                     = f.input :zip_code, label: 'Code Postal'
             .form-actions.text-center

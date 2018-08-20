@@ -8,17 +8,14 @@
       thead
         tr
           th Type
-          th Nom
           th Adresse
           th Code Postal
           
       tbody
       - programs.each do |program|
-        tr data-toggle="modal" data-target="#modal#{program.id}"
-          td
-            span = program.nature.humanize
-          td
-            span = program.explicit_name
+        tr
+          / td
+          /   span = program.explicitname
           td
             span = program.address
           td

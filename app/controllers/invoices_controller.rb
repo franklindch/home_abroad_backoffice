@@ -33,6 +33,18 @@ class InvoicesController < ApplicationController
 	  redirect_to families_path
 	end
 
+	def invoice
+		@invoice = Invoice.find(params[:invoice])
+	  generate_invoice_pdf(@invoice)
+		# fields_filled(@language_stay)
+	end
+
+	def paid_invoice
+		@invoice = Invoice.find(params[:paid_invoice])
+	  generate_paid_invoice_pdf(@invoice)
+		# fields_filled(@language_stay)
+	end
+
 	private
 
 	def create_payments

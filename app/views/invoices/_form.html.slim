@@ -10,10 +10,17 @@ section
 							.container-fluid
 								.row
 									.col-md-12
+										- if @language_stay.fee
+											= f.input :camp_fee_amount_price_cents, label: 'Montant commission', selected: '200'
+											= f.input :camp_fee_percentage, label: 'Pourcentage', selected: '200'
+											= f.input :camp_fee_total_price_cents, label: 'Total', selected: '200'
 										= f.input :application_fee_price_cents, label: 'Frais de dossier', selected: '200'
 										= f.input :language_stay_price_cents, label: 'Prix séjours'
 										= f.input :travel_price_cents, label: 'Prix voyage'
-										= f.input :total_price, label: 'dza voyage'
+										= f.input :transfer_price_cents, label: 'Prix transfert'
+										= f.input :option_1_price_cents, label: 'Option 1'
+										= f.input :option_2_price_cents, label: 'Option 2'
+										= f.input :total_price, label: 'Total'
 
 										h4.mt-4.mb-4 Règlements
 										.child_details.mt-3

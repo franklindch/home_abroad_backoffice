@@ -1,7 +1,8 @@
 = f.input :nature, collection: TravelDetail.natures.keys.map { |w| [w.humanize, w] }, selected: 0
 = f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?'
 = f.input :mode, collection: TravelDetail.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
-= f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false
+/ = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false*
+= f.input :companies, label: 'Compagnie'
 = f.input :reference, label: 'Référence'
 
 .row

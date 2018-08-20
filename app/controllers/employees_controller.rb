@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
 	end
 
 	def retrieve_partner_company
-	  @partner_Company ||= PartnerCompany.find(params[:partner_company_id])
+	  @partner_company ||= PartnerCompany.find(params[:partner_company_id])
 	end
 
 	def employee_params

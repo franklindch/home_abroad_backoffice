@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802143221) do
+ActiveRecord::Schema.define(version: 20180813193508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.string "school"
     t.integer "duration"
     t.integer "month"
+    t.boolean "client"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
@@ -131,6 +132,11 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
   end
 
+  create_table "generate_pdfs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.integer "application_fee_price_cents"
     t.integer "language_stay_price_cents"
@@ -142,6 +148,9 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.integer "transfer_price_cents"
     t.integer "option_1_price_cents"
     t.integer "option_2_price_cents"
+    t.integer "camp_fee_percentage"
+    t.integer "camp_fee_amount_price_cents"
+    t.integer "camp_fee_total_price_cents"
     t.index ["language_stay_id"], name: "index_invoices_on_language_stay_id"
   end
 
@@ -203,7 +212,7 @@ ActiveRecord::Schema.define(version: 20180802143221) do
 
   create_table "programs", force: :cascade do |t|
     t.integer "nature"
-    t.string "explicit_name"
+    t.string "name"
     t.string "address"
     t.string "zip_code"
     t.datetime "created_at", null: false
@@ -235,6 +244,7 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.datetime "updated_at", null: false
     t.bigint "travel_id"
     t.string "reference"
+    t.string "companies"
     t.index ["partner_company_id"], name: "index_travel_details_on_partner_company_id"
     t.index ["travel_id"], name: "index_travel_details_on_travel_id"
   end
@@ -248,6 +258,7 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.bigint "attendant_id"
     t.bigint "language_stay_id"
     t.bigint "travel_group_id"
+    t.integer "acheminement"
     t.index ["attendant_id"], name: "index_travels_on_attendant_id"
     t.index ["language_stay_id"], name: "index_travels_on_language_stay_id"
     t.index ["travel_group_id"], name: "index_travels_on_travel_group_id"
@@ -266,6 +277,7 @@ ActiveRecord::Schema.define(version: 20180802143221) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

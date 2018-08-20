@@ -1,0 +1,12 @@
+.nested-fields.form-row.mt-2.pb-2
+  .field.form-group.col-md-4
+    = f.input :nature, collection: PotentialLanguageStay.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0
+
+  .field.form-group.col-md-4
+    = f.input :countries, label: 'Pays'
+
+  .field.form-group.col-md-4
+     = f.input :partner_companies, label: 'Organismes étrangers'
+
+  .field.form-group.col-md-4.border-bottom
+    = link_to_remove_association "Supprimer le séjour", f

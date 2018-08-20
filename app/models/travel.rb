@@ -5,7 +5,7 @@ class Travel < ApplicationRecord
   has_many :correspondences, through: :travel_details
   belongs_to :language_stay, optional: true
   belongs_to :attendant, optional: true
-  belongs_to :travel, optional: true
+  belongs_to :travel, class_name: 'Travel', foreign_key: "travel_group_id", optional: true
 
   # validates :travel_group_id, if: :travel_group_id_params
 
@@ -17,8 +17,17 @@ class Travel < ApplicationRecord
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}
-  enum nature: { Groupe: 0, Groupe_décalé: 1, Pré_acheminement: 2, Post_acheminement: 3, Indépendant: 4, Individuel: 5 }
+  enum nature: { Groupe: 0, Groupe_décalé: 1, Indépendant: 2, Individuel: 3 }
+  enum acheminement: { Pré_acheminement: 0, Post_acheminement: 1 }
   # validate :coverimage_size
+
+  # before_validation :verify_uniqueness_pre_acheminement!, on: :create
+  # before_validation :verify_uniqueness_post_acheminement!, on: :create
+  # before_validation :verify_uniqueness_travel_group_id!, on: :create
+
+  def uniqu_travel_group
+    travel.present?
+  end
 
   private
 
@@ -26,12 +35,19 @@ class Travel < ApplicationRecord
     params[:travel][:travel_group_id]
   end
 
-   # private
+  # def verify_uniqueness_pre_acheminement!
+  #   throw(:abort) if (language_stay.travels.where(acheminement: 'Pré_acheminement').length > 0)
+  # end
 
-   # # Validates the size of an uploaded picture.
-   # def coverimage_size
-   #   if coverimage.size > 5.megabytes
-   #     errors.add(:coverimage, "should be less than 5MB")
-   #   end
-   # end
+  # def verify_uniqueness_post_acheminement!
+  #   throw(:abort) if (language_stay.travels.where(acheminement: 'Post_acheminement').length > 0)
+  # end
+
+  # def verify_uniqueness_travel_group_id!
+  #   throw(:abort) if travel_group
+  # end
+
+  def travel_group
+    self.travel_group_id
+  end
 end

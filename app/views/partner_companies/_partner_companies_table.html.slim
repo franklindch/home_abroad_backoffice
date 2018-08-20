@@ -15,6 +15,8 @@
           th Code Postal
           th Création
           th
+          th
+          th
       tbody
       - partner_companies.each do |partner_company|
         tr data-toggle="modal" data-target="#modal#{partner_company.id}"
@@ -33,7 +35,11 @@
           td
             span = partner_company.created_at.strftime('%A %d %B %Y')
           th
-            span = link_to 'Ajouter un employer', new_partner_company_employee_path(partner_company)
+            span = link_to "<i class='fa fas fa-plus-circle'>Employer</i>".html_safe, new_partner_company_employee_path(partner_company)
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, partner_company_path(partner_company), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: partner_company.id
             
 
           = render 'partner_companies/partner_company_modal', partner_company: partner_company

@@ -10,7 +10,6 @@ section
             	.container-fluid
             		.row
             			.col-md-12
-                    = f.hidden_field :nature, value: 'Groupe' 
                     = f.input :travel_code, label: 'Code Groupe'
                     = f.input :capacity, label: 'Capacité', collection: 20..100, selected: 10
                     = f.input :attendant_id, collection: Attendant.all, include_blank: "Merci de sélectionner l'accompagnateur...", label: false

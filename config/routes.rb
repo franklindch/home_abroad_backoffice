@@ -2,12 +2,12 @@
 
 Rails.application.routes.draw do
 	scope '/dashboard' do
-    resources :clients, only: [:new, :index, :create, :update]
+    resources :clients, only: [:new, :index, :create, :update, :edit, :destroy]
     resources :families do
       resources :clients, only: [:edit, :create, :update, :destroy, :show, :new]
     end
     # resources :employees, only: [:index]
-    resources :partner_companies, only: [:new, :index, :create] do 
+    resources :partner_companies, only: [:new, :index, :create, :edit, :destroy] do 
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
@@ -17,15 +17,19 @@ Rails.application.routes.draw do
 
     resources :language_stays, only: [:show] do 
       resources :invoices, only: [:new, :create, :edit, :update, :destroy]
+      resources :travels, only: [:new, :create, :edit, :update, :destroy]
     end
-    resources :travels
     resources :attendants
+    resources :travels, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :programs
 
-    # post '/dashboard/clients', to: 'clients#create'
     get 'static', to: 'excels#static'
-    get 'inscription_details', to: 'families#inscription_details'
+    get 'enrollment_form', to: 'language_stays#enrollment_form'
+    get 'invoice', to: 'invoices#invoice'
+    get 'paid_invoice', to: 'invoices#paid_invoice'
+    get 'airport_convocation', to: 'travels#airport_convocation'
   end
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"

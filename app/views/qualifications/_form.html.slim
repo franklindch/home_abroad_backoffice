@@ -10,15 +10,14 @@ section
               .container-fluid
                 .row
                   .col-md-12
-                    = f.input :refered_by, collection: Qualification.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
-                    = f.input :reference_name, label: 'Nom Référence'
-                    = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact', selected: 0
                     = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: Qualification.data_entry_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
-                    / = f.input :status, collection: Qualification.statuses.keys.map { |w| [w.humanize, w] }, selected: 1, label: 'Statut'
+                    = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact', selected: 0
+                    = f.input :refered_by, collection: Qualification.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
+                    = f.input :reference_name, label: 'Nom référence'
                     = f.hidden_field :status, value: 'Prospect'
                     = f.input :comment, placeholder: 'Quel commentaire général à faire ?', label: false
                     .child_details_section.pt-3
-                      h4.mt-4.mb-4 Renseignez ci-dessous les souhaits des enfants de cette famille.
+                      h4.mt-4.mb-4 Renseignez ci-dessous les souhaits des membres de cette famille.
                       .child_details.mt-3
                         = f.simple_fields_for :child_details do |child_detail|
                           / = render 'qualifications/child_detail_fields', f: child_detail

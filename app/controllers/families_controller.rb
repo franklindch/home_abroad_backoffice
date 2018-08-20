@@ -3,6 +3,7 @@ class FamiliesController < ApplicationController
   before_action :retrieve_family, only: [:edit, :update, :destroy, :show]
 
   def new
+    ClientMailer.with(language_stay: LanguageStay.first, client: LanguageStay.first.client).send_language_stay_feedback.deliver_now
     @family = Family.new
     @qualification = Qualification.new
   end
@@ -36,12 +37,7 @@ class FamiliesController < ApplicationController
       format.html
       format.js
     end
-    
-    if params[:query].present?
-      @families = Family.search_by_name(params[:query]).page(params[:query])
-    else
-      @families = Family.order(:name).page params[:page]
-    end
+    search_families
   end
 
   def show
@@ -56,30 +52,14 @@ class FamiliesController < ApplicationController
     end
   end
 
-  def inscription_details
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "inscription_details",
-               template: 'pdf/inscription_details.html.slim',
-               disposition: 'attachment',
-               layout: 'pdf'
-      end
-    end
-  end
-
   private
 
-  def family_invoice
-    # respond_to do |format|
-    #   format.html
-    #   format.pdf do
-    #     render pdf: "#{@family.name}",
-    #            template: 'pdf/family_pdf.html.slim',
-    #            disposition: 'attachment',
-    #            layout: 'pdf'
-    #   end
-    # end
+  def search_families
+    if params[:query].present?
+      @families = Family.search_by_name(params[:query]).page(params[:query])
+    else
+      @families = Family.order(:name).page params[:page]
+    end
   end
 
   def retrieve_family

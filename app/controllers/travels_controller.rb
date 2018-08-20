@@ -1,7 +1,9 @@
 class TravelsController < ApplicationController
   before_action :authenticate_user!
   before_action :retrieve_travel, only: [:edit, :update, :destroy, :show]
-  before_action :retrieve_travel_group, only: [:edit, :update, :destroy, :show]
+  before_action :retrieve_travel_group, only: [:update, :show]
+  before_action :retrieve_language_stay, only: [:new, :edit, :update, :destroy, :create]
+
 
   def new
     @travel = Travel.new
@@ -14,22 +16,31 @@ class TravelsController < ApplicationController
   def create
     @travel = Travel.new(travel_params)
 
-    while params[:travel][:travel_group_id]
-      retrieve_travel_group
-      @travel.travel_group_id = @travel_group
-      # retrieve_attendant
-      # @travel.attendant_id = @attendant
-      # @travel.update_columns(attendant_id: @attendant.id)
+    if params[:language_stay_id]
+      @travel.language_stay = @language_stay
+      client = @language_stay.client
+    else
+      retrieve_attendant
+      @travel.attendant = @attendant
     end
 
-    @language_stays = LanguageStay.all
+    @travel_nature = params[:travel][:nature]
 
-    if @travel.save && params[:language_stay_id]
-      retrieve_language_stay
-      client = @language_stay.client
-      @invoice.language_stay = @language_stay
+    if @travel_nature == 'Groupe'
+      retrieve_travel_group
+      uniqu_travel_group?(@travel)
+      @travel.travel_group_id = @travel_group.id
+    elsif @travel_nature == 'Pré_acheminement'
+
+    end
+
+    if @travel.save
       flash[:notice] = "Voyage créé avec succès !"
-      redirect_to client_path(client)
+      if params[:language_stay_id]
+        redirect_to client_path(client)
+      else
+      redirect_to travels_path
+      end
     else
       flash[:alert] = "Merci de lire les messages d'erreur !"
       render :new
@@ -40,29 +51,52 @@ class TravelsController < ApplicationController
   def edit; end
 
   def update
+    @travel.update(travel_params)
+    redirect_to travels_path
   end
 
 
   def destroy
+    @travel.destroy
+    redirect_to travels_path
+  end
+
+  def airport_convocation
+    @travel_group = Travel.where(nature: "Groupe").find(params[:travel_group])
+    generate_airport_convocation_pdf(@travel_group)
+    # fields_filled(@language_stay)
   end
 
   def index
-    @travels = Travel.order(:travel_code).page params[:page]
+    @travels = Travel.where(nature: 'Groupe').order(:travel_code).page params[:page]
     respond_to do |format|
       format.html
       format.js
     end
     if params[:query].present?
-      @travels = Travel.search_by_travel_code(params[:query]).page params[:page]
+      @travels = Travel.where(nature: 'Groupe').search_by_travel_code(params[:query]).page params[:page]
     else
-      @travels = Travel.order(:travel_code).page params[:page]
+      @travels = Travel.where(nature: 'Groupe').order(:travel_code).page params[:page]
     end
   end
 
   private
 
+  def uniqu_travel_group?(travel)
+    if travel.uniqu_travel_group
+      flash[:alert] = 'Vous ne pouvez pas ajouter le même voyage de groupe 2 fois à un séjour'
+    end
+  end
+
   def travel_params
-    params.require(:travel).permit(:capacity, :travel_code, :attendant_id, :nature, :language_stay_id, :travel_group_id, travel_details_attributes: [:id, :reference, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy, correspondences_attributes: [:id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :_destroy]])    
+    params.require(:travel).permit(:capacity, :acheminement, :travel_code, :attendant_id, :nature, :language_stay_id, :travel_group_id, 
+      travel_details_attributes: [
+        :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy, 
+        correspondences_attributes: [
+          :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :_destroy
+        ]
+      ]
+    )    
   end
 
   def retrieve_travel
@@ -70,7 +104,7 @@ class TravelsController < ApplicationController
   end
 
   def retrieve_language_stay
-    @language_stay ||= LanguageStay.find(params[:language_stay_id])
+    @language_stay ||= LanguageStay.find(params[:language_stay_id]) if params[:language_stay_id]
   end
 
   def retrieve_attendant
@@ -78,6 +112,6 @@ class TravelsController < ApplicationController
   end
 
   def retrieve_travel_group
-    @travel_group ||= Travel.find(params[:travel_group_id]) if params[:travel_group_id]
+    @travel_group ||= Travel.find(params[:travel][:travel_group_id])
   end
 end

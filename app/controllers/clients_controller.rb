@@ -16,10 +16,13 @@ class ClientsController < ApplicationController
 	def create
 	  @client = Client.new(client_params)
 	  @client.family = @family
-	  associate_age(client_params)
+	  birth_date_format = @client.associate_age(params[:client])
+	  @client.age = @client.get_age(birth_date_format)
+	  # binding.pry
 
 	  if @client.save
-		  @family.qualification.update_columns(status: "Cliente")
+			ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
+	  	check_if_family_is_client?(@family.qualification)
 		  flash[:notice] = "Client ajouté avec succès !"
 		  redirect_to new_client_language_stay_path(@client)
 		else
@@ -48,7 +51,6 @@ class ClientsController < ApplicationController
 			format.html
 	    format.js
 	  end	
-
 	  if params[:query].present?
 	    @clients = Client.search_by_full_name(params[:query]).page params[:page]
 	  else
@@ -56,23 +58,19 @@ class ClientsController < ApplicationController
 	  end
 	end
 
-	def show
-	  respond_to do |format|
-	    format.html
-	    format.pdf do
-	      render pdf: "#{@client.name}",
-	             template: 'pdf/invoice.html.slim',
-	             disposition: 'attachment',
-	             layout: 'pdf'
-	    end
-		end
-	end
+	def show; end
 
 	private
 
+	# def check_if_family_is_client?(qualification)
+	# 	qualification.update_columns(status: 'Cliente') if qualification.child_details { |child_detail| child_detail.client = true }
+	# end
+
 	def search_for_child_detail
 		@child_detail = ChildDetail.find(params[:child_detail_id])
+		@child_detail.update_columns(client: true)
 		@family = @child_detail.qualification.family
+		@child_detail.qualification.check_if_family_is_client?
 	  @client = Client.create!(family: @family, first_name: @child_detail.first_name, last_name: @child_detail.last_name, age: @child_detail.age, gender: @child_detail.gender)
 	  respond_to do |format|
 	    format.html # new.html.erb
@@ -85,16 +83,7 @@ class ClientsController < ApplicationController
 	end
 
 	def retrieve_family
-		if params[:client]
-	  	@family ||= Family.find(params[:client][:family_id])
-	  else
-	  	@family ||= Family.find(params[:family_id])
-	  end
-	end
-
-	def associate_age(client_params)
-		birth_date_format = get_birth_date(client_params)
-		@client.age = @client.get_age(birth_date_format)
+		@family ||= Family.retrieve_family(params[:client][:family_id])
 	end
 
 	def client_params

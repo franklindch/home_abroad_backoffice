@@ -1,4 +1,6 @@
-- if params[:client] || params[:language_stay]
-	= render 'travels/form/other_travel', travel: @travel
-- else
+- if params[:groupe]
 	= render 'travels/form/travel_group', travel: @travel
+- elsif params[:Pré_acheminement] || params[:Post_acheminement]
+	= render 'travels/form/pre_post_acheminement'
+- else
+	= render 'travels/form/other_travel', travel: @travel

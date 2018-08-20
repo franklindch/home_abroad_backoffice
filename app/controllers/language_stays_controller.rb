@@ -35,7 +35,22 @@ class LanguageStaysController < ApplicationController
 	  redirect_to client_path(@client)
 	end
 
+	
+	def enrollment_form
+		@language_stay = LanguageStay.find(params[:language_stay])
+	  generate_enrollment_form_pdf(@language_stay)
+		fields_filled(@language_stay)
+	end
+
 	private
+
+	def fields_filled(language_stay)
+		if language_stay.all_attributes?
+			flash[:notice] = 'Tous les champs du séjour ont été remplis'
+		else
+			flash[:alert] = 'Il reste sûrement des informations à compléter sur le séjour'
+		end
+	end
 
 	def retrieve_client
 		@client ||= Client.find(params[:client_id])
@@ -43,7 +58,6 @@ class LanguageStaysController < ApplicationController
 
 	def retrieve_language_stay
 		@language_stay ||= LanguageStay.find(params[:id])
-		
 	end
 
 	def language_stay_params

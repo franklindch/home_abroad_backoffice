@@ -8,6 +8,56 @@
 		p Pas de qualification associée à cette famille
 
 	- elsif qualification.status == 'Prospect'
+		h6 Statut
+		p.pb-2 = "#{qualification&.status}" if qualification.status != ""
+		h6 Commentaire
+		p.pb-2 = "#{qualification&.comment}" if qualification.comment != ""
+		h6 Référence
+		p.pb-2 = "#{qualification&.refered_by}" if qualification.refered_by != ""
+		
+		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
+		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
+		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
+
+		- if child_details.empty?
+			p Aucun complément d'information renseigné sur l'un des enfants.
+			p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'
+
+		- else
+			h5.mt-4.border-top.pt-4 Enfants de la famille
+			- qualification.child_details.each do |child_detail|
+				- if child_detail.client == nil
+					.card.mt-3
+						.card-body
+							h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
+							h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
+							p.card-text = "#{child_detail.comment}"
+							p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
+
+	- elsif qualification.status == 'Cliente'
+		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
+		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
+		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
+		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
+		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
+		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
+
+		- if child_details.empty?
+			p Aucun complément d'information renseigné sur l'un des enfants.
+			p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'
+
+		- else
+			h5.mt-4.border-top.pt-4 Enfants de la famille
+			- qualification.child_details.each do |child_detail|
+				- if child_detail.client == nil
+					.card.mt-3
+						.card-body
+							h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
+							h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
+							p.card-text = "#{child_detail.comment}"
+							p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
+
+	- else
 		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
 		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
 		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
@@ -22,33 +72,21 @@
 		- else
 			h5.mt-4.border-top.pt-4 Enfants de la famille
 			- qualification.child_details.each do |child_detail|
-				.card.mt-3
-					.card-body
-						h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
-						h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
-						p.card-text = "Commentaire: #{child_detail.comment}"
-						p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
-
-	- elsif qualification.status == 'Cliente'
-		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
-		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
-		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
-		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
-		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
-		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
-
-	- else
-		h6 = "Statut: #{qualification&.status}" if qualification.status != ""
-		p = "Commentaire - #{qualification&.comment}" if qualification.comment != ""
-		p = "Connu par - #{qualification&.refered_by}" if qualification.refered_by != ""
-		p = "Responsable de saisie - #{qualification&.data_entry_responsible}" if qualification.data_entry_responsible
-		p = "Mode de contact - #{qualification&.contact_mode.humanize}" if qualification.contact_mode != ""
-		p = "Référence - #{qualification&.reference_name}" if qualification.reference_name != ""
+				- if child_detail.client == nil
+					.card.mt-3
+						.card-body
+							h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
+							h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
+							p.card-text = "#{child_detail.comment}"
+							p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
 		
 	- family.clients.each do |client|
 		.card.mt-3
 			.card-body
-				h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
+				- if client.last_name.present? && client.family
+					h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
+				- if client.family && !client.last_name.present?
+					h5 = "#{client.first_name.capitalize} #{client.family.name.capitalize}"
 				h6.card-subtitle.mb-2.text-muted = "#{client.age} ans"
 				p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)
 				

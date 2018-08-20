@@ -19,15 +19,15 @@ section
 								// calculer l'âge à partir de la date de naissance et le stocker dans la DB
 								h4.mt-4.mb-4 Section à remplir si différent des informations de la famille :
 								= f.input :last_name, label: 'Nom '
-								= f.input :address_1, label: 'Adresse'
+								= f.input :address_1, label: 'Adresse principale', input_html: {class: 'google_map'}
 								= f.input :address_2, label: 'Complément d\'adresse'
-								= f.input :zip_code, label: 'Code postal'
+								= f.input :zip_code, label: 'Code postal', wrapper_html: {class: ['pb-5', 'border-bottom']}
 
 								h4.mt-4.mb-4 Passeport
 								= f.input :passport_number, label: 'Numéro de passeport'
 								= f.input :passport_expiration_date, label: 'Date d\'expiration'
 								= f.input :country_of_issue, label: 'Pays d\'émission'
-								= f.input :nationality, label: 'Nationalité', selected: 'Française'
+								= f.input :nationality, label: 'Nationalité', selected: 'Française', wrapper_html: {class: ['pb-5', 'border-bottom']}
 
 								h4.mt-4.mb-4 Langues
 								.row

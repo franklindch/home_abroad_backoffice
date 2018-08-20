@@ -9,21 +9,23 @@
         tr
           th Nom
           th Statut
-          th Nombre d'enfants
+          / th Nombre d'enfants clients
           th Email
           th Téléphone
           th Adresse
           th Code Postal
+          th
+          th
 
       tbody
       - families.each do |family|
         tr data-toggle="modal" data-target="#modal#{family.id}"
           td
-            span = family&.name
+            span = family&.name.capitalize
           td
             span = family&.qualification.status if family.qualification
-          td
-            span = family&.qualification.child_details.count if family.qualification && family.qualification.child_details != nil
+          / td
+          /   span = count_client_hildren(family) if family.qualification && family.qualification.child_details != nil
           td
             span = family&.email
           td
@@ -32,6 +34,9 @@
             span = family&.address_1
           td
             span = family&.zip_code
-            
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_family_path(family)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, family_path(family), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: family.id
 
           = render 'families/family_modal', family: family

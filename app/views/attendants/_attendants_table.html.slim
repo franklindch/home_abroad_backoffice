@@ -12,10 +12,12 @@
           th Âge
           th Email
           th Téléphone
+          th
+          th
 
       tbody
       - @attendants.each do |attendant|
-        tr data-toggle="modal" data-target="#modal#{attendant.id}"
+        tr
           td
             span = attendant.first_name
           td
@@ -26,3 +28,7 @@
             span = attendant.email
           td
             span = attendant.phone
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, attendant_path(attendant), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: attendant.id

@@ -1,0 +1,21 @@
+.modal-header
+	h4.modal-title id='modal#{travel_detail.id}LongTitle' = "Informations sur la famille #{travel_detail&.nature.capitalize}"
+	button.close aria-label="Close" data-dismiss="modal" type="button" 
+		span aria-hidden="true"  &times; 
+
+.modal-body
+	- if travel_detail == nil
+		p Pas d'aller associé à cette famille
+
+	- else
+		h6 Correspondance ?
+		p.pb-2 = "#{travel_detail&.is_correspondence}" if travel_detail.is_correspondence != ""
+		h6 Commentaire
+		p.pb-2 = "#{travel_detail&.mode}" if travel_detail.mode != ""
+		h6 Référence
+		p.pb-2 = "#{travel_detail&.meeting_time}" if travel_detail.meeting_time != ""
+		p = "Heure de départ - #{travel_detail&.start_time}" if travel_detail.start_time
+		p = "Ville de départ - #{travel_detail&.departure_location}" if travel_detail.departure_location
+		p = "Heure d'arrivée - #{travel_detail&.end_time}" if travel_detail.end_time != ""
+		p = "Ville d'arrivée - #{travel_detail&.arrival_location}" if travel_detail.arrival_location
+		p = "Référence - #{travel_detail&.reference}" if travel_detail.reference != ""

@@ -8,7 +8,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		.btn-toolbar.mb-2.mb-md-0
 		.mr-2.d-flex.justify-content-around
 				= link_to ('<i class="fa fas fa-plus-circle">Ajouter un séjour</i>').html_safe, new_client_language_stay_path(@client), class: 'btn btn-primary'
-				= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_travel_path(client: @client), class: 'btn btn-danger'
+				/ = link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_travel_path(client: @client), class: 'btn btn-danger'
 				= link_to 'Retour', :back, class: 'btn btn-outline-primary'
 
 	= render 'clients/show_details/client_details'
@@ -16,16 +16,18 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	- if @language_stays.empty?
 		.card.mt-5
 		.card-body
-			p Encore aucun séjour ajouté à ce client. Veuillez en ajouter un.
+			p.mt-2 Encore aucun séjour ajouté à ce client. Veuillez en ajouter un.
 
 	- else
 	.card.mt-5
 		- @language_stays.each do |language_stay|
 			.d-flex.justify-content-between.card-header
-				h5 = "Séjour #{language_stay&.program&.nature.humanize}, #{language_stay&.program&.explicit_name}, #{language_stay&.partner_company&.name.humanize}"
-				= link_to 'Editer', edit_client_language_stay_path(@client, language_stay)
+				h5 = "Séjour #{language_stay&.program&.name}, #{language_stay&.partner_company&.name.humanize}"
+				.d-flex.justify-content-between
+					= link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_client_language_stay_path(@client, language_stay)
+					= link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
 
-			- if language_stay.travel == nil && language_stay.invoice == nil
+			- if language_stay.travels == [] && language_stay.invoice == nil
 				.row.mb-5
 					.col-sm-6
 						.card.height
@@ -33,40 +35,40 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 								= render 'clients/show_details/language_stay_details', language_stay: language_stay
 								.btn-toolbar.mb-2.mb-md-0
 									.mr-2.d-flex.justify-content-around
-										= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_travel_path(language_stay: language_stay), class: 'btn btn-danger'
+										= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
 										= link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-danger ml-2'
 
 
-			- elsif language_stay.travel == nil && language_stay.invoice
+			- elsif language_stay.travels == [] && language_stay.invoice
 				.row.mb-5
 					.col-sm-6
 						.card.height
 							.card-body
 								= render 'clients/show_details/language_stay_details', language_stay: language_stay
-								= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_travel_path(language_stay: language_stay), class: 'btn btn-danger'
+								= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
 
 					.col-sm-4
 						.card.height
 							.card-body
 								= render 'clients/show_details/invoice_details', language_stay: language_stay
 
-			- elsif language_stay.travel && language_stay.invoice == nil
+			- elsif language_stay.travels && language_stay.invoice == nil
 				.row.mb-5
 					.col-sm-6
 						.card.height
 							.card-body
 								= render 'clients/show_details/language_stay_details', language_stay: language_stay
-								= link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_travel_path, class: 'btn btn-danger'
+								= link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-danger'
 
 					.col-sm-4
 						.card.height
 							.card-body
 								= render 'clients/show_details/travel_details', language_stay: language_stay
 
-			- elsif language_stay.travel && language_stay.invoice 
-				.row.mb-5
-					.col-sm-4
-						.card.height
+			- elsif language_stay.travels && language_stay.invoice 
+				.row.mb-3
+					.col-sm-12
+						.card
 							.card-body
 								h5.card-title Informations
 								.card-text
@@ -74,13 +76,22 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 								p = "Responsable commercial: #{language_stay&.commercial_responsible}" if language_stay.commercial_responsible != 0
 								p = "Durée du séjour: #{language_stay&.duration} semaines" if language_stay.duration != nil
 								p = "Activités: #{language_stay&.activities}" if language_stay.activities != ''
-					
-					.col-sm-4
-						.card.height
+				
+				.row.mb-3
+					.col-sm-12
+						.card
 							.card-body
 								= render 'clients/show_details/travel_details', language_stay: language_stay
-								
-					.col-sm-4
-						.card.height
+				
+				.row.mb-3
+					.col-sm-12
+						.card
 							.card-body
 								= render 'clients/show_details/invoice_details', language_stay: language_stay
+
+			.row.mb-3
+				.col-sm-12
+					.card
+						.card-body
+							= render 'clients/show_details/pdf', language_stay: language_stay
+

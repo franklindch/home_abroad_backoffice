@@ -11,4 +11,10 @@ class Invoice < ApplicationRecord
 	def total
 	  return application_fee_price_cents + language_stay_price_cents + travel_price_cents
 	end
+
+	def total_payments
+		sum = 0
+		payments.each { |payment| sum += payment.amount_price_cents}
+		return sum
+	end
 end

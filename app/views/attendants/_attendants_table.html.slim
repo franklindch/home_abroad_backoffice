@@ -1,0 +1,34 @@
+- if @attendants.empty?
+  .card
+    .card-body
+      p Aucun accompagnateur trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Prénom
+          th Nom
+          th Âge
+          th Email
+          th Téléphone
+          th
+          th
+
+      tbody
+      - @attendants.each do |attendant|
+        tr
+          td
+            span = attendant.first_name
+          td
+            span = attendant.last_name
+          td
+            span = attendant.age
+          td
+            span = attendant.email
+          td
+            span = attendant.phone
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, attendant_path(attendant), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: attendant.id

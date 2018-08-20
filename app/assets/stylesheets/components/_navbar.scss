@@ -1,6 +1,6 @@
 // top_navbar
 .navbar {
-  background-color: $purple-hard ;
+  background-color: $strong-blue ;
   height: 8vh;
   a {
     color: white;
@@ -10,6 +10,7 @@
     color: white;
     opacity: 0.7;
   }
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
 }
 
 // left_navbar
@@ -20,6 +21,7 @@
   padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
 }
 
 .sidebar {
@@ -42,18 +44,19 @@
 
 .sidebar-sticky {
   padding-top: 50px;
-  background-color: $purple-hard;
+  background-color: $strong-blue;
   a {
     color: white;
-    height: 10vh;
+    height: 6vh;
     text-decoration: none;
   }
   a:hover {
     color: white;
-    background-color: $khaki-green;
+    background-color: $medium-blue;
   }
 }
 
 .icon {
-  padding-left: 10px;
+  padding-left: 40px;
+  margin-right: 20px;
 }

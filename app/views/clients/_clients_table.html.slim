@@ -1,0 +1,45 @@
+- if clients.empty?
+  .card
+    .card-body
+      p Aucun client trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Nom
+          th Téléphone
+          th Adresse
+          th Code Postal
+          th Ville
+          th Création
+          th 
+          th 
+          th 
+      tbody
+      - Family.all.each do |family|
+        - family.clients.each do |client|
+          div id="accordion"
+            tr data-toggle="collapse" data-target="#collapse#{client.id}" aria-expanded="true" aria-controls="#collapse#{client.id}" id="heading#{client.id}"
+              td
+                span = client.first_name.capitalize
+              td
+                span = client.last_name.capitalize
+              td
+                span = client.gender
+              td
+                span = client.age_category
+              td
+                span = client.email
+              td
+                span = client.created_at.strftime('%A %d %B %Y')
+              td
+                span = link_to 'Vers sa fiche client', family_client_path(client.family, client)
+              td
+                span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_client_path(client)
+              td
+                span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, client_path(client), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: client.id
+
+              
+
+          = render 'clients/client_modal', client: client

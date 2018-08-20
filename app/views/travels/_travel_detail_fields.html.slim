@@ -1,0 +1,71 @@
+= f.input :nature, collection: TravelDetail.natures.keys.map { |w| [w.humanize, w] }, selected: 0
+= f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?'
+= f.input :mode, collection: TravelDetail.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
+/ = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false*
+= f.input :companies, label: 'Compagnie'
+= f.input :reference, label: 'Référence'
+
+.row
+  .col-md-6
+    h4.mt-3 Départ
+    = f.input :departure_location, label: 'Ville de départ'
+    = f.input :start_time, label: 'Heure de départ'
+    = f.input :meeting_time, label: 'Heure de rendez-vous'
+    / = f.input :father_name, label: 'Nom'
+  .col-md-6
+    h4.mt-3 Arrivée
+    = f.input :arrival_location, label: 'Ville d\'arrivée'
+    = f.input :end_time, label: 'Heure d\'arrivée'
+    / = f.input :end_time, label: 'Heure d\'arrivée'
+.row.pb-5.mb-5.border-bottom
+  .col-md-6
+    .child_details_section.pt-3.correspondence
+      h3.mt-3 Correspondance
+      .child_details.mt-3
+        = f.simple_fields_for :correspondences do |correspondence|
+          = render 'travels/correspondence_fields', f: correspondence
+
+
+ruby:
+  conditionals = [
+    {
+      selector: '#travel_travel_details_attributes_0_is_correspondence_true',
+      when: [{
+        event: 'click',
+        actions: [{
+          type: 'SHOW',
+          nodes: ['.correspondence:eq(0)'],
+        }]
+      }]
+      }, {
+        selector: '#travel_travel_details_attributes_0_is_correspondence_false',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'HIDE',
+            nodes: ['.correspondence:eq(0)'],
+          }]
+        }]
+        }, {
+        selector: '#travel_travel_details_attributes_1_is_correspondence_true',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'SHOW',
+            nodes: ['.correspondence:eq(1)'],
+          }]
+        }]
+        }, {
+        selector: '#travel_travel_details_attributes_1_is_correspondence_false',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'HIDE',
+            nodes: ['.correspondence:eq(1)'],
+          }]
+        }]
+      }].to_json
+
+code data-conditionals= conditionals 
+
+

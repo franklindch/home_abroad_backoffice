@@ -14,6 +14,6 @@ section
               - if devise_mapping.rememberable?
                 = f.input :remember_me, as: :boolean
             .form-actions
-              = f.button :submit, "Valider", class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Chargement..."} 
+              = f.button :submit, "Valider", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin'></i>Chargement".html_safe}
 
           / = render 'devise/shared/links'

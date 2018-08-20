@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Familles") do |sheet|
+  @families.each do |family|
+    sheet.add_row [family.name]
+  end
+end

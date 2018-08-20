@@ -1,0 +1,2 @@
+class TravelAgency < PartnerCompany
+end

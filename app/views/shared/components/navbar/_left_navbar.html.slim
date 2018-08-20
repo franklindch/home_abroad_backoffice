@@ -1,24 +1,9 @@
 nav.col-md-2.d-none.d-md-block.bg-light.sidebar
   .sidebar-sticky
-    ul.nav.flex-column
-      a.item href="#" 
-        li.nav-item
-          span data-feather="home" Clients
-          i.fa.far.fa-user-circle.icon
-      a.item href="#" 
-        li.nav-item
-          span data-feather="file" Familles
-          i.fa.fas.fa-users.icon
-      a.item href="#" 
-        li.nav-item
-          span data-feather="bar-chart-2" Vols
-          i.fa.fas.fa-plane.icon
-      a.item href="#" 
-        li.nav-item
-          span data-feather="shopping-cart" Partenaires
-          i.fa.fas.fa-handshake.icon
-      a.item href="#" 
-        li.nav-item
-          span data-feather="users" Séjours
-          i.fa.fas.fa-location-arrow.icon
-      = link_to 'Famille', family_path(id: 2), remote: true
+    div.nav.flex-column
+      = link_to ('<i class="fa fas fa-users icon d-flex justify-content-between">Familles</i>').html_safe, families_path, class: 'item', remote: true
+      = link_to ('<i class="fa fas fa-user-circle icon d-flex justify-content-between">Clients</i>').html_safe, clients_path, class: 'item', remote: true
+      = link_to ('<i class="fa fas fa-plane icon d-flex justify-content-between">Voyages Groupes</i>').html_safe, travels_path, class: 'item', remote: true
+      = link_to ('<i class="fa fas fa-handshake icon d-flex justify-content-between">Partenaires</i>').html_safe, partner_companies_path, class: 'item', remote: true
+      = link_to ('<i class="fa fas fa-handshake icon d-flex justify-content-between">Types de séjours</i>').html_safe, programs_path, class: 'item', remote: true
+      = link_to ('<i class="fa fas fa-handshake icon d-flex justify-content-between">Accompagnateurs</i>').html_safe, attendants_path, class: 'item', remote: true

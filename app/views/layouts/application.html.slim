@@ -7,13 +7,16 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api_key']}&libraries=places", defer: 'defer', async: true 
+    = javascript_include_tag 'application'
     / = stylesheet_pack_tag 'application', media: 'all'
     /! Uncomment if you import CSS in app/javascript/packs/application.js
   body
     - if user_signed_in?
         = render 'shared/components/navbar/top_navbar'
+        = render 'shared/flashes'
     .page-wrapper
         .container-fluid
+            .row
             = yield
-    = javascript_include_tag 'application'
-    = javascript_pack_tag 'application'

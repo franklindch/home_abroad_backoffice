@@ -1,0 +1,86 @@
+section
+  .row.margin-top-navbar
+    .col-md-6.mx-auto
+      .card.mt-5
+        .card-header
+          h2.travel-form Formulaire Voyage
+        .card-body
+          = simple_form_for [@language_stay, @travel] do |f|
+            .form-inputs
+            	.container-fluid
+            		.row
+            			.col-md-12
+                    // if nature: gorupe, put the collection travel.where field
+                    
+                    = f.input :nature, collection: Travel.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0 
+                    = f.input :travel_group_id, collection: Travel.where(nature: "Groupe"), include_blank: "Merci de sélectionner le voyage de groupe...", label: false
+
+                    / = f.input :language_stay_id, collection: LanguageStay.all, include_blank: "Voulez pouvez associer ce voyage au séjour...", label: false
+                    
+                    .child_details_section.pt-3
+                      .child_details_1.mt-3
+                        h3.mt-3 Remplir les détails du voyage
+                        = f.simple_fields_for :travel_details do |travel_detail|
+                          = render 'travels/travel_detail_fields', f: travel_detail
+                      .form-actions.text-center
+                        = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe}
+
+ruby:
+  conditionals = [
+    {
+      selector: '#travel_travel_details_attributes_0_is_correspondence',
+      when: [{
+        event: 'click',
+        actions: [{
+          type: 'SHOW',
+          nodes: ['.landing-page-brand-members'],
+        }]
+      }]
+      }, {
+        selector: '#brand_account_display_team_false',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'HIDE',
+            nodes: ['.landing-page-brand-members'],
+          }]
+        }]
+      }, {
+        selector: '#brand_account_display_representative_true',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'SHOW',
+            nodes: ['.landing-page-negociation-service'],
+          }]
+        }]
+      }, {
+        selector: '#brand_account_display_representative_false',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'HIDE',
+            nodes: ['.landing-page-negociation-service'],
+          }]
+        }]
+      }, {
+        selector: '#brand_account_display_marketplace_true',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'SHOW',
+            nodes: ['.landing-page-properties'],
+          }]
+        }]
+      }, {
+        selector: '#brand_account_display_marketplace_false',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'HIDE',
+            nodes: ['.landing-page-properties'],
+          }]
+        }]
+      }].to_json
+
+code data-conditionals= conditionals 

@@ -10,6 +10,9 @@ Bundler.require(*Rails.groups)
 
 module HomeAbroadBackoffice
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     config.generators do |generate|
       generate.assets false
       generate.helper false
@@ -23,7 +26,6 @@ module HomeAbroadBackoffice
     config.i18n.default_locale = :fr
 
     # mailer
-    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
     config.action_mailer.default_url_options = { host: 'https://sejours-homeabroad.com' }
 
     # Settings in config/environments/* take precedence over those specified here.

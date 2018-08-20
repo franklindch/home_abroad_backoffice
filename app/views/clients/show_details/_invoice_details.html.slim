@@ -1,0 +1,7 @@
+h5.card-title Facture
+.card-text
+	p = "Frais de dossier: #{language_stay&.invoice&.application_fee_price_cents} euros"
+	p = "Prix du séjour: #{language_stay&.invoice&.language_stay_price_cents} euros"
+	p = "Prix du voyage: #{language_stay&.invoice&.travel_price_cents} euros"
+	p = "Total - #{language_stay&.invoice&.total} euros"
+	p = link_to 'Editer la facture', edit_language_stay_invoice_path(language_stay, id: language_stay.invoice), class: 'btn btn-success'

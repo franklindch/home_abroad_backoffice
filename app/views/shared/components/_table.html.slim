@@ -1,34 +1,20 @@
-- if families.empty?
-  .card
-    .card-body
-      p Aucune famille trouvée pour cette recherche, merci de réessayer.
-- else
-  .table-responsive
-    table.table.table-striped.table-sm.table-hover
-      thead
-        tr
-          th Nom
-          th Téléphone
-          th Adresse
-          th Code Postal
-          th Ville
-          th Création
-      tbody
-      - families.each do |family|
-        div id="accordion"
-          tr data-toggle="collapse" data-target="#collapse#{family.id}" aria-expanded="true" aria-controls="#collapse#{family.id}" id="heading#{family.id}"
-            td
-              span = family.name
-            td
-              span = family.phone
-            td
-              span = family.address_1
-            td
-              span = family.zip_code
-            td
-              span = family.city
-            td
-              span = family.created_at.strftime('%A %d %B %Y')
-            
+- if @families
+  	= render 'families/families_table', families: @families.order('created_at DESC')
+		= paginate @families
+- elsif @clients
+  	= render 'clients/clients_table', clients: @clients.order('created_at ASC')
+		= paginate @clients
+- elsif @partner_companies
+  	= render 'partner_companies/partner_companies_table', partner_companies: @partner_companies.order('created_at ASC')
+		= paginate @partner_companies
+- elsif @travels
+  	= render 'travels/travels_table', travels: @travels.order('created_at ASC')
+		= paginate @travels
+- elsif @attendants
+  	= render 'attendants/attendants_table', attendants: @attendants.order('created_at ASC')
+		= paginate @attendants
+- elsif @programs
+  	= render 'programs/programs_table', programs: @programs.order('created_at ASC')
+		= paginate @programs
 
-          = render 'shared/components/collapse', family: family
+		/ .created_at.strftime('%A %d %B %Y')

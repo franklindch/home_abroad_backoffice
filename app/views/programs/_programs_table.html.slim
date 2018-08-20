@@ -1,0 +1,22 @@
+- if programs.empty?
+  .card
+    .card-body
+      p Aucun partenaire trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Type
+          th Adresse
+          th Code Postal
+          
+      tbody
+      - programs.each do |program|
+        tr
+          / td
+          /   span = program.explicitname
+          td
+            span = program.address
+          td
+            span = program.zip_code

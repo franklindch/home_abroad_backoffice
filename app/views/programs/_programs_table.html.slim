@@ -7,16 +7,13 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Type
-          th Adresse
-          th Code Postal
+          th Code séjour
+          th Intitulé
           
       tbody
       - programs.each do |program|
         tr
-          / td
-          /   span = program.explicitname
           td
-            span = program.address
+            span = program.program_code
           td
-            span = program.zip_code
+            span = program.name

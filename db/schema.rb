@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813193508) do
+ActiveRecord::Schema.define(version: 20180904152902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,11 +18,17 @@ ActiveRecord::Schema.define(version: 20180813193508) do
   create_table "attendants", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "age"
     t.string "email"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "intl_number"
+    t.date "birth_date"
+  end
+
+  create_table "attendants_travels", id: false, force: :cascade do |t|
+    t.bigint "travel_id", null: false
+    t.bigint "attendant_id", null: false
   end
 
   create_table "camps", force: :cascade do |t|
@@ -63,12 +69,10 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.string "first_name"
     t.string "last_name"
     t.date "birth_date"
-    t.integer "age"
     t.string "email"
     t.string "phone_number"
     t.string "passport_number"
     t.string "country_of_issue", default: "France"
-    t.string "nationality", default: "French"
     t.integer "first_language_level"
     t.string "preferred_hobbies"
     t.string "medical_issue"
@@ -84,6 +88,10 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.integer "second_language_level"
     t.integer "first_language"
     t.integer "second_language"
+    t.string "intl_number"
+    t.string "nationality", default: "Française"
+    t.integer "school_grade"
+    t.string "school"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -96,6 +104,8 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "travel_detail_id"
+    t.date "start_date"
+    t.date "end_date"
     t.index ["travel_detail_id"], name: "index_correspondences_on_travel_detail_id"
   end
 
@@ -109,6 +119,7 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.bigint "partner_company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "intl_number"
     t.index ["partner_company_id"], name: "index_employees_on_partner_company_id"
   end
 
@@ -129,12 +140,13 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.string "father_phone"
     t.string "mother_email"
     t.string "father_email"
+    t.string "mother_intl_number"
+    t.string "father_intl_number"
+    t.string "intl_number"
+    t.string "mother_first_name"
+    t.string "father_first_name"
+    t.string "mother_office_phone"
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
-  end
-
-  create_table "generate_pdfs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -170,12 +182,14 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.date "end_date"
     t.string "location"
     t.string "transfer"
-    t.string "pension"
-    t.string "accomodation"
+    t.integer "pension"
+    t.integer "accomodation"
     t.string "option_1"
     t.string "option_2"
     t.integer "class_hours"
     t.text "precisions"
+    t.string "intl_number"
+    t.integer "room"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -190,6 +204,8 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "intl_number"
+    t.string "urgence_phone_number"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -211,12 +227,10 @@ ActiveRecord::Schema.define(version: 20180813193508) do
   end
 
   create_table "programs", force: :cascade do |t|
-    t.integer "nature"
     t.string "name"
-    t.string "address"
-    t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "program_code"
   end
 
   create_table "qualifications", force: :cascade do |t|
@@ -230,23 +244,54 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.string "reference_name"
   end
 
-  create_table "travel_details", force: :cascade do |t|
+  create_table "transits", force: :cascade do |t|
     t.integer "nature"
-    t.boolean "is_correspondence"
-    t.integer "mode"
-    t.time "meeting_time"
     t.time "start_time"
     t.time "end_time"
+    t.date "start_date"
+    t.date "end_date"
     t.string "departure_location"
     t.string "arrival_location"
-    t.bigint "partner_company_id"
+    t.integer "mode"
+    t.string "reference"
+    t.string "partner_company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "travel_id"
+  end
+
+  create_table "transits_travels", id: false, force: :cascade do |t|
+    t.bigint "travel_id", null: false
+    t.bigint "transit_id", null: false
+  end
+
+  create_table "travel_details", force: :cascade do |t|
+    t.integer "nature"
+    t.time "start_time"
+    t.time "end_time"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "is_correspondence", default: true
+    t.string "departure_location"
+    t.string "arrival_location"
     t.string "reference"
+    t.bigint "partner_company_id"
+    t.bigint "travel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "companies"
+    t.time "meeting_time"
+    t.integer "mode"
     t.index ["partner_company_id"], name: "index_travel_details_on_partner_company_id"
     t.index ["travel_id"], name: "index_travel_details_on_travel_id"
+  end
+
+  create_table "travel_transits", force: :cascade do |t|
+    t.bigint "transit_id"
+    t.bigint "travel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transit_id"], name: "index_travel_transits_on_transit_id"
+    t.index ["travel_id"], name: "index_travel_transits_on_travel_id"
   end
 
   create_table "travels", force: :cascade do |t|
@@ -255,13 +300,10 @@ ActiveRecord::Schema.define(version: 20180813193508) do
     t.datetime "updated_at", null: false
     t.integer "nature", default: 0
     t.string "travel_code"
-    t.bigint "attendant_id"
     t.bigint "language_stay_id"
-    t.bigint "travel_group_id"
-    t.integer "acheminement"
-    t.index ["attendant_id"], name: "index_travels_on_attendant_id"
+    t.bigint "travel_id"
     t.index ["language_stay_id"], name: "index_travels_on_language_stay_id"
-    t.index ["travel_group_id"], name: "index_travels_on_travel_group_id"
+    t.index ["travel_id"], name: "index_travels_on_travel_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -296,7 +338,8 @@ ActiveRecord::Schema.define(version: 20180813193508) do
   add_foreign_key "payments", "invoices"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travels"
-  add_foreign_key "travels", "attendants"
+  add_foreign_key "travel_transits", "transits"
+  add_foreign_key "travel_transits", "travels"
   add_foreign_key "travels", "language_stays"
-  add_foreign_key "travels", "travels", column: "travel_group_id"
+  add_foreign_key "travels", "travels"
 end

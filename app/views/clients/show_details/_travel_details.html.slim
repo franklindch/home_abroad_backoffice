@@ -1,53 +1,12 @@
-- travels = language_stay.travels
-- group_travel = travels.where(nature: 'Groupe').first
-- pre_acheminement_travel = travels.where(acheminement: 'Pré_acheminement').first
-- post_acheminement_travel = travels.where(acheminement: 'Post_acheminement').first
-- travel_group = Travel.find(group_travel.travel.id) if group_travel && group_travel.travel
+- travel = language_stay.travel
 
-- if travel_group
-	h5.card-title = "Voyage #{travel_group.nature}" 
-	.card-text
-		h6 Capacité
-		p = travel_group.capacity
-		h6 Code voyage
-		p = travel_group.travel_code
-		p Facture
-		p Durée d
-		p Durée d
+- if travel.nature == 'Groupe'
+	.col-md-4
+		= render 'travels/travel_group/travel_group_details', travel_group: travel.travel
+	= render 'travels/travel_group/transit_details', travel: travel
 
-	- if pre_acheminement_travel == nil && post_acheminement_travel == nil
-		= link_to ('<i class="fa fas fa-plus-circle">Ajouter pré acheminement</i>').html_safe, new_language_stay_travel_path(language_stay, Pré_acheminement: 'Pré_acheminement'), class: 'btn btn-danger'
-		= link_to ('<i class="fa fas fa-plus-circle">Ajouter post acheminement</i>').html_safe, new_language_stay_travel_path(language_stay, Post_acheminement: 'Post_acheminement'), class: 'btn btn-danger'
-
-	- elsif pre_acheminement_travel && post_acheminement_travel == nil
-		h5.card-title = "Voyage #{pre_acheminement_travel.acheminement}"
-		.card-text
-			p Respon
-			p Facture
-			p Durée d
-		= link_to ('<i class="fa fas fa-plus-circle">Ajouter post acheminement</i>').html_safe, new_language_stay_travel_path(language_stay, Post_acheminement: 'Post_acheminement'), class: 'btn btn-danger'
-
-	- elsif post_acheminement_travel && pre_acheminement_travel == nil
-		h5.card-title = "Voyage #{post_acheminement_travel.acheminement}"
-		.card-text
-			p Respon
-			p Facture
-			p Durée d
-		= link_to ('<i class="fa fas fa-plus-circle">Ajouter pré acheminement</i>').html_safe, new_language_stay_travel_path(language_stay, Pré_acheminement: 'Pré_acheminement'), class: 'btn btn-danger'
-		h5.card-title = "Voyage #{post_acheminement_travel.acheminement}"
-		.card-text
-			p Respon
-			p Facture
-			p Durée d
-
-	- elsif pre_acheminement_travel && post_acheminement_travel
-		h5.card-title = "Voyage #{pre_acheminement_travel.acheminement}"
-		.card-text
-			p Respon
-			p Facture
-			p Durée d
-		h5.card-title = "Voyage #{post_acheminement_travel.acheminement}"
-		.card-text
-			p Respon
-			p Facture
-			p Durée d
+- else
+	.col-md-3
+		h6.card-title = "Voyage #{travel.nature}" 
+		.card-text 
+			= render 'travels/travel_details/other_travels_details', travel: travel

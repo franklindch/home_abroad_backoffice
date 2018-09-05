@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :clients, only: [:edit, :create, :update, :destroy, :show, :new]
     end
     # resources :employees, only: [:index]
-    resources :partner_companies, only: [:new, :index, :create, :edit, :destroy] do 
+    resources :partner_companies, only: [:new, :index, :create, :edit, :destroy, :update] do 
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
@@ -19,8 +19,12 @@ Rails.application.routes.draw do
       resources :invoices, only: [:new, :create, :edit, :update, :destroy]
       resources :travels, only: [:new, :create, :edit, :update, :destroy]
     end
+
     resources :attendants
-    resources :travels, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :travels, only: [:index, :new, :create, :edit, :update, :destroy] do
+      resources :transits
+    end
+      
     resources :programs
 
     get 'static', to: 'excels#static'

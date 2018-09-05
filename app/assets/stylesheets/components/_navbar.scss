@@ -1,6 +1,6 @@
 // top_navbar
 .navbar {
-  background-color: $strong-blue ;
+  background-color: $strong-purple;
   height: 8vh;
   a {
     color: white;
@@ -44,7 +44,7 @@
 
 .sidebar-sticky {
   padding-top: 50px;
-  background-color: $strong-blue;
+  background-color: $strong-purple;
   a {
     color: white;
     height: 6vh;
@@ -52,7 +52,7 @@
   }
   a:hover {
     color: white;
-    background-color: $medium-blue;
+    background-color: $medium-purple;
   }
 }
 

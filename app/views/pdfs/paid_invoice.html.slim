@@ -1,0 +1,154 @@
+- client = @invoice.language_stay.client
+- family = @invoice.language_stay.client.family
+
+h1 Facture ACQUITTEE
+
+.invoice-box.margin-top-navbar
+  table cellpadding="0" cellspacing="0" 
+    tr.top
+      td colspan="2" 
+        table
+          tr
+            td.title
+              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
+            td
+              = "Mr ou Mme #{family.name}" 
+              br/
+              = "#{family.address_1}" 
+
+    tr.information
+      td colspan="2" 
+        table
+          tr
+            td
+              | Facture acquittée N° [à renseigner]
+              br/
+              = "Versailles, le #{Date.today}" 
+            td
+              | N/Réf : 
+              br/
+              = "#{client.first_name} #{client.last_name}" 
+              br/
+              | [dates séjour]
+    tr.heading
+      td
+        | Libellé
+      td
+        | Prix
+    tr.item
+      td
+        | Frais de dossier
+      td
+        | $120.00
+    tr.item
+      td
+        | [détails du séjour associé]
+      td
+        | [prix]
+    tr.item
+      td
+        | Voyage [inclus ou non/booléen]
+      td
+        | [prix]
+    tr.item.last
+      td
+        | Transferts A/R [inclus ou non/booléen]
+      td
+        | [prix]
+    tr.total
+      td
+      td
+        | Total: [formule]
+
+    tr.information
+      td colspan="2" 
+        table
+          tr
+            td
+              br/
+              | Par la présente,nous attestons que [nom client] est bien isncrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur [nom famille] s'est acquitté(e) du montant total du séjour.
+              br/
+              br/
+              | Christine de Chanaud
+              br/
+              br/
+            td
+              | Séjours HOME Abroad
+              br/
+              | Par la présente,nous attestons que [nom client] est bien isncrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur [nom famille] s'est acquitté(e) du montant total du séjour.
+- client = @invoice.language_stay.client
+- family = @invoice.language_stay.client.family
+
+.invoice-box.margin-top-navbar
+  table cellpadding="0" cellspacing="0" 
+    tr.top
+      td colspan="2" 
+        table
+          tr
+            td.title
+              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
+            td
+              = "Mr ou Mme #{family.name}" 
+              br/
+              = "#{family.address_1}" 
+
+    tr.information
+      td colspan="2" 
+        table
+          tr
+            td
+              | Facture acquittée N° [à renseigner]
+              br/
+              = "Versailles, le #{Date.today}" 
+            td
+              | N/Réf : 
+              br/
+              = "#{client.first_name} #{client.last_name}" 
+              br/
+              | [dates séjour]
+    tr.heading
+      td
+        | Libellé
+      td
+        | Prix
+    tr.item
+      td
+        | Frais de dossier
+      td
+        | $120.00
+    tr.item
+      td
+        | [détails du séjour associé]
+      td
+        | [prix]
+    tr.item
+      td
+        | Voyage [inclus ou non/booléen]
+      td
+        | [prix]
+    tr.item.last
+      td
+        | Transferts A/R [inclus ou non/booléen]
+      td
+        | [prix]
+    tr.total
+      td
+      td
+        | Total: [formule]
+
+    tr.information
+      td colspan="2" 
+        table
+          tr
+            td
+              br/
+              | Par la présente,nous attestons que [nom client] est bien isncrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur [nom famille] s'est acquitté(e) du montant total du séjour.
+              br/
+              br/
+              | Christine de Chanaud
+              br/
+              br/
+            td
+              | Séjours HOME Abroad
+              br/
+              | Par la présente,nous attestons que [nom client] est bien isncrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur [nom famille] s'est acquitté(e) du montant total du séjour.

@@ -1,7 +1,23 @@
-h5.card-title Facture
-.card-text
-	p = "Frais de dossier: #{language_stay&.invoice&.application_fee_price_cents} euros"
-	p = "Prix du séjour: #{language_stay&.invoice&.language_stay_price_cents} euros"
-	p = "Prix du voyage: #{language_stay&.invoice&.travel_price_cents} euros"
-	p = "Total - #{language_stay&.invoice&.total} euros"
-	p = link_to 'Editer la facture', edit_language_stay_invoice_path(language_stay, id: language_stay.invoice), class: 'btn btn-success'
+- invoice = language_stay.invoice
+- payments = invoice.payments
+
+.col-md-4
+	h6.card-title Décomptes
+	.card-text
+		p = "Frais de dossier: #{invoice.application_fee_price_cents} euros"
+		p = "Prix du séjour: #{invoice.language_stay_price_cents} euros"
+		p = "Prix du voyage: #{invoice.travel_price_cents} euros"
+		p = "Total - #{invoice.total} euros"
+		p = link_to 'Editer la facture', edit_language_stay_invoice_path(language_stay, id: language_stay.invoice), class: 'btn btn-success'
+
+.col-md-4
+	h6.card-title Règlements
+	- if payments.empty?
+		p Encore aucun règlement à ce jour
+	- else
+		.card-text 
+			= show_client_attribute(@client&.email, 'Email')
+			= show_client_attribute(@client&.intl_number, 'Téléphone')
+			= show_client_attribute(@client&.passport_number, 'Numéro de passport')
+			= show_client_attribute(@client&.country_of_issue, 'Pays d\'émission')
+			= show_client_attribute(@client&.passport_expiration_date, 'Date d\'expiration')

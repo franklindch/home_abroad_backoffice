@@ -33,7 +33,7 @@ class ProgramsController < ApplicationController
 	  end	
 
 	  if params[:query].present?
-	    @programs = Program.search_by_explicit_name(params[:query]).page params[:page]
+	    @programs = Program.search_by_name(params[:query]).page params[:page]
 	  else
 	    @programs = Program.order(:name).page params[:page]
 	  end
@@ -59,7 +59,7 @@ class ProgramsController < ApplicationController
 
 	def program_params
 	  params.require(:program).permit(
-	  	:nature, :explicit_name, :address, :zip_code
+	  	:name, :program_code
 	  )
 	end
 end

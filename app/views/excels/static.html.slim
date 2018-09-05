@@ -1,3 +1,12 @@
-= link_to 'Familles en excel', all_families_path(format: :xlsx)
-= link_to 'Clients en excel', all_families_path(format: :xlsx)
-= link_to 'Partenaires en excel', all_families_path(format: :xlsx)
+.row.mt-5
+	.col-xs-12
+		.card.ml-5
+			.card-title.pl-3.pt-3 Générer les excels
+			.card-body
+				= link_to 'Familles', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Clients', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Partenaires', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Partenaires', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Partenaires', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Partenaires', all_families_path(format: :xlsx), class: 'pr-2'
+				= link_to 'Partenaires', all_families_path(format: :xlsx)

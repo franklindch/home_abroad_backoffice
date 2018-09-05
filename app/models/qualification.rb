@@ -12,6 +12,6 @@ class Qualification < ApplicationRecord
 	# enum commercial_responsible: HOME_ABROAD_EMPLOYEES
 
 	def check_if_family_is_client?
-		update_columns(status: 'Cliente') if qualification.child_details { |child_detail| child_detail.client = true }
+		update_columns(status: 'Cliente') if self.child_details { |child_detail| child_detail.client = true }
 	end
 end

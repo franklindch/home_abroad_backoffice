@@ -3,7 +3,7 @@ class FamiliesController < ApplicationController
   before_action :retrieve_family, only: [:edit, :update, :destroy, :show]
 
   def new
-    ClientMailer.with(language_stay: LanguageStay.first, client: LanguageStay.first.client).send_language_stay_feedback.deliver_now
+    # ClientMailer.with(language_stay: LanguageStay.first, client: LanguageStay.first.client).send_language_stay_feedback.deliver_now
     @family = Family.new
     @qualification = Qualification.new
   end
@@ -12,7 +12,11 @@ class FamiliesController < ApplicationController
     @family = Family.new(family_params)
     if @family.save
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
-      redirect_to family_qualification_path(@family)
+      if params[:family][:prospect] == 'non'
+        redirect_to families_path
+      else
+        redirect_to family_qualification_path(@family)
+      end
       flash[:notice] = "Famille ajoutée avec succès !"
     else
       render :new
@@ -68,7 +72,7 @@ class FamiliesController < ApplicationController
 
   def family_params
     params.require(:family).permit(
-      :name, :family_situation, :address_1, :address_2, :zip_code, :phone, :email, :qualification_id, :father_name, :mother_name, :father_phone, :mother_phone, :father_email, :mother_email
+      :intl_number, :name, :family_situation, :mother_office_phone, :father_office_phone, :father_first_name, :mother_first_name, :father_intl_number, :mother_intl_number, :address_1, :address_2, :zip_code, :phone, :email, :qualification_id, :father_name, :mother_name, :father_phone, :mother_phone, :father_email, :mother_email
     )    
   end
 end

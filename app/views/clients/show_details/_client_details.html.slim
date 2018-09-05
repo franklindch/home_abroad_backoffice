@@ -6,38 +6,34 @@
 	.card-body
 		.row
 			.col-md-3
-				h5.card-title Général
+				h6.card-title Général
 				.card-text 
-						p = "#{@client&.age_category}" if @client.age_category != nil
-						p = "Sexe: #{@client&.gender}" if @client.gender != nil
-						p = "Nationalité: #{@client&.nationality}" if @client.nationality != nil
-						p = "Âge: #{@client&.age} ans" if @client.age != nil
-						p = "Date de naissance: #{@client&.birth_date.strftime("%d/%m/%Y")}" if @client.birth_date != nil
-						
+						= show_client_attribute(@client&.gender, 'Sexe')
+						= show_client_attribute(@client&.age_category, 'Catégorie')
+						p = "Âge: #{show_the_age(@client&.birth_date)} ans" if @client.birth_date != nil
+						p = "Date de naissance: #{birth_date_format(@client)}" if @client.birth_date != nil
+						= show_client_attribute(@client&.nationality, 'Nationalité')
+			.col-md-3
+				h6.card-title Contact
+				.card-text 
+					= show_client_attribute(@client&.email, 'Email')
+					= show_client_attribute(@client&.intl_number, 'Téléphone')
+					= show_client_attribute(@client&.passport_number, 'Numéro de passport')
+					= show_client_attribute(@client&.country_of_issue, 'Pays d\'émission')
+					= "Date d\'expiration: #{date_format(@client.passport_expiration_date)}" if @client.passport_expiration_date != nil
 
 			.col-md-3
-				h5.card-title Contact
+				h6.card-title Langues & Hobbies
 				.card-text 
-					p = "Email: #{@client&.email}" if @client.email != nil
-					p = "Tél: #{@client&.phone_number}" if @client.phone_number != nil
-					p = "Numéro de passeport: #{@client&.passport_number}" if @client.passport_number != nil
-					p = "Date d\'espiration du passeport: #{@client&.passport_expiration_date.strftime("%d/%m/%Y")}" if @client.passport_expiration_date != nil
-					p = "Pays d\'émission du passeport: #{@client&.country_of_issue}" if @client.country_of_issue != nil
-
-
-			.col-md-3
-				h5.card-title Langues & Hobbies
-				.card-text 
-					p = "Langue 1: #{@client&.first_language}" if @client.first_language != nil
-					p = "Niveau: #{@client&.first_language_level}" if @client.first_language_level != nil
-					p = "Langue 2: #{@client&.second_language}" if @client.second_language != nil
-					p = "Niveau: #{@client&.second_language_level}" if @client.second_language_level != nil
-					p = "Hobbies: #{@client&.preferred_hobbies}" if @client.preferred_hobbies != nil
-				
+					= show_client_attribute(@client&.first_language, 'Langue 1')
+					= show_client_attribute(@client&.first_language_level, 'Niveau')
+					= show_client_attribute(@client&.second_language, 'Langue 2')
+					= show_client_attribute(@client&.second_language_level, 'Niveau')
+					= show_client_attribute(@client&.preferred_hobbies, 'Hobbies')
 
 			.col-md-3
-				h5.card-title Autres
+				h6.card-title Autres
 				.card-text 
-					p = "Fumeur: #{@client&.smoker}" if @client.smoker != nil
-					p = "Problèmes médicaux: #{@client&.medical_issue}" if @client.medical_issue != nil
-					p = "Remarque: #{@client&.comment}" if @client.comment != nil
+					= show_client_attribute(@client&.smoker, 'Fumeur')
+					= show_client_attribute(@client&.medical_issue, 'Problèmes de santé')
+					= show_client_attribute(@client&.comment, 'Remarque')

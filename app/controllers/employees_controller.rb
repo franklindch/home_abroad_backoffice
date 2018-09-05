@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :retrieve_employee, only: [:edit, :update, :destroy, :show]
-	before_action :retrieve_partner_company, only: [:new, :create, :edit, :update, :show]
+	before_action :retrieve_employee, only: [:edit, :update, :destroy]
+	before_action :retrieve_partner_company, only: [:new, :create, :edit]
 
 	def new
 		@employee = Employee.new
@@ -21,6 +21,12 @@ class EmployeesController < ApplicationController
 
 	def edit; end
 
+	def update
+		@employee.update(employee_params)
+		flash[:notice] = "Employer édité avec succès !"
+	  redirect_to partner_companies_path
+	end
+
 	def destroy
 		@employee.destroy
 		redirect_to partner_companies_path
@@ -38,7 +44,7 @@ class EmployeesController < ApplicationController
 
 	def employee_params
 	  params.require(:employee).permit(
-	    :main_contact, :job_position, :first_name, :last_name, :phone_number, :email, :partner_company_id
+	    :intl_number, :main_contact, :job_position, :first_name, :last_name, :phone_number, :email, :partner_company_id
 	  )
 	end
 end

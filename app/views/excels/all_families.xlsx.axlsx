@@ -1,6 +1,31 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Familles") do |sheet|
-  @families.each do |family|
-    sheet.add_row [family.name]
-  end
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "EFC376", color: "WHITE")
+	wb.add_worksheet(name: "Familles") do |sheet|
+		sheet.add_row [
+			'olivier',
+			'peter',
+			'jim'
+		], style: [
+			highlight_cell,
+			highlight_cell,
+			highlight_cell
+		]
+	  @families.each do |family|
+	    sheet.add_row [
+	    	family.name,
+	    	family.address_1,
+	    	family.address_2,
+	    	family.zip_code,
+	    	family.intl_number,
+	    	family.email,
+	    	family.father_name,
+	    	family.father_intl_number,
+	    	family.father_email,
+	    	family.mother_name,
+	    	family.mother_intl_number,
+	    	family.mother_email,
+	    ]
+	  end
+	end
 end

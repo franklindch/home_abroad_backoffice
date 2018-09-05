@@ -36,7 +36,7 @@ class AttendantsController < ApplicationController
 	  end
 	  
 	  if params[:query].present?
-	    @attendants = attendant.search_by_name(params[:query]).page(params[:query])
+	    @attendants = Attendant.search_by_full_name(params[:query]).page(params[:query])
 	  else
 	    @attendants = Attendant.order(:first_name).page params[:page]
 	  end
@@ -50,7 +50,7 @@ class AttendantsController < ApplicationController
 
 	def attendant_params
 	  params.require(:attendant).permit(
-	    :first_name, :last_name, :age, :email, :phone
+	    :first_name, :last_name, :email, :phone, :intl_number, :birth_date
 	  )    
 	end
 end

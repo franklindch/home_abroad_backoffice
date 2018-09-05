@@ -3,11 +3,11 @@
 module ApplicationHelper
 	def create_a_model(model)
 		if model == "famille"
-			link_to ("<i class=\"fa fas fa-plus-circle\">Créer une #{model.capitalize}</i>").html_safe, new_family_path, class: 'btn btn-primary'
+			link_to ("<i class=\"fa fas fa-plus-circle\">Créer une #{model.capitalize}</i>").html_safe, new_family_path(prospect: 'non'), class: 'btn btn-primary'
 		elsif model == "client"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_client_path, class: 'btn btn-primary'
 		elsif model == "voyage"
-			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize} Groupe</i>").html_safe, new_travel_path(groupe: 'Groupe'), class: 'btn btn-primary'
+			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize} Groupe</i>").html_safe, new_travel_path(travel_type: 'Groupe'), class: 'btn btn-primary'
 		elsif model == "partenaire"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_partner_company_path, class: 'btn btn-primary'
 		elsif model == "accompagnateur"
@@ -19,7 +19,7 @@ module ApplicationHelper
 
 	def number_to_phone(number)
 		new_number = []
-		number.split('').each_slice(2).to_a.each do |slice|
+		number.split('').each_slice(3).to_a.each do |slice|
 			new_number << slice.join
 		end
 	  	return new_number.join(' ')
@@ -30,5 +30,21 @@ module ApplicationHelper
 		# 	h6 = "#{h1}"
 		# 	p.pb-2 = "#{qualification&.status}"
 		# end
+	end
+
+	def show_the_age(date_of_birth)
+  		now = Time.now.utc.to_date
+  		now.year - date_of_birth.year - ((now.month > date_of_birth.month || (now.month == date_of_birth.month && now.day >= date_of_birth.day)) ? 0 : 1)
+	end
+
+	def birth_date_format(instance)
+		instance.birth_date.strftime("%d/%m/%Y")
+	end
+
+	def date_format(value)
+		value.strftime("%d/%m/%Y")
+	end
+	def c(name)
+		name&.capitalize
 	end
 end

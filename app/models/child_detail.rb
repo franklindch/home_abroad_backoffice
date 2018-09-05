@@ -1,6 +1,6 @@
 class ChildDetail < ApplicationRecord
-	belongs_to :qualification, dependent: :destroy
-	has_one :family, dependent: :destroy, through: :qualification
+	belongs_to :qualification
+	# has_one :family, dependent: :destroy, through: :qualification
 	has_many :child_detail_language_stays, dependent: :destroy
 	has_many :potential_language_stays, through: :child_detail_language_stays
 

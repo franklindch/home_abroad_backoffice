@@ -18,7 +18,7 @@ class PartnerCompaniesController < ApplicationController
 	def edit; end
 
 	def update
-	  @partner_company.update(partner_company_params)
+	  @partner_company.update(camp_params)
 	  redirect_to partner_companies_path
 	end
 
@@ -50,6 +50,11 @@ class PartnerCompaniesController < ApplicationController
 	def partner_company_params
 	  params.require(:partner_company).permit(
 	    :type, :name, :email, :phone_number, :city, :zip_code, :country
+	  )    
+	end
+	def camp_params
+	  params.require(:camp).permit(
+	    :type, :name, :email, :phone_number, :city, :zip_code, :country, :intl_number
 	  )    
 	end
 end

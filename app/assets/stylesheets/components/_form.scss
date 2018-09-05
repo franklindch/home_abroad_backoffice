@@ -45,7 +45,7 @@
     cursor: pointer;
   }
   &.active {
-  background: $medium-blue;
+  background: $medium-purple;
   color: white;
   opacity: 1;
   }
@@ -57,4 +57,10 @@
 
 .margin-top-navbar {
   margin-top: 80px;
+}
+
+// phone field
+
+.tel {
+  padding-right: 20px;
 }

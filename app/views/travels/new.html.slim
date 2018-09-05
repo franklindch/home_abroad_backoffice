@@ -1,6 +1,4 @@
-- if params[:groupe]
+- if params[:travel_type] == 'Groupe'
 	= render 'travels/form/travel_group', travel: @travel
-- elsif params[:Pré_acheminement] || params[:Post_acheminement]
-	= render 'travels/form/pre_post_acheminement'
 - else
-	= render 'travels/form/other_travel', travel: @travel
+	= render 'travels/form/specific_language_stay_travel', travel: @travel

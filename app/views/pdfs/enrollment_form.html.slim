@@ -1,0 +1,121 @@
+- client = @language_stay.client
+
+.invoice-box.margin-top-navbar
+  table cellpadding="0" cellspacing="0" 
+    tr.top
+      td colspan="2" 
+        table
+          tr
+            td.title
+              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
+            td
+              br/
+              h3 Enrolment Form
+              br/
+              p = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
+
+    tr.heading
+      td
+        | APPLICANT
+      td
+    tr.item
+      td
+        = "Surname : #{client.last_name}"
+      td
+        = "Gender : #{client.gender}"
+    tr.item
+      td
+        = "First name : #{client.first_name}"
+      td
+        = "Address : #{client.family.address_1}" unless client.address_1
+    tr.item
+      td
+        = "Home telephone : #{client.family.phone}"
+      td
+        = "Cellphone : #{client.intl_number}"
+    tr.item
+      td
+        = "Birthdate (dd/jj/mm) : #{client.birth_date}"
+      td
+        = "Nationality : #{client.nationality}"
+    tr.item
+      td
+        = "Language level 1 : #{client.first_language}"
+      td
+        = "--- Level : #{client.first_language_level}"
+    tr.item
+      td
+        = "Language level 2 : #{client.second_language}"
+      td
+        = "--- Level : #{client.second_language_level}"
+    tr.item
+      td
+        = "Preferred hobbies : #{client.preferred_hobbies}"
+      td
+        = "Smoker : #{client.smoker}"
+    tr.item
+      td
+        = "Medical issues / allergies / diet... : #{client.medical_issue}"
+      td
+    tr.item.last
+      td
+        = "Comment : #{client.comment}"
+      td
+
+
+    
+    - if client.age_category == 'Junior' || client.age_category == 'Etudiant'
+    tr.heading
+      td
+        | PARENTS (if a junior student)
+      td
+    tr.item
+      td
+        = "Mother name : #{client.family.mother_name}"
+    tr.item
+      td
+        = "Cellphone : #{client.family.mother_phone}"
+      td
+        = "Email : #{client.family.mother_email}"
+    tr.item
+      td
+        = "Father name : #{client.family.father_name}"
+    tr.item.last
+      td
+        = "Cellphone : #{client.family.father_phone}"
+      td
+        = "Email : #{client.family.father_email}"
+
+    tr.heading
+      td
+        | PROGRAM
+      td
+    tr.item
+      td
+        = "Applying with : #{@language_stay.partner_company.name}"
+      td
+        = "Program : #{@language_stay.program.name}"
+    tr.item
+      td
+        = "Location : #{@language_stay.location}"
+      td
+        = "Durée : #{@language_stay.duration}"
+    tr.item
+      td
+        = "Dates --- Arrival date : #{@language_stay.start_date.strftime('%A %d %B %Y')}"
+      td
+        = "Departure date : #{@language_stay.end_date.strftime('%A %d %B %Y')}"
+
+    tr.item
+      td
+        = "Pension : #{@language_stay.pension}"
+      td
+        = "Accomodation : #{@language_stay.accomodation}"
+    tr.item
+      td
+        = "Transfer : #{@language_stay.transfer}"
+      td
+        = "Class hours : #{@language_stay.class_hours}"
+    tr.item.last
+      td
+        = "Precisions : #{@language_stay.precisions}"

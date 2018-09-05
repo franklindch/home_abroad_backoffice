@@ -25,7 +25,7 @@ class InvoicesController < ApplicationController
 
 	def update
 	  @invoice.update(invoice_params)
-	  redirect_to families_path
+	  redirect_to client_path(@invoice.language_stay.client)
 	end
 
 	def destroy

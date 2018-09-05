@@ -12,8 +12,11 @@ section
             			.col-md-12
                     = f.input :travel_code, label: 'Code Groupe'
                     = f.input :capacity, label: 'Capacité', collection: 20..100, selected: 10
-                    = f.input :attendant_id, collection: Attendant.all, include_blank: "Merci de sélectionner l'accompagnateur...", label: false
-
+                    / = f.input :attendant_id, collection: Attendant.all, include_blank: "Merci de sélectionner l'accompagnateur...", label: false
+                    = f.input :attendant_ids, input_html: {include_hidden: false}, collection: Attendant.all.map { |w| [w.first_name, w.id] }, label: 'Accompagnateur 1'
+                    = f.input :attendant_ids, input_html: {include_hidden: false}, collection: Attendant.all.map { |w| [w.first_name, w.id] }, label: 'Accompagnateurs 2'
+                    = f.hidden_field :nature, value: params[:travel_type]
+                  
                 .child_details_section.pt-3
                   .col-md-12
                     h3.mt-3 Remplir les détails du voyage

@@ -11,22 +11,25 @@ section
             		.row
             			.col-md-12
                     h4.mt-4.mb-4 Séjour
-                    = f.input :data_entry_responsible, collection: LanguageStay::HOME_ABROAD_EMPLOYEES, label: 'Responsable de saisie', selected: 0
-                    = f.input :commercial_responsible, collection: LanguageStay::HOME_ABROAD_EMPLOYEES, label: 'Responsable commercial', selected: 0
+                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: LanguageStay.data_entry_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
+                    = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Responsable commercial', selected: 0
                     = f.input :program_id, collection: Program.all, include_blank: "Merci de sélectionner le type de séjour concerné...", label: false
                     = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                     h4.mt-4.mb-4 Détails
                     = f.input :start_date, label: 'Début'
                     = f.input :end_date, label: 'Fin'
-                    = f.input :location, label: 'Lieu'
-                    = f.input :phone_during_stay, label: 'Téléphone pendant le séjour :'
+                    = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
+                    = f.input :phone_during_stay, label: 'Téléphone pendant le séjour :', input_html: { class: 'phone_field' }
+
                     = f.input :option_1, label: 'Option 1/'
                     = f.input :option_2, label: 'Option 2/'
-                    = f.input :transfer, label: 'Transfert'
-                    = f.input :class_hours, label: 'Nombre d\'heures de cours'
-                    = f.input :accomodation, label: 'Logement'
-                    = f.input :pension, label: 'Pension'
+                    / = f.input :transfer, label: 'Transfert'
+                    = f.input :transfer, collection: ['Aller', 'Retour'], as: :check_boxes, input_html: { multiple: true }, label: 'Transfert'
+                    = f.input :class_hours, label: 'Nombre d\'heures de cours (par semaine)'
+                    = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [w.humanize, w] }, label: 'Logement', selected: 0
+                    = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [w.humanize, w] }, label: 'Pension', selected: 0
+                    = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [w.humanize, w] }, label: 'Chambre', selected: 0
                     = f.input :precisions, label: 'Précisions'
                     / = f.input :duration, label: 'Durée (en semaines)'
 

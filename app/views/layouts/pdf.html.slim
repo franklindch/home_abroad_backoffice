@@ -2,7 +2,10 @@ doctype html
 html
   head
     title PDF
-    = wicked_pdf_stylesheet_link_tag "application"
+    / = wicked_pdf_stylesheet_link_tag "application"
+    meta charset="UTF-8" /
+    meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" /
+    = stylesheet_link_tag "http://#{request.host_with_port}/#{asset_path("application.css")}", rel: "stylesheet", media: "all"
   body
     .container
       = yield

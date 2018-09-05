@@ -29,7 +29,7 @@
           td
             span = family&.email
           td
-            span = number_to_phone(family&.phone)
+            span = number_to_phone(family&.intl_number) if family.intl_number != nil
           td
             span = family&.address_1
           td

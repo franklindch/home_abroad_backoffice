@@ -1,0 +1,38 @@
+- transits = travel.transits
+- pre_transit = transits.find_by(nature: 'Pré_acheminement')
+- post_transit = transits.find_by(nature: 'Post_acheminement')
+
+
+- if pre_transit.nil? && post_transit.nil?
+	.col-md-4
+		= link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-danger mr-3'
+
+- elsif pre_transit && post_transit
+	.col-md-4
+		h6.card-title = "Voyage #{pre_transit.nature.humanize}"
+		.card-text
+			p = "Heure de départ: #{pre_transit&.start_time}" if pre_transit.start_time != ""
+			p = "Heure d'arrivée: #{pre_transit&.end_time}" if pre_transit.end_time != ""
+	
+	.col-md-4
+		h6.card-title = "Voyage #{post_transit.nature.humanize}"
+		.card-text
+			p = "Heure de départ: #{post_transit&.start_time}" if post_transit.start_time != ""
+			p = "Heure d'arrivée: #{post_transit&.end_time}" if post_transit.end_time != ""
+
+- elsif pre_transit && post_transit.nil?
+	.col-md-4
+		h6.card-title = "Voyage #{pre_transit.nature.humanize}"
+		.card-text
+			p = "Heure de départ: #{pre_transit&.start_time}" if pre_transit.start_time != ""
+			p = "Heure d'arrivée: #{pre_transit&.end_time}" if pre_transit.end_time != ""
+		= link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-danger mr-3'
+
+- elsif post_transit && pre_transit.nil?
+	.col-md-4
+		h6.card-title = "Voyage #{post_transit.nature.humanize}"
+		.card-text
+			p = "Heure de départ: #{post_transit&.start_time}" if post_transit.start_time != ""
+			p = "Heure d'arrivée: #{post_transit&.end_time}" if post_transit.end_time != ""
+
+		= link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-danger mr-3'

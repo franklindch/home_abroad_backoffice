@@ -13,13 +13,13 @@ section
                     // if nature: gorupe, put the collection travel.where field
                     
                     = f.input :nature, collection: Travel.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0 
-                    = f.input :travel_group_id, collection: Travel.where(nature: "Groupe"), include_blank: "Merci de sélectionner le voyage de groupe...", label: false
+                    = f.input :travel_id, collection: Travel.where(nature: "Groupe").map { |w| [w.travel_code, w.id] }, include_blank: "Merci de sélectionner le voyage de groupe...", label: false
 
                     / = f.input :language_stay_id, collection: LanguageStay.all, include_blank: "Voulez pouvez associer ce voyage au séjour...", label: false
                     
                     .child_details_section.pt-3
                       .child_details_1.mt-3
-                        h3.mt-3 Remplir les détails du voyage
+                        h3.mt-3 Remplir les détails de l'aller
                         = f.simple_fields_for :travel_details do |travel_detail|
                           = render 'travels/travel_detail_fields', f: travel_detail
                       .form-actions.text-center

@@ -4,33 +4,37 @@
   .modal-dialog.modal-dialog-centered role="document" 
     .modal-content
       .modal-header
-        h5.modal-title id='modal#{partner_company.id}LongTitle' Informations sur le partenaire #{partner_company.name}
+        h4.modal-title id='modal#{partner_company.id}LongTitle' Informations sur le partenaire #{partner_company.name}
         button.close aria-label="Close" data-dismiss="modal" type="button" 
           span aria-hidden="true"  &times; 
 
       .modal-body
-      	.row
-      		.col-md-12
-      			.card
-      				.card-body
-      					.card-text
-      					
-					      - if employees == nil
-					      	p Pas d'employers associés à ce partenaire
+        h6 Type
+        p.pb-2 = "#{partner_company&.type}" if partner_company.type != ""
+        h6 Nom
+        p.pb-2 = "#{partner_company&.name}" if partner_company.name != ""
+        h6 Email
+        p.pb-2 = "#{partner_company&.email}" if partner_company.email != ""
+        h6 Téléphone
+        p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
+        h6 Adresse
+        p.pb-2 = "#{partner_company&.address}" if partner_company.address != ""
 
 
-					      - else
-					      	- employees.each do |employee|
-				      			p = employee.main_contact
-				      			p = employee.job_position
-				      			p = employee.first_name
-				      			p = employee.last_name
+        - if employees == []
+          p Pas d'employers associés à ce partenaire
 
-				      			p =	link_to 'Editer', edit_partner_company_employee_path(employee.partner_company, employee) , class: 'btn btn-primary'
-				      			p =	link_to 'Suprrimer', partner_company_employee_path(employee.partner_company, employee), method: :delete , class: 'btn btn-primary'
-				      			br
-					
-      .modal-footer
-      	/ p Vous pouvez ajouter ajouter un nouveau client à cette famille
-        / button.btn.btn-secondary  type="button" Ajouter nouveau client
-        button.btn.btn-secondary data-dismiss="modal" type="button" Fermer
+        - else
+          h5.mt-4.border-top.pt-4 Employers
+          - employees.each do |employee|
+            .card.mt-3
+              .card-body
+                p = "Prénom: #{employee.first_name}"
+                p = "Nom: #{employee.last_name}"
+                p = "Contact pricipal: #{employee.main_contact}"
+                p = "Job: #{employee.job_position}"
+                p = "Email: #{employee.email}"
+                p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee.intl_number != nil
+               
+                p = link_to 'Editer', edit_partner_company_employee_path(employee.partner_company, employee)
+                p = link_to 'Supprimer', partner_company_employee_path(employee.partner_company, employee), method: :delete

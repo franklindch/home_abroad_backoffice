@@ -6,7 +6,4 @@ class Payment < ApplicationRecord
 		Chèque: 1, 
 		Virement: 2
 	}
-	def total
-		return 
-	end
 end

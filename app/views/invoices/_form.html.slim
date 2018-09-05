@@ -18,9 +18,10 @@ section
 										= f.input :language_stay_price_cents, label: 'Prix séjours'
 										= f.input :travel_price_cents, label: 'Prix voyage'
 										= f.input :transfer_price_cents, label: 'Prix transfert'
-										= f.input :option_1_price_cents, label: 'Option 1'
-										= f.input :option_2_price_cents, label: 'Option 2'
-										= f.input :total_price, label: 'Total'
+										- if @language_stay.option_1
+											= f.input :option_1_price_cents, label: "Option 1 - #{@language_stay.option_1}"
+										- if @language_stay.option_2
+											= f.input :option_2_price_cents, label: "Option 1 - #{@language_stay.option_2}"
 
 										h4.mt-4.mb-4 Règlements
 										.child_details.mt-3

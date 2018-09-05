@@ -20,22 +20,20 @@ class ApplicationController < ActionController::Base
 
   def generate_enrollment_form_pdf(language_stay)
     respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "enrollment_form_client_#{language_stay.client.first_name}_séjour_#{language_stay.duration}",
-               template: 'language_stays/enrollment_form.html.slim',
+      format.html do
+        render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
+               template: 'pdfs/enrollment_form.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
       end
     end
   end
-
+  
   def generate_invoice_pdf(invoice)
     respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "#{invoice.family.name}",
-               template: 'invoices/invoice.html.slim',
+      format.html do
+        render pdf: "#{invoice.client.first_name} #{invoice.language_stay.client.family.name}_Facture",
+               template: 'pdfs/invoice.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
       end
@@ -44,10 +42,9 @@ class ApplicationController < ActionController::Base
 
   def generate_paid_invoice_pdf(invoice)
     respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "#{invoice.family.name}",
-               template: 'invoices/invoice.html.slim',
+      format.html do
+        render pdf: "#{invoice.language_stay.client.family.name}",
+               template: 'pdfs/paid_invoice.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
       end
@@ -56,10 +53,9 @@ class ApplicationController < ActionController::Base
 
   def generate_airport_convocation_pdf(travel)
     respond_to do |format|
-      format.html
-      format.pdf do
+      format.html do
         render pdf: "#{travel.travel_code}",
-               template: 'travels/airport_convocation.html.slim',
+               template: 'pdfs/airport_convocation.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
       end

@@ -10,8 +10,8 @@ class LanguageStaysController < ApplicationController
 	def create
 	  @language_stay = LanguageStay.new(language_stay_params)
 	  @language_stay.client = @client
-	  @s = date_format(language_stay_params, 'start_date')
-	  @e = date_format(language_stay_params, 'end_date')
+	  @s = @language_stay.start_date
+	  @e = @language_stay.end_date
 	  @language_stay.duration = @language_stay.get_duration(@e, @s)
 
 	  if @language_stay.save
@@ -38,7 +38,7 @@ class LanguageStaysController < ApplicationController
 	
 	def enrollment_form
 		@language_stay = LanguageStay.find(params[:language_stay])
-	  generate_enrollment_form_pdf(@language_stay)
+	  	generate_enrollment_form_pdf(@language_stay)
 		fields_filled(@language_stay)
 	end
 
@@ -62,7 +62,7 @@ class LanguageStaysController < ApplicationController
 
 	def language_stay_params
 	  params.require(:language_stay).permit(
-	    :data_entry_responsible, :commercial_responsible, :precisions, :duration, :activities, :fee, :travel_id, :program_id, :phone_during_stay, :start_date, :end_date, :location, :transfer, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
+	    :data_entry_responsible, :intl_number, :commercial_responsible, :precisions, :duration, :activities, :fee, :travel_id, :program_id, :phone_during_stay, :start_date, :end_date, :location, :transfer, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
 	  )    
 	end
 

@@ -9,6 +9,7 @@
         tr
           th Prénom
           th Nom
+          th Date de naissance
           th Âge
           th Email
           th Téléphone
@@ -23,11 +24,13 @@
           td
             span = attendant.last_name
           td
-            span = attendant.age
+            span = birth_date_format(attendant) if attendant.birth_date != nil
+          td
+            span = "#{show_the_age(attendant.birth_date)} ans" if attendant.birth_date != nil
           td
             span = attendant.email
           td
-            span = attendant.phone
+            span = number_to_phone(attendant.intl_number) if attendant.intl_number != nil
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)
           td

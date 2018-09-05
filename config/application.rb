@@ -12,6 +12,7 @@ module HomeAbroadBackoffice
   class Application < Rails::Application
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
+    # config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
     config.generators do |generate|
       generate.assets false

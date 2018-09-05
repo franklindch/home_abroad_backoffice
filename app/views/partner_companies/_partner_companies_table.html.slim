@@ -13,7 +13,6 @@
           th Téléphone
           th Adresse
           th Code Postal
-          th Création
           th
           th
           th
@@ -27,13 +26,11 @@
           td
             span = partner_company.email
           td
-            span = partner_company.phone_number
+            span = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
           td
             span = partner_company.address
           td
             span = partner_company.zip_code
-          td
-            span = partner_company.created_at.strftime('%A %d %B %Y')
           th
             span = link_to "<i class='fa fas fa-plus-circle'>Employer</i>".html_safe, new_partner_company_employee_path(partner_company)
           td

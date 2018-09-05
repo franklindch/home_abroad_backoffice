@@ -1,14 +1,30 @@
 class LanguageStay < ApplicationRecord
-  has_many :travels, dependent: :destroy
+  has_one :travel, dependent: :destroy
   belongs_to :program
   belongs_to :client
   belongs_to :partner_company
   has_one :invoice, dependent: :destroy
 
+  enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
+  enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
+  enum accomodation: { 
+    Sans_logement: 1, 
+    Avec_logement: 2
+  }
+  enum pension: { 
+    Sans_repas: 1,
+    Petit_dej: 2,
+    Demi_pension: 3,
+    Pension_complète: 4
+  }
+  enum room: { 
+    Avec_chamb: 1, 
+    sans_chambre: 2
+  }
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
 
   def get_duration(e, s)
-    return (e[:month] - s[:month]) + 12 * (e[:year] - s[:year])  
+    return (e.strftime("%U").to_i - s.strftime("%U").to_i)
   end
 
   def all_attributes?

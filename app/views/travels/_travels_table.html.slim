@@ -12,9 +12,9 @@
           th Accompagnateurs
           th Détails Aller
           th Détails Retour
+          th 
           th
-          th
-          th
+          th Convocation Aéroport
       tbody
       - @travels.each do |travel|
         tr data-toggle="modal" data-target="#modal#{travel.id}"
@@ -23,24 +23,37 @@
           td
             span = travel&.travel_code
           td
-            span = "#{travel&.attendant&.first_name} #{travel&.attendant&.last_name}"
-
-          td data-toggle="modal" data-target="#modal#{travel&.travel_details[0].id}"
-            span = "Voir les détails de l\'aller"
-
-          .modal.fade id="modal#{travel&.travel_details[0].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel&.travel_details[0].id}Title"
-            .modal-dialog.modal-dialog-centered role="document" 
-              .modal-content
-                = render 'travels/travel_details/go_flight', travel_detail: travel.travel_details[0]
-
-          td data-toggle="modal" data-target="#modal#{travel&.travel_details[1].id}"
-            span = "Voir les détails du retour"
-
-          .modal.fade id="modal#{travel&.travel_details[1].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel&.travel_details[1].id}Title"
-            .modal-dialog.modal-dialog-centered role="document" 
-              .modal-content
-                = render 'travels/travel_details/return_flight', travel_detail: travel.travel_details[1]
           td
-            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_path(travel)
+          td
+          td
+          td
+            span 
+            - if travel.attendants
+              - travel.attendants.each do |attendant|
+                = "#{attendant&.first_name} #{attendant&.last_name} | "
+          td
+            span = link_to "Générer", airport_convocation_path(travel: travel), format: :pdf
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_path(travel, groupe: 'Groupe')
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_path(travel), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: travel.id
+
+          / td data-toggle="modal" data-target="#modal#{travel&.travel_details[0].id}"
+          /   span = "Voir les détails de l\'aller"
+
+          / .modal.fade id="modal#{travel&.travel_details[0].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel&.travel_details[0].id}Title"
+          /   .modal-dialog.modal-dialog-centered role="document" 
+          /     .modal-content
+          /       = render 'travels/travel_details/go_flight', travel_detail: travel.travel_details[0]
+
+          / td data-toggle="modal" data-target="#modal#{travel&.travel_details[1].id}"
+          /   span = "Voir les détails du retour"
+
+          / .modal.fade id="modal#{travel&.travel_details[1].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel&.travel_details[1].id}Title"
+          /   .modal-dialog.modal-dialog-centered role="document" 
+          /     .modal-content
+          /       = render 'travels/travel_details/return_flight', travel_detail: travel.travel_details[1]
+          / td
+          /   span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_path(travel)
+          / td
+          /   span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_path(travel), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: travel.id

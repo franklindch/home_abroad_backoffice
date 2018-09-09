@@ -38,4 +38,4 @@ const travelConditionnal = {
   }
 };
 
-export { travelConditionnal }
+export { travelConditionnal };

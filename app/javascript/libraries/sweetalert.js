@@ -56,7 +56,7 @@ const handleConfirm = () => {
 
 // Add event listener before the other Rails event listeners like the one
 // for `method: :delete`
-bindSweetAlertButtonDemo = function() {
+function bindSweetAlertButtonDemo() {
   Rails.delegate(document, 'a[data-confirm-swal]', 'click', handleConfirm)
 }
 

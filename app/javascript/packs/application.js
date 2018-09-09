@@ -1,11 +1,10 @@
-let Turbolinks = require("turbolinks")
-Turbolinks.start()
-
-
 import $ from "jquery";
 import "select2"
 import "bootstrap";
 import "intl-tel-input";
+
+let Turbolinks = require("turbolinks")
+Turbolinks.start()
 
 import { Conditionals } from '../style/conditionals';
 import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberLSFields } from '../libraries/initialize-intl-number';
@@ -31,7 +30,7 @@ document.addEventListener("turbolinks:load", () => {
 	travelConditionnal.init();
 	if ($('#travel_group_attendant_ids')) {
 		select2Attendants();
-	}
+	}	
 	if($(".father_phone") || ($(".mother_phone"))){
 		initializeIntlNumberFamilyFields();
 		autocompleteFamilyFields();
@@ -43,5 +42,4 @@ document.addEventListener("turbolinks:load", () => {
 	if ($('.phone_during_stay')){
 		initializeIntlNumberLSFields();
 	}
-
 });

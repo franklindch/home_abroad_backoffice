@@ -1,4 +1,4 @@
-initializeIntlNumberFamilyFields = function() {
+function initializeIntlNumberFamilyFields() {
 	$(".phone_field").intlTelInput({
 		formatOnInit: true,
 		separateDialCode: true,
@@ -75,7 +75,7 @@ initializeIntlNumberFamilyFields = function() {
 	}
 }
 
-initializeIntlNumberPartnerFields = function() {
+function initializeIntlNumberPartnerFields() {
 	$(".phone_number").intlTelInput({
 		formatOnInit: true,
 		separateDialCode: true,
@@ -107,7 +107,7 @@ initializeIntlNumberPartnerFields = function() {
 	}
 }
 
-initializeIntlNumberLSFields = function() {
+function initializeIntlNumberLSFields() {
 	$(".phone_during_stay").intlTelInput({
 		formatOnInit: true,
 		separateDialCode: true,

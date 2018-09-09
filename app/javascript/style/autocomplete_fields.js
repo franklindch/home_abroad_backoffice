@@ -1,4 +1,4 @@
-autocompleteFamilyFields = function() {
+function autocompleteFamilyFields() {
 	$("#family_name").on('change', function(){
 	  $("#family_father_name").val($(this).val());
 	  $("#family_mother_name").val($(this).val());
@@ -9,7 +9,7 @@ autocompleteFamilyFields = function() {
 	});
 }
 
-autocompleteInvoiceFieldTotal = function() {
+function autocompleteInvoiceFieldTotal() {
 	$(document).on("change", "#invoice_application_fee_price_cents", function() {
 	  const applicationFeePriceCents = $("#invoice_application_fee_price_cents").val() || 0,
 	      languageStayPriceCents = $("#invoice_language_stay_price_cents").val() || 0,

@@ -1,10 +1,11 @@
 - if language_stay
 	= link_to 'Enrollment Form', enrollment_form_path(language_stay: language_stay), format: :pdf, class: 'btn btn-primary mr-3'
+	= link_to 'Attestation de séjour', language_stay_certificate_path(language_stay: language_stay), format: :pdf, class: 'btn btn-primary mr-3'
 
 - invoice = language_stay.invoice
 
 - if invoice
 	= link_to 'Facture', invoice_path(invoice: language_stay.invoice), format: :pdf, class: 'btn btn-primary mr-3'
 
-	- if invoice.total && invoice.total == invoice.total_payments
+	- if invoice.total_price_cents == invoice.total_payments
 		= link_to 'Facture acquittée', paid_invoice_path(paid_invoice: language_stay.invoice), format: :pdf, class: 'btn btn-primary mr-3'

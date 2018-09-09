@@ -42,6 +42,11 @@ class LanguageStaysController < ApplicationController
 		fields_filled(@language_stay)
 	end
 
+	def certificate
+		@language_stay = LanguageStay.find(params[:language_stay])
+	  	generate_language_stay_certificate_pdf(@language_stay)
+	end
+
 	private
 
 	def fields_filled(language_stay)
@@ -62,7 +67,7 @@ class LanguageStaysController < ApplicationController
 
 	def language_stay_params
 	  params.require(:language_stay).permit(
-	    :data_entry_responsible, :intl_number, :commercial_responsible, :precisions, :duration, :activities, :fee, :travel_id, :program_id, :phone_during_stay, :start_date, :end_date, :location, :transfer, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
+	    :transfers, :room, :data_entry_responsible, :intl_number, :commercial_responsible, :precisions, :duration, :activities, :fee, :travel_id, :program_id, :phone_during_stay, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
 	  )    
 	end
 

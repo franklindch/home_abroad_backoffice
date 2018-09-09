@@ -3,7 +3,7 @@ class QualificationsController < ApplicationController
 	before_action :retrieve_family, only: [:new, :edit, :create]
 
 	def new
-	  @qualification = Qualification.new
+	  @qualification = Qualification.new()
 	  create_child_details
 	  # create_potential_language_stays
 	end

@@ -21,17 +21,24 @@ Rails.application.routes.draw do
     end
 
     resources :attendants
-    resources :travels, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resources :travel_groups, only: [:index, :new, :create, :edit, :update, :destroy]
+
+    resources :travels, only: [:show] do
       resources :transits
     end
       
     resources :programs
+    resources :travels, only: [:index, :destroy, :edit, :update]
+    resources :travels, only: [:show] do
+      resources :off_set_travels, only: [:new, :create]
+    end
 
     get 'static', to: 'excels#static'
     get 'enrollment_form', to: 'language_stays#enrollment_form'
+    get 'language_stay_certificate', to: 'language_stays#certificate'
     get 'invoice', to: 'invoices#invoice'
     get 'paid_invoice', to: 'invoices#paid_invoice'
-    get 'airport_convocation', to: 'travels#airport_convocation'
+    get 'airport_convocation', to: 'travel_groups#airport_convocation'
   end
 
   devise_for :users, controllers: {

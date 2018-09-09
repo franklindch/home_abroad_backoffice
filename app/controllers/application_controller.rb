@@ -28,11 +28,22 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def generate_language_stay_certificate_pdf(language_stay)
+    respond_to do |format|
+      format.html do
+        render pdf: "Certificat #{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
+               template: 'pdfs/language_stay_certificate.html.slim',
+               disposition: 'attachment',
+               layout: 'pdf'
+      end
+    end
+  end
   
   def generate_invoice_pdf(invoice)
     respond_to do |format|
       format.html do
-        render pdf: "#{invoice.client.first_name} #{invoice.language_stay.client.family.name}_Facture",
+        render pdf: "#{invoice.language_stay.client.first_name} #{invoice.language_stay.client.family.name}_Facture",
                template: 'pdfs/invoice.html.slim',
                disposition: 'attachment',
                layout: 'pdf'

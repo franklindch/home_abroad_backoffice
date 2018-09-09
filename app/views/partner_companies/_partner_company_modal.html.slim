@@ -10,7 +10,7 @@
 
       .modal-body
         h6 Type
-        p.pb-2 = "#{partner_company&.type}" if partner_company.type != ""
+        p.pb-2 = "#{partner_company&.nature}" if partner_company.nature != ""
         h6 Nom
         p.pb-2 = "#{partner_company&.name}" if partner_company.name != ""
         h6 Email

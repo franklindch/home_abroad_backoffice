@@ -20,7 +20,9 @@ section
                     / = f.input :country_of_residence, label: 'Pays de résidence', priority: ["FR", "GB", "IT"]
                     = f.input :zip_code, label: 'Code Postal'
                     = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale'
-                    = f.hidden_field :prospect, value: params[:prospect]
+                    - if params[:prospect].present?
+                        = f.hidden_field :prospect, value: params[:prospect]
+                    - else
                     / = f.input :country_of_residence, priority: 'France'
             .form-inputs
               .container-fluid
@@ -30,6 +32,8 @@ section
                     = f.input :father_name, label: 'Nom'
                     = f.input :father_first_name, label: 'Prénom'
                     = f.input :father_phone, label: 'Tél', input_html: { class: 'father_phone' }
+                    = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
+                    / = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
                     / = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_phone' }
                     = f.input :father_email, label: 'Email'
                   .col-md-6
@@ -37,7 +41,7 @@ section
                     = f.input :mother_name, label: 'Nom'
                     = f.input :mother_first_name, label: 'Prénom'
                     = f.input :mother_phone, as: :tel, label: 'Tél', input_html: { class: 'mother_phone' }
-                    = f.input :mother_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'mother_phone' }
+                    = f.input :mother_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'mother_office_phone' }
                     = f.input :mother_email, as: :tel, label: 'Email'
 
             .form-actions.text-center.mt-4

@@ -52,12 +52,14 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/language_stay_details', language_stay: language_stay
-									= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
-
-					.col-sm-4
+								= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
+				.row.mb-3
+					.col-sm-12
 						.card.height
 							.card-body
-								= render 'clients/show_details/invoice_details', language_stay: language_stay
+								.row
+									= render 'clients/show_details/invoice_details', language_stay: language_stay
+								= link_to 'Editer la facture ou ajouter règlement', edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
 
 			- elsif language_stay.travel && language_stay.invoice.nil?
 				.row.mb-3
@@ -88,13 +90,13 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/invoice_details', language_stay: language_stay
+								= link_to 'Editer la facture ou ajouter règlement', edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
 				.row.mb-3
 					.col-sm-12
 						.card.height
 							.card-body
 								.row
 									= render 'clients/show_details/travel_details', language_stay: language_stay
-
 
 			.row.mb-3
 				.col-sm-12

@@ -25,6 +25,8 @@ gem 'rails', '5.1.6'
 gem 'redis'
 gem  'bootstrap', '>= 4.1.3'
 gem 'responders'
+gem "select2-rails"
+gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'

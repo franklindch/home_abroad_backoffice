@@ -1,2 +1,0 @@
-class Camp < PartnerCompany
-end

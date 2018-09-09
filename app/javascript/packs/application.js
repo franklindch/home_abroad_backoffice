@@ -1,36 +1,47 @@
-
 let Turbolinks = require("turbolinks")
 Turbolinks.start()
 
 
 import $ from "jquery";
-import { Conditionals } from '../style/conditionals';
-import { initializeIntlNumber } from '../libraries/initialize-intl-number';
-// import { init } from '../style/conditionals';
+import "select2"
 import "bootstrap";
 import "intl-tel-input";
+
+import { Conditionals } from '../style/conditionals';
+import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberLSFields } from '../libraries/initialize-intl-number';
 import { bindSweetAlertButtonDemo } from '../libraries/sweetalert';
 import { initAutocomplete } from '../libraries/place_autocomplete';
-// import { fillInAddress } from '../libraries/place_autocomplete';
-import { activeLink } from '../style/active_link';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelConditionnal } from '../style/conditional_form';
-import { autocompleteField } from '../style/autocomplete_field';
+import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
+import { select2Attendants } from '../style/select2_attendants';
 
 
 document.addEventListener("turbolinks:load", () => {
 	bindSweetAlertButtonDemo();
+	if ($('#invoice_total_price_cents')) {
+		autocompleteInvoiceFieldTotal();
+	}
 	if ($('.google_map')){
 		initAutocomplete();
 	}
-	// fillInAddress();
-	// activeLink();
 	Conditionals.init(); 
 	formSubmit.init();
 	AlertDisa();
 	travelConditionnal.init();
-	if($(".father_phone") || ($(".mother_phone"))){
-		initializeIntlNumber();
-		autocompleteField();
+	if ($('#travel_group_attendant_ids')) {
+		select2Attendants();
 	}
+	if($(".father_phone") || ($(".mother_phone"))){
+		initializeIntlNumberFamilyFields();
+		autocompleteFamilyFields();
+	}
+	if($(".partner_company_phone_number")){
+		initializeIntlNumberPartnerFields();
+	}
+
+	if ($('.phone_during_stay')){
+		initializeIntlNumberLSFields();
+	}
+
 });

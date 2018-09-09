@@ -1,6 +1,1 @@
-- if params[:travel_type] == 'Groupe'
-	= render 'travels/form/travel_group', travel: @travel
-- elsif params[:travel_type] == 'Aller'
-	= render 'travels/form/go_travel', travel: @travel
-- else
-	= render 'travels/form/return_travel', travel: @travel
+= render 'travels/form', travel: @travel

@@ -23,5 +23,5 @@ class ChildDetail < ApplicationRecord
 		Décembre: 11
 	}
 
-	validates :gender, :first_name, :last_name, :age, presence: true
+	# validates :gender, :first_name, :last_name, :age, presence: true
 end

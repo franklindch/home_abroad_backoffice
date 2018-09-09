@@ -1,0 +1,2 @@
+class FrenchPartner < PartnerCompany
+end

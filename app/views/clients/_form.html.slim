@@ -16,16 +16,19 @@ section
 								= f.input :first_name, label: 'Prénom'
 								= f.input :school, label: 'Etablissement scolaire'
 								= f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
-								= f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false
+								= f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "#{family.name.capitalize} | #{family.address_1.capitalize}" }
 								= f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year]
 								= f.input :phone_number, label: 'Téléphone fixe', input_html: { class: 'phone_field' }
 
-
-								h6.mt-5.mb-4 Section à remplir si différent des informations de la famille :
-								= f.input :last_name, label: 'Nom '
-								= f.input :address_1, label: 'Adresse principale', input_html: {class: 'google_map'}
-								= f.input :address_2, label: 'Complément d\'adresse'
-								= f.input :zip_code, label: 'Code postal', wrapper_html: {class: ['pb-5', 'border-bottom']}
+								p
+								  a.btn.btn-primary.mt-5.mb-4  aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample" role="button" 
+								    | A remplir si différent des informations de la famille
+								#collapseExample.collapse
+								  .card.card-body
+										= f.input :last_name, label: 'Nom '
+										= f.input :address_1, label: 'Adresse', input_html: {class: 'google_map'}
+										= f.input :address_2, label: 'Complément d\'adresse'
+										= f.input :zip_code, label: 'Code postal'
 
 								h4.mt-4.mb-4 Passeport ou Carte d'identité
 								= f.input :passport_number, label: 'Numéro'
@@ -54,16 +57,21 @@ section
 								= f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie', selected: 0
 								= f.input :gender, collection: ChildDetail.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
 								= f.input :first_name, label: 'Prénom'
-								= f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false
-								= link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: 'non'), class: 'btn mb-4'
+								= f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family.name.capitalize} | #{family.address_1.capitalize}" }
+								= link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'
 								= f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year]
 								= f.input :phone_number, label: 'Téléphone fixe', input_html: { class: 'phone_field' }
+
 								// calculer l'âge à partir de la date de naissance et le stocker dans la DB
-								h6.mt-5.mb-4 Section à remplir si différent des informations de la famille :
-								= f.input :last_name, label: 'Nom '
-								= f.input :address_1, label: 'Adresse', input_html: {class: 'google_map'}
-								= f.input :address_2, label: 'Complément d\'adresse'
-								= f.input :zip_code, label: 'Code postal', wrapper_html: {class: ['pb-5', 'border-bottom']}
+								p
+								  a.btn.btn-primary.mt-5.mb-4  aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample" role="button" 
+								    | A remplir si différent des informations de la famille
+								#collapseExample.collapse
+								  .card.card-body
+										= f.input :last_name, label: 'Nom '
+										= f.input :address_1, label: 'Adresse', input_html: {class: 'google_map'}
+										= f.input :address_2, label: 'Complément d\'adresse'
+										= f.input :zip_code, label: 'Code postal'
 
 								h4.mt-4.mb-4 Passeport / Carte d'identité
 								= f.input :passport_number, label: 'Numéro'

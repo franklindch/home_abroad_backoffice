@@ -7,6 +7,7 @@ class PartnerCompaniesController < ApplicationController
 	end
 
 	def create
+		# raise
 	  @partner_company = PartnerCompany.new(partner_company_params)
 	  if @partner_company.save
 	    redirect_to partner_companies_path
@@ -18,7 +19,7 @@ class PartnerCompaniesController < ApplicationController
 	def edit; end
 
 	def update
-	  @partner_company.update(camp_params)
+	  @partner_company.update(partner_company_params)
 	  redirect_to partner_companies_path
 	end
 
@@ -49,12 +50,7 @@ class PartnerCompaniesController < ApplicationController
 
 	def partner_company_params
 	  params.require(:partner_company).permit(
-	    :type, :name, :email, :phone_number, :city, :zip_code, :country
-	  )    
-	end
-	def camp_params
-	  params.require(:camp).permit(
-	    :type, :name, :email, :phone_number, :city, :zip_code, :country, :intl_number
+	    :urgence_intl_phone_number, :nature, :name, :email, :phone_number, :city, :zip_code, :country, :intl_number, :urgence_phone_number
 	  )    
 	end
 end

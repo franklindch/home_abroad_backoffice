@@ -7,7 +7,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
-					= link_to ("<i class=\"fa fas fa-plus-circle\">Créer un prospect</i>").html_safe, new_family_path, class: 'btn btn-primary'
+					= link_to ("<i class=\"fa fas fa-plus-circle\">Créer un prospect</i>").html_safe, new_family_path(prospect: true), class: 'btn btn-primary'
 					= link_to 'Retour', :back, class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag families_path, method: :get do
@@ -40,7 +40,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 					= create_a_model(model)
 					= link_to 'Retour', :back, class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
-		    = form_tag travels_path, method: :get do
+		    = form_tag travel_groups_path, method: :get do
 		      = text_field_tag :query,
 		        params[:query],
 		        class: "form-control",
@@ -53,6 +53,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
+					= link_to ("<i class=\"fa fas fa-plus-circle\">Créer un organisme étranger</i>").html_safe, new_partner_company_path(camp: true), class: 'btn btn-primary'
 					= link_to 'Retour', :back, class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag partner_companies_path, method: :get do

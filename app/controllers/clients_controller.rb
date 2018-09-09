@@ -16,12 +16,8 @@ class ClientsController < ApplicationController
 	def create
 	  @client = Client.new(client_params)
 	  @client.family = @family
-	  # birth_date_format = @client.associate_age(params[:client])
-	  # @client.age = @client.get_age(birth_date_format)
-	  
 	  if @client.save
 			# ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
-	  	# @family.qualification.check_if_family_is_client?
 		  flash[:notice] = "Client ajouté avec succès !"
 		  redirect_to new_client_language_stay_path(@client)
 		else
@@ -33,8 +29,13 @@ class ClientsController < ApplicationController
 	def edit; end
 
 	def update
-	  @client.update(client_params)
-	  redirect_to client_path(@client)
+	  if @client.update(client_params)
+	  	flash[:notice] = "Client édité avec succès !"
+	  	redirect_to client_path(@client)
+	  else
+	  	flash[:notice] = "Merci de lire les messages d'erreurs."
+	  	render :edit
+	  end
 	end
 
 	def destroy
@@ -63,8 +64,8 @@ class ClientsController < ApplicationController
 		@child_detail = ChildDetail.find(params[:child_detail_id])
 		@child_detail.update_columns(client: true)
 		@family = @child_detail.qualification.family
-		@child_detail.qualification.check_if_family_is_client?
-	  @client = Client.create!(
+		# @child_detail.qualification.check_if_family_is_client?
+	  @client = Client.new(
 	  	family: @family, first_name: @child_detail.first_name, 
 	  	last_name: @child_detail.last_name, 
 	  	gender: @child_detail.gender, 

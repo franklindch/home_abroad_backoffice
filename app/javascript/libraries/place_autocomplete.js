@@ -5,11 +5,10 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-var placeSearch, autocomplete;
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
-  autocomplete = new google.maps.places.Autocomplete(
+  const autocomplete = new google.maps.places.Autocomplete(
       /** @type {!HTMLInputElement} */(document.querySelector('.google_map')),
       {types: ['geocode']});
 }

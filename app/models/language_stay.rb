@@ -1,9 +1,12 @@
 class LanguageStay < ApplicationRecord
   has_one :travel, dependent: :destroy
-  belongs_to :program
-  belongs_to :client
-  belongs_to :partner_company
+  belongs_to :program, optional: true
+  belongs_to :client, optional: true
+  belongs_to :partner_company, optional: true
   has_one :invoice, dependent: :destroy
+
+  has_one :off_set_travel, through: :travel, dependent: :destroy
+  has_many :payments, through: :invoice, dependent: :destroy
 
   enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
   enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true

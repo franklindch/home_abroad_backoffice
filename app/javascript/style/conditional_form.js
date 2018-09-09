@@ -16,13 +16,11 @@ const travelConditionnal = {
       $childDetails.hide();
       $travelNatureSelect.change(event => {
         const $travelNatureVal = $(event.target).val();
-        console.log($travelNatureVal);
-        if ($travelNatureVal != 'Groupe') {
-          console.log('groupe')
+        if(!(($travelNatureVal == 'Groupe') || ($travelNatureVal == 'Groupe_décalé'))) {
           $childDetails.show();
           $travelGroupIdSection.hide();
-          $("#travel_travel_details_attributes_0_is_correspondence_true").prop("checked", true);
-          $("#travel_travel_details_attributes_1_is_correspondence_true").prop("checked", true);
+          $("#travel_travel_details_is_correspondence_true").prop("checked", true);
+          $("#travel_travel_details_is_correspondence_true").prop("checked", true);
           $travelId.hide();
         } else {
           $travelId.show();
@@ -33,10 +31,10 @@ const travelConditionnal = {
     } else {
       $childDetails.hide();
     }
-    if($('.travel_travel_code')) {
-      $("#travel_travel_details_attributes_0_is_correspondence_true").prop("checked", true);
-      $("#travel_travel_details_attributes_1_is_correspondence_true").prop("checked", true);
-    };
+    // if($('.travel_travel_code')) {
+    //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
+    //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
+    // };
   }
 };
 

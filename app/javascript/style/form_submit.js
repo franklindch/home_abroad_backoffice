@@ -1,6 +1,6 @@
 const formSubmit = {
 	init() {
-	  const input = document.getElementById('family_address_1');
+	  const input = document.querySelector('.google_map');
 	  if (input) {
 	    this.prevent(input);
 	  }

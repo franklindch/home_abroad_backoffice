@@ -1,26 +1,30 @@
-.col-md-4
+.col-md-3
 	h6.card-title Informations principales
 	.card-text
 		p = "Responsable de saisie: #{language_stay&.data_entry_responsible}" if language_stay.data_entry_responsible != 0
 		p = "Responsable commercial: #{language_stay&.commercial_responsible}" if language_stay.commercial_responsible != 0
 		p = "Début: #{date_format(language_stay&.start_date)}" if language_stay.start_date != ''
-		p = "Début: #{date_format(language_stay&.end_date)}" if language_stay.start_date != ''
-
 		p = "Fin: #{language_stay&.end_date.strftime("%d/%m/%Y")}" if language_stay.end_date != ''
 		p = "Durée du séjour: #{language_stay&.duration} semaines" if language_stay.duration != nil
+		p = "Transfert: #{language_stay&.transfers}" if language_stay.transfers != nil
+
+.col-md-3
+	h6.card-title Autres infos
+	.card-text
+		p = "Nombre d\'heures de cours: #{language_stay&.class_hours}" if language_stay.class_hours != nil
+		p = "Chambre: #{language_stay&.room&.humanize}" if language_stay.room != nil
 		p = "Lieu: #{language_stay&.location}" if language_stay.location != ''
 		p = "Téléphone pendant le séjour: #{number_to_phone(language_stay&.phone_during_stay)}" if language_stay.phone_during_stay != ''
 		p = "Option 1: #{language_stay&.option_1}" if language_stay.option_1 != ''
 		p = "Option 2: #{language_stay&.option_2}" if language_stay.option_2 != ''
-		p = "Transfert: #{language_stay&.transfer}" if language_stay.transfer != nil
-		p = "Nombre d\'heures de cours: #{language_stay&.class_hours}" if language_stay.class_hours != ''
-		p = "Logement: #{language_stay&.accomodation.humanize}" if language_stay.accomodation != nil
-		p = "Pension: #{language_stay&.pension&.humanize}" if language_stay.pension != nil
-		p = "Chambre: #{language_stay&.room&.humanize}" if language_stay.room != nil
+		p = "Partenaire: #{language_stay&.partner_company.name}" if language_stay.partner_company_id != ''
+
+.col-md-3
+	h6.card-title Autres infos 2
+	.card-text
 		p = "Activités: #{language_stay&.activities}" if language_stay.activities != ''
 		p = "Fee: #{language_stay&.fee}" if language_stay.fee != ''
+		p = "Logement: #{language_stay&.accomodation.humanize}" if language_stay.accomodation != nil
+		p = "Pension: #{language_stay&.pension&.humanize}" if language_stay.pension != nil
 		p = "Précisions: #{language_stay&.precisions}" if language_stay.precisions != ''
 		p = "Âge pendant le séjour: #{show_the_age_at_language(language_stay&.client&.birth_date, language_stay)} ans"
-
-.col-md-4
-	h6.card-title Autres infos

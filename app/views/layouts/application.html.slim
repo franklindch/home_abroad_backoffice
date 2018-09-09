@@ -5,12 +5,14 @@ html
     meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" /
     title Home_abroad_backoffice
     = csrf_meta_tags
-    = action_cable_meta_tag
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"
+    = action_cable_meta_tag
     / = javascript_include_tag "../node_modules/intl-tel-input/src/js/intlTelInput.js"
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api_key']}&libraries=places", defer: 'defer', async: true 
+    = javascript_pack_tag 'application', 'data-turbolinks-track':'reload', defer: true
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api_key']}&libraries=places", defer: 'defer'
     = javascript_include_tag 'application'
     / = javascript_include_tag 'intl-tel-input'
     / = stylesheet_pack_tag 'application', media: 'all'

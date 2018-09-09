@@ -1,12 +1,15 @@
 - travel = language_stay.travel
 
 - if travel.nature == 'Groupe'
-	.col-md-4
-		= render 'travels/travel_group/travel_group_details', travel_group: travel.travel
-	= render 'travels/travel_group/transit_details', travel: travel
+	.col-md-3
+		h6.card-title Associé à un voyage groupe
+		.card-text
+			= render 'travel_groups/travel_group_details', travel_group: travel.travel_group
+			= render 'transits/transit_details', travel: travel
 
 - else
 	.col-md-3
-		h6.card-title = "Voyage #{travel.nature}" 
+		h6.card-title = "Voyage #{travel.nature.humanize}" 
 		.card-text 
-			= render 'travels/travel_details/other_travels_details', travel: travel
+			= render 'travels/travel_details', travel: travel
+			= render 'transits/transit_details', travel: travel

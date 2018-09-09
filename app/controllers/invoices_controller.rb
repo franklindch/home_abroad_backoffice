@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_invoice, only: [:edit, :update, :destroy]
 	before_action :retrieve_language_stay, only: [:new, :edit, :update, :destroy, :create]
-
+	
 	def new
 	  @invoice = Invoice.new
 	  create_payments
@@ -10,6 +10,7 @@ class InvoicesController < ApplicationController
 
 	def create
 	  @invoice = Invoice.new(invoice_params)
+	  payments_coherence
 	  @invoice.language_stay = @language_stay
 	  client = @language_stay.client
 	  if @invoice.save
@@ -25,6 +26,7 @@ class InvoicesController < ApplicationController
 
 	def update
 	  @invoice.update(invoice_params)
+	  payments_coherence
 	  redirect_to client_path(@invoice.language_stay.client)
 	end
 
@@ -63,10 +65,26 @@ class InvoicesController < ApplicationController
 
 	def invoice_params
 	  params.require(:invoice).permit(
-	    :application_fee_price_cents, :language_stay_price_cents, :travel_price_cents, :total_price, :language_stay_id,
+	  	:application_fee_price_cents, 
+		  :language_stay_price_cents,
+		  :travel_price_cents,
+		  :transfer_price_cents,
+		  :option_1_price_cents,
+		  :option_2_price_cents,
+		  :camp_fee_amount_price_cents,
+		  :camp_fee_total_price_cents,
+		  :total_price_cents,
+		  :camp_fee_percentage,
 	    payments_attributes: [
 	    	:id, :amount_price_cents, :nature, :comment, :_destroy
 	    ]
 	  )    
+	end
+
+	def payments_coherence
+		if @invoice.verify_payment_coherence
+			flash[:alert] = "Montant des payments sup. à montant facture: in"
+			render :new 
+		end
 	end
 end

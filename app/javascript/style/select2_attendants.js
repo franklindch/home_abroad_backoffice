@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import 'select2';
 
-function select2Attendants() {
+select2Attendants = function() {
 		$('#travel_group_attendant_ids').select2();
 }
 

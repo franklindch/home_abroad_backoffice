@@ -34,7 +34,7 @@ section
 											p Aucune option 2 choisie pour ce séjour
 										= f.input :total_price_cents, label: 'Grand total', wrapper_html: {class: 'mt-4'}, id: 'total_price_cents'
 
-										- if @invoice.total_payments == @invoice.total_price_cents
+										- if @invoice.total_payments == @invoice.total_price_cents && @invoice.total_payments != 0
 											p Facture acquittée et disponible. Aucun règlement à ajouter.
 										- else
 

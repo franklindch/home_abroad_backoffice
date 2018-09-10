@@ -16,14 +16,6 @@
 		
 		
 		- if qualification.status == 'Prospect'
-			p
-			  a.btn.btn-primary.mt-5.mb-4  aria-controls="collapse_relance_message" aria-expanded="false" data-toggle="collapse" href="#collapse_relance_message" role="button" 
-			    | Texte de relance
-			#collapse_relance_message.collapse
-			  .card.card-body
-					p = "Bonjour #{family&.name}"
-					br
-					p = "blablabla"
 			- if child_details.empty?
 				p Aucun complément d'information renseigné sur l'un des enfants.
 				p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'
@@ -41,13 +33,14 @@
 								= show_attribute(child_detail.email, "Email")
 								= show_attribute(child_detail.school_grade, "Niveau scolaire")
 								= show_attribute(child_detail.school, "Ecole")
-								h6.card-subtitle.mb-2.text-muted = "Intéressé pour séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}"
+								h6.card-subtitle.text-muted = "Intéressé pour séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}"
+								= render 'child_details/relance_prospect_collapse', child_detail: child_detail
 
 								- child_detail.potential_language_stays.each do |potential_language_stay|
 									= show_attribute(potential_language_stay.nature, "Nature")
 									= show_attribute(potential_language_stay.countries, "Pays")
 									= show_attribute(potential_language_stay.partner_companies, "Partenaires")
-								p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
+								p.card-text.mt-2 = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
 
 		- elsif qualification.status == 'Cliente'
 			- if child_details.empty?
@@ -56,15 +49,15 @@
 
 			- else
 				h5.mt-4.border-top.pt-4 Enfants de la famille
-				- qualification.child_details.each do |child_detail|
-					- if child_detail.client == nil
-						.card.mt-3
-							.card-body
-								h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
-								h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
-								p.card-text = "#{child_detail.comment}"
-								p.card-text = "Intéressé par"
-								p.card-text = "#{child_detail.comment}"
+				.card.mt-3
+					.card-body
+						- qualification.child_details.each do |child_detail|
+							h5 = "#{child_detail.first_name.capitalize} #{child_detail.last_name.capitalize}"
+							h6.card-subtitle.mb-2.text-muted = "#{child_detail.age} ans"
+							p.card-text = "#{child_detail.comment}"
+							p.card-text = "Intéressé par"
+							p.card-text = "#{child_detail.comment}"
+							- if child_detail.client == nil
 								p.card-text = link_to 'Passer en mode client', new_client_path(child_detail_id: child_detail.id)
 		- else
 			- if child_details.empty?

@@ -15,11 +15,11 @@ class Family < ApplicationRecord
 	validates :name, :email, :phone, presence: true
 	validates :phone, uniqueness: true
 
-	def self.retrieve_family(family_associated)
+	def self.retrieve_family(family_associated, ap)
 		if family_associated
 			Family.find(family_associated)
 		else
-			Family.find(params[:family_id])
+			Family.find(ap)
 		end
 	end
 

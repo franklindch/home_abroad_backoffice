@@ -3,6 +3,7 @@ class ClientsController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
 	before_action :retrieve_family, only: [:update, :create]
+	before_action :retrieve_child_detail, only: [:create]
 
 	def new
 		@families = Family.all
@@ -18,6 +19,7 @@ class ClientsController < ApplicationController
 	  @client.family = @family
 	  if @client.save
 			# ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
+			@child_detail.update_columns(client: true)
 		  flash[:notice] = "Client ajouté avec succès !"
 		  redirect_to new_client_language_stay_path(@client)
 		else
@@ -62,11 +64,10 @@ class ClientsController < ApplicationController
 
 	def search_for_child_detail
 		@child_detail = ChildDetail.find(params[:child_detail_id])
-		@child_detail.update_columns(client: true)
 		@family = @child_detail.qualification.family
-		# @child_detail.qualification.check_if_family_is_client?
 	  @client = Client.new(
-	  	family: @family, first_name: @child_detail.first_name, 
+	  	family: @family, 
+	  	first_name: @child_detail.first_name, 
 	  	last_name: @child_detail.last_name, 
 	  	gender: @child_detail.gender, 
 	  	email: @child_detail.email,
@@ -84,7 +85,11 @@ class ClientsController < ApplicationController
 	end
 
 	def retrieve_family
-		@family ||= Family.retrieve_family(params[:client][:family_id])
+		@family ||= Family.retrieve_family(params[:client][:family_id], params[:family_id])
+	end
+
+	def retrieve_child_detail
+		@child_detail ||= ChildDetail.find(params[:child_detail_id])
 	end
 
 	def client_params

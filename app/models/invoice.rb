@@ -1,5 +1,4 @@
 class Invoice < ApplicationRecord
-	before_destroy :destroy_language_stay
 	after_save :verify_payment_coherence
 
 	register_currency :eur
@@ -23,10 +22,6 @@ class Invoice < ApplicationRecord
 		payments.each { |payment| sum += payment.amount_price_cents}
 		return sum
 	end
-
-	def destroy_language_stay
-    self.language_stay.destroy
-  end
 
   def verify_payment_coherence
   	self.total_payments > self.total_price_cents

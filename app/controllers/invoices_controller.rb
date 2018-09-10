@@ -32,7 +32,7 @@ class InvoicesController < ApplicationController
 
 	def destroy
 	  @invoice.destroy
-	  redirect_to families_path
+	  redirect_to client_path(@invoice.language_stay.client)
 	end
 
 	def invoice

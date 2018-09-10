@@ -27,7 +27,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	.mt-5
 		- @language_stays.each do |language_stay|
 			.d-flex.justify-content-between.card-header
-				h5 = "Séjour - #{language_stay&.program&.name}, #{language_stay&.partner_company&.name.humanize}, #{language_stay&.location}"
+				h5 = "Séjour - #{language_stay&.program&.name}, #{language_stay&.partner_company&.name&.humanize}, #{language_stay&.location}"
 				.d-flex.justify-content-between
 					= link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_client_language_stay_path(@client, language_stay)
 					= link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id

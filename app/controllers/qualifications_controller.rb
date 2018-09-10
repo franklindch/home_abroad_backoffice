@@ -9,7 +9,6 @@ class QualificationsController < ApplicationController
 	end
 
 	def create
-	  binding.pry
 	  @qualification = Qualification.new(qualification_params)
 
 	  @qualification.save

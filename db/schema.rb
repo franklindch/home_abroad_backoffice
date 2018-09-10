@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180909120209) do
+ActiveRecord::Schema.define(version: 20180910100030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,9 +298,9 @@ ActiveRecord::Schema.define(version: 20180909120209) do
 
   create_table "transits_travels", force: :cascade do |t|
     t.bigint "transit_id"
-    t.bigint "travel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "travel_id"
     t.index ["transit_id"], name: "index_transits_travels_on_transit_id"
     t.index ["travel_id"], name: "index_transits_travels_on_travel_id"
   end
@@ -379,7 +379,6 @@ ActiveRecord::Schema.define(version: 20180909120209) do
   add_foreign_key "off_set_travels", "travels"
   add_foreign_key "payments", "invoices"
   add_foreign_key "transits_travels", "transits"
-  add_foreign_key "transits_travels", "travel_groups", column: "travel_id"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travel_groups"
   add_foreign_key "travels", "language_stays"

@@ -2,7 +2,7 @@
 - pre_transit = transits.find_by(nature: 'Pré_acheminement')
 - post_transit = transits.find_by(nature: 'Post_acheminement')
 
-
+.row
 - if pre_transit.nil? && post_transit.nil?
 	.col-md-4
 		= link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-danger mr-3'

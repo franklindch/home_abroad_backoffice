@@ -1,2 +1,32 @@
-/ p = "Capacité: #{travel_group&.capacity}" if travel_group.capacity != ""
-/ p = "Code voyage: #{travel_group&.travel_code}" if travel_group.travel_code != ""
+
+.col-md-3
+  h6.card-title = "Voyage #{travel_detail_aller.nature}"
+  .card-text
+    p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    p = "Ville de départ: #{travel_detail_aller&.departure_location}" if travel_detail_aller.departure_location != ''
+    p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    p = "Heure début: #{date_format(travel_detail_aller&.start_time)}" if travel_detail_aller.start_time != ''
+    p = "Heure de rdv: #{date_format(travel_detail_aller&.meeting_time)}" if travel_detail_aller.meeting_time != ''
+    p = "Mode: #{travel_detail_aller&.mode}" if travel_detail_aller.mode != ''
+    p = "Compagnie aérienne: #{travel_detail_aller&.companies}" if travel_detail_aller.companies != ''
+
+  - if travel_detail_aller.is_correspondence
+    p infos corres
+  - else
+    p Pas de correspondance renseignée pour ce vol
+
+.col-md-3
+  h6.card-title = "Voyage #{travel_detail_retour.nature}"
+  .card-text
+    p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    p = "Ville de départ: #{travel_detail_aller&.departure_location}" if travel_detail_aller.departure_location != ''
+    p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    p = "Heure début: #{date_format(travel_detail_aller&.start_time)}" if travel_detail_aller.start_time != ''
+    p = "Heure de rdv: #{date_format(travel_detail_aller&.meeting_time)}" if travel_detail_aller.meeting_time != ''
+    p = "Mode: #{travel_detail_aller&.mode}" if travel_detail_aller.mode != ''
+    p = "Compagnie aérienne: #{travel_detail_aller&.companies}" if travel_detail_aller.companies != ''
+
+  - if travel_detail_retour.is_correspondence
+    p infos corres
+  - else
+    p Pas de correspondance renseignée pour ce vol

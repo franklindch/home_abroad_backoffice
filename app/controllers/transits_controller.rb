@@ -12,7 +12,6 @@ class TransitsController < ApplicationController
 	  client = @travel.language_stay.client
 	  if @transit.save
 	  	@travel.transits << @transit
-	    # transitMailer.with(transit: @transit).welcome_email.deliver_now
 	    redirect_to client_path(client)
 	    flash[:notice] = "Acheminement ajouté avec succès !"
 	  else

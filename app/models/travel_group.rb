@@ -3,7 +3,9 @@ class TravelGroup < ApplicationRecord
   # belongs_to :attendants, through: :attendants_travel
   has_many :travel_details, dependent: :destroy, inverse_of: :travel_group
   has_many :correspondences, through: :travel_details, dependent: :destroy
+  # has_many :travels, dependent: :destroy, if: :travel_group_present
 
+  has_many :travels, dependent: :destroy, inverse_of: :travel_group
   belongs_to :language_stay, optional: true
   has_and_belongs_to_many :attendants
   # belongs_to :travel, class_name: 'Travel', foreign_key: "travel_group_id", optional: true
@@ -28,8 +30,8 @@ class TravelGroup < ApplicationRecord
   # before_validation :verify_uniqueness_post_acheminement!, on: :create
   # before_validation :verify_uniqueness_travel_group_id!, on: :create
 
-  def uniqu_travel_group
-    travel.present?
+  def travel_group_present
+    travels != []
   end
 
   def full_name
@@ -53,8 +55,4 @@ class TravelGroup < ApplicationRecord
   # def verify_uniqueness_travel_group_id!
   #   throw(:abort) if travel_group
   # end
-
-  def travel_group
-    self.travel_group_id
-  end
 end

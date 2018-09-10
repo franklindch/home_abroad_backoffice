@@ -32,23 +32,3 @@
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_group_path(travel_group, groupe: 'Groupe')
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_group_path(travel_group), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: travel_group.id
-
-          / td data-toggle="modal" data-target="#modal#{travel_group&.travel_group_details[0].id}"
-          /   span = "Voir les détails de l\'aller"
-
-          / .modal.fade id="modal#{travel_group&.travel_group_details[0].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel_group&.travel_group_details[0].id}Title"
-          /   .modal-dialog.modal-dialog-centered role="document" 
-          /     .modal-content
-          /       = render 'travel_group_groups/travel_group_details/go_flight', travel_group_detail: travel_group.travel_group_details[0]
-
-          / td data-toggle="modal" data-target="#modal#{travel_group&.travel_group_details[1].id}"
-          /   span = "Voir les détails du retour"
-
-          / .modal.fade id="modal#{travel_group&.travel_group_details[1].id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel_group&.travel_group_details[1].id}Title"
-          /   .modal-dialog.modal-dialog-centered role="document" 
-          /     .modal-content
-          /       = render 'travel_group_groups/travel_group_details/return_flight', travel_group_detail: travel_group.travel_group_details[1]
-          / td
-          /   span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_group_path(travel_group)
-          / td
-          /   span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_group_path(travel_group), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: travel_group.id

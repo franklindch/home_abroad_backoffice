@@ -5,7 +5,8 @@ function initializeIntlNumberFamilyFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'intl_number'
+		hiddenInput: 'intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -20,7 +21,8 @@ function initializeIntlNumberFamilyFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'father_intl_number'
+		hiddenInput: 'father_intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -35,7 +37,8 @@ function initializeIntlNumberFamilyFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'mother_intl_number'
+		hiddenInput: 'mother_intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -50,7 +53,8 @@ function initializeIntlNumberFamilyFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'mother_office_intl_number'
+		hiddenInput: 'mother_office_intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -65,7 +69,8 @@ function initializeIntlNumberFamilyFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'father_office_intl_number'
+		hiddenInput: 'father_office_intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -82,7 +87,8 @@ function initializeIntlNumberPartnerFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'intl_number'
+		hiddenInput: 'intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -97,7 +103,8 @@ function initializeIntlNumberPartnerFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'urgence_intl_phone_number'
+		hiddenInput: 'urgence_intl_phone_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {
@@ -114,7 +121,8 @@ function initializeIntlNumberLSFields() {
 		utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
 		preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
 		initialCountry: 'fr',
-		hiddenInput: 'intl_number'
+		hiddenInput: 'intl_number',
+		placeholderNumberType: 'mobile'
 	});
 
 	if(document.getElementById('submit_with_phone')) {

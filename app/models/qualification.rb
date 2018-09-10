@@ -1,7 +1,7 @@
 class Qualification < ApplicationRecord
 	has_many :child_details, dependent: :destroy, inverse_of: :qualification
 	has_one :family, dependent: :destroy, inverse_of: :qualification
-	validates_uniqueness_of :family_id
+	# validates_uniqueness_of :family_id
 	accepts_nested_attributes_for :child_details, reject_if: :all_blank, allow_destroy: true
 
 	enum refered_by: { Ami: 1, Salon: 2, Rencontre_Home_Abroad: 3, Recherche_google: 4 }

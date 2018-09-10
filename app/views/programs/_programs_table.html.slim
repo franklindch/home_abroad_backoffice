@@ -17,3 +17,8 @@
             span = program.program_code
           td
             span = program.name
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_program_path(program)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, program_path(program), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: program.id
+            

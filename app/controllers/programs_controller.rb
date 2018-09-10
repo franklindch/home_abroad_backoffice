@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :retrieve_program, only: [:destroy, :show]
+	before_action :retrieve_program, only: [:destroy, :show, :edit, :update]
 
 	def new
 		@program = Program.new

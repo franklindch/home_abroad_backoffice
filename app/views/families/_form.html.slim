@@ -20,10 +20,7 @@ section
                     / = f.input :country_of_residence, label: 'Pays de résidence', priority: ["FR", "GB", "IT"]
                     = f.input :zip_code, label: 'Code Postal'
                     = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale'
-                    - if params[:prospect].present?
-                        = f.hidden_field :prospect, value: params[:prospect]
-                    - else
-                    / = f.input :country_of_residence, priority: 'France'
+                    = f.hidden_field :prospect, value: params[:prospect]
             .form-inputs
               .container-fluid
                 .row

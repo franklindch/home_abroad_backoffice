@@ -9,11 +9,12 @@ class FamiliesController < ApplicationController
   end
 
   def create
-    # raise
     @family = Family.new(family_params)
+    @prospect = params[:prospect]
+
     if @family.save
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
-      if @family.prospect == false
+      if @prospect == false
         redirect_to families_path
       else
         redirect_to family_qualification_path(@family)
@@ -22,6 +23,10 @@ class FamiliesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def method_name
+    
   end
 
   def edit; end

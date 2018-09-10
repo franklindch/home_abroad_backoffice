@@ -50,7 +50,7 @@ class PartnerCompaniesController < ApplicationController
 
 	def partner_company_params
 	  params.require(:partner_company).permit(
-	    :urgence_intl_phone_number, :nature, :name, :email, :phone_number, :city, :zip_code, :country, :intl_number, :urgence_phone_number
+	    :address, :urgence_intl_phone_number, :nature, :name, :email, :phone_number, :zip_code, :intl_number, :urgence_phone_number
 	  )    
 	end
 end

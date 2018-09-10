@@ -11,14 +11,15 @@ class QualificationsController < ApplicationController
 	def create
 	  @qualification = Qualification.new(qualification_params)
 
-	  @qualification.save
-	  if @family.update_columns(qualification_id: @qualification.id)
-	    redirect_to families_path
-	    flash[:notice] = "Qualification associée avec succès à la famille !"
-	  else
-	  	flash[:alert] = "Veuillez compléter les champs obligatoires."
-	  	render :new
-	  end
+	  if @qualification.save
+		  if @family.update_columns(qualification_id: @qualification.id)
+		    redirect_to families_path
+		    flash[:notice] = "Qualification associée avec succès à la famille !"
+		  else
+		  	flash[:alert] = "Veuillez compléter les champs obligatoires."
+		  	render :new
+		  end
+		end
 	end
 
 	private

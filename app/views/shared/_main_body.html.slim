@@ -63,6 +63,23 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		        placeholder: "Rechercher un #{model}"
 		      = submit_tag :Entrer, class: 'btn btn-primary'
 
+
+	- elsif model == 'accompagnateur'
+		.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-2.mb-1
+		  h1.h2 = "Tous les #{model}s"
+		  .btn-toolbar.mb-2.mb-md-0
+		    .mr-2.d-flex.justify-content-around
+					= create_a_model(model)
+					= link_to 'Retour', :back, class: 'btn btn-outline-primary'
+	  	.form-inline.pb-4.mb-5.border-bottom
+		    = form_tag attendants_path, method: :get do
+		      = text_field_tag :query,
+		        params[:query],
+		        class: "form-control",
+		        placeholder: "Rechercher un #{model}"
+		      = submit_tag :Entrer, class: 'btn btn-primary'
+
+
 	- else
 		.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-2.mb-1
 		  h1.h2 = "Tous les #{model}s"

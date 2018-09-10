@@ -22,6 +22,15 @@ class QualificationsController < ApplicationController
 		end
 	end
 
+	def close_prospect
+		@qualification = Qualification.find(params[:qualification])
+		@qualification.status_to_close
+		respond_to do |format|
+		  format.html
+		  format.js { render :js => "window.location = '/dashboard/families'" }
+		end
+	end
+
 	private
 
 	def retrieve_family

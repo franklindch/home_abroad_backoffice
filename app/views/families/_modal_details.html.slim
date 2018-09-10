@@ -14,7 +14,16 @@
 		= show_attribute(qualification.contact_mode, "Mode de contact")
 		= show_attribute(qualification.reference_name, "Référence")
 		
+		
 		- if qualification.status == 'Prospect'
+			p
+			  a.btn.btn-primary.mt-5.mb-4  aria-controls="collapse_relance_message" aria-expanded="false" data-toggle="collapse" href="#collapse_relance_message" role="button" 
+			    | Texte de relance
+			#collapse_relance_message.collapse
+			  .card.card-body
+					p = "Bonjour #{family&.name}"
+					br
+					p = "blablabla"
 			- if child_details.empty?
 				p Aucun complément d'information renseigné sur l'un des enfants.
 				p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'
@@ -80,7 +89,6 @@
 					h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
 				- if client.family && !client.last_name.present?
 					h5 = "#{client.first_name.capitalize} #{client.family.name.capitalize}"
-				/ h6.card-subtitle.mb-2.text-muted = "#{client&.show_the_age(client.birth_date)} ans" if client.birth_date != nil
 				p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)
 				
 

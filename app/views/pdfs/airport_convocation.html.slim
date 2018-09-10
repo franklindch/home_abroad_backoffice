@@ -1,1 +1,64 @@
-h1 Convocation aéroport
+- travel_detail_aller = @travel_group.travel_details.first
+- travel_detail_retour = @travel_group.travel_details.second
+
+.invoice-box.margin-top-navbar
+  table cellpadding="0" cellspacing="0" 
+    tr.top
+      td colspan="2" 
+        table
+          tr
+            td.title
+              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
+            td
+              br/
+              h3 Convocation aéroport
+              br/
+              p = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
+              p = "Capacité: #{@travel_group&.capacity}" if @travel_group.capacity != ""
+              p = "Code voyage: #{@travel_group&.travel_code}" if @travel_group.travel_code != ""
+
+    tr.heading
+      td
+        | Aller
+      td 
+    tr.item
+    	td
+    		p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    tr.item
+    	td
+    		p = "Ville de départ: #{travel_detail_aller&.departure_location}" if travel_detail_aller.departure_location != ''
+    tr.item
+    	td
+    		p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+    tr.item
+    	td
+    		p = "Heure début: #{date_format(travel_detail_aller&.start_time)}" if travel_detail_aller.start_time != ''
+    tr.item
+    	td
+    		p = "Heure de rdv: #{date_format(travel_detail_aller&.meeting_time)}" if travel_detail_aller.meeting_time != ''
+    tr.item
+    	td
+    		p = "Mode: #{travel_detail_aller&.mode}" if travel_detail_aller.mode != ''
+    tr.item
+    	td
+    		p = "Compagnie aérienne: #{travel_detail_aller&.companies}" if travel_detail_aller.companies != ''
+
+    tr.heading
+      td
+        | Retour
+      td
+    tr.item
+    	td
+    		p = "Début: #{date_format(travel_detail_retour&.start_date)}" if travel_detail_retour.start_date != ''
+    	td
+    		p = "Ville de départ: #{travel_detail_retour&.departure_location}" if travel_detail_retour.departure_location != ''
+    	td
+    		p = "Début: #{date_format(travel_detail_retour&.start_date)}" if travel_detail_retour.start_date != ''
+    	td
+    		p = "Heure début: #{date_format(travel_detail_retour&.start_time)}" if travel_detail_retour.start_time != ''
+    	td
+    		p = "Heure de rdv: #{date_format(travel_detail_retour&.meeting_time)}" if travel_detail_retour.meeting_time != ''
+    	td
+    		p = "Mode: #{travel_detail_retour&.mode}" if travel_detail_retour.mode != ''
+    	td
+    		p = "Compagnie aérienne: #{travel_detail_retour&.companies}" if travel_detail_retour.companies != ''

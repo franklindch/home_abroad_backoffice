@@ -1,7 +1,7 @@
 class TravelGroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :retrieve_travel_group, only: [:edit, :update, :destroy, :show]
-  before_action :retrieve_attendants, only: [:create]
+  before_action :retrieve_attendants, only: [:create, :update]
 
   def new
     @travel_group = TravelGroup.new
@@ -32,6 +32,7 @@ class TravelGroupsController < ApplicationController
 
   def update
     @travel_group.update(travel_group_params)
+    @travel_group.update(attendant_ids: @attendants)
     flash[:notice] = "Voyage édité avec succès !"
     redirect_to travel_groups_path
   end

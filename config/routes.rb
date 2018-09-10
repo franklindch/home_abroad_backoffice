@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   end
 
   get 'all_families', to: 'excels#all_families'
+  get 'close_prospect', to: 'qualifications#close_prospect'
   get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
+  get "qualifications/:qualification_id/child_details/:id", to: "child_details#edit", as: :child_detail_qualification
   post "families/:id/qualification", to: "qualifications#create"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

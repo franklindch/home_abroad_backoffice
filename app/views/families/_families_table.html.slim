@@ -9,7 +9,7 @@
         tr
           th Nom
           th Statut
-          / th Nombre d'enfants clients
+          th Date d'ajout
           th Email
           th Téléphone
           th Adresse
@@ -27,6 +27,11 @@
           / td
           /   span = count_client_hildren(family) if family.qualification && family.qualification.child_details != nil
           td
+            - if family.qualification.nil?
+              span = "#{date_format(family.created_at)}"
+            - else
+              span = "#{date_format(family&.qualification.created_at)}"
+          td
             span = family&.email
           td
             span = number_to_phone(family&.intl_number) if family.intl_number != nil
@@ -38,5 +43,8 @@
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_family_path(family)
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, family_path(family), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: family.id
+          td
+            - if family.qualification&.status == 'Prospect'
+              span = link_to "Clôturer le prospect", close_prospect_path(qualification: family.qualification), remote: true
 
           = render 'families/family_modal', family: family

@@ -45,6 +45,6 @@ module ApplicationHelper
 		value.strftime("%d/%m/%Y")
 	end
 	def c(name)
-		name&.capitalize
+		name&.upcase
 	end
 end

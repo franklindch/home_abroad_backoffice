@@ -17,11 +17,12 @@ class TravelGroup < ApplicationRecord
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
 
-  pg_search_scope :search_by_travel_code, 
+  pg_search_scope :search_by_travel_code,
   				against: [:travel_code],
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}
+  enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
 
   # enum acheminement: { Pré_acheminement: 0, Post_acheminement: 1 }
   # validate :coverimage_size

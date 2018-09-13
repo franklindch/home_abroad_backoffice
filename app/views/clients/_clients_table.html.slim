@@ -7,27 +7,30 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Prénom
           th Nom
+          th Prénom
           th Catégorie
+          th Date de saisie
           th Téléphone
           th Email
-          th 
           th
-          th 
-          th 
-          th 
+          th
+          th
+          th
+          th
       tbody
       - Family.all.each do |family|
         - family.clients.each do |client|
           div id="accordion"
             tr data-toggle="collapse" data-target="#collapse#{client.id}" aria-expanded="true" aria-controls="#collapse#{client.id}" id="heading#{client.id}"
               td
-                span = c(client&.first_name)
-              td
                 span = c(client&.last_name)
               td
-                span = c(client&.age_category)
+                span = client&.first_name
+              td
+                span = client&.age_category
+              td
+                span = date_format(client&.created_at)
               td
                 span = number_to_phone(client&.intl_number) if client.intl_number != nil
               td

@@ -7,8 +7,8 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Prénom
           th Nom
+          th Prénom
           th Date de naissance
           th Âge
           th Email
@@ -20,9 +20,9 @@
       - @attendants.each do |attendant|
         tr
           td
-            span = attendant.first_name
+            span = c(attendant.last_name)
           td
-            span = attendant.last_name
+            span = attendant.first_name
           td
             span = birth_date_format(attendant) if attendant.birth_date != nil
           td

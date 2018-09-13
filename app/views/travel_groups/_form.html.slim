@@ -10,10 +10,11 @@ section
             	.container-fluid
             		.row
             			.col-md-12
+                    = f.input :season, collection: TravelGroup.seasons.keys.map { |w| [w.humanize, w] }, label: 'Saison', selected: 0
                     = f.input :travel_code, label: 'Code Groupe'
                     = f.input :capacity, label: 'Capacité', collection: 20..100, selected: 10
                     = f.input :attendant_ids, as: :select2, collection: Attendant.all, label_method: lambda { |attendant| "#{attendant.first_name.capitalize} #{attendant.last_name.capitalize}" }, multiple: true, value_method: :id, include_blank: false, label: 'Choisir le(s) accompagnateur(s) sur le vol'
-                  
+
                 .child_details_section.pt-3
                   .col-md-12
                     h3.mt-3 Remplir les détails du voyage
@@ -64,4 +65,4 @@ ruby:
         }]
       }].to_json
 
-code data-conditionals= conditionals 
+code data-conditionals= conditionals

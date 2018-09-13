@@ -26,7 +26,7 @@ class FamiliesController < ApplicationController
   end
 
   def method_name
-    
+
   end
 
   def edit; end
@@ -80,6 +80,6 @@ class FamiliesController < ApplicationController
   def family_params
     params.require(:family).permit(
       :prospect, :father_office_phone, :father_office_intl_number, :mother_office_intl_number, :intl_number, :name, :family_situation, :mother_office_phone, :father_office_phone, :father_first_name, :mother_first_name, :father_intl_number, :mother_intl_number, :address_1, :address_2, :zip_code, :phone, :email, :qualification_id, :father_name, :mother_name, :father_phone, :mother_phone, :father_email, :mother_email
-    )    
+    )
   end
 end

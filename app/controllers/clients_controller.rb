@@ -50,7 +50,7 @@ class ClientsController < ApplicationController
 		respond_to do |format|
 			format.html
 	    format.js
-	  end	
+	  end
 	  if params[:query].present?
 	    @clients = Client.search_by_full_name(params[:query]).page params[:page]
 	  else
@@ -66,10 +66,10 @@ class ClientsController < ApplicationController
 		@child_detail = ChildDetail.find(params[:child_detail_id])
 		@family = @child_detail.qualification.family
 	  @client = Client.new(
-	  	family: @family, 
-	  	first_name: @child_detail.first_name, 
-	  	last_name: @child_detail.last_name, 
-	  	gender: @child_detail.gender, 
+	  	family: @family,
+	  	first_name: @child_detail.first_name,
+	  	last_name: @child_detail.last_name,
+	  	gender: @child_detail.gender,
 	  	email: @child_detail.email,
 	  	school: @child_detail.school,
 	  	school_grade: @child_detail.school_grade
@@ -94,7 +94,7 @@ class ClientsController < ApplicationController
 
 	def client_params
 	  params.require(:client).permit(
-	  	:age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
+	  	:status, :age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
 	  )
 	end
 end

@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :retrieve_invoice, only: [:edit, :update, :destroy]
 	before_action :retrieve_language_stay, only: [:new, :edit, :update, :destroy, :create]
-	
+
 	def new
 	  @invoice = Invoice.new
 	  create_payments
@@ -65,7 +65,7 @@ class InvoicesController < ApplicationController
 
 	def invoice_params
 	  params.require(:invoice).permit(
-	  	:application_fee_price_cents, 
+	  	:application_fee_price_cents,
 		  :language_stay_price_cents,
 		  :travel_price_cents,
 		  :transfer_price_cents,
@@ -76,15 +76,15 @@ class InvoicesController < ApplicationController
 		  :total_price_cents,
 		  :camp_fee_percentage,
 	    payments_attributes: [
-	    	:id, :amount_price_cents, :nature, :comment, :_destroy
+	    	:payment_date, :id, :amount_price_cents, :nature, :comment, :_destroy
 	    ]
-	  )    
+	  )
 	end
 
 	def payments_coherence
 		if @invoice.verify_payment_coherence
 			flash[:alert] = "Montant des payments sup. à montant facture: in"
-			render :new 
+			render :new
 		end
 	end
 end

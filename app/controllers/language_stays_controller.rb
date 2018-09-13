@@ -35,7 +35,7 @@ class LanguageStaysController < ApplicationController
 	  redirect_to client_path(@client)
 	end
 
-	
+
 	def enrollment_form
 		@language_stay = LanguageStay.find(params[:language_stay])
 	  	generate_enrollment_form_pdf(@language_stay)
@@ -67,8 +67,8 @@ class LanguageStaysController < ApplicationController
 
 	def language_stay_params
 	  params.require(:language_stay).permit(
-	    :transfers, :room, :data_entry_responsible, :intl_number, :commercial_responsible, :precisions, :duration, :activities, :fee, :travel_id, :program_id, :phone_during_stay, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
-	  )    
+	    :accomodation_type, :transfers, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
+	  )
 	end
 
 	def date_format(language_stay_params, date)

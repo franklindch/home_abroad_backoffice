@@ -1,12 +1,12 @@
 - employees = partner_company.employees
 
 .modal.fade id="modal#{partner_company.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{partner_company.id}Title"
-  .modal-dialog.modal-dialog-centered role="document" 
+  .modal-dialog.modal-dialog-centered role="document"
     .modal-content
       .modal-header
         h4.modal-title id='modal#{partner_company.id}LongTitle' Informations sur le partenaire #{partner_company.name}
-        button.close aria-label="Close" data-dismiss="modal" type="button" 
-          span aria-hidden="true"  &times; 
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
 
       .modal-body
         h6 Type
@@ -29,12 +29,12 @@
           - employees.each do |employee|
             .card.mt-3
               .card-body
+                p = "Nom: #{c(employee.last_name)}"
                 p = "Prénom: #{employee.first_name}"
-                p = "Nom: #{employee.last_name}"
                 p = "Contact pricipal: #{employee.main_contact}"
                 p = "Job: #{employee.job_position}"
                 p = "Email: #{employee.email}"
                 p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee.intl_number != nil
-               
+
                 p = link_to 'Editer', edit_partner_company_employee_path(employee.partner_company, employee)
                 p = link_to 'Supprimer', partner_company_employee_path(employee.partner_company, employee), method: :delete

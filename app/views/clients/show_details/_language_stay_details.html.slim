@@ -7,6 +7,8 @@
 		p = "Fin: #{language_stay&.end_date.strftime("%d/%m/%Y")}" if language_stay.end_date != ''
 		p = "Durée du séjour: #{language_stay&.duration} semaines" if language_stay.duration != nil
 		p = "Transfert: #{language_stay&.transfers}" if language_stay.transfers != nil
+    - if language_stay.canceled_languaged_stay == true
+      p Séjours annulé my nigga!!!!! SEJOURS ANNULE
 
 .col-md-3
 	h6.card-title Autres infos

@@ -5,7 +5,6 @@ class QualificationsController < ApplicationController
 	def new
 	  @qualification = Qualification.new()
 	  create_child_details
-	  # create_potential_language_stays
 	end
 
 	def create
@@ -43,20 +42,11 @@ class QualificationsController < ApplicationController
 		end
 	end
 
-	def create_potential_language_stays
-		2.times do
-		  @qualification.child_details.build
-		end
-	end
-
 	def qualification_params
 		params.require(:qualification).permit(
 		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :status,
 		  child_details_attributes: [
-		  	:id, :first_name, :last_name, :age, :comment, :gender, :email, :school, :school_grade, :duration, :month, :_destroy,
-		  	potential_language_stays_attributes: [
-		  		:id, :nature, :countries, :partner_companies, :_destroy
-		  	]
+		  	:id, :first_name, :last_name, :age, :comment, :gender, :email, :school, :school_grade, :duration, :month, :_destroy
 		  ]
 		)
 	end

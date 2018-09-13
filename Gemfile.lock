@@ -105,6 +105,10 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.6.4)
       devise (>= 4.4)
+    dotenv (2.5.0)
+    dotenv-rails (2.5.0)
+      dotenv (= 2.5.0)
+      railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -325,6 +329,7 @@ DEPENDENCIES
   country_select
   devise
   devise-i18n
+  dotenv-rails
   figaro
   font-awesome-sass
   jbuilder (~> 2.0)
@@ -362,4 +367,4 @@ RUBY VERSION
    ruby 2.4.3p205
 
 BUNDLED WITH
-   1.16.2
+   1.16.4

@@ -20,20 +20,17 @@ section
                     = f.input :start_date, label: 'Début'
                     = f.input :end_date, label: 'Fin'
                     = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
-                    = f.input :phone_during_stay, label: 'Téléphone pendant le séjour :', input_html: { class: 'phone_during_stay' }
-
                     = f.input :option_1, label: 'Option 1/'
                     = f.input :option_2, label: 'Option 2/'
                     = f.input :transfers, collection: ['Aller', 'Retour'], as: :check_boxes, input_html: { multiple: true }, label: 'Transfert'
                     = f.input :class_hours, label: 'Nombre d\'heures de cours (par semaine)'
+                    = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [w.humanize, w] }, label: 'Type de logement', selected: 0
                     = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [w.humanize, w] }, label: 'Logement', selected: 0
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [w.humanize, w] }, label: 'Pension', selected: 0
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [w.humanize, w] }, label: 'Chambre', selected: 0
                     = f.input :precisions, label: 'Précisions'
-                    / = f.input :duration, label: 'Durée (en semaines)'
 
-                    = f.input :activities, label: 'Activités' 
-                    = f.input :fee, label: 'Fee vers le camp', as: :radio_buttons
+                    = f.input :fee, label: 'Payment en direct du camp', as: :radio_buttons
 
 
             .form-actions.text-center
@@ -96,4 +93,4 @@ ruby:
         }]
       }].to_json
 
-code data-conditionals= conditionals 
+code data-conditionals= conditionals

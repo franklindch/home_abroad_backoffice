@@ -13,6 +13,8 @@ section
                     = f.input :first_name, label: 'Prénom'
                     = f.input :last_name, label: 'Nom'
                     = f.input :email, label: 'Email'
+                    = f.input :address, label: 'Adresse principale', input_html: {class: 'google_map'}
+                    = f.input :zip_code, label: 'Code Postal', input_html: { class: 'zip_code_field '}
                     = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year]
                     = f.input :phone, label: 'Téléphone', input_html: { class: 'phone_field' }
 

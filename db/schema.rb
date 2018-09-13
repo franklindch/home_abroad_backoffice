@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910100030) do
+ActiveRecord::Schema.define(version: 20180913072828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.datetime "updated_at", null: false
     t.string "intl_number"
     t.date "birth_date"
+    t.string "address"
+    t.string "zip_code"
   end
 
   create_table "attendants_travel_groups", id: false, force: :cascade do |t|
@@ -34,15 +36,6 @@ ActiveRecord::Schema.define(version: 20180910100030) do
   create_table "camps", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "child_detail_language_stays", force: :cascade do |t|
-    t.bigint "potential_language_stay_id"
-    t.bigint "child_detail_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["child_detail_id"], name: "index_child_detail_language_stays_on_child_detail_id"
-    t.index ["potential_language_stay_id"], name: "index_child_detail_language_stays_on_potential_language_stay_id"
   end
 
   create_table "child_details", force: :cascade do |t|
@@ -83,7 +76,7 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.datetime "updated_at", null: false
     t.string "address_1"
     t.string "address_2"
-    t.integer "zip_code"
+    t.string "zip_code"
     t.date "passport_expiration_date"
     t.integer "second_language_level"
     t.integer "first_language"
@@ -92,6 +85,8 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.string "nationality", default: "Française"
     t.integer "school_grade"
     t.string "school"
+    t.integer "status"
+    t.integer "season"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -130,7 +125,7 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.integer "family_situation"
     t.string "address_1"
     t.string "address_2"
-    t.integer "zip_code"
+    t.string "zip_code"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -185,14 +180,12 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.integer "data_entry_responsible"
     t.integer "commercial_responsible"
     t.integer "duration"
-    t.string "activities"
     t.boolean "fee"
     t.bigint "program_id"
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "partner_company_id"
-    t.string "phone_during_stay"
     t.date "start_date"
     t.date "end_date"
     t.string "location"
@@ -202,9 +195,10 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.string "option_2"
     t.integer "class_hours"
     t.text "precisions"
-    t.string "intl_number"
     t.integer "room"
     t.text "transfers", default: [], array: true
+    t.boolean "canceled_language_stay", default: false
+    t.integer "accomodation_type"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -252,15 +246,8 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.datetime "updated_at", null: false
     t.integer "amount_price_cents", default: 0, null: false
     t.string "amount_price_currency", default: "EUR", null: false
+    t.date "payment_date"
     t.index ["invoice_id"], name: "index_payments_on_invoice_id"
-  end
-
-  create_table "potential_language_stays", force: :cascade do |t|
-    t.integer "nature"
-    t.string "countries"
-    t.string "partner_companies"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "programs", force: :cascade do |t|
@@ -333,6 +320,7 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "travel_code"
+    t.integer "season"
   end
 
   create_table "travels", force: :cascade do |t|
@@ -363,8 +351,6 @@ ActiveRecord::Schema.define(version: 20180910100030) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "child_detail_language_stays", "child_details"
-  add_foreign_key "child_detail_language_stays", "potential_language_stays"
   add_foreign_key "child_details", "qualifications"
   add_foreign_key "clients", "families"
   add_foreign_key "correspondences", "off_set_travels"

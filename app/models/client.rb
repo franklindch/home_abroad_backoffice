@@ -5,7 +5,7 @@ class Client < ApplicationRecord
   has_many :travels, through: :language_stays, dependent: :destroy
   # validates_uniqueness_of :first_name, scope: :family_id
 
-  pg_search_scope :search_by_full_name, 
+  pg_search_scope :search_by_full_name,
   				against: [:first_name, :last_name],
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
@@ -18,7 +18,9 @@ class Client < ApplicationRecord
   enum second_language: { Anglais: 0, Espagnol: 1, Allemand: 2 }, _suffix: true
   enum second_language_level: { Débutant: 0, Intermédiaire: 1, Courant: 2, Bilingue: 3, Ne_sait_pas: 4 }, _suffix: true
 
-  after_save :check_if_family_is_client
+  enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
+  enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
+  # after_save :check_if_family_is_client
   # validates :age_category, :first_name, presence: true
 
   # before_save :capitalize_fields

@@ -4,9 +4,11 @@ class Payment < ApplicationRecord
   register_currency :eur
   monetize :amount_price_cents
 
-  enum nature: { 
-		Carte_de_crédit: 0, 
-		Chèque: 1, 
-		Virement: 2
+  enum nature: {
+    Stripe: 0,
+    Espèces: 1,
+		Carte_de_crédit: 2,
+		Chèque: 3,
+		Virement: 4
 	}
 end

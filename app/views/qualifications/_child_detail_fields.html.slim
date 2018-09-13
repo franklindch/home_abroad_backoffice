@@ -16,7 +16,7 @@
 
   .field.form-group.col-md-3
     = f.input :school, label: 'Etablissement Scolaire'
-  
+
   .field.form-group.col-md-3
     = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire', selected: 0
 
@@ -25,17 +25,9 @@
 
   .field.form-group.col-md-3
     = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois', selected: 0
-  
+
   .field.form-group.col-md-12
     = f.input :comment, label: 'Remarque'
-
-  
-
-    .child_details_section.pt-3
-      .child_details.mt-3
-        = f.simple_fields_for :potential_language_stays do |potential_language_stay|
-        .links.form-inline.mt-1
-          = link_to_add_association 'Ajouter des séjours', f, :potential_language_stays
 
   .field.form-group.col-md-4
     = link_to_remove_association "Supprimer ce membre", f

@@ -21,7 +21,7 @@
       - families.each do |family|
         tr data-toggle="modal" data-target="#modal#{family.id}"
           td
-            span = family&.name.capitalize
+            span = c(family&.name)
           td
             span = family&.qualification&.status.humanize if family.qualification
           / td

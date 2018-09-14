@@ -1,6 +1,6 @@
 class QualificationsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :retrieve_family, only: [:new, :edit, :create]
+  before_action :retrieve_family, only: [:new, :edit, :create]
 
 	def new
 	  @qualification = Qualification.new()
@@ -12,8 +12,8 @@ class QualificationsController < ApplicationController
 
 	  if @qualification.save
 		  if @family.update_columns(qualification_id: @qualification.id)
-		    redirect_to families_path
 		    flash[:notice] = "Qualification associée avec succès à la famille !"
+        redirect_to new_qualification_child_detail_path(@qualification)
 		  else
 		  	flash[:alert] = "Veuillez compléter les champs obligatoires."
 		  	render :new
@@ -22,8 +22,17 @@ class QualificationsController < ApplicationController
 	end
 
 	def close_prospect
-		@qualification = Qualification.find(params[:qualification])
-		@qualification.status_to_close
+		@child_detail = ChildDetail.find(params[:child_detail])
+		@child_detail.status_to_close
+		respond_to do |format|
+		  format.html
+		  format.js { render :js => "window.location = '/dashboard/families'" }
+		end
+	end
+
+	def reestablish_prospect
+		@child_detail = ChildDetail.find(params[:child_detail])
+		@child_detail.status_to_open
 		respond_to do |format|
 		  format.html
 		  format.js { render :js => "window.location = '/dashboard/families'" }
@@ -44,10 +53,7 @@ class QualificationsController < ApplicationController
 
 	def qualification_params
 		params.require(:qualification).permit(
-		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :status,
-		  child_details_attributes: [
-		  	:id, :first_name, :last_name, :age, :comment, :gender, :email, :school, :school_grade, :duration, :month, :_destroy
-		  ]
+		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :status
 		)
 	end
 end

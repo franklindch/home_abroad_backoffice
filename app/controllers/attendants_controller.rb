@@ -34,7 +34,7 @@ class AttendantsController < ApplicationController
 	    format.html
 	    format.js
 	  end
-	  
+
 	  if params[:query].present?
 	    @attendants = Attendant.search_by_full_name(params[:query]).page(params[:query])
 	  else
@@ -50,7 +50,7 @@ class AttendantsController < ApplicationController
 
 	def attendant_params
 	  params.require(:attendant).permit(
-	    :first_name, :last_name, :email, :phone, :intl_number, :birth_date
-	  )    
+	    :first_name, :last_name, :email, :phone, :intl_number, :birth_date, :zip_code, :address
+	  )
 	end
 end

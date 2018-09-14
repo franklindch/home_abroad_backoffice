@@ -1,0 +1,26 @@
+- family = qualification.family
+.btn-group.mr-2.d-flex
+  = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
+  / = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
+- if qualification.child_details.empty?
+  p Aucun information renseigné sur les prospects de cette famille.
+
+- else
+  h5.mt-4.border-top.pt-4 Prospects de la famille
+  - qualification.child_details.each do |child_detail|
+    .card-modal.mt-3
+      .card-category
+        h6 = "#{child_detail.first_name.capitalize} #{c(child_detail.last_name)}"
+        p = "Intéressé par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}"
+        - if child_detail.partner_companies.empty?
+          p Aucun organisme étranger renseigné.
+        - else
+          - child_detail.partner_companies.each do |partner_company|
+            p = "#{c(partner_company.name)}"
+        = render 'child_details/relance_prospect_collapse', child_detail: child_detail
+
+        = render 'child_details/verify_status_for_badge', child_detail: child_detail
+      .card-user
+        = "#{child_detail.age} ans"
+      .card-links
+        = render 'child_details/verify_status_for_links', child_detail: child_detail

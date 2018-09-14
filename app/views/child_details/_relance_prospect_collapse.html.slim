@@ -1,9 +1,15 @@
-p
-  a.btn.btn-primary.mt-2.mb-2  aria-controls="collapse_relance_message" aria-expanded="false" data-toggle="collapse" href="#collapse_relance_message" role="button" 
-    | Texte de relance
-#collapse_relance_message.collapse
-  .card.card-body
-		p = "Cher(s) parent(s) #{child_detail&.qualification.family.name}, cher(e) #{child_detail.first_name},"
-		p = "Nous vous avons fait parvenir il y a quelques temps des informations sur un projet de séjours à l'étranger."
-		p = "Nous nous tenons à votre disposition pour répondre à toutes vos questions à ce sujet."
-		p = "L'équipe Home Abroad."
+- if child_detail.status != 'Client'
+  p
+    a.mt-2.mb-2  aria-controls="collapse_relance_message" aria-expanded="false" data-toggle="collapse" href="#collapse_relance_message" role="button"
+      | Texte de relance
+  #collapse_relance_message.collapse
+    .card.card-body
+  		p = "Cher(s) parent(s) #{child_detail&.qualification.family.name}, cher(e) #{child_detail.first_name},"
+  		p = "Nous vous avons fait parvenir il y a quelques temps des informations sur un projet de séjours à l'étranger."
+  		p = "Nous nous tenons à votre disposition pour répondre à toutes vos questions à ce sujet."
+  		p = "L'équipe Home Abroad."
+- else
+  - if child_detail.qualification.family.clients.find_by(first_name: child_detail.first_name).language_stays.empty?
+    p Encore aucun séjour ajouté à ce client.
+  - else
+    p Consultez ses séjours sur sa fiche client

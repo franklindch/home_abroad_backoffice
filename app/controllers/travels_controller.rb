@@ -36,7 +36,8 @@ class TravelsController < ApplicationController
 
 	def destroy
 		@travel.destroy
-		redirect_to
+    flash[:success] = 'Voyage supprimé avec succès'
+		redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
 	end
 
 	private
@@ -44,12 +45,12 @@ class TravelsController < ApplicationController
 	def travel_params
 	  params.require(:travel).permit(:nature, :language_stay_id, :travel_group_id, :travel_details,
 	    travel_details_attributes: [
-	      :start_date, :end_date, :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy, 
+	      :start_date, :end_date, :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy,
 	      correspondences_attributes: [
 	        :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :start_date, :end_date, :_destroy
 	      ]
 	    ]
-	  )    
+	  )
 	end
 
 	def retrieve_language_stay

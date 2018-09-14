@@ -8,7 +8,7 @@
       thead
         tr
           th Nom
-          th Statut
+          th Prospect ?
           th Date d'ajout
           th Email
           th Téléphone
@@ -23,7 +23,7 @@
           td
             span = c(family&.name)
           td
-            span = family&.qualification&.status.humanize if family.qualification
+            span = family&.prospect if family&.prospect
           / td
           /   span = count_client_hildren(family) if family.qualification && family.qualification.child_details != nil
           td
@@ -45,6 +45,5 @@
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, family_path(family), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: family.id
           td
             - if family.qualification&.status == 'Prospect'
-              span = link_to "Clôturer le prospect", close_prospect_path(qualification: family.qualification), remote: true, class: 'btn btn-outline-danger'
 
           = render 'families/family_modal', family: family

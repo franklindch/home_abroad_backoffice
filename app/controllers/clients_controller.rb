@@ -3,7 +3,6 @@ class ClientsController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	before_action :retrieve_client, only: [:edit, :update, :destroy, :show]
 	before_action :retrieve_family, only: [:update, :create]
-	before_action :retrieve_child_detail, only: [:create]
 
 	def new
 		@families = Family.all
@@ -18,8 +17,9 @@ class ClientsController < ApplicationController
 	  @client = Client.new(client_params)
 	  @client.family = @family
 	  if @client.save
+      retrieve_child_detail && @child_detail.update_columns(status: 'Client') if params[:child_detail_id]
 			# ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
-			@child_detail.update_columns(client: true)
+
 		  flash[:notice] = "Client ajouté avec succès !"
 		  redirect_to new_client_language_stay_path(@client)
 		else

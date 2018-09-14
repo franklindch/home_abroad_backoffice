@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180913072828) do
+ActiveRecord::Schema.define(version: 20180913131420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,13 @@ ActiveRecord::Schema.define(version: 20180913072828) do
     t.string "school"
     t.integer "duration"
     t.integer "month"
-    t.boolean "client"
+    t.integer "status"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
+  end
+
+  create_table "child_details_partner_companies", id: false, force: :cascade do |t|
+    t.bigint "child_detail_id", null: false
+    t.bigint "partner_company_id", null: false
   end
 
   create_table "clients", force: :cascade do |t|
@@ -85,7 +90,6 @@ ActiveRecord::Schema.define(version: 20180913072828) do
     t.string "nationality", default: "Française"
     t.integer "school_grade"
     t.string "school"
-    t.integer "status"
     t.integer "season"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end

@@ -35,7 +35,20 @@ const travelConditionnal = {
     //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
     //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
     // };
+
+    if($('#travel_group_attendant_ids')) {
+      if ($("#travel_group_travel_details_attributes_0_is_correspondence_true").prop("checked", true)) {
+        $('.corres:eq(0)').hide();
+      }
+      if ($("#travel_group_travel_details_attributes_0_is_correspondence_false").prop("checked", true)) {
+        $('.corres:eq(0)').show();
+      }
+    }
   }
 };
 
 export { travelConditionnal };
+
+
+
+// child_details_section:eq(1)

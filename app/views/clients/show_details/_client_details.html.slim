@@ -2,38 +2,41 @@
 	.d-flex.justify-content-between.card-header
 		h5 Détails du client
 
-			
+
 	.card-body
 		.row
 			.col-md-3
 				h6.card-title Général
-				.card-text 
-						= show_client_attribute(@client&.gender, 'Sexe')
-						= show_client_attribute(@client&.age_category, 'Catégorie')
-						p = "Âge: #{show_the_age(@client&.birth_date)} ans" if @client.birth_date != nil
-						p = "Date de naissance: #{birth_date_format(@client)}" if @client.birth_date != nil
-						= show_client_attribute(@client&.nationality, 'Nationalité')
+				.card-text
+  					= show_attribute(@client&.gender, 'Sexe')
+            = show_attribute(@client&.age_category, 'Catégorie')
+            = show_attribute(show_the_age(@client&.birth_date), 'Âge (années)')
+  					= show_attribute((@client&.birth_date), 'Âge (années)')
+  					= show_attribute(@client&.nationality, 'Nationalité')
 			.col-md-3
 				h6.card-title Contact
-				.card-text 
-					= show_client_attribute(@client&.email, 'Email')
-					= show_client_attribute(@client&.intl_number, 'Téléphone')
-					= show_client_attribute(@client&.passport_number, 'Numéro de passport')
-					= show_client_attribute(@client&.country_of_issue, 'Pays d\'émission')
-					= "Date d\'expiration: #{date_format(@client.passport_expiration_date)}" if @client.passport_expiration_date != nil
+				.card-text
+  					= show_attribute(@client&.email, 'Email')
+  					= show_attribute(@client&.intl_number, 'Téléphone')
+  					= show_attribute(@client&.passport_number, 'Numéro de passport')
+            = show_attribute(@client&.country_of_issue, 'Pays d\'émission')
+  					= show_attribute(date_format(@client&.passport_expiration_date), 'Date d\'expiration')
 
 			.col-md-3
 				h6.card-title Langues & Hobbies
-				.card-text 
-					= show_client_attribute(@client&.first_language, 'Langue 1')
-					= show_client_attribute(@client&.first_language_level, 'Niveau')
-					= show_client_attribute(@client&.second_language, 'Langue 2')
-					= show_client_attribute(@client&.second_language_level, 'Niveau')
-					= show_client_attribute(@client&.preferred_hobbies, 'Hobbies')
+				.card-text
+					= show_attribute(@client&.first_language, 'Langue 1')
+					= show_attribute(@client&.first_language_level, 'Niveau')
+					= show_attribute(@client&.second_language, 'Langue 2')
+					= show_attribute(@client&.second_language_level, 'Niveau')
+					= show_attribute(@client&.preferred_hobbies, 'Hobbies')
 
 			.col-md-3
 				h6.card-title Autres
-				.card-text 
-					= show_client_attribute(@client&.smoker, 'Fumeur')
-					= show_client_attribute(@client&.medical_issue, 'Problèmes de santé')
-					= show_client_attribute(@client&.comment, 'Remarque')
+				.card-text
+					= show_attribute(@client&.smoker, 'Fumeur')
+					= show_attribute(@client&.medical_issue, 'Problèmes de santé')
+					= show_attribute(@client&.comment, 'Remarque')
+    .mt-3.edit-delete-links
+      = link_to "<i class='fa fas fa-edit'> Editer le client</i>".html_safe, edit_client_path(@client)
+      = link_to "<i class='fa fas fa-trash-alt'> Supprimer le client</i>".html_safe, client_path(@client), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id

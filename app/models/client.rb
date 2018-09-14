@@ -18,7 +18,7 @@ class Client < ApplicationRecord
   enum second_language: { Anglais: 0, Espagnol: 1, Allemand: 2 }, _suffix: true
   enum second_language_level: { Débutant: 0, Intermédiaire: 1, Courant: 2, Bilingue: 3, Ne_sait_pas: 4 }, _suffix: true
 
-  enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
+
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
   # after_save :check_if_family_is_client
   # validates :age_category, :first_name, presence: true

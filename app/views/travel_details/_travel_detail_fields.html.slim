@@ -1,4 +1,5 @@
 / = f.input :nature, collection: TravelDetail.natures.keys.map { |w| [w.humanize, w] }, selected: 0
+
 = f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?', checked_value: true
 = f.input :mode, collection: TravelDetail.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
 / = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false*
@@ -68,6 +69,6 @@ ruby:
         }]
       }].to_json
 
-code data-conditionals= conditionals 
+code data-conditionals= conditionals
 
 

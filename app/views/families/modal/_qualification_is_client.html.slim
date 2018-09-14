@@ -1,0 +1,12 @@
+p Tous les prospects de cette famille sont devenus clients.
+
+- family.clients.each do |client|
+  .card.mt-3
+    .card-body
+    - if client.last_name.present? && client.family
+      h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
+    - if client.family && !client.last_name.present?
+      h5 = "#{client.first_name.capitalize} #{client.family.name.capitalize}"
+      p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)
+
+p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'

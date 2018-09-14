@@ -22,6 +22,20 @@ class OffSetTravelsController < ApplicationController
 		end
 	end
 
+  def edit; end
+
+  def update
+    @off_set_travel.travel = @travel
+    client = @travel.language_stay.client
+    if @off_set_travel.update(off_set_travel_params)
+      flash[:notice] = "Voyage édité avec succès !"
+      redirect_to family_client_path(client.family, client)
+    else
+      flash[:notice] = "Merci de lire les messages d'erreurs."
+      render :edit
+    end
+  end
+
 	private
 
 	def retrieve_off_set_travel

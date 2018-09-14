@@ -13,6 +13,7 @@
           th Âge
           th Email
           th Téléphone
+          th Adresse
           th
           th
 
@@ -31,6 +32,8 @@
             span = attendant.email
           td
             span = number_to_phone(attendant.intl_number) if attendant.intl_number != nil
+          td
+            span = attendant.address if attendant.address != nil
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)
           td

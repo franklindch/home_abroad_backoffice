@@ -25,12 +25,21 @@ module ApplicationHelper
 	  	return new_number.join(' ')
 	end
 
-	def data(model, column, h1)
-		# unless model.column == ""
-		# 	h6 = "#{h1}"
-		# 	p.pb-2 = "#{qualification&.status}"
-		# end
-	end
+  def show_attribute(attribute, label)
+    if attribute != '' || attribute != 0 || attribute != nil
+      "<p><u>#{label}</u> #{attribute}</p>".html_safe
+    else
+      return ''
+    end
+  end
+
+  def show_list_attribute(attribute, label)
+    if attribute != ''
+      "<h6>#{label}</h6><p class='pb-2'>#{attribute&.humanize}</p>".html_safe
+    else
+      return ''
+    end
+  end
 
 	def show_the_age(date_of_birth)
   		now = Time.now.utc.to_date

@@ -9,8 +9,29 @@ function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
   const autocomplete = new google.maps.places.Autocomplete(
-      /** @type {!HTMLInputElement} */(document.querySelector('.google_map')),
-      {types: ['geocode']});
+    (document.querySelector('.google_map')), {types: ['geocode']}
+  );
+  google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+
+  function onPlaceChanged() {
+    const place = this.getPlace();
+    console.log(place);
+    const zipCode = document.querySelector('.zip_code_field')
+    const placeZipCode6 = place.address_components[6];
+    const placeZipCode7 = place.address_components[7];
+    const placeZipCode8 = place.address_components[8];
+
+    if (placeZipCode6) {
+      zipCode.value = placeZipCode6.short_name
+    }
+    if (placeZipCode7) {
+      zipCode.value = placeZipCode7.short_name
+    }
+    if (placeZipCode8) {
+      zipCode.value = placeZipCode8.short_name
+    }
+
+  }
 }
 
 

@@ -10,11 +10,12 @@ class FamiliesController < ApplicationController
 
   def create
     @family = Family.new(family_params)
-    @prospect = params[:prospect]
+    @prospect = params[:family][:prospect]
 
     if @family.save
+      # binding.pry
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
-      if @prospect == false
+      if @prospect == "false"
         redirect_to families_path
       else
         redirect_to family_qualification_path(@family)

@@ -13,7 +13,7 @@ import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelConditionnal } from '../style/conditional_form';
 import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
-import { select2Attendants } from '../style/select2_attendants';
+import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
 
 
 document.addEventListener("turbolinks:load", () => {
@@ -24,13 +24,16 @@ document.addEventListener("turbolinks:load", () => {
 	if ($('.google_map')){
 		initAutocomplete();
 	}
-	Conditionals.init(); 
+	Conditionals.init();
 	formSubmit.init();
 	AlertDisa();
 	travelConditionnal.init();
 	if ($('#travel_group_attendant_ids')) {
-		select2Attendants();
-	}	
+    select2Attendants();
+  }
+  if ($('.oli')) {
+		select2PartnerCompanies();
+  }
 	if($(".father_phone") || ($(".mother_phone"))){
 		initializeIntlNumberFamilyFields();
 		autocompleteFamilyFields();

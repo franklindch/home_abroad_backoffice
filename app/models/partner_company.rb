@@ -4,7 +4,9 @@ class PartnerCompany < ApplicationRecord
 	has_many :travel_details, dependent: :destroy
 	has_many :language_stays, dependent: :destroy
 
-	pg_search_scope :search_by_name, 
+  has_and_belongs_to_many :child_details
+
+	pg_search_scope :search_by_name,
 					against: [:name],
 					using: {
 						tsearch: { prefix: true, negation: true, any_word: true}

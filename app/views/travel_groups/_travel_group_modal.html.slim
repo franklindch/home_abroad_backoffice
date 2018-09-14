@@ -1,0 +1,13 @@
+.modal.fade id="modal#{travel.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel.id}Title"
+  .modal-dialog.modal-dialog-centered role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title id='modal#{travel.id}LongTitle' = "Voyage Groupe Code #{travel&.travel_code}"
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+        span aria-hidden="true"  &times;
+
+      .modal-body
+        p = "Capacité #{travel.capacity}"
+
+      .modal-footer
+      button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

@@ -37,6 +37,10 @@ class TransitsController < ApplicationController
 		@travel ||= Travel.find(params[:travel_id])
 	end
 
+  def retrieve_transit
+    @transit ||= Transit.find(params[:id])
+  end
+
 	def transit_params
 	  params.require(:transit).permit(
 	    :nature, :start_time, :end_time, :mode, :departure_location, :arrival_location, :start_date, :end_date, :reference, :partner_company

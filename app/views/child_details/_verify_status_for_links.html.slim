@@ -1,0 +1,9 @@
+- if child_detail.status == 'Prospect'
+  = link_to "Clôturer le prospect", close_prospect_path(child_detail: child_detail), remote: true, class: 'btn-sm btn-outline-danger'
+  = link_to 'Passer en client', new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
+- elsif child_detail.status == 'Prospect_clôturé'
+  = link_to "Rétablir le prospect", reestablish_prospect_path(child_detail: child_detail), remote: true, class: 'btn-sm btn-outline-primary'
+- elsif child_detail.qualification.family.clients.find_by(first_name: child_detail.first_name)
+  = link_to "Vers sa fiche client", family_client_path(child_detail.qualification.family, child_detail.qualification.family.clients.find_by(first_name: child_detail.first_name)), class: 'btn-sm btn-outline-primary'
+- else
+

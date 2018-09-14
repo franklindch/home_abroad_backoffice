@@ -10,7 +10,7 @@ section
               .container-fluid
                 .row
                   .col-md-12
-                    = f.input :nature, collection: Transit.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0 
+                    = f.input :nature, collection: Transit.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0
                     .row
                       .col-md-6
                         = f.input :start_date, label: 'Date du départ'
@@ -26,4 +26,4 @@ section
                     = f.input :mode, collection: Transit.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
                     = f.input :reference, label: 'Référence'
                     = f.input :partner_company, label: 'Compagnie aérienne'
-                    = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 
+                    = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe}

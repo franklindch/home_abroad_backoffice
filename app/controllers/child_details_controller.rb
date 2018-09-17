@@ -20,7 +20,6 @@ class ChildDetailsController < ApplicationController
   end
 
   def create
-    binding.pry
     @child_detail = ChildDetail.new(child_detail_params)
     @child_detail.qualification = @qualification
     if @child_detail.save

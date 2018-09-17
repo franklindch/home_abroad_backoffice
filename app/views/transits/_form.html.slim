@@ -5,8 +5,18 @@ section
         .card-header
           h2.travel-form Formulaire Acheminement
         .card-body
+          - if @travel.transits.find_by(nature: 'Pré_acheminement') && @travel.transits.find_by(nature: 'Post_acheminement')
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+
+          - elsif @travel.transits.find_by(nature: 'Post_acheminement')
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+
+          - elsif @travel.transits.find_by(nature: 'Pré_acheminement')
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+
           = simple_form_for [@travel, @transit] do |f|
-            .form-inputs
+            .form-inputs.mt-4
               .container-fluid
                 .row
                   .col-md-12

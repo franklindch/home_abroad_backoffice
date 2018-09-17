@@ -1,6 +1,6 @@
 - if language_stay
 	= link_to 'Enrollment Form', enrollment_form_path(language_stay: language_stay), format: :pdf, class: 'btn btn-primary mr-3'
-	= link_to 'Attestation de séjour', language_stay_certificate_path(language_stay: language_stay), format: :pdf, class: 'btn btn-primary mr-3'
+	= link_to 'Attestation de séjour', language_stay_certificate_path(language_stay: language_stay), format: :html, class: 'btn btn-primary mr-3'
 
 - invoice = language_stay.invoice
 

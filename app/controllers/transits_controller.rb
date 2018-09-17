@@ -13,22 +13,27 @@ class TransitsController < ApplicationController
 	  if @transit.save
 	  	@travel.transits << @transit
 	    redirect_to client_path(client)
-	    flash[:notice] = "Acheminement ajouté avec succès !"
-	  else
-	    render :new
-	  end
-	end
+      flash[:notice] = "Acheminement ajouté avec succès !"
+    else
+      render :new
+    end
+  end
 
-	def edit; end
+  def edit; end
 
-	def update
-	  @transit.update(transit_params)
-	  # redirect_to families_path
-	end
+  def update
+    client = @travel.language_stay.client
+    @transit.update(transit_params)
+    flash[:notice] = "Acheminement édité avec succès !"
+    redirect_to client_path(client)
+    # redirect_to families_path
+  end
 
-	def destroy
-	  @transit.destroy
-	  redirect_to families_path
+  def destroy
+    client = @travel.language_stay.client
+    @transit.destroy
+	  flash[:notice] = "Acheminement supprimé avec succès !"
+	  redirect_to client_path(client)
 	end
 
 	private

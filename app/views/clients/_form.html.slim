@@ -13,7 +13,7 @@ section
                 - if @child_detail
                   = f.input :season, collection: Client.seasons.keys.map { |w| [w.humanize, w] }, label: 'Saison', selected: 0
                   = f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie', selected: 0
-                  = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
+                  = f.input :gender, collection: Client.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
                   = f.input :first_name, label: 'Prénom'
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'

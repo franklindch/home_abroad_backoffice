@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   include ActionController::MimeResponds
-  
+
   def after_sign_in_path_for(resource)
     families_path
   end
@@ -29,17 +29,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def generate_language_stay_certificate_pdf(language_stay)
-    respond_to do |format|
-      format.html do
-        render pdf: "Certificat #{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
-               template: 'pdfs/language_stay_certificate.html.slim',
-               disposition: 'attachment',
-               layout: 'pdf'
-      end
-    end
-  end
-  
   def generate_invoice_pdf(invoice)
     respond_to do |format|
       format.html do

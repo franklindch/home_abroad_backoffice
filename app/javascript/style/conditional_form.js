@@ -36,19 +36,27 @@ const travelConditionnal = {
     //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
     // };
 
-    if($('#travel_group_attendant_ids')) {
-      if ($("#travel_group_travel_details_attributes_0_is_correspondence_true").prop("checked", true)) {
-        $('.corres:eq(0)').hide();
-      }
-      if ($("#travel_group_travel_details_attributes_0_is_correspondence_false").prop("checked", true)) {
-        $('.corres:eq(0)').show();
-      }
-    }
+
   }
 };
 
-export { travelConditionnal };
+const travelGroupConditionnal = {
+  init() {
+    if ($('#travel_group_attendant_ids')) {
+      this.travelGroupConditionnalExecute();
+    }
+  },
 
+  travelGroupConditionnalExecute() {
+    if ($("#travel_group_travel_details_attributes_0_is_correspondence_false").prop("checked", true)) {
+      $('.child_details_section:eq(0)').hide();
+    } else {
+      $('.child_details_section:eq(0)').show();
+    }
+    if ($("#travel_group_travel_details_attributes_0_is_correspondence_false").prop("checked", true)) {
+      $('.child_details_section:eq(0)').show();
+    }
+  }
+}
 
-
-// child_details_section:eq(1)
+export { travelConditionnal, travelGroupConditionnal };

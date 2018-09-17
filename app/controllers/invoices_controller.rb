@@ -10,7 +10,6 @@ class InvoicesController < ApplicationController
 
 	def create
 	  @invoice = Invoice.new(invoice_params)
-	  payments_coherence
 	  @invoice.language_stay = @language_stay
 	  client = @language_stay.client
 	  if @invoice.save
@@ -26,8 +25,7 @@ class InvoicesController < ApplicationController
 
 	def update
 	  @invoice.update(invoice_params)
-	  payments_coherence
-	  redirect_to client_path(@invoice.language_stay.client)
+	  return payments_coherence
 	end
 
 	def destroy
@@ -83,8 +81,11 @@ class InvoicesController < ApplicationController
 
 	def payments_coherence
 		if @invoice.verify_payment_coherence
-			flash[:alert] = "Montant des payments sup. à montant facture: in"
-			render :new
+      flash[:alert] = "Montant des payments supérieur à montant de la facture"
+      render :new
+    else
+			flash[:notice] = "Facture éditée avec succès !"
+      redirect_to client_path(@invoice.language_stay.client)
 		end
 	end
 end

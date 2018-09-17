@@ -2,9 +2,9 @@
 - travel_detail_retour = @travel_group.travel_details.second
 
 .invoice-box.margin-top-navbar
-  table cellpadding="0" cellspacing="0" 
+  table cellpadding="0" cellspacing="0"
     tr.top
-      td colspan="2" 
+      td colspan="2"
         table
           tr
             td.title
@@ -20,7 +20,7 @@
     tr.heading
       td
         | Aller
-      td 
+      td
     tr.item
     	td
     		p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
@@ -62,3 +62,4 @@
     		p = "Mode: #{travel_detail_retour&.mode}" if travel_detail_retour.mode != ''
     	td
     		p = "Compagnie aérienne: #{travel_detail_retour&.companies}" if travel_detail_retour.companies != ''
+  = render 'pdfs/footer'

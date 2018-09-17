@@ -26,10 +26,6 @@ class FamiliesController < ApplicationController
     end
   end
 
-  def method_name
-
-  end
-
   def edit; end
 
   def update

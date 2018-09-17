@@ -13,6 +13,12 @@ class ChildDetailsController < ApplicationController
 
   def edit; end
 
+  def destroy
+    @child_detail.destroy
+    flash[:notice] = "Prospect supprimé avec succès !"
+    redirect_to families_path
+  end
+
   def create
     binding.pry
     @child_detail = ChildDetail.new(child_detail_params)
@@ -43,7 +49,7 @@ class ChildDetailsController < ApplicationController
 	end
 
   def retrieve_child_detail
-    @qualification = Qualification.find(params[:qualification_id])
+    @child_detail = ChildDetail.find(params[:id])
   end
 
   def child_detail_params

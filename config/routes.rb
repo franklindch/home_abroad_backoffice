@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       resources :travels, only: [:new, :create, :edit, :update, :destroy]
     end
 
+    resources :invoices, only: [:show] do
+      resources :payments, only: [:edit, :destroy, :update]
+    end
     resources :attendants
     resources :travel_groups, only: [:index, :new, :create, :edit, :update, :destroy]
 
@@ -39,7 +42,7 @@ Rails.application.routes.draw do
 
     get 'static', to: 'excels#static'
     get 'enrollment_form', to: 'language_stays#enrollment_form'
-    get 'language_stay_certificate', to: 'language_stays#certificate'
+    get 'language_stay_certificate', to: 'language_stays#certificate', format: 'docx'
     get 'invoice', to: 'invoices#invoice'
     get 'paid_invoice', to: 'invoices#paid_invoice'
     get 'airport_convocation', to: 'travel_groups#airport_convocation'
@@ -55,6 +58,9 @@ Rails.application.routes.draw do
 
   get 'all_families', to: 'excels#all_families'
   get 'close_prospect', to: 'qualifications#close_prospect'
+  get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
+  get 'cancel_language_stay', to: 'language_stays#cancel_language_stay'
+  get 'reestablish_language_stay', to: 'language_stays#reestablish_language_stay'
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
   get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
   post "families/:id/qualification", to: "qualifications#create"

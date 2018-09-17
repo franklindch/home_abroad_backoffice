@@ -7,18 +7,18 @@
 
 - elsif pre_transit && post_transit
   .col-md-3
-    = link_to ('<i class="fa fas fa-edit"> Editer pré acheminement</i>').html_safe, edit_travel_transit_path(travel, pre_transit), class: 'btn btn-outine-primary mr-3'
+    = link_to ('<i class="fa fas fa-edit"> Editer | Supprimer pré acheminement</i>').html_safe, edit_travel_transit_path(travel, pre_transit), class: 'btn btn-outine-primary mr-3'
   .col-md-3
-    = link_to ('<i class="fa fas fa-edit"> Editer post acheminement</i>').html_safe, edit_travel_transit_path(travel, post_transit), class: 'btn btn-outine-primary mr-3'
+    = link_to ('<i class="fa fas fa-edit"> Editer | Supprimer post acheminement</i>').html_safe, edit_travel_transit_path(travel, post_transit), class: 'btn btn-outine-primary mr-3'
 
 - elsif pre_transit && post_transit.nil?
   .col-md-3
-    = link_to ('<i class="fa fas fa-edit"> Editer pré acheminement</i>').html_safe, edit_travel_transit_path(travel, pre_transit), class: 'btn btn-outine-primary mr-3'
+    = link_to ('<i class="fa fas fa-edit"> Editer | Supprimer pré acheminement</i>').html_safe, edit_travel_transit_path(travel, pre_transit), class: 'btn btn-outine-primary mr-3'
   .col-md-3
     = link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-outine-primary mr-3'
 
 - elsif post_transit && pre_transit.nil?
   .col-md-3
-    = link_to ('<i class="fa fas fa-edit"> Editer post acheminement</i>').html_safe, edit_travel_transit_path(travel, post_transit), class: 'btn btn-outine-primary mr-3'
+    = link_to ('<i class="fa fas fa-edit"> Editer | Supprimer post acheminement</i>').html_safe, edit_travel_transit_path(travel, post_transit), class: 'btn btn-outine-primary mr-3'
   .col-md-3
     = link_to ('<i class="fa fas fa-plus-circle">Ajouter acheminement</i>').html_safe, new_travel_transit_path(travel), class: 'btn btn-outine-primary mr-3'

@@ -4,27 +4,36 @@
 .col-md-3
 	h6.card-title Décomptes
 	.card-text
-		p = "Frais de dossier: #{invoice.application_fee_price_cents} euros"
-		p = "Prix du voyage: #{invoice.travel_price_cents} euros"
-		p = "Prix du séjour: #{invoice.language_stay_price_cents} euros"
-		p = "Prix option 1: #{invoice.option_1_price_cents} euros"
-		p = "Prix option 2: #{invoice.option_2_price_cents} euros"
-		p = "Prix du séjour: #{invoice.language_stay_price_cents} euros"
-		p = "GRAND TOTAL : #{invoice.total_price_cents} euros"
+    p = show_attribute(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
+    p = show_attribute(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
+    p = show_attribute(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
+    - if invoice&.option_1_price_cents != 0
+      p = show_attribute(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
+    - else
+      p Pas d'option 1 renseignée.
+    - if invoice&.option_2_price_cents != 0
+      p = show_attribute(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
+    - else
+      p Pas d'option 2 renseignée.
+    p = "<b>Total - #{invoice.total_price_cents} euros</b>".html_safe
 
 .col-md-3
-	h6.card-title Règlements
-	- if payments.empty?
-		p Encore aucun règlement à ce jour
-	- else
-		.card-text 
-		- payments.all.each_with_index do |payment, index|
-			p = "Réglement #{index + 1}: #{payment.amount_price_cents} euros, #{payment.nature.humanize}"
-		p = "GRAND TOTAL : #{invoice.total_payments} euros"
+  h6.card-title Règlements
+  - if payments.empty?
+    .badge.badge-warning Encore aucun règlement à ce jour
+  - else
+    .card-text
+    - payments.all.each_with_index do |payment, index|
+      p.mb-0 = "<u>Règlement #{index + 1} (EUR)</u>".html_safe
+      p.mb-0 = "#{payment.amount_price_cents} le #{date_format(payment.payment_date)} | Nature - #{payment.nature.humanize}"
+      = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_invoice_payment_path(invoice, payment)
+      = link_to "<i class='fa fas fa-trash'></i>".html_safe, invoice_payment_path(invoice, payment), class: 'ml-2', method: :delete
 
-.col-md-3
-	h6.card-title Etat
-	- if invoice.total_payments == invoice.total_price_cents
-		p Facture acquittée et disponible.
-	- else
-		p = "Il reste encore #{invoice.total_price_cents - invoice.total_payments} euros à payer"
+    p.mt-3 = "<b>Total - #{invoice.total_payments} euros</b>".html_safe
+
+.col-md-4
+  h6.card-title Etat
+  - if invoice.total_payments == invoice.total_price_cents
+    .badge.badge-success Facture acquittée et disponible.
+  - else
+    .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_payments} euros à payer"

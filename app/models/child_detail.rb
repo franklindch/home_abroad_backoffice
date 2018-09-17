@@ -1,10 +1,6 @@
 class ChildDetail < ApplicationRecord
 	belongs_to :qualification
 	# has_one :family, dependent: :destroy, through: :qualification
-	has_many :child_detail_language_stays, dependent: :destroy
-	has_many :potential_language_stays, through: :child_detail_language_stays
-
-	accepts_nested_attributes_for :potential_language_stays, reject_if: :all_blank, allow_destroy: true
 
   has_and_belongs_to_many :partner_companies
 	enum gender: { Masculin: 1, Féminin: 2 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180913131420) do
+ActiveRecord::Schema.define(version: 20180917094830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,9 +200,10 @@ ActiveRecord::Schema.define(version: 20180913131420) do
     t.integer "class_hours"
     t.text "precisions"
     t.integer "room"
-    t.text "transfers", default: [], array: true
     t.boolean "canceled_language_stay", default: false
     t.integer "accomodation_type"
+    t.boolean "transfer_aller", default: false
+    t.boolean "transfer_retour", default: false
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"

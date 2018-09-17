@@ -1,9 +1,9 @@
 class Invoice < ApplicationRecord
-	after_save :verify_payment_coherence
+	after_update :verify_payment_coherence
 
 	register_currency :eur
 
-	monetize :application_fee_price_cents, 
+	monetize :application_fee_price_cents,
 			 :language_stay_price_cents,
 			 :travel_price_cents,
 			 :transfer_price_cents,

@@ -3,17 +3,18 @@
 = render 'shared/components/navbar/left_navbar'
 
 main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
-	.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-1.mb-2
-		- if @client.last_name =! ""
-			h1.h2.border-bottom.pb-3.mt-4
-				= "#{@client&.first_name.capitalize} #{@client&.last_name&.upcase}"
-		- else
-			h1.h2.border-bottom.pb-3.mt-4
-				= "#{@client&.first_name.capitalize} #{@client&.family&.name.upcase}"
-		.btn-toolbar.mb-2.mb-md-0
-		.mr-2.d-flex.justify-content-around
-				= link_to ('<i class="fa fas fa-plus-circle">Ajouter un séjour</i>').html_safe, new_client_language_stay_path(@client), class: 'btn btn-primary'
-				= link_to 'Retour', :back, class: 'btn btn-outline-primary'
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-1.mb-2
+      - if @client.last_name =! ""
+        h1.h2.border-bottom.pb-3.mt-4
+          = "#{@client&.first_name.capitalize} #{@client&.last_name&.upcase}"
+      - else
+        h1.h2.border-bottom.pb-3.mt-4
+          = "#{@client&.first_name.capitalize} #{@client&.family&.name.upcase}"
+        .btn-toolbar.mb-2.mb-md-0
+          .mr-2.d-flex.justify-content-around
+            = link_to ('<i class="fa fas fa-plus-circle">Ajouter un séjour</i>').html_safe, new_client_language_stay_path(@client), class: 'btn btn-primary'
+
+            = link_to 'Retour', :back, class: 'btn btn-outline-primary'
 
 	= render 'clients/show_details/client_details'
 
@@ -36,13 +37,9 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 								.row
 									= render 'clients/show_details/language_stay_details', language_stay: language_stay
 
-								.btn-toolbar.mb-2.mb-md-0
-									.mr-2.d-flex.justify-content-around
-										= link_to ('<i class="fa fas fa-plus-circle">Ajouter un Voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
-										= link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-danger ml-2'
-								.mt-3.edit-delete-links
-									= link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-									= link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
+                .mt-3.edit-delete-links
+                  = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
+                  = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
 
 
 			- elsif language_stay.travel.nil? && language_stay.invoice
@@ -52,11 +49,10 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/language_stay_details', language_stay: language_stay
-								.d-flex.justify-content-between
-									= link_to ('<i class="fa fas fa-plus-circle">Ajouter un voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-danger'
-									.edit-delete-links
-										= link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-										= link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
+
+								.mt-3.edit-delete-links
+									= link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
+									= link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
 				.row.mb-3
 					.col-sm-12
 						.card.height
@@ -75,7 +71,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/language_stay_details', language_stay: language_stay
-								= link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-danger'
+
 								.mt-3.edit-delete-links
 									= link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
 									= link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
@@ -117,7 +113,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 
 			.row.mb-3
 				.col-sm-12
-					.card.mb-5
+					.card
 						.card-body.d-inline-flex.p-2
 							= render 'clients/show_details/pdf', language_stay: language_stay
 

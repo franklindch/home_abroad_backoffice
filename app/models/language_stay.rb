@@ -40,4 +40,12 @@ class LanguageStay < ApplicationRecord
   		return false if self[attr].nil?
   	end
   end
+
+  def cancel
+    update_columns(canceled_language_stay: true)
+  end
+
+  def reestablish
+    update_columns(canceled_language_stay: false)
+  end
 end

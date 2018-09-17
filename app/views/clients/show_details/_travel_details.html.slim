@@ -5,9 +5,9 @@
     .btn.btn-primary data-target="#modal#{travel.travel_group.id}" data-toggle="modal" Associé à un voyage groupe
     = render 'travel_groups/travel_group_modal', travel: travel.travel_group
   = render 'transits/transit_details', travel: travel
-  .mt-5.col-md-3
+  .mt-3.edit-delete-links
     = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, travel)
-    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, travel), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, travel), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
 
 - elsif travel.nature == 'Groupe_décalé'
   .col-md-3
@@ -15,7 +15,7 @@
     = render 'travel_groups/travel_group_modal', travel: travel.travel_group
     = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
   = render 'transits/transit_details', travel: travel
-  .mt-5.col-md-3
+  .mt-3.edit-delete-links
     = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, travel)
     = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, language_stay_travel_path(language_stay, travel), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
 - else

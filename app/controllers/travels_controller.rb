@@ -24,20 +24,30 @@ class TravelsController < ApplicationController
     client = @language_stay.client
     if @travel.save
     	if @travel.nature == 'Groupe_décalé'
-	    	redirect_to new_travel_off_set_travel_path(@travel)
-	    else
-    		redirect_to family_client_path(client.family, client)
-	    end
+        flash[:notice] = 'Voyage Groupe décalé ajouté avec succès'
+        redirect_to new_travel_off_set_travel_path(@travel)
+      else
+        flash[:notice] = 'Voyage ajouté avec succès'
+        redirect_to family_client_path(client.family, client)
+      end
 
     else
-    	render :new
+      render :new
     end
-	end
+  end
 
-	def destroy
-		@travel.destroy
-    flash[:success] = 'Voyage supprimé avec succès'
+  def edit; end
+
+  def update
+    @travel.update(travel_params)
+    flash[:notice] = 'Voyage édité avec succès'
 		redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
+  end
+
+  def destroy
+    @travel.destroy
+    flash[:notice] = 'Voyage supprimé avec succès'
+    redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
 	end
 
 	private

@@ -1,9 +1,9 @@
 - client = @language_stay.client
 
 .invoice-box.margin-top-navbar
-  table cellpadding="0" cellspacing="0" 
+  table cellpadding="0" cellspacing="0"
     tr.top
-      td colspan="2" 
+      td colspan="2"
         table
           tr
             td.title
@@ -63,7 +63,7 @@
       td
 
 
-    
+
     - if client.age_category == 'Junior' || client.age_category == 'Etudiant'
     tr.heading
       td
@@ -119,3 +119,5 @@
     tr.item.last
       td
         = "Precisions : #{@language_stay.precisions}"
+  = render 'pdfs/footer'
+

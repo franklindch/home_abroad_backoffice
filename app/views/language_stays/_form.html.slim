@@ -22,7 +22,8 @@ section
                     = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
                     = f.input :option_1, label: 'Option 1/'
                     = f.input :option_2, label: 'Option 2/'
-                    = f.input :transfers, collection: ['Aller', 'Retour'], as: :check_boxes, input_html: { multiple: true }, label: 'Transfert'
+                    = f.input :transfer_aller, label: 'Transfert Aller'
+                    = f.input :transfer_retour, label: 'Transfert Retour'
                     = f.input :class_hours, label: 'Nombre d\'heures de cours (par semaine)'
                     = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [w.humanize, w] }, label: 'Type de logement', selected: 0
                     = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [w.humanize, w] }, label: 'Logement', selected: 0

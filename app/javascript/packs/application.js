@@ -11,7 +11,7 @@ import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, in
 import { bindSweetAlertButtonDemo } from '../libraries/sweetalert';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
-import { travelConditionnal } from '../style/conditional_form';
+import { travelConditionnal, travelGroupConditionnal } from '../style/conditional_form';
 import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
 import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
 
@@ -27,8 +27,9 @@ document.addEventListener("turbolinks:load", () => {
 	Conditionals.init();
 	formSubmit.init();
 	AlertDisa();
-	travelConditionnal.init();
-	if ($('#travel_group_attendant_ids')) {
+  travelGroupConditionnal.init();
+  travelConditionnal.init();
+  if ($('#travel_group_attendant_ids')) {
     select2Attendants();
   }
   if ($('.oli')) {

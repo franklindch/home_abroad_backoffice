@@ -15,7 +15,7 @@ class FamiliesController < ApplicationController
     if @family.save
       # binding.pry
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
-      binding.pry
+      # binding.pry
       if @prospect == "false"
         redirect_to families_path
       else

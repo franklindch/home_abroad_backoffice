@@ -68,4 +68,14 @@
     - else
       = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
 
+- else
+  .mt-5.edit-delete-links.ml-3
+    = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.id
+    - if language_stay.canceled_language_stay == true
+      .badge.badge-danger.ml-3 Séjours annulé
+      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary'
+    - else
+      = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
+
 

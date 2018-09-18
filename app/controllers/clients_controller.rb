@@ -16,8 +16,9 @@ class ClientsController < ApplicationController
 	def create
 	  @client = Client.new(client_params)
 	  @client.family = @family
-	  if @client.save
+    if @client.save
       retrieve_child_detail && @child_detail.update_columns(status: 'Client') if params[:child_detail_id]
+      @client.update_columns(last_name: @family.name)
 			# ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
 
 		  flash[:notice] = "Client ajouté avec succès !"

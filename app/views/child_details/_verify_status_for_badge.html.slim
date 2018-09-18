@@ -3,4 +3,4 @@
 - elsif child_detail.status == 'Prospect_clôturé'
   span.badge.badge-danger = "#{child_detail&.status&.humanize}"
 - else
-  span.badge.badge-success = "#{child_detail&.status&.humanize}"
+  span.badge.badge-success = "Devenu #{child_detail&.status&.humanize}"

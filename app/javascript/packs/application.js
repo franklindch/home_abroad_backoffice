@@ -1,5 +1,4 @@
 import $ from "jquery";
-import "select2"
 import "bootstrap";
 import "intl-tel-input";
 
@@ -8,7 +7,6 @@ Turbolinks.start()
 
 import { Conditionals } from '../style/conditionals';
 import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberLSFields } from '../libraries/initialize-intl-number';
-import { bindSweetAlertButtonDemo } from '../libraries/sweetalert';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelConditionnal, travelGroupConditionnal } from '../style/conditional_form';
@@ -17,13 +15,12 @@ import { select2Attendants, select2PartnerCompanies } from '../style/select2_att
 
 
 document.addEventListener("turbolinks:load", () => {
-	bindSweetAlertButtonDemo();
-	if ($('#invoice_total_price_cents')) {
-		autocompleteInvoiceFieldTotal();
-	}
-	if ($('.google_map')){
-		initAutocomplete();
-	}
+  if ($('#invoice_total_price_cents')) {
+    autocompleteInvoiceFieldTotal();
+  }
+  if ($('.google_map')){
+    initAutocomplete();
+  }
 	Conditionals.init();
 	formSubmit.init();
 	AlertDisa();

@@ -6,23 +6,31 @@
 .modal-body
   - if qualification == nil
     p Famille non ajoutée en tant que prospect.
-    = count_clients(family)
+    .btn-group.mr-2.d-flex
+      / = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
+      / = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
+    span.badge.badge-info.mt-3
+        = count_clients(family)
 
   - else
     = show_attribute_empty_string(qualification.comment, "Commentaire")
-    = show_attribute_empty_string(qualification.data_entry_responsible, "Responsable de saisie")
-    = show_attribute_empty_string(qualification.contact_mode.humanize, "Mode de contact")
-    = show_attribute_empty_string(qualification.reference_name, "Référence")
+    / = show_attribute_empty_string(qualification.data_entry_responsible, "Responsable de saisie")
+    / = show_attribute_empty_string(qualification.contact_mode.humanize, "Mode de contact")
+    / = show_attribute_empty_string(qualification.reference_name, "Référence")
+    .btn-group.mr-2.d-flex
+      = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
+      = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
 
-    - if qualification.status == 'Prospect'
-      = render 'families/modal/qualification_is_prospect', qualification: qualification
+    = render 'families/modal/qualification_is_prospect', qualification: qualification
 
-    - elsif qualification.status == 'Cliente'
-      = render 'families/modal/qualification_is_client', qualification: qualification, family: qualification.family
-    - elsif qualification.status == 'Dormante'
-      = render 'families/modal/qualification_is_sleeping', qualification: qualification
-    - else
-    = count_clients(family)
+    / = render 'families/modal/qualification_is_client', qualification: qualification, family: qualification.family
+
+    / = render 'families/modal/qualification_is_sleeping', qualification: qualification
+
+    span.badge.badge-info.mt-3
+        = count_prospects(qualification)
+    span.badge.badge-info.ml-2
+        = count_clients(family)
 
 .modal-footer
 button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

@@ -27,6 +27,8 @@ class TravelsController < ApplicationController
         flash[:notice] = 'Voyage Groupe décalé ajouté avec succès'
         redirect_to new_travel_off_set_travel_path(@travel)
       else
+        @travel.travel_details.first.update_columns(nature: 'Aller')
+        @travel.travel_details.second.update_columns(nature: 'Retour')
         flash[:notice] = 'Voyage ajouté avec succès'
         redirect_to family_client_path(client.family, client)
       end

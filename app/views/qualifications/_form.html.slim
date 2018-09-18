@@ -14,7 +14,7 @@ section
                     = f.input :contact_mode, collection: Qualification.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact', selected: 0
                     = f.input :refered_by, collection: Qualification.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
                     = f.input :reference_name, label: 'Nom référence'
-                    = f.hidden_field :status, value: 'Prospect'
                     = f.input :comment, placeholder: 'Quel commentaire général à faire ?', label: false
+                    = f.input :prospect, label: 'Ajouter un prospect à cette famille ?', as: :radio_buttons
                     .form-actions.text-center
                       = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i> Chargement".html_safe}

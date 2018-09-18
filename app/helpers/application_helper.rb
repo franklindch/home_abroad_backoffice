@@ -67,7 +67,7 @@ module ApplicationHelper
 	end
 
 	def date_format(value)
-		value.strftime("%d/%m/%Y")
+		value&.strftime("%d/%m/%Y")
 	end
 	def c(name)
 		name&.upcase

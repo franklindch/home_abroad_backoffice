@@ -7,6 +7,7 @@
     p = show_attribute_nil(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
     p = show_attribute_nil(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
     p = show_attribute_nil(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
+    p = show_attribute_nil(invoice&.transfer_price_cents, 'Prix du transfert (EUR)')
     - if invoice&.option_1_price_cents != 0
       p = show_attribute_nil(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
     - else
@@ -41,4 +42,4 @@
 
 .mt-5.edit-delete-links.ml-3
   = link_to "<i class='fa fas fa-trash-alt'> Editer la facture ou ajouter règlement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
-  = link_to "<i class='fa fas fa-trash-alt'> Supprimer la facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.invoice.id
+  = link_to "<i class='fa fas fa-trash-alt'> Supprimer la facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.invoice.id

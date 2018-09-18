@@ -7,7 +7,11 @@ class ChildDetailsController < ApplicationController
   def new
     @family = @qualification.family
     @child_detail = ChildDetail.new(
-      last_name: @family.name
+      last_name: @family.name,
+      refered_by: @qualification.refered_by,
+      contact_mode: @qualification.contact_mode,
+      data_entry_responsible: @qualification.data_entry_responsible,
+      reference_name: @qualification.reference_name
     )
   end
 
@@ -34,6 +38,7 @@ class ChildDetailsController < ApplicationController
   def update
     if @child_detail.update(child_detail_params)
       flash[:notice] = "Prospect édité avec succès !"
+      @child_detail.update(partner_company_ids: @partner_companies)
       redirect_to families_path
     else
       flash[:notice] = "Merci de lire les messages d'erreurs."
@@ -53,7 +58,7 @@ class ChildDetailsController < ApplicationController
 
   def child_detail_params
     params.require(:child_detail).permit(
-      :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
+      :reference_name, :refered_by, :contact_mode, :data_entry_responsible, :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
     )
   end
 

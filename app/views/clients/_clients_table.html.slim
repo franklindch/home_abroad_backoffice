@@ -9,6 +9,7 @@
         tr
           th Nom
           th Prénom
+          th Saison
           th Catégorie
           th Date de naissance
           th Date de saisie
@@ -25,6 +26,8 @@
                 span = c(client&.last_name)
               td
                 span = client&.first_name
+              td
+                span = client&.season&.humanize
               td
                 span = client&.age_category
               td

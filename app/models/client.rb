@@ -10,13 +10,13 @@ class Client < ApplicationRecord
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}
-  enum gender: { Masculin: 0, Féminin: 1 }
+  enum gender: { Male: 0, Female: 1 }
   enum school_grade: { Prépa: 0, Césure: 1, Terminale: 2, Première: 3, Seconde: 4, Troisième: 5, Quatrième: 6, Cinquième: 7, Sixième: 8 }
   enum age_category: { Junior: 0, Etudiant: 1, Adulte: 2 }
-  enum first_language: { Anglais: 0, Espagnol: 1, Allemand: 2 }
-  enum first_language_level: { Débutant: 0, Intermédiaire: 1, Courant: 2, Bilingue: 3, Ne_sait_pas: 4 }
-  enum second_language: { Anglais: 0, Espagnol: 1, Allemand: 2 }, _suffix: true
-  enum second_language_level: { Débutant: 0, Intermédiaire: 1, Courant: 2, Bilingue: 3, Ne_sait_pas: 4 }, _suffix: true
+  enum first_language: { English: 0, Spanish: 1, German: 2 }
+  enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, Ne_sait_pas: 4 }
+  enum second_language: { English: 0, Spanish: 1, German: 2 }, _suffix: true
+  enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, Ne_sait_pas: 4 }, _suffix: true
 
 
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }

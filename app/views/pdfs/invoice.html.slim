@@ -8,10 +8,10 @@
       td colspan="2"
         table
           tr
-            td.title
-              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
-            td.family-section
-              = "Mr ou Mme #{family.name}"
+            td.title.text-left
+              = wicked_pdf_image_tag 'logo.png'
+            td.text-right
+              = "Mr ou Mme #{family.name.upcase}"
               br/
               = "#{family.address_1}"
 
@@ -19,13 +19,13 @@
       td colspan="2"
         table
           tr
-            td
-              = "Facture N°#{@invoice.id}"
+            td.text-left
+              = "<b>Facture N°#{@invoice.id}</b>".html_safe
               br/
               = "Versailles, le #{date_format(Date.today)}"
           tr
-            td
-              = "N/Réf :"
+            td.text-left
+              = "N/Réf : "
               = "Client #{client.first_name} #{client.last_name}"
               br/
               = "Séjour #{language_stay.program.name} à #{language_stay.location}"

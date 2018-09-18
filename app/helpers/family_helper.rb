@@ -3,11 +3,11 @@
 module FamilyHelper
 	def count_clients(family)
     if family.clients.count == 0
-      "<span class='badge badge-info mt-3'>Encore aucun Client<span>".html_safe
+      "Encore aucun Client".html_safe
     elsif family.clients.count == 1
-      "<span class='badge badge-info mt-3'>#{family.clients.count} Client<span>".html_safe
+      "#{family.clients.count} Client au total".html_safe
     else
-      "<span class='badge badge-info mt-3'>#{family.clients.count} Clients<span>".html_safe
+      "#{family.clients.count} Clients au total".html_safe
 	  end
   end
 end

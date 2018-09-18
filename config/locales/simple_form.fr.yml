@@ -1,7 +1,7 @@
-en:
+fr:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": 'Oui'
+    "no": 'Non'
     required:
       text: 'required'
       mark: '*'
@@ -10,6 +10,11 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+    options:
+      language_stay:
+        accomodation:
+          Sans_logement: Nop
+          Avec_logement: oliv
     # Examples
     # labels:
     #   defaults:

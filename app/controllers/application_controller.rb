@@ -18,13 +18,18 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
+  def configure_permitted_parameters
+    # For additional fields in app/views/devise/registrations/new.html.erb
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
+  end
+
   def generate_enrollment_form_pdf(language_stay)
     respond_to do |format|
       format.html do
-      #   render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
-      #          template: 'pdfs/enrollment_form.html.slim',
-      #          disposition: 'attachment',
-      #          layout: 'pdf'
+        render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
+               template: 'pdfs/enrollment_form.html.slim',
+               disposition: 'attachment',
+               layout: 'pdf'
       end
     end
   end

@@ -32,4 +32,4 @@
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_group_path(travel_group, groupe: 'Groupe')
           td
-            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_group_path(travel_group), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: travel_group.id
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_group_path(travel_group), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: travel_group.id

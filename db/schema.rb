@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180917094830) do
+ActiveRecord::Schema.define(version: 20180918150009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 20180917094830) do
     t.integer "duration"
     t.integer "month"
     t.integer "status"
+    t.integer "data_entry_responsible"
+    t.integer "contact_mode"
+    t.integer "refered_by"
+    t.string "reference_name"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
@@ -204,6 +208,7 @@ ActiveRecord::Schema.define(version: 20180917094830) do
     t.integer "accomodation_type"
     t.boolean "transfer_aller", default: false
     t.boolean "transfer_retour", default: false
+    t.string "program_detail"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -266,11 +271,11 @@ ActiveRecord::Schema.define(version: 20180917094830) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
     t.integer "refered_by"
     t.integer "data_entry_responsible"
     t.integer "contact_mode"
     t.string "reference_name"
+    t.boolean "prospect", default: true
   end
 
   create_table "transits", force: :cascade do |t|
@@ -352,6 +357,8 @@ ActiveRecord::Schema.define(version: 20180917094830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

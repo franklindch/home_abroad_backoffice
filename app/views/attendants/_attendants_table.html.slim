@@ -37,4 +37,4 @@
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)
           td
-            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, attendant_path(attendant), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: attendant.id
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, attendant_path(attendant), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: attendant.id

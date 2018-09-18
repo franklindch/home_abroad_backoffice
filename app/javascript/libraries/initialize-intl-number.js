@@ -29,7 +29,23 @@ function initializeIntlNumberFamilyFields() {
 		document.getElementById('submit_with_phone').addEventListener('click', (event) => {
 			$("[name=attendant[father_intl_number]]").intlTelNumber("getNumber");
 		});
-	}	
+	}
+
+  $(".client_phone_number").intlTelInput({
+    formatOnInit: true,
+    separateDialCode: true,
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.12/js/utils.js",
+    preferredCountries: ['fr', 'gb', 'de', 'ch', 'us', 'it', 'es'],
+    initialCountry: 'fr',
+    hiddenInput: 'father_intl_number',
+    placeholderNumberType: 'mobile'
+  });
+
+  if(document.getElementById('submit_with_phone')) {
+    document.getElementById('submit_with_phone').addEventListener('click', (event) => {
+      $("[name=attendant[father_intl_number]]").intlTelNumber("getNumber");
+    });
+  }
 
 	$(".mother_phone").intlTelInput({
 		formatOnInit: true,

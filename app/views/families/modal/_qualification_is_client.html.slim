@@ -1,12 +1,22 @@
-p Tous les prospects de cette famille sont devenus clients.
-
+h5.mt-4.border-top.pt-4 Prospects de la famille
 - family.clients.each do |client|
-  .card.mt-3
-    .card-body
-    - if client.last_name.present? && client.family
-      h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
-    - if client.family && !client.last_name.present?
-      h5 = "#{client.first_name.capitalize} #{client.family.name.capitalize}"
-      p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)
+  .card-modal.mt-3
+    .card-category
+      h6 = "#{client.first_name.capitalize} #{c(client.last_name)}"
+    - client.language_stays.each do |language_stay|
+      / = render 'clients/verify_status_for_badge', client: client
+    .card-user
+      / = "#{client.age} ans"
+      = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_family_client_path(family, client), class: 'modal-links ml-2'
+      = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, family_client_path(family, client), method: :delete, class: 'delete-link modal-links ml-2', data: {confirm: 'Êtes-vous sûr ?'}, id: client.id
+    .card-links
+      / = render 'clients/verify_status_for_links', client: client
 
-p = link_to 'Ajouter un client à cette famille', new_client_path(family: qualification.family), class: 'btn btn-primary'
+
+/ .card.mt-3
+/   .card-body
+/   - if client.last_name.present? && client.family
+/     h5 = "#{client.first_name.capitalize} #{client.last_name.capitalize}"
+/   - if client.family && !client.last_name.present?
+/     h5 = "#{client.first_name.capitalize} #{client.family.name.capitalize}"
+/     p.card-text = link_to 'Vers sa fiche client', family_client_path(family, client)

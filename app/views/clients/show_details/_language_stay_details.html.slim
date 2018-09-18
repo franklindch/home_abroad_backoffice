@@ -1,20 +1,33 @@
 .col-md-3
 	h6.card-title
 	.card-text
-    .mb-4
-      = "<b>Du #{date_format(language_stay&.start_date)} au #{date_format(language_stay&.end_date)}</b>".html_safe
-      br/
-      = "<b>Durée (en semaines) - #{language_stay&.duration}</b>".html_safe
-    p = show_attribute_empty_string(language_stay&.data_entry_responsible, 'Responsable de saisie')
-    p = show_attribute_empty_string(language_stay&.commercial_responsible, 'Responsable commercial')
-    p = show_attribute_empty_string(language_stay&.partner_company.name, 'Partenaire')
+    - if language_stay.canceled_language_stay == false
+      .mb-4
+        = "<b>Du #{date_format(language_stay&.start_date)} au #{date_format(language_stay&.end_date)}</b>".html_safe
+        br/
+        = "<b>Durée (en semaines) - #{language_stay&.duration}</b>".html_safe
+      p = show_attribute_empty_string(language_stay&.data_entry_responsible, 'Responsable de saisie')
+      p = show_attribute_empty_string(language_stay&.commercial_responsible, 'Responsable commercial')
+      p = show_attribute_empty_string(language_stay&.partner_company.name, 'Partenaire')
+    - else
+      .mb-4
+        .badge.badge-danger Séjours annulé
+
 
 .col-md-3
   h6.card-title Détails séjour
   .card-text
     p = show_attribute_empty_string(language_stay&.location, 'Lieu')
-    p = show_attribute_empty_string(language_stay&.transfer_aller, 'Transfert Aller')
-    p = show_attribute_empty_string(language_stay&.transfer_retour, 'Transfert Retour')
+    - if language_stay&.transfer_aller == false
+      = '<p><u>Transfert Aller</u> Non</p>'.html_safe
+    - else
+      = '<p><u>Transfert Aller</u> Oui</p>'.html_safe
+
+    - if language_stay&.transfer_retour == false
+      = '<p><u>Transfert Retour</u> Non</p>'.html_safe
+    - else
+      = '<p><u>Transfert Retour</u> Oui</p>'.html_safe
+
     p = show_attribute_empty_string(language_stay&.option_1, 'Option 1')
     p = show_attribute_empty_string(language_stay&.option_2, 'Option 2')
     p = show_attribute_empty_string(language_stay&.class_hours, 'Nombre d\'heures de cours')
@@ -22,9 +35,9 @@
 .col-md-3
   h6.card-title Autres
   .card-text
-    p = show_attribute_empty_string(language_stay&.accomodation_type.humanize, 'Type de logement')
-    p = show_attribute_empty_string(language_stay&.room.humanize, 'Chambre')
-    p = show_attribute_empty_string(language_stay&.pension.humanize, 'Pension')
+    p = show_attribute_empty_string(language_stay&.accomodation_type&.humanize, 'Type de logement')
+    p = show_attribute_empty_string(language_stay&.room&.humanize, 'Chambre')
+    p = show_attribute_empty_string(language_stay&.pension&.humanize, 'Pension')
     p = show_attribute_empty_string(show_the_age_at_language(language_stay&.client&.birth_date, language_stay), 'Âge pendant le séjour (ans)')
     p = show_attribute_empty_string(language_stay&.precisions, 'Précisions')
 
@@ -35,10 +48,9 @@
       = link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-outline-info mt-2'
   .mt-5.edit-delete-links.ml-3
     = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.id
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.id
     - if language_stay.canceled_language_stay == true
-      .badge.badge-danger.ml-3 Séjours annulé
-      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary'
+      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary ml-3'
     - else
       = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
 
@@ -48,10 +60,9 @@
     = link_to ('<i class="fa fas fa-plus-circle">Ajouter un Voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-outline-info'
   .mt-5.edit-delete-links.ml-3
     = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.id
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.id
     - if language_stay.canceled_language_stay == true
-      .badge.badge-danger.ml-3 Séjours annulé
-      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary'
+      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary ml-3'
     - else
       = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
 
@@ -61,20 +72,18 @@
     = link_to ('<i class="fa fas fa-plus-circle">Ajouter une facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-danger mt-2'
   .mt-5.edit-delete-links.ml-3
     = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.id
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.id
     - if language_stay.canceled_language_stay == true
-      .badge.badge-danger.ml-3 Séjours annulé
-      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary'
+      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary ml-3'
     - else
       = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
 
 - else
   .mt-5.edit-delete-links.ml-3
     = link_to "<i class='fa fas fa-edit'> Editer le séjour</i>".html_safe, edit_client_language_stay_path(@client, language_stay)
-    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.id
+    = link_to "<i class='fa fas fa-trash-alt'> Supprimer le séjour</i>".html_safe, client_language_stay_path(@client, language_stay), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.id
     - if language_stay.canceled_language_stay == true
-      .badge.badge-danger.ml-3 Séjours annulé
-      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary'
+      = link_to "Rétablir le séjour", reestablish_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-primary ml-3'
     - else
       = link_to "Annuler le séjour", cancel_language_stay_path(language_stay: language_stay), remote: true, class: 'btn-sm btn-outline-danger ml-3'
 

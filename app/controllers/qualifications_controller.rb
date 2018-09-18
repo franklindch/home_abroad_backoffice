@@ -10,14 +10,18 @@ class QualificationsController < ApplicationController
 	def create
 	  @qualification = Qualification.new(qualification_params)
 
-	  if @qualification.save
-		  if @family.update_columns(qualification_id: @qualification.id)
-		    flash[:notice] = "Qualification associée avec succès à la famille !"
+    if @qualification.save
+		  @family.update_columns(qualification_id: @qualification.id)
+      if @qualification.prospect?
+        flash[:notice] = "Merci de remplir les informations du prospect."
         redirect_to new_qualification_child_detail_path(@qualification)
-		  else
-        flash[:alert] = "Veuillez compléter les champs obligatoires."
-        render :new
+      else
+        flash[:notice] = "Vous pouvez toujours ajouter des prospects à la famille ajoutée."
+        redirect_to families_path
       end
+	  else
+      flash[:alert] = "Veuillez compléter les champs obligatoires."
+      render :new
     end
   end
 
@@ -55,7 +59,7 @@ class QualificationsController < ApplicationController
 
 	def qualification_params
 		params.require(:qualification).permit(
-		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :status
+		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :prospect
 		)
 	end
 end

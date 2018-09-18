@@ -1,13 +1,47 @@
+- travel_detail_aller = travel.travel_details.first
+- travel_detail_retour = travel.travel_details.second
+
 .modal.fade id="modal#{travel.id}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modal#{travel.id}Title"
   .modal-dialog.modal-dialog-centered role="document"
     .modal-content
       .modal-header
-        h4.modal-title id='modal#{travel.id}LongTitle' = "Voyage Groupe Code #{travel&.travel_code}"
+        h4.modal-title id='modal#{travel.id}LongTitle' = "Voyage Groupe - Code #{travel&.travel_code}"
         button.close aria-label="Close" data-dismiss="modal" type="button"
         span aria-hidden="true"  &times;
 
       .modal-body
-        p = "Capacité #{travel.capacity}"
+        p = show_attribute_empty_string(travel&.capacity, 'Capacité')
+        p = show_attribute_nil(travel&.season&.humanize, 'Saison')
+        h6.card-title.card-title.pt-3.border-top = "Voyage #{travel_detail_aller.nature}"
+        p = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
+        p = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
+        p = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
+        p = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
+        p = show_attribute_empty_string(travel_detail_aller&.start_date, 'Date de départ')
+        p = show_attribute_empty_string(travel_detail_aller&.start_time, 'Heure de départ')
+        p = show_attribute_empty_string(travel_detail_aller&.meeting_time, 'Rendez-vous')
+        p = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Ville d\'arrivée')
+        p = show_attribute_empty_string(travel_detail_aller&.end_date, 'Date de retour')
+        p = show_attribute_empty_string(travel_detail_aller&.end_time, 'Heure de retour')
+
+        h6.card-title.pt-3.border-top = "Voyage #{travel_detail_retour.nature}"
+        p = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
+        p = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
+        p = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
+        p = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
+        p = show_attribute_empty_string(travel_detail_retour&.start_date, 'Date de départ')
+        p = show_attribute_empty_string(travel_detail_retour&.start_time, 'Heure de départ')
+        p = show_attribute_empty_string(travel_detail_retour&.meeting_time, 'Rendez-vous')
+        p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
+        p = show_attribute_empty_string(travel_detail_retour&.end_date, 'Date de retour')
+        p = show_attribute_empty_string(travel_detail_retour&.end_time, 'Heure de retour')
+        / p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+        / p = "Ville de départ: #{travel_detail_aller&.departure_location}" if travel_detail_aller.departure_location != ''
+        / p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
+        / p = "Heure début: #{date_format(travel_detail_aller&.start_time)}" if travel_detail_aller.start_time != ''
+        / p = "Heure de rdv: #{date_format(travel_detail_aller&.meeting_time)}" if travel_detail_aller.meeting_time != ''
+        / p = "Mode: #{travel_detail_aller&.mode}" if travel_detail_aller.mode != ''
+        / p = "Compagnie aérienne: #{travel_detail_aller&.companies}" if travel_detail_aller.companies != ''
 
       .modal-footer
       button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

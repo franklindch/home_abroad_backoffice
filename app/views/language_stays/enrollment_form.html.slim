@@ -30,7 +30,10 @@
       td
     tr.item
       td
-        = "Address : #{client.family.address_1}"
+        - if client.address_1 != ''
+          = "Address : #{client.address_1}"
+        - else
+          = "Address : #{client.family.address_1}"
     tr.item
       td
         = "Email : #{client.email}"
@@ -43,7 +46,7 @@
       td
         = "Birthdate (dd/mm/yr) : #{date_format(client.birth_date)}"
       td
-       = "Age : #{show_the_age(client.birth_date)} years"
+       = "Age : #{show_the_age_at_language(client.birth_date, @language_stay)} years"
     tr.item
       td
         = "Language : #{client.first_language} | Level : #{client.first_language_level}"
@@ -58,8 +61,7 @@
       td
         = "Medical issues / allergies / diet... : #{client.medical_issue}"
       td
-        = "Level of sport (for sport program) ?!"
-      td
+        = "School grade : #{client.school_grade}"
     tr.item.last
       td.pb-3
         = "Comment : #{client.comment}"
@@ -80,9 +82,9 @@
 
     tr.item
       td
-        = "Cellphone : #{client.family.mother_phone}"
+        = "Cellphone : #{client.family.mother_intl_number}"
       td
-        = "Workphone : #{client.family.mother_office_phone}"
+        = "Workphone : #{client.family.mother_office_intl_number}"
     tr.item
       td
         = "Email : #{client.family.mother_email}"
@@ -93,9 +95,9 @@
         = "First name : #{client.family.father_first_name}"
     tr.item
       td
-        = "Cellphone : #{client.family.father_phone}"
+        = "Cellphone : #{client.family.father_intl_number}"
       td
-        = "Workphone : #{client.family.father_office_phone}"
+        = "Workphone : #{client.family.father_office_intl_number}"
     tr.item
       td
         = "Email : #{client.family.father_email}"
@@ -113,7 +115,7 @@
       td
     tr.heading
       td
-        = "LOCATION / AREA : #{@language_stay.partner_company.address}"
+        = "LOCATION / AREA : #{@language_stay.location}"
       td
     tr.item
       td
@@ -125,17 +127,20 @@
         = "OPTION 2 : #{@language_stay.option_2}"
     tr.item
       td
-        = "Accomodation type : #{@language_stay.accomodation_type}"
+        = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
       td
-        = "Room : #{@language_stay.room}"
+        = "Room : #{@language_stay&.room&.humanize}"
     tr.item
       td
-        = "Pension : #{@language_stay.pension}"
+        = "Pension : #{@language_stay&.pension}"
       td
-        = "Accomodation : #{@language_stay.accomodation}"
+        = "Accomodation : #{@language_stay&.accomodation&.humanize}"
     tr.item
       td
         = "Class hours (in weeks) : #{@language_stay.class_hours}"
+    tr.item
+      td
+        = "Program details : #{@language_stay.program_detail}"
     tr.item.last
       - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
         td.pb-3

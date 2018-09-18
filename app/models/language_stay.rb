@@ -11,23 +11,24 @@ class LanguageStay < ApplicationRecord
   enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
   enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
   enum accomodation: {
-    Sans_logement: 1,
-    Avec_logement: 2
+    Without_accomodation: 1,
+    With_accomodation: 2
   }
   enum pension: {
-    Sans_repas: 1,
-    Petit_dej: 2,
-    Demi_pension: 3,
-    Pension_complète: 4
+    No_meal: 1,
+    Breakfast: 2,
+    Semi_pension: 3,
+    Full_pension: 4
   }
   enum room: {
-    Chambre_simple: 1,
-    Chambre_partagée: 2
+    Simple_room: 1,
+    Shared_room: 2
   }
   enum accomodation_type: {
-    Famille_d_accueil: 1,
-    En_résidence: 2,
-    Chez_le_professeur: 3
+    Host_family: 1,
+    In_residence: 2,
+    Summer_camp: 3,
+    Teachers_home: 4
   }
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
 

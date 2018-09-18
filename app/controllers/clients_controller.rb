@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 	end
 
 	def index
-		@clients = Client.order(:last_name).page params[:page]
+		@clients = Client.order('created_at ASC').page params[:page]
 		respond_to do |format|
 			format.html
 	    format.js
@@ -54,7 +54,7 @@ class ClientsController < ApplicationController
 	  if params[:query].present?
 	    @clients = Client.search_by_full_name(params[:query]).page params[:page]
 	  else
-	    @clients = Client.order(:last_name).page params[:page]
+	    @clients = Client.order('created_at ASC').page params[:page]
 	  end
 	end
 
@@ -94,7 +94,7 @@ class ClientsController < ApplicationController
 
 	def client_params
 	  params.require(:client).permit(
-	  	:status, :age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
+	  	:school, :school_grade, :season, :status, :age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
 	  )
 	end
 end

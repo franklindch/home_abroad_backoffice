@@ -11,7 +11,7 @@ section
   					.row
   						.col-md-12
                 - if @child_detail
-                  = f.input :season, collection: Client.seasons.keys.map { |w| [w.humanize, w] }, label: 'Saison', selected: 0
+                  = f.hidden_field :season, value: 'Saison_2018_2019'
                   = f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie', selected: 0
                   = f.input :gender, collection: Client.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
                   = f.input :first_name, label: 'Prénom'
@@ -53,11 +53,11 @@ section
                   = f.input :comment, label: 'Commentaire'
 
                 - else
-                  = f.input :season, collection: Client.seasons.keys.map { |w| [w.humanize, w] }, label: 'Saison', selected: 0
+                  = f.hidden_field :season, value: 'Saison_2018_2019'
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
                   = f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie', selected: 0
-                  = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
+                  = f.input :gender, collection: Client.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', selected: 0
                   = f.input :first_name, label: 'Prénom'
                   = f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family.name.capitalize} | #{family.  address_1.capitalize}" }
                   = link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'

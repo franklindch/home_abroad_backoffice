@@ -4,15 +4,15 @@
 .col-md-3
 	h6.card-title Décomptes
 	.card-text
-    p = show_attribute(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
-    p = show_attribute(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
-    p = show_attribute(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
+    p = show_attribute_nil(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
+    p = show_attribute_nil(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
+    p = show_attribute_nil(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
     - if invoice&.option_1_price_cents != 0
-      p = show_attribute(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
+      p = show_attribute_nil(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
     - else
       p Pas d'option 1 renseignée.
     - if invoice&.option_2_price_cents != 0
-      p = show_attribute(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
+      p = show_attribute_nil(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
     - else
       p Pas d'option 2 renseignée.
     p = "<b>Total - #{invoice.total_price_cents} euros</b>".html_safe
@@ -29,6 +29,7 @@
       = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_invoice_payment_path(invoice, payment)
       = link_to "<i class='fa fas fa-trash'></i>".html_safe, invoice_payment_path(invoice, payment), class: 'ml-2', method: :delete
 
+
     p.mt-3 = "<b>Total - #{invoice.total_payments} euros</b>".html_safe
 
 .col-md-4
@@ -37,3 +38,7 @@
     .badge.badge-success Facture acquittée et disponible.
   - else
     .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_payments} euros à payer"
+
+.mt-5.edit-delete-links.ml-3
+  = link_to "<i class='fa fas fa-trash-alt'> Editer la facture ou ajouter règlement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
+  = link_to "<i class='fa fas fa-trash-alt'> Supprimer la facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: language_stay.invoice.id

@@ -6,14 +6,14 @@ section
           h2.travel-form Formulaire Acheminement
         .card-body
           - if @travel.transits.find_by(nature: 'Pré_acheminement') && @travel.transits.find_by(nature: 'Post_acheminement')
-            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
-            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @travel.transits.find_by(nature: 'Pré_acheminement')), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @travel.transits.find_by(nature: 'Pré_acheminement').id
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @travel.transits.find_by(nature: 'Post_acheminement')), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @travel.transits.find_by(nature: 'Post_acheminement').id
 
           - elsif @travel.transits.find_by(nature: 'Post_acheminement')
-            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer post acheminement</i>".html_safe, travel_transit_path(@travel, @travel.transits.find_by(nature: 'Post_acheminement')), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @travel.transits.find_by(nature: 'Post_acheminement').id
 
           - elsif @travel.transits.find_by(nature: 'Pré_acheminement')
-            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @transit), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @transit.id
+            = link_to "<i class='fa fas fa-trash-alt'> Supprimer pré acheminement</i>".html_safe, travel_transit_path(@travel, @travel.transits.find_by(nature: 'Pré_acheminement')), method: :delete, class: 'delete-link ml-3',  data: {'confirm-swal': 'Are you sure?'}, id: @travel.transits.find_by(nature: 'Pré_acheminement').id
 
           = simple_form_for [@travel, @transit] do |f|
             .form-inputs.mt-4

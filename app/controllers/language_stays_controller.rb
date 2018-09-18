@@ -29,11 +29,13 @@ class LanguageStaysController < ApplicationController
 
   def update
     @language_stay.update(language_stay_params)
+    flash[:notice] = 'Séjour édité avec succès !'
     redirect_to client_path(@client)
   end
 
   def destroy
     @language_stay.destroy
+    flash[:notice] = 'Séjour supprimé avec succès !'
     redirect_to client_path(@client)
   end
 
@@ -56,6 +58,7 @@ class LanguageStaysController < ApplicationController
       format.html
       format.js { render :js => "window.location = '/dashboard/clients/#{@language_stay.client.id}'" }
     end
+    flash[:alert] = 'Séjour correctement annulé.'
   end
 
   def reestablish_language_stay
@@ -65,7 +68,7 @@ class LanguageStaysController < ApplicationController
       format.html
       format.js { render :js => "window.location = '/dashboard/clients/#{@language_stay.client.id}'" }
     end
-
+    flash[:notice] = 'Séjour correctement rétabli.'
   end
 
   private

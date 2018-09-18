@@ -21,10 +21,10 @@ class ApplicationController < ActionController::Base
   def generate_enrollment_form_pdf(language_stay)
     respond_to do |format|
       format.html do
-        render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
-               template: 'pdfs/enrollment_form.html.slim',
-               disposition: 'attachment',
-               layout: 'pdf'
+      #   render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
+      #          template: 'pdfs/enrollment_form.html.slim',
+      #          disposition: 'attachment',
+      #          layout: 'pdf'
       end
     end
   end

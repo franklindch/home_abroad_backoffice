@@ -23,7 +23,8 @@
           td
             span = travel_group&.travel_code
           td
-            span = "#{travel_group.attendants.first&.first_name} #{travel_group.attendants.first&.last_name}"
+            - travel_group.attendants.each do |attendant|
+              span = "| #{attendant&.first_name} #{attendant&.last_name.upcase} "
           td
           td
           td

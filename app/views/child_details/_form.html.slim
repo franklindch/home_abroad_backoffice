@@ -19,7 +19,7 @@ section
                     = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire', selected: 0
                     = f.input :duration, label: 'Durée envisagée (en s)'
                     = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois', selected: 0
-                    = f.input :comment, label: 'Remarque'
+                    = f.input :comment, label: 'Souhaits de séjours'
                     = f.hidden_field :status, value: 'Prospect'
                     = f.input :partner_company_ids, as: :select2, collection: PartnerCompany.where(nature: 'Organisme'), label_method: lambda { |partner_company| "#{c(partner_company.name)} | #{partner_company&.address}" }, multiple: true, value_method: :id, include_blank: false, label: 'Choisir le(s) organisme(s)', input_html: {class: 'oli'}
             .form-actions.text-center

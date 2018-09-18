@@ -10,6 +10,7 @@
           th Nom
           th Prénom
           th Catégorie
+          th Date de naissance
           th Date de saisie
           th Téléphone
           th Email
@@ -27,10 +28,13 @@
               td
                 span = client&.age_category
               td
+                span = date_format(client&.birth_date)
+              td
                 span = date_format(client&.created_at)
               td
                 span = number_to_phone(client&.intl_number) if client.intl_number != nil
               td
                 span = client&.email
+              td
               td
                 span = link_to 'Vers sa fiche client', family_client_path(client.family, client)

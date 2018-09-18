@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     get 'static', to: 'excels#static'
     get 'enrollment_form', to: 'language_stays#enrollment_form'
     get 'language_stay_certificate', to: 'language_stays#certificate', format: 'docx'
-    get 'invoice', to: 'invoices#invoice'
+    get 'invoice_pdf', to: 'invoices#invoice'
     get 'paid_invoice', to: 'invoices#paid_invoice'
     get 'airport_convocation', to: 'travel_groups#airport_convocation'
   end

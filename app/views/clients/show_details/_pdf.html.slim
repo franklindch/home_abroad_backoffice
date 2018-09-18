@@ -5,7 +5,7 @@
 - invoice = language_stay.invoice
 
 - if invoice
-	= link_to 'Facture', invoice_path(invoice: language_stay.invoice), format: :pdf, class: 'btn btn-primary mr-3'
+	= link_to 'Facture', invoice_pdf_path(invoice: language_stay.invoice), format: :pdf, class: 'btn btn-primary mr-3'
 
 	- if invoice.total_price_cents == invoice.total_payments
 		= link_to 'Facture acquittée', paid_invoice_path(paid_invoice: language_stay.invoice), format: :pdf, class: 'btn btn-primary mr-3'

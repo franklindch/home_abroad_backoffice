@@ -15,28 +15,30 @@ class QualificationsController < ApplicationController
 		    flash[:notice] = "Qualification associée avec succès à la famille !"
         redirect_to new_qualification_child_detail_path(@qualification)
 		  else
-		  	flash[:alert] = "Veuillez compléter les champs obligatoires."
-		  	render :new
-		  end
-		end
-	end
+        flash[:alert] = "Veuillez compléter les champs obligatoires."
+        render :new
+      end
+    end
+  end
 
-	def close_prospect
-		@child_detail = ChildDetail.find(params[:child_detail])
-		@child_detail.status_to_close
-		respond_to do |format|
-		  format.html
-		  format.js { render :js => "window.location = '/dashboard/families'" }
-		end
-	end
+  def close_prospect
+    @child_detail = ChildDetail.find(params[:child_detail])
+    @child_detail.status_to_close
+    respond_to do |format|
+      format.html
+      format.js { render :js => "window.location = '/dashboard/families'" }
+    end
+    flash[:alert] = "Prospect correctement clôturé."
+  end
 
-	def reestablish_prospect
-		@child_detail = ChildDetail.find(params[:child_detail])
-		@child_detail.status_to_open
-		respond_to do |format|
-		  format.html
-		  format.js { render :js => "window.location = '/dashboard/families'" }
-		end
+  def reestablish_prospect
+    @child_detail = ChildDetail.find(params[:child_detail])
+    @child_detail.status_to_open
+    respond_to do |format|
+      format.html
+      format.js { render :js => "window.location = '/dashboard/families'" }
+    end
+		flash[:notice] = "Prospect correctement rétabli."
 	end
 
 	private

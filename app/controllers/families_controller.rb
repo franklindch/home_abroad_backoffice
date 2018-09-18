@@ -15,6 +15,7 @@ class FamiliesController < ApplicationController
     if @family.save
       # binding.pry
       # FamilyMailer.with(family: @family).welcome_email.deliver_now
+      binding.pry
       if @prospect == "false"
         redirect_to families_path
       else
@@ -40,7 +41,7 @@ class FamiliesController < ApplicationController
   end
 
   def index
-    @families = Family.order(:name).page(params[:page])
+    @families = Family.order('created_at DESC').page(params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -66,7 +67,7 @@ class FamiliesController < ApplicationController
     if params[:query].present?
       @families = Family.search_by_name(params[:query]).page(params[:query])
     else
-      @families = Family.order(:name).page params[:page]
+      @families = Family.order('created_at DESC').page params[:page]
     end
   end
 

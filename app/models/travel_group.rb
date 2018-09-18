@@ -24,12 +24,6 @@ class TravelGroup < ApplicationRecord
   				}
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
 
-  # enum acheminement: { Pré_acheminement: 0, Post_acheminement: 1 }
-  # validate :coverimage_size
-
-  # before_validation :verify_uniqueness_pre_acheminement!, on: :create
-  # before_validation :verify_uniqueness_post_acheminement!, on: :create
-  # before_validation :verify_uniqueness_travel_group_id!, on: :create
 
   def travel_group_present
     travels != []

@@ -18,7 +18,8 @@ function autocompleteInvoiceFieldTotal() {
   }
   if($("#invoice_option_1_price_cents")){
     c();
-  } else {
+  }
+  if($("#invoice_transfer_price_cents")) {
     d();
   }
 }
@@ -178,27 +179,39 @@ function c() {
   });
 }
 
-function c() {
+function d() {
   $(document).on("change", "#invoice_application_fee_price_cents", function() {
     const applicationFeePriceCents = $("#invoice_application_fee_price_cents").val() || 120,
     languageStayPriceCents = $("#invoice_language_stay_price_cents").val(),
+    TransferPriceCents = $("#invoice_transfer_price_cents").val(),
     TravelPriceCents = $("#invoice_travel_price_cents").val();
-    const total = parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
+    const total = parseInt(TransferPriceCents) + parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
     $("#invoice_total_price_cents").val(total);
   });
   $(document).on("change", "#invoice_language_stay_price_cents", function() {
     const applicationFeePriceCents = $("#invoice_application_fee_price_cents").val() || 120,
     languageStayPriceCents = $("#invoice_language_stay_price_cents").val(),
-    TravelPriceCents = $("#invoice_travel_price_cents").val();
-    const total = parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
+    TravelPriceCents = $("#invoice_travel_price_cents").val(),
+    TransferPriceCents = $("#invoice_transfer_price_cents").val();
+    const total = parseInt(TransferPriceCents) + parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
     $("#invoice_total_price_cents").val(total);
   });
 
   $(document).on("change", "#invoice_travel_price_cents", function() {
     const applicationFeePriceCents = $("#invoice_application_fee_price_cents").val() || 120,
     languageStayPriceCents = $("#invoice_language_stay_price_cents").val(),
-    TravelPriceCents = $("#invoice_travel_price_cents").val();
-    const total = parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
+    TravelPriceCents = $("#invoice_travel_price_cents").val(),
+    TransferPriceCents = $("#invoice_transfer_price_cents").val();
+    const total = parseInt(applicationFeePriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents) + parseInt(TransferPriceCents)
+    $("#invoice_total_price_cents").val(total);
+  });
+
+  $(document).on("change", "#invoice_transfer_price_cents", function() {
+    const applicationFeePriceCents = $("#invoice_application_fee_price_cents").val() || 120,
+    languageStayPriceCents = $("#invoice_language_stay_price_cents").val(),
+    TravelPriceCents = $("#invoice_travel_price_cents").val(),
+    TransferPriceCents = $("#invoice_transfer_price_cents").val();
+    const total = parseInt(applicationFeePriceCents) + parseInt(TransferPriceCents) + parseInt(languageStayPriceCents) + parseInt(TravelPriceCents)
     $("#invoice_total_price_cents").val(total);
   });
 }

@@ -25,8 +25,24 @@ module ApplicationHelper
 	  	return new_number.join(' ')
 	end
 
-  def show_attribute(attribute, label)
-    if attribute != '' || attribute != 0 || attribute != nil
+  def show_attribute_nil(attribute, label)
+    if attribute != nil
+      "<p><u>#{label}</u> #{attribute}</p>".html_safe
+    else
+      return ''
+    end
+  end
+
+  def show_attribute_null(attribute, label)
+    if attribute != 0
+      "<p><u>#{label}</u> #{attribute}</p>".html_safe
+    else
+      return ''
+    end
+  end
+
+  def show_attribute_empty_string(attribute, label)
+    if attribute != ''
       "<p><u>#{label}</u> #{attribute}</p>".html_safe
     else
       return ''

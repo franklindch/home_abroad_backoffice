@@ -1,17 +1,18 @@
 .modal-header
-  h4.modal-title id='modal#{family.id}LongTitle' = "Informations sur la famille #{family&.name.capitalize}"
+  h4.modal-title id='modal#{family.id}LongTitle' = "<b>Informations sur la famille #{family&.name.capitalize}</b>".html_safe
   button.close aria-label="Close" data-dismiss="modal" type="button"
   span aria-hidden="true"  &times;
 
 .modal-body
   - if qualification == nil
-    p Pas de détails sur les prospects de cette famille
+    p Famille non ajoutée en tant que prospect.
+    = count_clients(family)
 
   - else
-    = show_attribute(qualification.comment, "Commentaire")
-    = show_attribute(qualification.data_entry_responsible, "Responsable de saisie")
-    = show_attribute(qualification.contact_mode.humanize, "Mode de contact")
-    = show_attribute(qualification.reference_name, "Référence")
+    = show_attribute_empty_string(qualification.comment, "Commentaire")
+    = show_attribute_empty_string(qualification.data_entry_responsible, "Responsable de saisie")
+    = show_attribute_empty_string(qualification.contact_mode.humanize, "Mode de contact")
+    = show_attribute_empty_string(qualification.reference_name, "Référence")
 
     - if qualification.status == 'Prospect'
       = render 'families/modal/qualification_is_prospect', qualification: qualification
@@ -21,6 +22,7 @@
     - elsif qualification.status == 'Dormante'
       = render 'families/modal/qualification_is_sleeping', qualification: qualification
     - else
+    = count_clients(family)
 
 .modal-footer
 button.btn.btn-secondary data-dismiss="modal" type="button" Fermer

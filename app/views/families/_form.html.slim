@@ -6,7 +6,7 @@ section
           h2 Formulaire Famille
         .card-body
           = simple_form_for @family do |f|
-            .form-inputs
+            .form-inputs.pb-4
             	.container-fluid
             		.row
             			.col-md-4
@@ -21,7 +21,8 @@ section
                     = f.input :zip_code, label: 'Code Postal', input_html: { class: 'zip_code_field '}
                     = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale'
                     = f.hidden_field :prospect, value: params[:prospect]
-            .form-inputs
+
+            .form-inputs.border-top.pt-4
               .container-fluid
                 .row
                   .col-md-6
@@ -30,8 +31,6 @@ section
                     = f.input :father_first_name, label: 'Prénom'
                     = f.input :father_phone, label: 'Tél', input_html: { class: 'father_phone' }
                     = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
-                    / = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
-                    / = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_phone' }
                     = f.input :father_email, label: 'Email'
                   .col-md-6
                     h4.mt-3.text-center Mère

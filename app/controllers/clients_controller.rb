@@ -8,8 +8,11 @@ class ClientsController < ApplicationController
 		@families = Family.all
 		if params[:child_detail_id]
 			search_for_child_detail
-		else
-			@client = Client.new
+		elsif params[:family_id]
+      @family = Family.find(params[:family_id])
+			@client = Client.new(family: @family)
+    else
+      @client = Client.new
 		end
 	end
 
@@ -32,13 +35,9 @@ class ClientsController < ApplicationController
 	def edit; end
 
 	def update
-	  if @client.update(client_params)
-	  	flash[:notice] = "Client édité avec succès !"
-	  	redirect_to client_path(@client)
-	  else
-	  	flash[:notice] = "Merci de lire les messages d'erreurs."
-	  	render :edit
-	  end
+    @client.update(client_params)
+  	flash[:notice] = "Client édité avec succès !"
+  	redirect_to client_path(@client)
 	end
 
 	def destroy

@@ -6,17 +6,12 @@
 .modal-body
   - if qualification == nil
     p Famille non ajoutée en tant que prospect.
-    .btn-group.mr-2.d-flex
-      / = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
-      / = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
     span.badge.badge-info.mt-3
         = count_clients(family)
 
   - else
-    = show_attribute_empty_string(qualification.comment, "Commentaire")
-    / = show_attribute_empty_string(qualification.data_entry_responsible, "Responsable de saisie")
-    / = show_attribute_empty_string(qualification.contact_mode.humanize, "Mode de contact")
-    / = show_attribute_empty_string(qualification.reference_name, "Référence")
+    = show_attribute_empty_string(qualification&.family_comment, "Commentaire Famille")
+
     .btn-group.mr-2.d-flex
       = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
       = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'

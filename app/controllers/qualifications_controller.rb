@@ -58,8 +58,6 @@ class QualificationsController < ApplicationController
 	end
 
 	def qualification_params
-		params.require(:qualification).permit(
-		  :comment, :refered_by, :reference_name, :contact_mode, :data_entry_responsible, :prospect
-		)
+		params.require(:qualification).permit(:prospect, :family_comment)
 	end
 end

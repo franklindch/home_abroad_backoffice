@@ -6,7 +6,7 @@ let Turbolinks = require("turbolinks")
 Turbolinks.start()
 
 import { Conditionals } from '../style/conditionals';
-import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberLSFields } from '../libraries/initialize-intl-number';
+import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberClientFields } from '../libraries/initialize-intl-number';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelConditionnal, travelGroupConditionnal } from '../style/conditional_form';
@@ -40,7 +40,7 @@ document.addEventListener("turbolinks:load", () => {
 		initializeIntlNumberPartnerFields();
 	}
 
-	if ($('.phone_during_stay')){
-		initializeIntlNumberLSFields();
+	if ($('.client_phone_number')){
+		initializeIntlNumberClientFields();
 	}
 });

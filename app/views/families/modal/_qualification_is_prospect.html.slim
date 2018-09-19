@@ -9,13 +9,15 @@
     .card-modal.mt-3
       .card-category
         h6 = "#{child_detail.first_name.capitalize} #{c(child_detail.last_name)}"
-        p = "Intéressé par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}"
+        p = "Intéressé par séjour de #{child_detail.comment} semaines, plutôt en #{child_detail.month} | Souhaits de séjour : #{child_detail.comment}"
+
         - if child_detail.partner_companies.empty?
           p Aucun organisme étranger renseigné.
         - else
           p
             - child_detail.partner_companies.each do |partner_company|
               = "Organisme #{c(partner_company.name)} "
+
         = render 'child_details/relance_prospect_collapse', child_detail: child_detail
         = render 'child_details/verify_status_for_badge', child_detail: child_detail
       .card-user

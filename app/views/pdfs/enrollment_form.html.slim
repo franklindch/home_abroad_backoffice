@@ -57,7 +57,10 @@
       td
         = "Preferred hobbies : #{client.preferred_hobbies}"
       td
-        = "Smoker : #{client.smoker}"
+        - if client&.smoker == false
+          = '<p><u>Fumeur</u> No</p>'.html_safe
+        - else
+          = '<p><u>Fumeur</u> Yes</p>'.html_safe
     tr.item
       td
         = "Medical issues / allergies / diet... : #{client.medical_issue}"
@@ -120,7 +123,7 @@
       td
     tr.item
       td
-        = "<b>Dates</b> - arrival date (dd/mm/yr) : #{date_format(@language_stay.end_date)} | departure date (dd/mm/yr) : #{date_format(@language_stay.end_date)}".html_safe
+        = "<b>Dates</b> - arrival date (dd/mm/yr) : #{date_format(@language_stay.start_date)} | departure date (dd/mm/yr) : #{date_format(@language_stay.end_date)}".html_safe
     tr.item
       td
         = "OPTION 1 : #{@language_stay.option_1}"
@@ -138,10 +141,7 @@
         = "Accomodation : #{@language_stay&.accomodation&.humanize}"
     tr.item
       td
-        = "Class hours (in weeks) : #{@language_stay.class_hours}"
-    tr.item
-      td
-        = "Program details : #{@language_stay.program_detail}"
+        = "Program details: #{@language_stay.program_detail}"
     tr.item.last
       - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
         td.pb-3

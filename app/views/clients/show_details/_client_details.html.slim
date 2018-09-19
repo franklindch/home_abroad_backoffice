@@ -13,6 +13,10 @@
           = show_attribute_empty_string(@client&.nationality, 'Nationalité')
           = show_attribute_empty_string(@client&.email, 'Email')
           = show_attribute_nil(@client&.intl_number, 'Tél')
+          - if @client.family.address_1
+            = show_attribute_nil(@client.family.address_1, 'Adresse Famille')
+          - else
+            = show_attribute_nil(@client.address, 'Adresse Client')
       .col-md-3
         h6.card-title Document officiel
         .card-text

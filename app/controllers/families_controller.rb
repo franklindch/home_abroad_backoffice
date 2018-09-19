@@ -10,7 +10,6 @@ class FamiliesController < ApplicationController
 
   def create
     @family = Family.new(family_params)
-
     if @family.save
       flash[:notice] = "Famille ajoutée avec succès !"
       redirect_to family_qualification_path(@family)

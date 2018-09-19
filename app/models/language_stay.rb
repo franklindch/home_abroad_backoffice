@@ -17,16 +17,16 @@ class LanguageStay < ApplicationRecord
   enum pension: {
     No_meal: 1,
     Breakfast: 2,
-    Semi_pension: 3,
-    Full_pension: 4
+    Half_board: 3,
+    Full_board: 4
   }
   enum room: {
-    Simple_room: 1,
+    Single_room: 1,
     Shared_room: 2
   }
   enum accomodation_type: {
     Host_family: 1,
-    In_residence: 2,
+    Residence: 2,
     Summer_camp: 3,
     Teachers_home: 4
   }

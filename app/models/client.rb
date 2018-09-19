@@ -25,10 +25,10 @@ class Client < ApplicationRecord
 
   # before_save :capitalize_fields
 
-  def check_if_family_is_client
-    if self.family.prospect?
-      qualification = self.family.qualification
-      qualification.check
-    end
-  end
+  # def check_if_family_is_client
+  #   if self.family.prospect?
+  #     qualification = self.family.qualification
+  #     qualification.check
+  #   end
+  # end
 end

@@ -7,59 +7,42 @@
       td colspan="2"
         table
           tr
-            td.title
-              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
-            td
-              br/
-              h3 Convocation aéroport
-              br/
-              p = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
-              p = "Capacité: #{@travel_group&.capacity}" if @travel_group.capacity != ""
-              p = "Code voyage: #{@travel_group&.travel_code}" if @travel_group.travel_code != ""
+            td.title.text-left
+              = wicked_pdf_image_tag 'logo.png'
 
-    tr.heading
-      td
-        | Aller
-      td
-    tr.item
-    	td
-    		p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
-    tr.item
-    	td
-    		p = "Ville de départ: #{travel_detail_aller&.departure_location}" if travel_detail_aller.departure_location != ''
-    tr.item
-    	td
-    		p = "Début: #{date_format(travel_detail_aller&.start_date)}" if travel_detail_aller.start_date != ''
-    tr.item
-    	td
-    		p = "Heure début: #{date_format(travel_detail_aller&.start_time)}" if travel_detail_aller.start_time != ''
-    tr.item
-    	td
-    		p = "Heure de rdv: #{date_format(travel_detail_aller&.meeting_time)}" if travel_detail_aller.meeting_time != ''
-    tr.item
-    	td
-    		p = "Mode: #{travel_detail_aller&.mode}" if travel_detail_aller.mode != ''
-    tr.item
-    	td
-    		p = "Compagnie aérienne: #{travel_detail_aller&.companies}" if travel_detail_aller.companies != ''
+    tr.information
+      td colspan="2"
+        table
+          tr
+            td.text-left
+              = "<b>Convocation aéroport</b>".html_safe
+              br/
+              p = "Versailles, le #{date_format(Date.today)}"
+          td
+            td.text-left
+              p = "Rendez-vous au comptoir d'enregistrement à <b>#{travel_detail_aller.meeting_time}</b> précise(s)".html_safe
+              p = "L'accompagnateur portera un panneau HOME ABROAD"
 
-    tr.heading
-      td
-        | Retour
-      td
-    tr.item
-    	td
-    		p = "Début: #{date_format(travel_detail_retour&.start_date)}" if travel_detail_retour.start_date != ''
-    	td
-    		p = "Ville de départ: #{travel_detail_retour&.departure_location}" if travel_detail_retour.departure_location != ''
-    	td
-    		p = "Début: #{date_format(travel_detail_retour&.start_date)}" if travel_detail_retour.start_date != ''
-    	td
-    		p = "Heure début: #{date_format(travel_detail_retour&.start_time)}" if travel_detail_retour.start_time != ''
-    	td
-    		p = "Heure de rdv: #{date_format(travel_detail_retour&.meeting_time)}" if travel_detail_retour.meeting_time != ''
-    	td
-    		p = "Mode: #{travel_detail_retour&.mode}" if travel_detail_retour.mode != ''
-    	td
-    		p = "Compagnie aérienne: #{travel_detail_retour&.companies}" if travel_detail_retour.companies != ''
-  = render 'pdfs/footer'
+  h6.card-title.pt-3.border-top = "Voyage #{travel_detail_aller.nature}"
+  p = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
+  p = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
+  p = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
+  p = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
+  p = show_attribute_empty_string(travel_detail_aller&.start_date, 'Date de départ')
+  p = show_attribute_empty_string(travel_detail_aller&.start_time, 'Heure de départ')
+  p = show_attribute_empty_string(travel_detail_aller&.meeting_time, 'Rendez-vous')
+  p = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Ville d\'arrivée')
+  p = show_attribute_empty_string(travel_detail_aller&.end_date, 'Date de retour')
+  p = show_attribute_empty_string(travel_detail_aller&.end_time, 'Heure de retour')
+
+  h6.card-title.pt-3.border-top = "Voyage #{travel_detail_retour.nature}"
+  p = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
+  p = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
+  p = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
+  p = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
+  p = show_attribute_empty_string(travel_detail_retour&.start_date, 'Date de départ')
+  p = show_attribute_empty_string(travel_detail_retour&.start_time, 'Heure de départ')
+  p = show_attribute_empty_string(travel_detail_retour&.meeting_time, 'Rendez-vous')
+  p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
+  p = show_attribute_empty_string(travel_detail_retour&.end_date, 'Date de retour')
+  p = show_attribute_empty_string(travel_detail_retour&.end_time, 'Heure de retour')

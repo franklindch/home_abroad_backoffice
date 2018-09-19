@@ -30,7 +30,19 @@
               br/
               = "Séjour #{language_stay.program.name} à #{language_stay.location}"
               br/
+              = "Détails du programme : #{language_stay&.program_detail_fr}"
+              br/
               = "Du #{date_format(language_stay.start_date)} au #{date_format(language_stay.end_date)} - durée de #{language_stay.duration} semaines"
+              br/
+              = t("views.pensions.#{language_stay&.pension}")
+              br/
+              = t("views.rooms.#{language_stay&.room}")
+              br/
+              = t("views.accomodation_types.#{language_stay&.accomodation_type}")
+              br/
+              = t("views.accomodations.#{language_stay&.accomodation}")
+
+
     tr.heading
       td
         | Libellé
@@ -52,15 +64,15 @@
       td
         = "#{@invoice.travel_price_cents} #{@invoice.travel_price_currency}"
     tr.item
-      - if @invoice.option_1_price_cents != 0
+      - if language_stay.option_1_fr != ''
         td
-          | Prix Option 1
+          = "Prix Option 1 : #{language_stay&.option_1_fr}"
         td
           = "#{@invoice.option_1_price_cents} #{@invoice.option_1_price_currency}"
     tr.item
-      - if @invoice.option_2_price_cents != 0
+      - if language_stay.option_2_fr != ''
         td
-          | Prix Option 2
+          = "Prix Option 2 : #{language_stay&.option_2_fr}"
         td
           = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
     tr.item.last

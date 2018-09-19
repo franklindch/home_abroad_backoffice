@@ -17,7 +17,7 @@ br
 = "Versailles, le #{Date.today},"
 br
 br
-= "Je soussigné; #{current_user&.first_name} #{current_user&.last_name&.upcase}, responsable séjours Etudiants & Adultes chez Séjours HOME ABROAD, atteste que #{client.first_name.capitalize} #{client.last_name.upcase} est inscrit / a effectué un séjour linguistique - #{@language_stay.location}, du #{@language_stay.start_date} au #{@language_stay.end_date}."
+= "Je soussigné; #{current_user&.first_name} #{current_user&.last_name&.upcase}, Responsable séjours Etudiants & Adultes chez Séjours HOME ABROAD, atteste que #{client.first_name.capitalize} #{client.last_name.upcase} est inscrit(e) / a effectué un séjour linguistique, #{@language_stay.program.name} - #{@language_stay.location}, du #{@language_stay.start_date} au #{@language_stay.end_date}."
 br
 br
 br
@@ -37,6 +37,14 @@ br
 br
 br
 = "#{current_user&.first_name} #{current_user&.last_name&.upcase}"
+br
+br
+br
+br
+br
+br
+br
+br
 br
 br
 nr

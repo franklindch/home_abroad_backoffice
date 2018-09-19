@@ -8,11 +8,11 @@
     p = show_attribute_nil(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
     p = show_attribute_nil(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
     p = show_attribute_nil(invoice&.transfer_price_cents, 'Prix du transfert (EUR)')
-    - if invoice&.option_1_price_cents != 0
+    - if language_stay&.option_1 != ''
       p = show_attribute_nil(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
     - else
       p Pas d'option 1 renseignée.
-    - if invoice&.option_2_price_cents != 0
+    - if language_stay&.option_2 != ''
       p = show_attribute_nil(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
     - else
       p Pas d'option 2 renseignée.

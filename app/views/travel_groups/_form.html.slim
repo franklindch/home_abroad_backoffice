@@ -17,8 +17,8 @@ section
 
                 .child_details_section.pt-3
                   .col-md-12
-                    h3.mt-3 Remplir les détails du voyage
-                    .child_details.mt-3
+                    h3.mt-3 Remplir l'Aller & le Retour du voyage
+                    .child_details.mt-5
                       = f.simple_fields_for :travel_details do |travel_detail|
                         = render 'travel_details/travel_detail_fields', f: travel_detail
                   .form-actions.text-center

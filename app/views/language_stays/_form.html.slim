@@ -17,22 +17,26 @@ section
                     = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                     h4.mt-4.mb-4 Détails
+                    = f.input :program_detail_fr, label: 'Détails du programme'
+                    = f.input :option_1_fr, label: 'Option 1'
+                    = f.input :option_2_fr, label: 'Option 2'
                     = f.input :start_date, label: 'Début'
                     = f.input :end_date, label: 'Fin'
+                    = f.input :class_hours, label: 'Nombre de leçons (par semaine)'
+                    = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement'
+                    = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [t("views.accomodation_types.#{w}"), w] }, label: 'Type de logement'
+                    = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
+                    = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
                     = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
                     = f.input :transfer_aller, label: 'Transfert Aller'
                     = f.input :transfer_retour, label: 'Transfert Retour'
-                    = f.input :class_hours, label: 'Nombre d\'heures de cours (par semaine)'
-                    = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [w.humanize, w] }, label: 'Logement'
-                    = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [w.humanize, w] }, label: 'Type de logement'
-                    = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [w.humanize, w] }, label: 'Pension'
-                    = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [w.humanize, w] }, label: 'Chambre'
-                    = f.input :option_1, label: 'Option 1 (en Anglais)'
-                    = f.input :program_detail, label: 'Détails du programme (en Anglais)'
-                    = f.input :option_2, label: 'Option 2 (en Anglais)'
-                    = f.input :precisions, label: 'Précisions (en Anglais)'
-
                     = f.input :fee, label: 'Payment en direct du camp', as: :radio_buttons
+
+                    h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :
+                    = f.input :program_detail, label: 'Program details'
+                    = f.input :precisions, label: 'Specific requests'
+                    = f.input :option_1, label: 'Option 1'
+                    = f.input :option_2, label: 'Option 2'
 
 
             .form-actions.text-center

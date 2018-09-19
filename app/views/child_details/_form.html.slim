@@ -10,11 +10,12 @@ section
               .container-fluid
                 .row
                   .col-md-12
-                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: ChildDetail.data_entry_responsibles.keys.map { |w| [w.humanize, w] }, selected: 0
-                    = f.input :contact_mode, collection: ChildDetail.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact', selected: 0
-                    = f.input :refered_by, collection: ChildDetail.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence', selected: 0
+                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: ChildDetail.data_entry_responsibles.keys.map { |w| [w.humanize, w] }
+                    = f.input :commercial_responsible, collection: ChildDetail.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Responsable commercial'
+                    = f.input :contact_mode, collection: ChildDetail.contact_modes.keys.map { |w| [w.humanize, w] }, label: 'Prise de contact'
+                    = f.input :refered_by, collection: ChildDetail.refered_bies.keys.map { |w| [w.humanize, w] }, label: 'Référence'
                     = f.input :reference_name, label: 'Nom référence'
-                    = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [w.humanize, w] }, label: 'Sexe', include_blank: false
+                    = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [t("views.genders.#{w}"), w] }, label: 'Sexe', include_blank: false
                     = f.input :first_name, label: 'Prénom'
                     = f.input :last_name, label: 'Nom de famille'
                     = f.input :age, label: 'Âge', collection: 10..50, include_blank: false
@@ -22,7 +23,7 @@ section
                     = f.input :school, label: 'Etablissement Scolaire'
                     = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
                     = f.input :duration, label: 'Durée envisagée (en s)'
-                    = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois', selected: 0
+                    = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois'
                     = f.input :comment, label: 'Souhaits de séjours'
                     = f.hidden_field :status, value: 'Prospect'
                     = f.input :partner_company_ids, as: :select2, collection: PartnerCompany.where(nature: 'Organisme'), label_method: lambda { |partner_company| "#{c(partner_company.name)}" }, multiple: true, value_method: :id, include_blank: false, label: 'Choisir le(s) organisme(s)', input_html: {class: 'oli'}

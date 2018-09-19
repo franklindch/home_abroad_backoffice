@@ -24,6 +24,14 @@ class TravelGroup < ApplicationRecord
   				}
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
 
+  # after_save :correspondences
+
+  # def correspondences
+  #   correspondence_aller = self.travel_details.first.correspondences.first
+  #   correspondence_retour = self.travel_details.second.correspondences.first
+  #   correspondence_aller.destroy if correspondence_aller.departure_location == '' && correspondence_aller
+  #   correspondence_retour.destroy if correspondence_retour.departure_location == '' && correspondence_retour
+  # end
 
   def travel_group_present
     travels != []

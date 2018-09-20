@@ -12,9 +12,9 @@ module ApplicationHelper
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_partner_company_path, class: 'btn btn-primary'
 		elsif model == "accompagnateur"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_attendant_path, class: 'btn btn-primary'
-		else
-			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_program_path, class: 'btn btn-primary'
-		end
+		elsif model == "programme"
+      link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_program_path, class: 'btn btn-primary'
+    end
 	end
 
 	def number_to_phone(number)

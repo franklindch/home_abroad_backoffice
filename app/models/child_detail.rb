@@ -1,5 +1,12 @@
 class ChildDetail < ApplicationRecord
+  include PgSearch
 	belongs_to :qualification
+
+  pg_search_scope :search_by_first_name,
+          against: [:first_name],
+          using: {
+            tsearch: { prefix: true, negation: true, any_word: true}
+          }
 
   has_and_belongs_to_many :partner_companies
 	enum gender: { Male: 1, Female: 2 }

@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       resources :child_details
     end
 
+    resources :child_details, only: [:index]
+
     resources :travels, only: [:index, :destroy, :edit, :update]
     resources :travels, only: [:show] do
       resources :off_set_travels, only: [:new, :create, :edit, :update]

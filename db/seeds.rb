@@ -73,24 +73,34 @@ end
 puts 'Importation des clients de l\'autre base...'
 csv_text = File.read(Rails.root.join('clients_retravaillee.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
-csv.each do |row|
-  Client.create!(
-    name: row['name'],
-    address_1: row['Address₁'],
-    # address_2: row['zip'],
-    zip_code: row['zip_code'],
-    intl_number: row['intl_number'],
+csv.each do |row, i|
+  client_i = Client.create!(
+    gender: row['gender'],
+    first_name: row['first_name'],
+    # last_name: "",
+    # birth_date: Wed, 21 Aug 1968,
+    # passport_expiration_date: Sat, 25 Dec 2021,
     email: row['email'],
-    father_name: row['father_name'],
-    mother_name: row['mother_name'],
-    father_email: row['father_email'],
-    mother_email: row['mother_email'],
-    mother_intl_number: row['mother_intl_number'],
-    father_intl_number: row['father_intl_number'],
-    mother_office_intl_number: row['mother_office_intl_number'],
-    father_office_intl_number: row['father_office_intl_number']
+    passport_number: row['passport_number'],
+    country_of_issue: row['country_of_issue'],
+    school: row['school'],
+    intl_number: nil,
+
+
+
+    age: 17,
+    nationality: "French",
+    first_language_level: "Courant",
+    preferred_hobbies: "footing, lecture",
+    medical_issue: "aucun",
+    smoker: false,
+    comment: "",
+    family_id: family_1.id,
+    second_language_level: "Intermédiaire",
+    first_language: "Anglais",
+    second_language: "Espagnol"
   )
-  puts "Famille créée"
+  puts "Client créée"
 end
 
 

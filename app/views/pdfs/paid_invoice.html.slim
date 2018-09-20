@@ -33,26 +33,23 @@
               br/
               = "Séjour #{language_stay.program.name} à #{language_stay.location}"
               br/
-              = "<u>Détails du programme</u><br>#{language_stay&.program_detail_fr}".html_safe
+              br/
+              = "<u>Détails du programme</u><br> #{language_stay&.program_detail_fr}".html_safe
               br/
               - if language_stay&.accomodation == 'With_accomodation'
                 = "<u>Détails du logement</u><br>".html_safe
-                = t("views.pensions.#{language_stay&.pension}")
+                = t("views.accomodation_types.#{language_stay&.accomodation_type}")
                 br/
                 = t("views.rooms.#{language_stay&.room}")
                 br/
-                = t("views.accomodation_types.#{language_stay&.accomodation_type}")
+                = t("views.pensions.#{language_stay&.pension}")
+                br/
 
     tr.heading
       td
         | Libellé
       td
         | Prix
-    tr.item
-      td
-        | Frais de dossier
-      td
-        = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
     tr.item
       td
         | Prix du séjour
@@ -75,11 +72,16 @@
           = "Prix Option 2 : #{language_stay&.option_2_fr}"
         td
           = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
-    tr.item.last
+    tr.item
       td
         | Transferts A/R
       td
         = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+    tr.item.last
+      td
+        | Frais de dossier
+      td
+        = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
     tr.total
       td
        |

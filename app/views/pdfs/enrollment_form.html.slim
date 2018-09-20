@@ -194,7 +194,7 @@
           td
         tr.item
           td
-            = "Date (dd/mm/yr) : #{travel_detail_aller.start_date} | Time : #{time_format(travel_detail_aller.start_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.start_date)} | Time : #{time_format(travel_detail_aller.start_time)}"
           td
         tr.item
           td
@@ -202,7 +202,7 @@
           td
         tr.item
           td
-            = "Date (dd/mm/yr) : #{travel_detail_aller.end_date} | Time : #{time_format(travel_detail_aller.end_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
         tr.item
           td
@@ -215,7 +215,7 @@
           td
         tr.item
           td
-            = "Date (dd/mm/yr) : #{travel_detail_retour.start_date} | Time : #{time_format(travel_detail_retour.start_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.start_date)} | Time : #{time_format(travel_detail_retour.start_time)}"
           td
         tr.item
           td
@@ -223,7 +223,7 @@
           td
         tr.item
           td
-            = "Date (dd/mm/yr) : #{travel_detail_retour.end_date} | Time : #{time_format(travel_detail_retour.end_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
       - else
         - travel_detail_aller = travel.travel_details.first

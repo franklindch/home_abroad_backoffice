@@ -1,0 +1,42 @@
+- if @child_details.empty?
+  .card
+    .card-body
+      p Aucun prospect trouvé pour cette recherche, merci de réessayer.
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Statut
+          th Nom
+          th Prénom
+          th Âge
+          th Email
+          th Famille
+          th
+          th
+          th
+
+      tbody
+      - @child_details.each do |child_detail|
+        tr
+          td
+            span = child_detail&.status.humanize
+          td
+            span = c(child_detail&.last_name)
+          td
+            span = child_detail&.first_name
+          td
+            span = "#{child_detail.age} ans" if child_detail.age != nil
+          td
+            span = child_detail.email
+          td
+            span = "Famille #{child_detail.qualification.family.name}"
+          td
+            span = link_to 'Texte de relance', relaunch_path(child_detail: child_detail), format: :html
+          td
+            span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
+          td
+            span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
+
+// souhaits de séjour et organismes et durée envisagée

@@ -31,6 +31,20 @@ class ChildDetailsController < ApplicationController
     end
   end
 
+  def index
+    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    if params[:query].present?
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_first_name(params[:query]).page params[:page]
+    else
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
+    end
+  end
+
   def update
     @child_detail.update(child_detail_params)
     flash[:notice] = "Prospect édité avec succès !"

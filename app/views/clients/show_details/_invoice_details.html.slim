@@ -14,9 +14,9 @@
       p = show_attribute_nil(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
     - else
       p Pas d'option 2 renseignée.
-    p = "<b>Total - #{invoice.total_price_cents} euros</b>".html_safe
     p = show_attribute_nil(invoice&.transfer_price_cents, 'Prix transfert(s) (EUR)')
     p = show_attribute_nil(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
+    p = "<b>Total - #{invoice.total_price_cents} euros</b>".html_safe
 
 .col-md-3
   h6.card-title Règlements

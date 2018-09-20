@@ -10,8 +10,8 @@
             td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
             br/
-            td.text-left
-              = "<b>CONVOCATION AEROPORT</b>".html_safe
+            td.text-left.convocation-title
+              = "<b>Convocation aéroport</b>".html_safe
             br/
             td.text-left
               = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s)<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
@@ -27,7 +27,7 @@
         = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
     tr.item
       td
-        = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
+        = show_attribute_nil(travel_detail_aller&.companies, 'Compagnie')
       td
         = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
     tr.item
@@ -57,7 +57,7 @@
         = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
     tr.item
       td
-        = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
+        = show_attribute_nil(travel_detail_retour&.companies, 'Compagnie')
       td
         = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
     tr.item

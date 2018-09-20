@@ -7,38 +7,74 @@
       td colspan="2"
         table
           tr
-            td.title.text-center
+            td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
             br/
             td.text-left
-              = "<b>Convocation aéroport</b>".html_safe
+              = "<b>CONVOCATION AEROPORT</b>".html_safe
             br/
             td.text-left
-              p = "Rendez-vous au comptoir d'enregistrement à <b>#{travel_detail_aller.meeting_time}</b> précise(s)<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
+              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s)<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
-  h6.card-title.pt-3.border-top = "Voyage #{travel_detail_aller.nature}"
-  p = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
-  p = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
-  p = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
-  p = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
-  p = show_attribute_empty_string(travel_detail_aller&.start_date, 'Date de départ')
-  p = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
-  p = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
-  p = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Ville d\'arrivée')
-  p = show_attribute_empty_string(travel_detail_aller&.end_date, 'Date d\'arrivée')
-  p = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
+    tr.heading
+      td
+        = "Voyage #{travel_detail_aller.nature}"
+      td
+    tr.item
+      td
+        = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
+      td
+        = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
+    tr.item
+      td
+        = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
+      td
+        = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
+    tr.item
+      td
+        = show_attribute_empty_string(travel_detail_aller&.start_date, 'Date de départ')
+      td
+        = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
+    tr.item
+      td
+        = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
+      td
+        = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Ville d\'arrivée')
+    tr.item.last
+      td
+        = show_attribute_empty_string(travel_detail_aller&.end_date, 'Date d\'arrivée')
+      td
+        = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
-  h6.card-title.pt-3.border-top = "Voyage #{travel_detail_retour.nature}"
-  p = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
-  p = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
-  p = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
-  p = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
-  p = show_attribute_empty_string(travel_detail_retour&.start_date, 'Date de départ')
-  p = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
-  p = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
-  p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
-  p = show_attribute_empty_string(travel_detail_retour&.end_date, 'Date d\'arrivée')
-  p = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
+    tr.heading
+      td
+        = "Voyage #{travel_detail_retour.nature}"
+      td
+    tr.item
+      td
+        = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
+      td
+        = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
+    tr.item
+      td
+        = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
+      td
+        = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
+    tr.item
+      td
+        = show_attribute_empty_string(travel_detail_retour&.start_date, 'Date de départ')
+      td
+        = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
+    tr.item
+      td
+        = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
+      td
+        = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
+    tr.item.last
+      td
+        = show_attribute_empty_string(travel_detail_retour&.end_date, 'Date d\'arrivée')
+      td
+        = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
 
   br/
   br/

@@ -12,162 +12,252 @@
 
 puts 'Cleaning database...'
 Invoice.destroy_all
+Family.destroy_all
 Qualification.destroy_all
 LanguageStay.destroy_all
 Travel.destroy_all
-Family.destroy_all
 
-qualification_of_family_1 = Qualification.create!(
-	comment: "très sympathique au téléphone",
-	status: "Prospect",
-	refered_by: "Rencontre_Home_Abroad",
-	data_entry_responsible: "Stagiaire",
-	contact_mode: "Webcontact",
-	reference_name: ""
-)
+# require 'csv'
 
-qualification_of_family_2 = Qualification.create!(
-	comment: "a l'air très sympa au premier contact - nouveau client",
-	status: "Prospect",
-	refered_by: "Ami",
-	data_entry_responsible: "Christine",
-	contact_mode: "Par_Office",
-	reference_name: ""
-)
+# csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
+# filepath    = 'beers.csv'
 
+# CSV.foreach(filepath, csv_options) do |row|
+#   Family.create!({
+#     name: row[0],
+#     family_situation: "Divorcés",
+#     address_1: "191 Rue Saint-Honoré, Paris, France",
+#     address_2: "2ième étage, porte à gauche",
+#     zip_code: 75001,
+#     phone: "132238293",
+#     qualification_id: ualification_of_family_2.id,
+#     email: "james@family.com",
+#     father_name: "François JAMES",
+#     mother_name: "Marie FRANC",
+#     mother_phone: "629302381",
+#     father_phone: "623232392",
+#     mother_email: "marie.franc@gmail.com",
+#     father_email: "francois.james@email.fr",
+#     mother_intl_number: "+33629302381",
+#     father_intl_number: "+33623232392",
+#     intl_number: "+33132238293"
+#   })
+# end
 
-family_1 = Family.create!(
-	name: "JACQUES",
-	family_situation: "Veuf",
-	address_1: "12 Avenue Trudaine, Paris, France",
-	address_2: "2ieme étage",
-	zip_code: 75002,
-	intl_phone: "012323233",
-	qualification_id: qualification_of_family_1.id,
-	email: "jacques@zddz.com",
-	father_name: "pierre JACQUES",
-	mother_name: "",
-	mother_phone: "",
-	father_phone: "0623283923",
-	mother_email: "",
-	father_email: "pierre@jacques.com"
- )
-
-family_2 = Family.create!(
-	name: "JAMES",
-	family_situation: "Divorcés",
-	address_1: "191 Rue Saint-Honoré, Paris, France",
-	address_2: "2ième étage, porte à gauche",
-	zip_code: 75001,
-	phone: "132238293",
-	qualification_id: ualification_of_family_2.id,
-	email: "james@family.com",
-	father_name: "François JAMES",
-	mother_name: "Marie FRANC",
-	mother_phone: "629302381",
-	father_phone: "623232392",
-	mother_email: "marie.franc@gmail.com",
-	father_email: "francois.james@email.fr",
-	mother_intl_number: "+33629302381",
-	father_intl_number: "+33623232392",
-	intl_number: "+33132238293"
-)
-
-child_detail_of_family_1 = ChildDetail.create!(
-	first_name: "isaure",
-	last_name: "JACQUES",
-	age: 17,
-	comment: "timide",
-	qualification_id: qualification_of_family_1.id,
-	email: "",
-	gender: "Masculin",
-	school_grade: "Terminale",
-	school: "saint-jean hulst",
-	duration: 2,
-	month: "Décembre",
-	client: false
-)
+require 'csv'
 
 
-child_detail_of_family_2 = ChildDetail.create!(
-	first_name: "jean-baptiste",
-	last_name: "JAMES",
-	age: 14,
-	comment: "intéressé par summer camp principalement",
-	qualification_id: qualification_of_family_2.id,
-	email: "jb.james@gmail.com",
-	gender: "Masculin",
-	school_grade: "Quatrième",
-	school: "saint-jean",
-	duration: 4,
-	month: "Août",
-	client: nil
-)
+puts 'Importation des familles de l\'autre base...'
+csv_text = File.read(Rails.root.join('families_retravaillee.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv.each do |row|
+  Family.create!(
+    name: row['name'],
+    address_1: row['Address₁'],
+    # address_2: row['zip'],
+    zip_code: row['zip_code'],
+    intl_number: row['intl_number'],
+    email: row['email'],
+    father_name: row['father_name'],
+    mother_name: row['mother_name'],
+    father_email: row['father_email'],
+    mother_email: row['mother_email'],
+    mother_intl_number: row['mother_intl_number'],
+    father_intl_number: row['father_intl_number'],
+    mother_office_intl_number: row['mother_office_intl_number'],
+    father_office_intl_number: row['father_office_intl_number']
+  )
+  puts "Famille créée"
+end
 
-client_of_family_1 = Client.create!(
-	age_category: "Junior",
-	gender: nil,
-	first_name: "isaure",
-	last_name: "",
-	birth_date: Wed, 21 Aug 1968,
-	age: 17,
-	email: nil,
-	phone_number: nil,
-	passport_number: "12BC3242432",
-	country_of_issue: "FR",
-	nationality: "French",
-	first_language_level: "Courant",
-	preferred_hobbies: "footing, lecture",
-	medical_issue: "aucun",
-	smoker: false,
-	comment: "",
-	family_id: family_1.id,
-	address_1: "",
-	address_2: "",
-	zip_code: nil,
-	passport_expiration_date: Sat, 25 Dec 2021,
-	second_language_level: "Intermédiaire",
-	first_language: "Anglais",
-	second_language: "Espagnol"
-)
+puts 'Importation des clients de l\'autre base...'
+csv_text = File.read(Rails.root.join('clients_retravaillee.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv.each do |row|
+  Client.create!(
+    name: row['name'],
+    address_1: row['Address₁'],
+    # address_2: row['zip'],
+    zip_code: row['zip_code'],
+    intl_number: row['intl_number'],
+    email: row['email'],
+    father_name: row['father_name'],
+    mother_name: row['mother_name'],
+    father_email: row['father_email'],
+    mother_email: row['mother_email'],
+    mother_intl_number: row['mother_intl_number'],
+    father_intl_number: row['father_intl_number'],
+    mother_office_intl_number: row['mother_office_intl_number'],
+    father_office_intl_number: row['father_office_intl_number']
+  )
+  puts "Famille créée"
+end
 
-program_1 = Program.create!(
-	name: 'Séjours en famille'
-)
 
-partner_company_1 = PartnerCompany.create!(
-	name: 'ELS'
-)
 
-language_stay_for_client_of_family_1 = LanguageStay.create!(
-	data_entry_responsible: 0,
-	commercial_responsible: 0,
-	duration: 0,
-	activities: "",
-	fee: true,
-	program_id: program_1.id,
-	client_id: client_of_family_1.id,
-	partner_company_id: partner_company_1.id ,
-	phone_during_stay: "062738232",
-	start_date: Mon, 08 Apr 2019,
-	end_date: Sat, 27 Apr 2019,
-	location: "massachusets",
-	transfer: "",
-	pension: "non",
-	accomodation: "non",
-	option_1: "",
-	option_2: "",
-	class_hours: 12,
-	precisions: ""
-)
 
-attendant_1 = Attendant.create!(
-	first_name: "Jeremy",
-	last_name: "Oliviera",
-	age: 25,
-	email: "oliviera.jeremy@gmail.com",
-	phone: "0627382902"
-)
+puts ""
+puts "--------------------------------------------------------"
+puts "There are now #{Family.count} rows in the families table"
+puts "There are now #{Family.count} rows in the families table"
+puts "There are now #{Client.count} rows in the clients table"
+
+
+
+
+
+
+# qualification_of_family_1: Qualification.create!(
+# 	comment: "très sympathique au téléphone",
+# 	status: "Prospect",
+# 	refered_by: "Rencontre_Home_Abroad",
+# 	data_entry_responsible: "Stagiaire",
+# 	contact_mode: "Webcontact",
+# 	reference_name: ""
+# )
+
+# qualification_of_family_2 = Qualification.create!(
+# 	comment: "a l'air très sympa au premier contact - nouveau client",
+# 	status: "Prospect",
+# 	refered_by: "Ami",
+# 	data_entry_responsible: "Christine",
+# 	contact_mode: "Par_Office",
+# 	reference_name: ""
+# )
+
+
+# family_1 = Family.create!(
+# 	name: "JACQUES",
+# 	family_situation: "Veuf",
+# 	address_1: "12 Avenue Trudaine, Paris, France",
+# 	address_2: "2ieme étage",
+# 	zip_code: 75002,
+# 	intl_phone: "012323233",
+# 	qualification_id: qualification_of_family_1.id,
+# 	email: "jacques@zddz.com",
+# 	father_name: "pierre JACQUES",
+# 	mother_name: "",
+# 	mother_phone: "",
+# 	father_phone: "0623283923",
+# 	mother_email: "",
+# 	father_email: "pierre@jacques.com"
+#  )
+
+# family_2 = Family.create!(
+# 	name: "JAMES",
+# 	family_situation: "Divorcés",
+# 	address_1: "191 Rue Saint-Honoré, Paris, France",
+# 	address_2: "2ième étage, porte à gauche",
+# 	zip_code: 75001,
+# 	phone: "132238293",
+# 	qualification_id: ualification_of_family_2.id,
+# 	email: "james@family.com",
+# 	father_name: "François JAMES",
+# 	mother_name: "Marie FRANC",
+# 	mother_phone: "629302381",
+# 	father_phone: "623232392",
+# 	mother_email: "marie.franc@gmail.com",
+# 	father_email: "francois.james@email.fr",
+# 	mother_intl_number: "+33629302381",
+# 	father_intl_number: "+33623232392",
+# 	intl_number: "+33132238293"
+# )
+
+# child_detail_of_family_1 = ChildDetail.create!(
+# 	first_name: "isaure",
+# 	last_name: "JACQUES",
+# 	age: 17,
+# 	comment: "timide",
+# 	qualification_id: qualification_of_family_1.id,
+# 	email: "",
+# 	gender: "Masculin",
+# 	school_grade: "Terminale",
+# 	school: "saint-jean hulst",
+# 	duration: 2,
+# 	month: "Décembre",
+# 	client: false
+# )
+
+
+# child_detail_of_family_2 = ChildDetail.create!(
+# 	first_name: "jean-baptiste",
+# 	last_name: "JAMES",
+# 	age: 14,
+# 	comment: "intéressé par summer camp principalement",
+# 	qualification_id: qualification_of_family_2.id,
+# 	email: "jb.james@gmail.com",
+# 	gender: "Masculin",
+# 	school_grade: "Quatrième",
+# 	school: "saint-jean",
+# 	duration: 4,
+# 	month: "Août",
+# 	client: nil
+# )
+
+# client_of_family_1 = Client.create!(
+# 	age_category: "Junior",
+# 	gender: nil,
+# 	first_name: "isaure",
+# 	last_name: "",
+# 	birth_date: Wed, 21 Aug 1968,
+# 	age: 17,
+# 	email: nil,
+# 	phone_number: nil,
+# 	passport_number: "12BC3242432",
+# 	country_of_issue: "FR",
+# 	nationality: "French",
+# 	first_language_level: "Courant",
+# 	preferred_hobbies: "footing, lecture",
+# 	medical_issue: "aucun",
+# 	smoker: false,
+# 	comment: "",
+# 	family_id: family_1.id,
+# 	address_1: "",
+# 	address_2: "",
+# 	zip_code: nil,
+# 	passport_expiration_date: Sat, 25 Dec 2021,
+# 	second_language_level: "Intermédiaire",
+# 	first_language: "Anglais",
+# 	second_language: "Espagnol"
+# )
+
+# program_1 = Program.create!(
+# 	name: 'Séjours en famille'
+# )
+
+# partner_company_1 = PartnerCompany.create!(
+# 	name: 'ELS'
+# )
+
+# language_stay_for_client_of_family_1 = LanguageStay.create!(
+# 	data_entry_responsible: 0,
+# 	commercial_responsible: 0,
+# 	duration: 0,
+# 	activities: "",
+# 	fee: true,
+# 	program_id: program_1.id,
+# 	client_id: client_of_family_1.id,
+# 	partner_company_id: partner_company_1.id ,
+# 	phone_during_stay: "062738232",
+# 	start_date: Mon, 08 Apr 2019,
+# 	end_date: Sat, 27 Apr 2019,
+# 	location: "massachusets",
+# 	transfer: "",
+# 	pension: "non",
+# 	accomodation: "non",
+# 	option_1: "",
+# 	option_2: "",
+# 	class_hours: 12,
+# 	precisions: ""
+# )
+
+# attendant_1 = Attendant.create!(
+# 	first_name: "Jeremy",
+# 	last_name: "Oliviera",
+# 	age: 25,
+# 	email: "oliviera.jeremy@gmail.com",
+# 	phone: "0627382902"
+# )
 
 
 

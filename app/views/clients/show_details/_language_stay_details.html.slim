@@ -19,6 +19,9 @@
   .card-text
     p = show_attribute_empty_string(language_stay&.location, 'Lieu')
     p = show_attribute_empty_string(language_stay&.program_detail, 'Détails du programme')
+    p = show_attribute_empty_string(language_stay&.class_hours, 'Nombre de leçons')
+    p = show_attribute_empty_string(language_stay&.option_1_fr, 'Option 1')
+    p = show_attribute_empty_string(language_stay&.option_2_fr, 'Option 2')
     - if language_stay&.transfer_aller == false
       = '<p><u>Transfert Aller</u> Non</p>'.html_safe
     - else
@@ -28,10 +31,6 @@
       = '<p><u>Transfert Retour</u> Non</p>'.html_safe
     - else
       = '<p><u>Transfert Retour</u> Oui</p>'.html_safe
-
-    p = show_attribute_empty_string(language_stay&.option_1_fr, 'Option 1')
-    p = show_attribute_empty_string(language_stay&.option_2_fr, 'Option 2')
-    p = show_attribute_empty_string(language_stay&.class_hours, 'Nombre de leçons')
 
 .col-md-3
   h6.card-title Autres

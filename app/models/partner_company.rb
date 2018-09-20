@@ -11,5 +11,5 @@ class PartnerCompany < ApplicationRecord
 					using: {
 						tsearch: { prefix: true, negation: true, any_word: true}
 					}
-	paginates_per 10
+	paginates_per 30
 end

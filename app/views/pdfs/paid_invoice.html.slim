@@ -2,37 +2,47 @@
 - client = language_stay.client
 - family = client.family
 
-.invoice-box.margin-top-navbar
-  table cellpadding="0" cellspacing="0" 
+.invoice-box.margin-top-navbar.mt-5
+  table cellpadding="0" cellspacing="0"
     tr.top
-      td colspan="2" 
+      td colspan="2"
         table
           tr
-            td.title
-              img src="https://sejours-homeabroad.com/wp-content/uploads/2017/10/homea-gris-2.png" style=("width:100%; max-width:200px;") /
-            td
-              = "Mr ou Mme #{family.name}" 
+            td.title.text-left
+              = wicked_pdf_image_tag 'logo.png'
+            td.text-right
+              = "Mr ou Mme #{family.name.upcase}"
               br/
-              = "#{family.address_1}" 
+              = "#{family.address_1}"
 
     tr.information
-      td colspan="2" 
+      td colspan="2"
         table
           tr
-            td
-              | Facture acquittée
+            td.text-left
+              = "<b>Facture Acquittée N°#{@invoice.id}</b>".html_safe
               br/
-              = "Facture N°#{@invoice.id}" 
+              = "Versailles, le #{date_format(Date.today)}"
+          tr
+            td.text-left
+              = "<u>N/Réf</u>".html_safe
               br/
-              = "Versailles, le #{Date.today}" 
-            td
-              / | N/Réf : 
-              / br/
-              = "Client #{client.first_name} #{client.last_name}" 
+              = "Client #{client.first_name} #{client.last_name}"
               br/
-              = "Pour le séjour #{language_stay.program.name} à #{language_stay.location}"
+              = "Du #{date_format(language_stay.start_date)} au #{date_format(language_stay.end_date)} - durée de #{language_stay.duration} semaines"
               br/
-              = "Du #{language_stay.start_date} au #{language_stay.end_date}"
+              = "Séjour #{language_stay.program.name} à #{language_stay.location}"
+              br/
+              = "<u>Détails du programme</u><br>#{language_stay&.program_detail_fr}".html_safe
+              br/
+              - if language_stay&.accomodation == 'With_accomodation'
+                = "<u>Détails du logement</u><br>".html_safe
+                = t("views.pensions.#{language_stay&.pension}")
+                br/
+                = t("views.rooms.#{language_stay&.room}")
+                br/
+                = t("views.accomodation_types.#{language_stay&.accomodation_type}")
+
     tr.heading
       td
         | Libellé
@@ -54,15 +64,17 @@
       td
         = "#{@invoice.travel_price_cents} #{@invoice.travel_price_currency}"
     tr.item
-      td
-        | Prix Option 1
-      td
-        = "#{@invoice.option_1_price_cents} #{@invoice.option_1_price_currency}"
+      - if language_stay.option_1_fr != ''
+        td
+          = "Prix Option 1 : #{language_stay&.option_1_fr}"
+        td
+          = "#{@invoice.option_1_price_cents} #{@invoice.option_1_price_currency}"
     tr.item
-      td
-        | Prix Option 1
-      td
-        = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
+      - if language_stay.option_2_fr != ''
+        td
+          = "Prix Option 2 : #{language_stay&.option_2_fr}"
+        td
+          = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
     tr.item.last
       td
         | Transferts A/R
@@ -73,14 +85,11 @@
        |
       td
         = "Total: #{@invoice.total_price_cents} #{@invoice.total_price_currency}"
+  br/
+  br/
+  .text-left
+    = "Par la présente, nous attestons que le client #{client.first_name} #{client.last_name} est bien inscrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur #{family.name} s'est acquitté(e) du montant total du séjour."
+  .text-left
+    = "#{current_user&.first_name} #{current_user&.last_name&.upcase} de Séjours HOME ABROAD"
 
-    tr.information
-      td colspan="2" 
-        table
-          tr
-            td
-              br/
-              = "Par la présente, nous attestons que le client #{client.first_name} #{client.last_name} est bien inscrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur #{family.name} s'est acquitté(e) du montant total du séjour."
-              br/
-              br/
-              | Christine de Chanaud de Séjour Home Abroad
+  = render 'pdfs/footer'

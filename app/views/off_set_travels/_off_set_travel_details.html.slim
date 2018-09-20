@@ -4,14 +4,14 @@
 		p = "Début: #{date_format(off_set_travel&.start_date)}" if off_set_travel.start_date != ''
 		p = "Ville de départ: #{off_set_travel&.departure_location}" if off_set_travel.departure_location != ''
 		p = "Début: #{date_format(off_set_travel&.start_date)}" if off_set_travel.start_date != ''
-		p = "Heure début: #{date_format(off_set_travel&.start_time)}" if off_set_travel.start_time != ''
-		p = "Heure de rdv: #{date_format(off_set_travel&.meeting_time)}" if off_set_travel.meeting_time != ''
+		p = "Heure début: #{time_format(off_set_travel&.start_time)}" if off_set_travel.start_time != ''
+		p = "Heure de rdv: #{time_format(off_set_travel&.meeting_time}" if off_set_travel.meeting_time != ''
 
 .col-md-3
 	h6.card-title Décomptes
 	.card-text
 		p = "Ville d'arrivée: #{off_set_travel&.arrival_location}" if off_set_travel.arrival_location != ''
 		p = "Fin: #{off_set_travel&.end_date.strftime("%d/%m/%Y")}" if off_set_travel.end_date != ''
-		p = "Heure fin: #{date_format(off_set_travel&.end_time)}" if off_set_travel.end_time != ''
+		p = "Heure fin: #{time_format(off_set_travel&.end_time)}" if off_set_travel.end_time != ''
 		p = "Référence: #{off_set_travel&.reference}" if off_set_travel.reference != ''
 		p = "Compagie aérienne: #{off_set_travel&.partner_company.name}" if off_set_travel.partner_company.name != ''

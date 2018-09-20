@@ -19,8 +19,9 @@
         p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
         h6 Adresse
         p.pb-2 = "#{partner_company&.address}" if partner_company.address != ""
+        = link_to "Ajouter Employer</i>".html_safe, new_partner_company_employee_path(partner_company)
 
-
+        .mt-3
         - if employees == []
           p Pas d'employers associés à ce partenaire
 
@@ -38,3 +39,4 @@
 
                 p = link_to 'Editer', edit_partner_company_employee_path(employee.partner_company, employee)
                 p = link_to 'Supprimer', partner_company_employee_path(employee.partner_company, employee), method: :delete
+

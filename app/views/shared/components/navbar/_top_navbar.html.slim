@@ -3,6 +3,6 @@ nav.navbar.fixed-top.flex-md-nowrap.p-0
   / input.form-control.form-control-dark.w-100 aria-label="Search" placeholder="Search" type="text"
   ul.navbar-nav.px-3
     li.nav-item.text-nowrap
-    span 
+    span
     = link_to destroy_user_session_path, method: :delete do
-      .nav-link href="#" Session de Christine | Se déconnecter
+      .nav-link href="#" = "Session de #{current_user&.first_name} | Se déconnecter"

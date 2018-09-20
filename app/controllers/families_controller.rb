@@ -28,6 +28,7 @@ class FamiliesController < ApplicationController
 
   def destroy
     @family.destroy
+    flash[:notice] = "Famille supprimée avec succès !"
     redirect_to families_path
   end
 

@@ -9,7 +9,7 @@
     .card-modal.mt-3
       .card-category
         h6 = "#{child_detail.first_name.capitalize} #{c(child_detail.last_name)}"
-        p = "Intéressé par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}<br>Souhaits de séjour : #{child_detail.comment}".html_safe
+        p = "Intéressé(e) par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}<br>Souhaits de séjour : #{child_detail.comment}".html_safe
 
         - if child_detail.partner_companies.empty?
           p Aucun organisme étranger renseigné.

@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
 
   def destroy
     @payment.destroy
+    flash[:alert] = 'Payment supprimé avec succès'
     redirect_to client_path(@invoice.language_stay.client)
   end
 

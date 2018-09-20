@@ -72,4 +72,8 @@ module ApplicationHelper
 	def c(name)
 		name&.upcase
 	end
+
+  def time_format(time)
+    time.strftime('%H:%M')
+  end
 end

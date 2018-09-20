@@ -15,7 +15,6 @@
           th Code Postal
           th
           th
-          th
       tbody
       - partner_companies.each do |partner_company|
         tr data-toggle="modal" data-target="#modal#{partner_company.id}"
@@ -31,8 +30,6 @@
             span = partner_company.address
           td
             span = partner_company.zip_code
-          th
-            span = link_to "<i class='fa fas fa-plus-circle'>Employer</i>".html_safe, new_partner_company_employee_path(partner_company)
           td
             - if partner_company.nature == 'Organisme'
               span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company, camp: true)

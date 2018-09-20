@@ -11,7 +11,7 @@
               = wicked_pdf_image_tag 'logo.png'
             td
               br/
-              h3.text-left = '<b>Enrolment Form</b>'.html_safe
+              h3.text-left = '<b>Enrollment Form</b>'.html_safe
               br/
               p.text-right
                 = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
@@ -38,6 +38,8 @@
     tr.item
       td
         = "Email : #{client.email}"
+      td
+        = "(please use <u>info@sejours-homeabroad.com</u>)".html_safe
     tr.item
       td
         = "Home telephone : #{client.family.intl_number}"
@@ -50,9 +52,9 @@
        = "Age : #{show_the_age_at_language(client.birth_date, @language_stay)} years"
     tr.item
       td
-        = "Language : #{client.first_language} | Level : #{client.first_language_level}"
-      td
         = "Nationality : #{client.nationality}"
+      td
+        = "Language : #{client.first_language} | Level : #{client.first_language_level}"
     tr.item
       td
         = "Preferred hobbies : #{client.preferred_hobbies}"
@@ -105,6 +107,8 @@
     tr.item
       td
         = "Email : #{client.family.father_email}"
+      td
+        = "Address : #{client.family.address_1}"
     tr.item.last
       td.pb-3
         = "<u>Family Email</u> : #{client.family.email}".html_safe
@@ -123,10 +127,10 @@
       td
     tr.item
       td
-        = "<b>Dates</b> - arrival date (dd/mm/yr) : #{date_format(@language_stay.start_date)}<br>departure date (dd/mm/yr) : #{date_format(@language_stay.end_date)}".html_safe
+        = "<b>Dates</b> - arrival date (dd/mm/yr) : <b>#{date_format(@language_stay.start_date)}</b><br>departure date (dd/mm/yr) : <b>#{date_format(@language_stay.end_date)}</b>".html_safe
     tr.item
       td
-        = "Program details : #{@language_stay.program_detail}"
+        = "Program details : <b>#{@language_stay.program_detail}</b>".html_safe
       td
     tr.item
       td
@@ -135,13 +139,13 @@
     - if @language_stay&.accomodation == 'With_accomodation'
       tr.item
         td
-          = "Pension : #{@language_stay&.pension}"
+          = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
         td
       tr.item
         td
-          = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
-        td
           = "Room : #{@language_stay&.room&.humanize}"
+        td
+          = "Pension : #{@language_stay&.pension.humanize}"
     tr.item
       td
         = "OPTION 1 : #{@language_stay.option_1}"
@@ -154,16 +158,16 @@
     tr.item.last
       - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
         td.pb-3
-          = "Pickup & Dropoff requested"
+          = "<b>Pickup & Dropoff requested</b>".html_safe
       - elsif @language_stay.transfer_aller == true
         td.pb-3
-          = "Pickup requested"
+          = "<b>Pickup requested</b>".html_safe
       - elsif @language_stay.transfer_retour == true
         td.pb-3
-          = "Dropoff requested"
+          = "<b>Dropoff requested</b>".html_safe
       - else
         td.pb-3
-          = "No transfer requested"
+          = "<b>No transfer requested</b>".html_safe
       td
 
     - if travel.nil?
@@ -190,7 +194,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.start_date} | Time : #{travel_detail_aller.start_time}"
+            = "Date (dd/mm/yr) : #{travel_detail_aller.start_date} | Time : #{time_format(travel_detail_aller.start_time)}"
           td
         tr.item
           td
@@ -198,7 +202,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.end_date} | Time : #{travel_detail_aller.end_time}"
+            = "Date (dd/mm/yr) : #{travel_detail_aller.end_date} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
         tr.item
           td
@@ -211,7 +215,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.start_date} | Time : #{travel_detail_retour.start_time}"
+            = "Date (dd/mm/yr) : #{travel_detail_retour.start_date} | Time : #{time_format(travel_detail_retour.start_time)}"
           td
         tr.item
           td
@@ -219,7 +223,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.end_date} | Time : #{travel_detail_retour.end_time}"
+            = "Date (dd/mm/yr) : #{travel_detail_retour.end_date} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
       - else
         - travel_detail_aller = travel.travel_details.first
@@ -235,7 +239,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.start_date} | Time : #{travel_detail_aller.start_time}"
+            = "Date : #{travel_detail_aller.start_date} | Time : #{time_format(travel_detail_aller.start_time)}"
           td
         tr.item
           td
@@ -243,7 +247,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.end_date} | Time : #{travel_detail_aller.end_time}"
+            = "Date : #{travel_detail_aller.end_date} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
         tr.item
           td
@@ -256,7 +260,7 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.start_date} | Time : #{travel_detail_retour.start_time}"
+            = "Date : #{travel_detail_retour.start_date} | Time : #{time_format(travel_detail_retour.start_time)}"
           td
         tr.item
           td
@@ -264,5 +268,5 @@
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.end_date} | Time : #{travel_detail_retour.end_time}"
+            = "Date : #{travel_detail_retour.end_date} | Time : #{time_format(travel_detail_retour.end_time)}"
 

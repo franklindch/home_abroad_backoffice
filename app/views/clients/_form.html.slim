@@ -56,7 +56,7 @@ section
                         = f.input :second_language_level, collection: Client.second_language_levels.keys.map { |w| [w.humanize, w] }, label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
 
-            h6.mt-5.mb-4 A remplir sen Anglais pour Enrollment Form :
+            h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :
             = f.input :preferred_hobbies, label: 'Prefered hobbies'
             = f.input :medical_issue, label: 'Medical Problems'
             = f.input :nationality, label: 'Nationality', locale: 'en'

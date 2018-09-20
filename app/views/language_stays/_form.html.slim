@@ -17,6 +17,7 @@ section
                     = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                     h4.mt-4.mb-4 Détails
+                    = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
                     = f.input :program_detail_fr, label: 'Détails du programme'
                     = f.input :option_1_fr, label: 'Option 1'
                     = f.input :option_2_fr, label: 'Option 2'
@@ -27,7 +28,6 @@ section
                     = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [t("views.accomodation_types.#{w}"), w] }, label: 'Type de logement'
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
-                    = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
                     = f.input :transfer_aller, label: 'Transfert Aller'
                     = f.input :transfer_retour, label: 'Transfert Retour'
                     = f.input :fee, label: 'Payment en direct du camp', as: :radio_buttons

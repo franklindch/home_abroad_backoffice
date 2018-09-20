@@ -123,7 +123,25 @@
       td
     tr.item
       td
-        = "<b>Dates</b> - arrival date (dd/mm/yr) : #{date_format(@language_stay.start_date)} | departure date (dd/mm/yr) : #{date_format(@language_stay.end_date)}".html_safe
+        = "<b>Dates</b> - arrival date (dd/mm/yr) : #{date_format(@language_stay.start_date)}<br>departure date (dd/mm/yr) : #{date_format(@language_stay.end_date)}".html_safe
+    tr.item
+      td
+        = "Program details : #{@language_stay.program_detail}"
+      td
+    tr.item
+      td
+        = "Accomodation : #{@language_stay&.accomodation&.humanize}"
+      td
+    - if @language_stay&.accomodation == 'With_accomodation'
+      tr.item
+        td
+          = "Pension : #{@language_stay&.pension}"
+        td
+      tr.item
+        td
+          = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
+        td
+          = "Room : #{@language_stay&.room&.humanize}"
     tr.item
       td
         = "OPTION 1 : #{@language_stay.option_1}"
@@ -131,17 +149,8 @@
         = "OPTION 2 : #{@language_stay.option_2}"
     tr.item
       td
-        = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
+        = "Special requests : #{@language_stay.precisions}"
       td
-        = "Room : #{@language_stay&.room&.humanize}"
-    tr.item
-      td
-        = "Pension : #{@language_stay&.pension}"
-      td
-        = "Accomodation : #{@language_stay&.accomodation&.humanize}"
-    tr.item
-      td
-        = "Program details: #{@language_stay.program_detail}"
     tr.item.last
       - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
         td.pb-3
@@ -155,28 +164,105 @@
       - else
         td.pb-3
           = "No transfer requested"
+      td
 
     - if travel.nil?
       tr.heading
         td
           = "NO TRANSPORTATION DETAILS YET"
         td
-
     - else
       tr.heading
         td
           = "TRANSPORTATION DETAILS"
         td
-        - if travel.nature == 'Travel_group'
+      - if travel.nature == 'Groupe' || travel.nature == 'Groupe_décalé'
+        - travel_detail_aller = travel.travel_group.travel_details.first
+        - travel_detail_retour = travel.travel_group.travel_details.second
+        tr.item
           td
-            = "Travel Group : #{travel.capacity}"
-        - else
+            = "<b>Go Flight</b>".html_safe
           td
-            = "Travel : #{@language_stay.class_hours}"
-
-        td
-          = "Class hours : #{@language_stay.class_hours}"
-    tr.item.last
-      td
-        = "Special requests : #{@language_stay.precisions}"
+            = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+        tr.item
+          td
+            = "Departing : #{travel_detail_aller.departure_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_aller.start_date} | Time : #{travel_detail_aller.start_time}"
+          td
+        tr.item
+          td
+            = "Arriving : #{travel_detail_aller.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_aller.end_date} | Time : #{travel_detail_aller.end_time}"
+          td
+        tr.item
+          td
+            = "<b>Return Flight</b>".html_safe
+          td
+            = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+        tr.item
+          td
+            = "Departing : #{travel_detail_retour.departure_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_retour.start_date} | Time : #{travel_detail_retour.start_time}"
+          td
+        tr.item
+          td
+            = "Arriving : #{travel_detail_retour.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_retour.end_date} | Time : #{travel_detail_retour.end_time}"
+          td
+      - else
+        - travel_detail_aller = travel.travel_details.first
+        - travel_detail_retour = travel.travel_details.second
+        tr.item
+          td
+            = "<b>Go Flight</b>".html_safe
+          td
+            = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+        tr.item
+          td
+            = "Departing : #{travel_detail_aller.departure_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_aller.start_date} | Time : #{travel_detail_aller.start_time}"
+          td
+        tr.item
+          td
+            = "Arriving : #{travel_detail_aller.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_aller.end_date} | Time : #{travel_detail_aller.end_time}"
+          td
+        tr.item
+          td
+            = "<b>Return Flight</b>".html_safe
+          td
+            = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+        tr.item
+          td
+            = "Departing : #{travel_detail_retour.departure_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_retour.start_date} | Time : #{travel_detail_retour.start_time}"
+          td
+        tr.item
+          td
+            = "Arriving : #{travel_detail_retour.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date : #{travel_detail_retour.end_date} | Time : #{travel_detail_retour.end_time}"
 

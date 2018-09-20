@@ -6,7 +6,6 @@
         = "<b>Du #{date_format(language_stay&.start_date)} au #{date_format(language_stay&.end_date)}</b>".html_safe
         br/
         = "<b>Durée (en semaines) - #{language_stay&.duration}</b>".html_safe
-      p = show_attribute_empty_string(language_stay&.program_detail, 'Détails du programme')
       p = show_attribute_empty_string(language_stay&.data_entry_responsible, 'Responsable de saisie')
       p = show_attribute_empty_string(language_stay&.commercial_responsible, 'Responsable commercial')
       p = show_attribute_empty_string(language_stay&.partner_company.name, 'Partenaire')
@@ -19,6 +18,7 @@
   h6.card-title Détails séjour
   .card-text
     p = show_attribute_empty_string(language_stay&.location, 'Lieu')
+    p = show_attribute_empty_string(language_stay&.program_detail, 'Détails du programme')
     - if language_stay&.transfer_aller == false
       = '<p><u>Transfert Aller</u> Non</p>'.html_safe
     - else
@@ -29,8 +29,8 @@
     - else
       = '<p><u>Transfert Retour</u> Oui</p>'.html_safe
 
-    p = show_attribute_empty_string(language_stay&.option_1, 'Option 1')
-    p = show_attribute_empty_string(language_stay&.option_2, 'Option 2')
+    p = show_attribute_empty_string(language_stay&.option_1_fr, 'Option 1')
+    p = show_attribute_empty_string(language_stay&.option_2_fr, 'Option 2')
     p = show_attribute_empty_string(language_stay&.class_hours, 'Nombre de leçons')
 
 .col-md-3

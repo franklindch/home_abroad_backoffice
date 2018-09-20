@@ -10,6 +10,7 @@
           th Capacité
           th Code du voyage
           th Accompagnateurs
+          th Voyage
           th Aller
           th Retour
           th Convocation Aéroport
@@ -17,8 +18,7 @@
           th
       tbody
       - @travel_groups.each do |travel_group|
-        tr data-toggle="modal" data-target="#modal#{travel_group.id}"
-          = render 'travel_groups/travel_group_modal', travel: travel_group
+        tr
           td
             span = travel_group&.capacity
           td
@@ -27,9 +27,12 @@
             - travel_group.attendants.each do |attendant|
               span = "| #{attendant&.first_name} #{attendant&.last_name.upcase} "
           td
-            span = "#{date_format(travel_group.travel_details.first.start_date)}"
+            span data-toggle="modal" data-target="#modal#{travel_group.id}" Voir
+            = render 'travel_groups/travel_group_modal', travel: travel_group
           td
             span = "#{date_format(travel_group.travel_details.first.start_date)}"
+          td
+            span = "#{date_format(travel_group.travel_details.second.end_date)}"
           td
             span = link_to "Générer", airport_convocation_path(travel_group: travel_group), format: :pdf
           td

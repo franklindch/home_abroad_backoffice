@@ -38,7 +38,20 @@ class ChildDetailsController < ApplicationController
     redirect_to families_path
   end
 
+  def relaunch
+    @child_detail = ChildDetail.find(params[:child_detail])
+    generate_relaunch_word(@child_detail)
+  end
+
 	private
+
+  def generate_relaunch_word(child_detail)
+    respond_to do |format|
+      format.html do
+        render docx: 'generate_relaunch_word', filename: "Relance prospect - #{child_detail.first_name}.docx"
+      end
+    end
+  end
 
 	def retrieve_qualification
 	  @qualification = Qualification.find(params[:qualification_id])

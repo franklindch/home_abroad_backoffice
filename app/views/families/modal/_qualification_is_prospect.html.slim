@@ -9,7 +9,7 @@
     .card-modal.mt-3
       .card-category
         h6 = "#{child_detail.first_name.capitalize} #{c(child_detail.last_name)}"
-        p = "Intéressé par séjour de #{child_detail.comment} semaines, plutôt en #{child_detail.month} | Souhaits de séjour : #{child_detail.comment}"
+        p = "Intéressé par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}<br>Souhaits de séjour : #{child_detail.comment}".html_safe
 
         - if child_detail.partner_companies.empty?
           p Aucun organisme étranger renseigné.
@@ -18,7 +18,7 @@
             - child_detail.partner_companies.each do |partner_company|
               = "Organisme #{c(partner_company.name)} "
 
-        = render 'child_details/relance_prospect_collapse', child_detail: child_detail
+        = render 'child_details/relance_prospect', child_detail: child_detail
         = render 'child_details/verify_status_for_badge', child_detail: child_detail
       .card-user
         = "#{child_detail.age} ans"
@@ -26,28 +26,3 @@
         = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(qualification, child_detail), method: :delete, class: 'delete-link modal-links ml-2', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
       .card-links
         = render 'child_details/verify_status_for_links', child_detail: child_detail
-
-/ - if familye.clients.empty?
-/   p.mt-4 Aucun information renseigné sur les prospects de cette famille.
-
-/ - else
-/   h5.mt-4.border-top.pt-4 Prospects de la famille
-/   - qualification.child_details.each do |child_detail|
-/     .card-modal.mt-3
-/       .card-category
-/         h6 = "#{child_detail.first_name.capitalize} #{c(child_detail.last_name)}"
-/         p = "Intéressé par séjour de #{child_detail.duration} semaines, plutôt en #{child_detail.month}"
-/         - if child_detail.partner_companies.empty?
-/           p Aucun organisme étranger renseigné.
-/         - else
-/           - child_detail.partner_companies.each do |partner_company|
-/             p = "#{c(partner_company.name)}"
-/         = render 'child_details/relance_prospect_collapse', child_detail: child_detail
-
-/         = render 'child_details/verify_status_for_badge', child_detail: child_detail
-/       .card-user
-/         = "#{child_detail.age} ans"
-/         = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(qualification, child_detail), class: 'modal-links ml-2'
-/         = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(qualification, child_detail), method: :delete, class: 'delete-link modal-links ml-2', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
-/       .card-links
-/         = render 'child_details/verify_status_for_links', child_detail: child_detail

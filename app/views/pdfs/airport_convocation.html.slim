@@ -9,19 +9,14 @@
           tr
             td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
-
-    tr.information
-      td colspan="2"
-        table
-          tr
+            br/
             td.text-left
               = "<b>Convocation aéroport</b>".html_safe
               br/
               p = "Versailles, le #{date_format(Date.today)}"
-          td
+            br/
             td.text-left
-              p = "Rendez-vous au comptoir d'enregistrement à <b>#{travel_detail_aller.meeting_time}</b> précise(s)".html_safe
-              p = "L'accompagnateur portera un panneau HOME ABROAD"
+              p = "Rendez-vous au comptoir d'enregistrement à <b>#{travel_detail_aller.meeting_time}</b> précise(s)<br>L'accompagnateur portera un panneau HOME ABROAD".html_safe
 
   h6.card-title.pt-3.border-top = "Voyage #{travel_detail_aller.nature}"
   p = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
@@ -46,3 +41,8 @@
   p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
   p = show_attribute_empty_string(travel_detail_retour&.end_date, 'Date de retour')
   p = show_attribute_empty_string(travel_detail_retour&.end_time, 'Heure de retour')
+
+  br/
+  br/
+  .text-left
+    = "<b>IMPORTANT : En cas d'urgence, merci de contacter le 06 65 16 40 80. Veuillez vous reporter au document 'INFORMATIONS GENERALES HOME ABROAD' pour les conditions de voyage de votre enfant (poids des bagages, douanes, ...)</b>".html_safe

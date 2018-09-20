@@ -29,12 +29,12 @@ section
                                           = f.input :transfer_price_cents, label: "Prix transfert Aller"
                                         - else
                                           p Aucun transfert ajouté pour ce séjour
-										- if @language_stay.option_1 != ""
-											= f.input :option_1_price_cents, label: "Quel montant pour l'option 1 - #{@language_stay.option_1}"
+										- if @language_stay.option_1_fr != ""
+											= f.input :option_1_price_cents, label: "Quel montant pour l'option 1 - #{@language_stay.option_1_fr}"
 										- else
 											p Aucune option 1 choisie pour ce séjour
-										- if @language_stay.option_2 != ""
-											= f.input :option_2_price_cents, label: "Quel montant pour l'option 2 - #{@language_stay.option_2}"
+										- if @language_stay.option_2_fr != ""
+											= f.input :option_2_price_cents, label: "Quel montant pour l'option 2 - #{@language_stay.option_2_fr}"
 										- else
 											p Aucune option 2 choisie pour ce séjour
 										= f.input :total_price_cents, label: 'Grand total', wrapper_html: {class: 'mt-4'}, id: 'total_price_cents'

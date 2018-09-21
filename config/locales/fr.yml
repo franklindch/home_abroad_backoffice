@@ -1,8 +1,8 @@
 fr:
   views:
     genders:
-      Male: "Homme"
-      Female: "Femme"
+      Male: "Masculin"
+      Female: "Féminin"
     pensions:
       No_meal: "Sans Repas"
       Breakfast: "Petit-déjeuner"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919122108) do
+ActiveRecord::Schema.define(version: 20180921133253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,11 +91,11 @@ ActiveRecord::Schema.define(version: 20180919122108) do
     t.integer "first_language"
     t.integer "second_language"
     t.string "intl_number"
-    t.string "nationality", default: "Française"
     t.integer "school_grade"
     t.string "school"
     t.integer "season"
     t.integer "gender"
+    t.string "nationality", default: "French"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 20180919122108) do
     t.string "urgence_phone_number"
     t.string "nature"
     t.string "urgence_intl_phone_number"
+    t.string "code"
   end
 
   create_table "payments", force: :cascade do |t|

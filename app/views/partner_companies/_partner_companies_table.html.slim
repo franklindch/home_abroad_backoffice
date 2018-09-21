@@ -8,11 +8,12 @@
       thead
         tr
           th Nom
+          th Code
           th Nature
           th Email
-          th Téléphone
+          th Tél
+          th Tél urgence
           th Adresse
-          th Code Postal
           th
           th
       tbody
@@ -21,6 +22,8 @@
           td
             span = c(partner_company.name)
           td
+            span = partner_company.code
+          td
             span = partner_company.nature
           td
             span = partner_company.email
@@ -28,8 +31,6 @@
             span = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
           td
             span = partner_company.address
-          td
-            span = partner_company.zip_code
           td
             - if partner_company.nature == 'Organisme'
               span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company, camp: true)

@@ -12,7 +12,7 @@ class Client < ApplicationRecord
   				}
   enum gender: { Male: 0, Female: 1 }
   enum school_grade: { Prépa: 0, Césure: 1, Terminale: 2, Première: 3, Seconde: 4, Troisième: 5, Quatrième: 6, Cinquième: 7, Sixième: 8 }
-  enum age_category: { Junior: 0, Etudiant: 1, Adulte: 2 }
+  enum age_category: { Junior: 0, Adulte: 1 }
   enum first_language: { English: 0, Spanish: 1, German: 2 }
   enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, Ne_sait_pas: 4 }
   enum second_language: { English: 0, Spanish: 1, German: 2 }, _suffix: true

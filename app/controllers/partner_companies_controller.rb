@@ -34,7 +34,7 @@ class PartnerCompaniesController < ApplicationController
 	    format.html
 	    format.js
 	  end
-	  
+
 	  if params[:query].present?
 	    @partner_companies = PartnerCompany.search_by_name(params[:query]).page(params[:query])
 	  else
@@ -50,7 +50,7 @@ class PartnerCompaniesController < ApplicationController
 
 	def partner_company_params
 	  params.require(:partner_company).permit(
-	    :address, :urgence_intl_phone_number, :nature, :name, :email, :phone_number, :zip_code, :intl_number, :urgence_phone_number
-	  )    
+	    :code, :address, :urgence_intl_phone_number, :nature, :name, :email, :phone_number, :zip_code, :intl_number, :urgence_phone_number
+	  )
 	end
 end

@@ -5,5 +5,5 @@
   - if child_detail&.qualification&.family&.clients&.find_by(first_name: child_detail&.first_name)&.language_stays&.empty?
     p Encore aucun séjour ajouté à ce client.
   - else
-    = "<b>Confirmé pour Séjour #{child_detail&.qualification&.family&.clients&.find_by(first_name: child_detail&.first_name)&.language_stays.first.program.name} avec #{child_detail&.qualification&.family&.clients&.find_by(first_name: child_detail&.first_name)&.language_stays.first.partner_company.name}.</b>".html_safe
+    = "<b>Inscrit(e) pour Séjour #{child_detail&.qualification&.family&.clients&.find_by(first_name: child_detail&.first_name)&.language_stays.first.program.name} avec #{child_detail&.qualification&.family&.clients&.find_by(first_name: child_detail&.first_name)&.language_stays.first.partner_company.name}.</b>".html_safe
     p

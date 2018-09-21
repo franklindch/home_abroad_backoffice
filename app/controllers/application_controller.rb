@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def generate_enrollment_form_pdf(language_stay)
     respond_to do |format|
       format.html do
-        render pdf: "#{language_stay.client.first_name} #{language_stay.client.family.name}_Application_Form",
+        render pdf: "#{language_stay.client.family.name} #{language_stay.client.first_name}_Enrollment_Form",
                template: 'pdfs/enrollment_form.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def generate_invoice_pdf(invoice)
     respond_to do |format|
       format.html do
-        render pdf: "#{invoice.language_stay.client.first_name} #{invoice.language_stay.client.family.name}_Facture",
+        render pdf: "#{invoice.language_stay.client.family.name} #{invoice.language_stay.client.first_name}_Facture",
                template: 'pdfs/invoice.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   def generate_paid_invoice_pdf(invoice)
     respond_to do |format|
       format.html do
-        render pdf: "#{invoice.language_stay.client.family.name}",
+        render pdf: "#{invoice.language_stay.client.family.name} #{invoice.language_stay.client.first_name}_Facture_acquittée",
                template: 'pdfs/paid_invoice.html.slim',
                disposition: 'attachment',
                layout: 'pdf'
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   def generate_airport_convocation_pdf(travel)
     respond_to do |format|
       format.html do
-        render pdf: "#{travel.travel_code}",
+        render pdf: "Convocation_#{travel.travel_code}",
                template: 'pdfs/airport_convocation.html.slim',
                disposition: 'attachment',
                layout: 'pdf'

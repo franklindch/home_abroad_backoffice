@@ -30,7 +30,7 @@ section
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
                     = f.input :transfer_aller, label: 'Transfert Aller'
                     = f.input :transfer_retour, label: 'Transfert Retour'
-                    = f.input :fee, label: 'Payment en direct du camp', as: :radio_buttons
+                    = f.input :fee, label: 'Payment en direct à l\'organisme étranger', as: :radio_buttons
 
                     h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :
                     = f.input :program_detail, label: 'Program details'

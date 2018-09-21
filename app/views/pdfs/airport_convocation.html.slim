@@ -29,7 +29,7 @@
       td
         = show_attribute_nil(travel_detail_aller&.companies, 'Compagnie')
       td
-        = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Ville de départ')
+        = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Départ de')
     tr.item
       td
         = show_attribute_empty_string(date_format(travel_detail_aller&.start_date), 'Date de départ')
@@ -39,7 +39,7 @@
       td
         = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
       td
-        = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Ville d\'arrivée')
+        = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
     tr.item.last
       td
         = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
@@ -59,7 +59,7 @@
       td
         = show_attribute_nil(travel_detail_retour&.companies, 'Compagnie')
       td
-        = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Ville de départ')
+        = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Départ de')
     tr.item
       td
         = show_attribute_empty_string(date_format(travel_detail_retour&.start_date), 'Date de départ')
@@ -69,7 +69,7 @@
       td
         = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
       td
-        = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Ville d\'arrivée')
+        = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
     tr.item.last
       td
         = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')

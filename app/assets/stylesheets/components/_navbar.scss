@@ -1,13 +1,13 @@
 // top_navbar
 .navbar {
-  background-color: $strong-purple;
+  background-color: white;
   height: 8vh;
   a {
-    color: white;
+    color: $strong-purple;
     text-decoration: none;
   }
   a:hover {
-    color: white;
+    color: $strong-purple;
     opacity: 0.7;
   }
   box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
@@ -31,10 +31,7 @@
   left: 0;
   z-index: 100;
   padding:78px 0px 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-  .nav-item {
-    // height: 15vh;
-  }
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
   .item {
       & {
           padding: 20px;
@@ -48,11 +45,11 @@
 
 .sidebar-sticky {
   padding-top: 50px;
-  background-color: $strong-purple;
+  background-color: white;
   a {
-    color: white;
+    color: $strong-purple;
     height: 6vh;
-    text-decoration: none;
+    text-decoration: none !important
   }
   a:hover {
     color: white;

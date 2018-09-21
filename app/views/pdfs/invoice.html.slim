@@ -86,11 +86,11 @@
       td
        |
       td
-        = "Total: #{@invoice.total_price_cents} #{@invoice.total_price_currency}"
+        = "Total TTC : #{@invoice.total_price_cents} #{@invoice.total_price_currency}"
   br/
   br/
   .text-left
-    = "Règlements : cette facture doit être réglé au plus tard un mois avant le départ: par carte bancaire en vous rendant sur le lien sécurisé de notre site: <u>https://sejours-homeabroad.com/paiement/</u> ou par chèque à HOME ABROAD. Si vous souhaitez recevoir une facture spéciale Comité d'entreprise, merci de nous adresser un mail décrivant le modèle de document désiré.".html_safe
+    = "Cette facture doit être réglée au plus tard 30 jours avant le départ: par carte bancaire en vous rendant sur le lien sécurisé de notre site: <u>https://sejours-homeabroad.com/paiement/</u> ou par chèque à HOME ABROAD. Si vous souhaitez recevoir une facture spéciale Comité d'entreprise, merci de nous adresser un mail décrivant le modèle de document désiré.".html_safe
 
   = render 'pdfs/footer'
 

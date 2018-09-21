@@ -26,13 +26,13 @@ section
                         = f.input :start_date, label: 'Date du départ'
                       .col-md-6
                         = f.input :start_time, label: 'Heure de départ'
-                    = f.input :departure_location, label: 'Ville de départ'
+                    = f.input :departure_location, label: 'Départ de'
                     .row
                       .col-md-6
                         = f.input :end_date, label: 'Date d\'arrivée'
                       .col-md-6
                         = f.input :end_time, label: 'Heure d\'arrivée'
-                    = f.input :arrival_location, label: 'Ville d\'arrivée'
+                    = f.input :arrival_location, label: 'Arrivée à'
                     = f.input :mode, collection: Transit.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
                     = f.input :reference, label: 'Référence'
                     = f.input :partner_company, label: 'Compagnie aérienne'

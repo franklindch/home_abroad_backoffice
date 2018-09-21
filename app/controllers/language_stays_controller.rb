@@ -12,11 +12,9 @@ class LanguageStaysController < ApplicationController
   def create
     @language_stay = LanguageStay.new(language_stay_params)
     @language_stay.client = @client
-    @s = @language_stay.start_date
-    @e = @language_stay.end_date
-    @language_stay.duration = @language_stay.get_duration(@e, @s)
-
     if @language_stay.save
+      result = @language_stay.get_duration
+      @language_stay.update_columns(duration: result)
       flash[:notice] = "Séjour ajouté avec succès !"
       redirect_to client_path(@client)
     else
@@ -29,6 +27,8 @@ class LanguageStaysController < ApplicationController
 
   def update
     @language_stay.update(language_stay_params)
+    result = @language_stay.get_duration
+    @language_stay.update_columns(duration: result)
     flash[:notice] = 'Séjour édité avec succès !'
     redirect_to client_path(@client)
   end

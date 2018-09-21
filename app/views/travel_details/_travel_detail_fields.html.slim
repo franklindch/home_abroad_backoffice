@@ -2,21 +2,24 @@
 
 = f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?', checked_value: true
 = f.input :mode, collection: TravelDetail.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
-/ = f.input :partner_company_id, collection: PartnerCompany.all, include_blank: "Merci de sélectionner la compagnie...", label: false*
-= f.input :companies, label: 'Compagnie'
+- if @travel_group
+  = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Partenaire'), include_blank: "Merci de sélectionner la compagnie du vol...", label: false, label_method: lambda { |partner_company| "#{partner_company&.name&.capitalize} " }
+- else
+  = f.input :companies, label: 'Compagnie'
+
 = f.input :reference, label: 'Référence'
 
 .row
   .col-md-6
     h4.mt-3 Départ
-    = f.input :departure_location, label: 'Ville de départ'
+    = f.input :departure_location, label: 'Départ de'
     = f.input :start_date, label: 'Date de départ'
     = f.input :start_time, label: 'Heure de départ'
     = f.input :meeting_time, label: 'Heure de rendez-vous'
     / = f.input :father_name, label: 'Nom'
   .col-md-6
     h4.mt-3 Arrivée
-    = f.input :arrival_location, label: 'Ville d\'arrivée'
+    = f.input :arrival_location, label: 'Arrivée à'
     = f.input :end_date, label: 'Date d\'arrivée'
     = f.input :end_time, label: 'Heure d\'arrivée'
     / = f.input :end_time, label: 'Heure d\'arrivée'

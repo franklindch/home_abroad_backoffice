@@ -30,10 +30,14 @@ class LanguageStay < ApplicationRecord
     Summer_camp: 3,
     Teachers_home: 4
   }
+
+
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
 
-  def get_duration(e, s)
-    return (e.strftime("%U").to_i - s.strftime("%U").to_i)
+  def get_duration
+    s = self.start_date
+    e = self.end_date
+    return s.step(e, 7).count
   end
 
   def all_attributes?

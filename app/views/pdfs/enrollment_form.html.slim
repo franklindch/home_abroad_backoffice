@@ -15,6 +15,8 @@
               br/
               p.text-right
                 = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
+                br/
+                = "Season 2018/2019"
 
     tr.heading
       td
@@ -60,14 +62,13 @@
         = "Preferred hobbies : #{client.preferred_hobbies}"
       td
         - if client&.smoker == false
-          = '<p><u>Fumeur</u> No</p>'.html_safe
+          = '<p><u>Smoker</u> No</p>'.html_safe
         - else
-          = '<p><u>Fumeur</u> Yes</p>'.html_safe
+          = '<p><u>Smoker</u> Yes</p>'.html_safe
     tr.item
       td
         = "Medical issues / allergies / diet... : #{client.medical_issue}"
       td
-        = "School grade : #{client.school_grade}"
     tr.item.last
       td.pb-3
         = "Comment : #{client.comment}"
@@ -185,12 +186,12 @@
         - travel_detail_retour = travel.travel_group.travel_details.second
         tr.item
           td
-            = "<b>Go Flight</b>".html_safe
+            = "<b>Departure</b>".html_safe
           td
             = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
         tr.item
           td
-            = "Departing : #{travel_detail_aller.departure_location}"
+            = "Departure : #{travel_detail_aller.departure_location}"
           td
         tr.item
           td
@@ -198,7 +199,7 @@
           td
         tr.item
           td
-            = "Arriving : #{travel_detail_aller.arrival_location}"
+            = "Arrival : #{travel_detail_aller.arrival_location}"
           td
         tr.item
           td
@@ -206,12 +207,12 @@
           td
         tr.item
           td
-            = "<b>Return Flight</b>".html_safe
+            = "<b>Arrival</b>".html_safe
           td
             = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
         tr.item
           td
-            = "Departing : #{travel_detail_retour.departure_location}"
+            = "Departure : #{travel_detail_retour.departure_location}"
           td
         tr.item
           td
@@ -219,7 +220,7 @@
           td
         tr.item
           td
-            = "Arriving : #{travel_detail_retour.arrival_location}"
+            = "Arrival : #{travel_detail_retour.arrival_location}"
           td
         tr.item
           td
@@ -230,43 +231,43 @@
         - travel_detail_retour = travel.travel_details.second
         tr.item
           td
-            = "<b>Go Flight</b>".html_safe
+            = "<b>Departure</b>".html_safe
           td
             = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
         tr.item
           td
-            = "Departing : #{travel_detail_aller.departure_location}"
+            = "Departure : #{travel_detail_aller.departure_location}"
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.start_date} | Time : #{time_format(travel_detail_aller.start_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.start_date)} | Time : #{time_format(travel_detail_aller.start_time)}"
           td
         tr.item
           td
-            = "Arriving : #{travel_detail_aller.arrival_location}"
+            = "Arrival : #{travel_detail_aller.arrival_location}"
           td
         tr.item
           td
-            = "Date : #{travel_detail_aller.end_date} | Time : #{time_format(travel_detail_aller.end_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
         tr.item
           td
-            = "<b>Return Flight</b>".html_safe
+            = "<b>Arrival</b>".html_safe
           td
             = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
         tr.item
           td
-            = "Departing : #{travel_detail_retour.departure_location}"
+            = "Departure : #{travel_detail_retour.departure_location}"
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.start_date} | Time : #{time_format(travel_detail_retour.start_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.start_date)} | Time : #{time_format(travel_detail_retour.start_time)}"
           td
         tr.item
           td
-            = "Arriving : #{travel_detail_retour.arrival_location}"
+            = "Arrival : #{date_format(travel_detail_retour.arrival_location)}"
           td
         tr.item
           td
-            = "Date : #{travel_detail_retour.end_date} | Time : #{time_format(travel_detail_retour.end_time)}"
+            = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
 

@@ -7,7 +7,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
-					= link_to 'Retour', :back, class: 'btn btn-outline-primary'
+					= link_to 'Exporter Familles', all_families_path(format: :xlsx), class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag families_path, method: :get do
 		      = text_field_tag :query,
@@ -22,7 +22,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	 	  .btn-toolbar.mb-2.mb-md-0
 	 	    .mr-2.d-flex.justify-content-around
 	 				= create_a_model(model)
-	 				= link_to 'Retour', :back, class: 'btn btn-outline-primary'
+	 				= link_to 'Exporter Clients', all_clients_path(format: :xlsx), class: 'btn btn-outline-primary'
 	   	.form-inline.pb-4.mb-5.border-bottom
 	 	    = form_tag clients_path, method: :get do
 	 	      = text_field_tag :query,

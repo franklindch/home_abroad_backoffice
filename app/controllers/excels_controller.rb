@@ -12,7 +12,9 @@ class ExcelsController < ApplicationController
 		@clients = Client.all
 	end
 
-	def all_partners; end
+	def all_partners
+    @partner_companies = PartnerCompany.all
+  end
 
 	private
 

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :payments, only: [:edit, :destroy, :update]
     end
     resources :attendants
-    resources :travel_groups, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :travel_groups
 
     resources :travels, only: [:show] do
       resources :transits

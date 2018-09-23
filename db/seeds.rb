@@ -11,11 +11,11 @@
 # frank@frank.com / franklin
 
 puts 'Cleaning database...'
-Invoice.destroy_all
 Family.destroy_all
 Qualification.destroy_all
-LanguageStay.destroy_all
-Travel.destroy_all
+# Invoice.destroy_all
+# LanguageStay.destroy_all
+# Travel.destroy_all
 
 # require 'csv'
 
@@ -52,6 +52,7 @@ csv_text = File.read(Rails.root.join('families_retravaillee.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
   Family.create!(
+    family_identifier: row['family_identifier'],
     name: row['name'],
     address_1: row['Address₁'],
     # address_2: row['zip'],
@@ -75,8 +76,10 @@ csv_text = File.read(Rails.root.join('clients_retravaillee.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row, i|
   client_i = Client.create!(
+    client_identifier: row['client_identifier']
     gender: row['gender'],
     first_name: row['first_name'],
+    family_id: Family.find(family_identifier: row['family_identifier']),
     # last_name: "",
     # birth_date: Wed, 21 Aug 1968,
     # passport_expiration_date: Sat, 25 Dec 2021,
@@ -85,9 +88,6 @@ csv.each do |row, i|
     country_of_issue: row['country_of_issue'],
     school: row['school'],
     intl_number: nil,
-
-
-
     age: 17,
     nationality: "French",
     first_language_level: "Courant",

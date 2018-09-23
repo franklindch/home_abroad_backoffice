@@ -1,6 +1,7 @@
 - language_stay = @invoice.language_stay
 - client = language_stay.client
 - family = client.family
+- payments = @invoice.payments
 
 .invoice-box.margin-top-navbar.mt-5
   table cellpadding="0" cellspacing="0"
@@ -77,11 +78,24 @@
         | Transferts A/R
       td
         = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
-    tr.item.last
+    tr.item
       td
         | Frais de dossier
       td
         = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
+
+    - if payments.empty?
+      tr.item.last
+        td
+          | Aucun règlement à date
+        td
+    - else
+      tr.item
+      - payments.each_with_index do |payment, i|
+          td
+            = "Règlement #{i + 1} - #{payment.nature}"
+          td
+            = "#{payment.amount_price_cents} #{payment.amount_price_currency}"
     tr.total
       td
        |

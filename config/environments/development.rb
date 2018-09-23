@@ -2,6 +2,7 @@
 
 Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
+  config.assets.compile = true
   config.webpacker.check_yarn_integrity = true
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
@@ -17,6 +18,7 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+
 
   # Show full error reports.
   config.consider_all_requests_local = true

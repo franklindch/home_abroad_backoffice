@@ -2,22 +2,20 @@
 
 - if travel.nature == 'Groupe'
   .col-md-3
-    .btn.btn-primary data-target="#modal#{travel.travel_group.id}" data-toggle="modal" Associé à un voyage groupe
-    = render 'travel_groups/travel_group_modal', travel: travel.travel_group
+    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group), class: 'btn-sm btn-outline-primary'
+
   = render 'transits/transit_details', travel: travel
 
 - elsif travel.nature == 'Groupe_décalé'
   .col-md-3
-    .btn.btn-primary data-target="#modal#{travel.travel_group.id}" data-toggle="modal" Associé à un voyage groupe décalé
-    = render 'travel_groups/travel_group_modal', travel: travel.travel_group
+    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group), class: 'btn-sm btn-outline-primary'
     = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
   = render 'transits/transit_details', travel: travel
 
 - else
   .col-md-3
-    .btn.btn-primary data-target="#modal#{travel.id}travel" data-toggle="modal" Voir le voyage
     - if travel.travel_details
-      = render 'travels/travel_modal', travel: travel, travel_detail_aller: travel.travel_details.first, travel_detail_retour: travel.travel_details.second
+      = link_to "Voir les détails du voyage", travel_path(travel), class: 'btn-sm btn-outline-primary'
     - else
       p Pas de travel_details
   = render 'transits/transit_details', travel: travel

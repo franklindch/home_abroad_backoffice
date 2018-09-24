@@ -48,10 +48,11 @@
       td
         = "Cellphone : #{client.intl_number}"
     tr.item
-      td
-        = "Birthdate (dd/mm/yr) : #{date_format(client.birth_date)}"
-      td
-       = "Age : #{show_the_age_at_language(client.birth_date, @language_stay)} years"
+      - if client&.birth_date != nil
+        td
+          = "Birthdate (dd/mm/yr) : #{date_format(client&.birth_date)}"
+        td
+         = "Age : #{show_the_age_at_language(client&.birth_date, @language_stay)} years"
     tr.item
       td
         = "Nationality : #{client.nationality}"

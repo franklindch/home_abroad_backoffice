@@ -38,7 +38,8 @@
     p = show_attribute_empty_string(language_stay&.accomodation_type&.humanize, 'Type de logement')
     p = show_attribute_empty_string(language_stay&.room&.humanize, 'Chambre')
     p = show_attribute_empty_string(language_stay&.pension&.humanize, 'Pension')
-    p = show_attribute_empty_string(show_the_age_at_language(language_stay&.client&.birth_date, language_stay), 'Âge pendant le séjour (ans)')
+    - if language_stay&.client&.birth_date != nil
+      p = show_attribute_empty_string(show_the_age_at_language(language_stay&.client&.birth_date, language_stay), 'Âge pendant le séjour (ans)')
     p = show_attribute_empty_string(language_stay&.precisions, 'Précisions')
 
 - if language_stay.travel.nil? && language_stay.invoice == nil

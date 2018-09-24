@@ -13,7 +13,7 @@
           th Âge
           th Email
           th Famille
-          th
+          th -> Client
           th
           th
 
@@ -38,5 +38,7 @@
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
+          td
+            span  = link_to 'Passer en client', new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
 
 // souhaits de séjour et organismes et durée envisagée

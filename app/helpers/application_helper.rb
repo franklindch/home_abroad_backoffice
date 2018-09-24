@@ -13,16 +13,12 @@ module ApplicationHelper
 		elsif model == "accompagnateur"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_attendant_path, class: 'btn btn-primary'
 		elsif model == "programme"
-      link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_program_path, class: 'btn btn-primary'
+      link_to ("<i class=\"fa fas fa-plus-circle\">Créer un séjour</i>").html_safe, new_program_path, class: 'btn btn-primary'
     end
 	end
 
 	def number_to_phone(number)
-		new_number = []
-		number.split('').each_slice(3).to_a.each do |slice|
-			new_number << slice.join
-		end
-	  	return new_number.join(' ')
+		return number[0..2] + ' ' + number [3..-1]
 	end
 
   def show_attribute_nil(attribute, label)

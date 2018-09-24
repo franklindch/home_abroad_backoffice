@@ -33,7 +33,7 @@ class FamiliesController < ApplicationController
   end
 
   def index
-    @families = Family.order('created_at DESC').page(params[:page])
+    @families = Family.none
     respond_to do |format|
       format.html
       format.js
@@ -59,7 +59,7 @@ class FamiliesController < ApplicationController
     if params[:query].present?
       @families = Family.search_by_name(params[:query]).page(params[:query])
     else
-      @families = Family.order('created_at DESC').page params[:page]
+      @families = Family.none
     end
   end
 

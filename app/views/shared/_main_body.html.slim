@@ -95,17 +95,17 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 
     - elsif model == 'programme'
         .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-2.mb-1
-            h1.h2 = "Tous les #{model}s"
+            h1.h2 = "Tous les séjours"
             .btn-toolbar.mb-2.mb-md-0
                 .mr-2.d-flex.justify-content-around
                 = create_a_model(model)
-                = link_to 'Exporter Programmes', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+                = link_to 'Exporter Séjours', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
         .form-inline.pb-4.mb-5.border-bottom
             = form_tag programs_path, method: :get do
                 = text_field_tag :query,
             params[:query],
             class: "form-control",
-            placeholder: "Rechercher un #{model}"
+            placeholder: "Rechercher un séjour"
             = submit_tag :Entrer, class: 'btn btn-primary'
 
 

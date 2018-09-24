@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924125212) do
+ActiveRecord::Schema.define(version: 20180924133651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 20180924125212) do
     t.integer "season"
     t.integer "gender"
     t.string "nationality", default: "French"
+    t.integer "client_identifier"
+    t.string "city"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -156,6 +158,8 @@ ActiveRecord::Schema.define(version: 20180924125212) do
     t.string "mother_office_intl_number"
     t.string "father_office_intl_number"
     t.boolean "prospect", default: false
+    t.integer "family_identifier"
+    t.string "city"
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
   end
 

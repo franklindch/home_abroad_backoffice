@@ -4,7 +4,7 @@ class Family < ApplicationRecord
 	has_many :clients, dependent: :destroy, inverse_of: :family
 
 	pg_search_scope :search_by_name,
-					against: [:name, :phone, :address_1],
+					against: [:name],
 					using: {
 						tsearch: { prefix: true, negation: true, any_word: true}
 					}

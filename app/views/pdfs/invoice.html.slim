@@ -61,7 +61,7 @@
           = "Prix du voyage #{travel.nature.humanize.capitalize} #{travel.travel_group.travel_code}"
       - else
         td
-          = "Prix du voyage #{travel.nature.humanize.capitalize} - Départ : #{travel.travel_details.first.departure_location}"
+          = "Prix du voyage #{travel.nature.humanize.capitalize}"
       td
         = "#{@invoice.travel_price_cents} #{@invoice.travel_price_currency}"
     tr.item

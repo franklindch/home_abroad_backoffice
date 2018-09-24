@@ -17,46 +17,19 @@ Qualification.destroy_all
 # LanguageStay.destroy_all
 # Travel.destroy_all
 
-# require 'csv'
-
-# csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
-# filepath    = 'beers.csv'
-
-# CSV.foreach(filepath, csv_options) do |row|
-#   Family.create!({
-#     name: row[0],
-#     family_situation: "Divorcés",
-#     address_1: "191 Rue Saint-Honoré, Paris, France",
-#     address_2: "2ième étage, porte à gauche",
-#     zip_code: 75001,
-#     phone: "132238293",
-#     qualification_id: ualification_of_family_2.id,
-#     email: "james@family.com",
-#     father_name: "François JAMES",
-#     mother_name: "Marie FRANC",
-#     mother_phone: "629302381",
-#     father_phone: "623232392",
-#     mother_email: "marie.franc@gmail.com",
-#     father_email: "francois.james@email.fr",
-#     mother_intl_number: "+33629302381",
-#     father_intl_number: "+33623232392",
-#     intl_number: "+33132238293"
-#   })
-# end
-
 require 'csv'
 
 
 puts 'Importation des familles de l\'autre base...'
-csv_text = File.read(Rails.root.join('families_retravaillee.csv'))
+csv_text = File.read(Rails.root.join('families.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
   Family.create!(
     family_identifier: row['family_identifier'],
     name: row['name'],
     address_1: row['Address₁'],
-    # address_2: row['zip'],
     zip_code: row['zip_code'],
+    city: row['city'],
     intl_number: row['intl_number'],
     email: row['email'],
     father_name: row['father_name'],
@@ -71,44 +44,36 @@ csv.each do |row|
   puts "Famille créée"
 end
 
-puts 'Importation des clients de l\'autre base...'
-csv_text = File.read(Rails.root.join('clients_retravaillee.csv'))
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
-csv.each do |row, i|
-  client_i = Client.create!(
-    client_identifier: row['client_identifier']
-    gender: row['gender'],
-    first_name: row['first_name'],
-    family_id: Family.find(family_identifier: row['family_identifier']),
-    # last_name: "",
-    # birth_date: Wed, 21 Aug 1968,
-    # passport_expiration_date: Sat, 25 Dec 2021,
-    email: row['email'],
-    passport_number: row['passport_number'],
-    country_of_issue: row['country_of_issue'],
-    school: row['school'],
-    intl_number: nil,
-    age: 17,
-    nationality: "French",
-    first_language_level: "Courant",
-    preferred_hobbies: "footing, lecture",
-    medical_issue: "aucun",
-    smoker: false,
-    comment: "",
-    family_id: family_1.id,
-    second_language_level: "Intermédiaire",
-    first_language: "Anglais",
-    second_language: "Espagnol"
-  )
-  puts "Client créée"
-end
+# puts 'Importation des clients de l\'autre base...'
+# csv_text = File.read(Rails.root.join('clients.csv'))
+# csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+# csv.each do |row, i|
+#   client_i = Client.create!(
+#     client_identifier: row['client_identifier']
+#     gender: row['gender'],
+#     first_name: row['first_name'],
+#     city: row['city'],
+#     last_name: row['last_name'],
+#     address_1: row['address_1'],
+#     intl_number: row['intl_number'],
+#     zip_code: row['zip_code'],
+#     family_id: Family.find(family_identifier: row['family_identifier']),
+#     # last_name: "",
+#     # birth_date: Wed, 21 Aug 1968,
+#     # passport_expiration_date: Sat, 25 Dec 2021,
+#     email: row['email'],
+#     passport_number: row['passport_number'],
+#     country_of_issue: row['country_of_issue'],
+
+#   )
+#   puts "Client créée"
+# end
 
 
 
 
 puts ""
 puts "--------------------------------------------------------"
-puts "There are now #{Family.count} rows in the families table"
 puts "There are now #{Family.count} rows in the families table"
 puts "There are now #{Client.count} rows in the clients table"
 

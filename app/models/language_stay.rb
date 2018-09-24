@@ -28,7 +28,7 @@ class LanguageStay < ApplicationRecord
     Host_family: 1,
     Residence: 2,
     Summer_camp: 3,
-    Teacher_home: 4
+    Teacher_s_home: 4
   }
 
 

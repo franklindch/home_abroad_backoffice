@@ -76,4 +76,8 @@ module ApplicationHelper
   def time_format(time)
     time.strftime('%H:%M')
   end
+
+  def get_comercial_responsible_name(list)
+    list.first {|commercial_responsible| commercial_responsible == current_user.first_name }
+  end
 end

@@ -106,7 +106,7 @@ class LanguageStaysController < ApplicationController
   def generate_language_stay_certificate_word(language_stay)
     respond_to do |format|
       format.docx do
-        render docx: 'generate_language_stay_certificate_word', filename: "Attestation de séjour - #{language_stay.client.first_name} #{language_stay.client.last_name}.docx"
+        render docx: 'generate_language_stay_certificate_word', filename: "#{language_stay.client.last_name.upcase} #{language_stay.client.first_name}_Attestation_séjour.docx"
       end
     end
   end

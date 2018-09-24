@@ -18,51 +18,8 @@ section
                 .child_details_section.pt-3
                   .col-md-12
                     h3.mt-3 Remplir l'Aller & le Retour du voyage
-                    .child_details.mt-5
+                    .child_details_2.mt-5
                       = f.simple_fields_for :travel_details do |travel_detail|
                         = render 'travel_details/travel_detail_fields', f: travel_detail, travel_group: @travel_group
                   .form-actions.text-center
                     = f.button :button, "Valider et terminer", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe}
-
-
-ruby:
-  conditionals = [
-    {
-      selector: '#travel_group_travel_details_attributes_0_is_correspondence_true',
-      when: [{
-        event: 'click',
-        actions: [{
-          type: 'SHOW',
-          nodes: ['.corres:eq(0)'],
-        }]
-      }]
-      }, {
-        selector: '#travel_group_travel_details_attributes_0_is_correspondence_false',
-        when: [{
-          event: 'click',
-          actions: [{
-            type: 'HIDE',
-            nodes: ['.corres:eq(0)'],
-          }]
-        }]
-        }, {
-        selector: '#travel_group_travel_details_attributes_1_is_correspondence_true',
-        when: [{
-          event: 'click',
-          actions: [{
-            type: 'SHOW',
-            nodes: ['.corres:eq(1)'],
-          }]
-        }]
-        }, {
-        selector: '#travel_group_travel_details_attributes_0_is_correspondence_false',
-        when: [{
-          event: 'click',
-          actions: [{
-            type: 'HIDE',
-            nodes: ['.corres:eq(1)'],
-          }]
-        }]
-      }].to_json
-
-code data-conditionals= conditionals

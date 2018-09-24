@@ -2,25 +2,32 @@
 
 - if travel.nature == 'Groupe'
   .col-md-3
-    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group), class: 'btn-sm btn-outline-primary'
+    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group)
 
   = render 'transits/transit_details', travel: travel
 
 - elsif travel.nature == 'Groupe_décalé'
   .col-md-3
-    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group), class: 'btn-sm btn-outline-primary'
-    = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
+    = link_to "Associé à un voyage groupe décalé", travel_group_path(travel.travel_group)
+  .col-md-3
+    - if travel.off_set_travel.present?
+      = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
+    - else
+      p Pas de voyage modifié sur le voyage groupe. Veuillez modifier le voyage pour ce séjour.
+
   = render 'transits/transit_details', travel: travel
+
 
 - else
   .col-md-3
     - if travel.travel_details
-      = link_to "Voir les détails du voyage", travel_path(travel), class: 'btn-sm btn-outline-primary'
+      = link_to "Voir les détails du voyage", travel_path(travel)
     - else
       p Pas de travel_details
+  .col-md-3
+
   = render 'transits/transit_details', travel: travel
 
-	- if travel.off_set_travel.present?
-		= render 'off_set_travels/off_set_travel_details', travel: travel, off_set_travel: travel.off_set_travel
-	- else
-		p Pas de voyage modifié sur le voyage groupe. Veuillez modifier le voyage pour ce séjour.
+.mt-5.edit-delete-links.ml-3
+  = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
+  = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id

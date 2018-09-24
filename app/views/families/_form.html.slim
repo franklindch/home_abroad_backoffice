@@ -29,14 +29,14 @@ section
                     h4.mt-3.text-center Père
                     = f.input :father_name, label: 'Nom'
                     = f.input :father_first_name, label: 'Prénom'
-                    = f.input :father_phone, label: 'Tél', input_html: { class: 'father_phone' }
+                    = f.input :father_phone, label: 'Tél père', input_html: { class: 'father_phone' }
                     = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
                     = f.input :father_email, label: 'Email'
                   .col-md-6
                     h4.mt-3.text-center Mère
                     = f.input :mother_name, label: 'Nom'
                     = f.input :mother_first_name, label: 'Prénom'
-                    = f.input :mother_phone, as: :tel, label: 'Tél', input_html: { class: 'mother_phone' }
+                    = f.input :mother_phone, as: :tel, label: 'Tél mère', input_html: { class: 'mother_phone' }
                     = f.input :mother_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'mother_office_phone' }
                     = f.input :mother_email, as: :tel, label: 'Email'
 

@@ -18,7 +18,6 @@
       p = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Départ de')
       p = show_attribute_empty_string(date_format(travel_detail_aller&.start_date), 'Date de départ')
       p = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
       p = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
       p = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date de retour')
       p = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure de retour')
@@ -42,7 +41,6 @@
       p = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Départ de')
       p = show_attribute_empty_string(date_format(travel_detail_retour&.start_date), 'Date de départ')
       p = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
       p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
       p = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date de retour')
       p = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure de retour')
@@ -58,5 +56,7 @@
         p = show_attribute_empty_string(time_format(correspondence_retour&.end_time), 'Heure de retour')
       - else
         p.card-title.card-title.pt-2.border-top = '<b>Aucun voyage Retour en correspondance renseigné.</b>'.html_safe
+  .row
+    .col-md-12
       .text-center
-        = link_to 'Retour', :back
+        = link_to 'Vers sa fiche client', family_client_path(@travel.language_stay.client.family, @travel.language_stay.client)

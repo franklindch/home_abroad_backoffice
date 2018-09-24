@@ -12,13 +12,13 @@ fr:
       Single_room: "Chambre simple"
       Shared_room: "Chambre partagée"
     accomodations:
-      Without_accomodation: "Sans logement"
-      With_accomodation: "Avec logement"
+      Without_accommodation: "Sans logement"
+      With_accommodation: "Avec logement"
     accomodation_types:
       Host_family: "Famille d'accueil"
       Residence: "En résidence"
       Summer_camp: "Summer Camp"
-      Teachers_home: "Chez le professeur"
+      Teacher's_home: "Chez le professeur"
 
     pagination:
       first: "Premier"

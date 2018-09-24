@@ -18,7 +18,7 @@ section
                   = f.input :first_name, label: 'Prénom'
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year]
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'
 
                   h4.mt-4.mb-4 Autres
@@ -26,7 +26,10 @@ section
                   = f.input :comment, label: 'Commentaire'
 
                 - else
-                  = f.input :season,  collection: Client.seasons.keys.map { |w| [w.humanize, w] },label: 'Saison'
+                  - if @client.id.nil?
+                    = f.input :season,  collection: Client.seasons.keys.map { |w| [w.humanize, w] },label: 'Saison', selected: 1
+                  - else
+                    = f.input :season,  collection: Client.seasons.keys.map { |w| [w.humanize, w] },label: 'Saison'
                   = f.input :phone_number, label: 'Téléphone mobile', input_html: { class: 'phone_number' }
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
@@ -35,7 +38,7 @@ section
                   = f.input :first_name, label: 'Prénom'
                   = f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family&.name&.capitalize} | #{family&.address_1&.capitalize}" }
                   = link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year]
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'
 
   								// calculer l'âge à partir de la date de naissance et le stocker dans la DB

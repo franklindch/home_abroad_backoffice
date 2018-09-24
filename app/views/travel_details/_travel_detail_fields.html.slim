@@ -15,7 +15,8 @@
     = f.input :departure_location, label: 'Départ de'
     = f.input :start_date, label: 'Date de départ'
     = f.input :start_time, label: 'Heure de départ'
-    = f.input :meeting_time, label: 'Heure de rendez-vous'
+    - if @travel_group
+      = f.input :meeting_time, label: 'Heure de rendez-vous'
     / = f.input :father_name, label: 'Nom'
   .col-md-6
     h4.mt-3 Arrivée
@@ -70,7 +71,45 @@ ruby:
             nodes: ['.correspondence:eq(1)'],
           }]
         }]
-      }].to_json
+      },
+
+      {
+        selector: '#travel_group_travel_details_attributes_0_is_correspondence_true',
+        when: [{
+          event: 'click',
+          actions: [{
+            type: 'SHOW',
+            nodes: ['.correspondence:eq(0)'],
+          }]
+        }]
+        }, {
+          selector: '#travel_group_travel_details_attributes_0_is_correspondence_false',
+          when: [{
+            event: 'click',
+            actions: [{
+              type: 'HIDE',
+              nodes: ['.correspondence:eq(0)'],
+            }]
+          }]
+          }, {
+          selector: '#travel_group_travel_details_attributes_1_is_correspondence_true',
+          when: [{
+            event: 'click',
+            actions: [{
+              type: 'SHOW',
+              nodes: ['.correspondence:eq(1)'],
+            }]
+          }]
+          }, {
+          selector: '#travel_group_travel_details_attributes_1_is_correspondence_false',
+          when: [{
+            event: 'click',
+            actions: [{
+              type: 'HIDE',
+              nodes: ['.correspondence:eq(1)'],
+            }]
+          }]
+        }].to_json
 
 code data-conditionals= conditionals
 

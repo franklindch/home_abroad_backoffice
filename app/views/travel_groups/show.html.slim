@@ -58,5 +58,7 @@
         p = show_attribute_empty_string(time_format(correspondence_retour&.end_time), 'Heure de retour')
       - else
         p.card-title.card-title.pt-2.border-top = '<b>Aucun voyage Retour en correspondance renseigné.</b>'.html_safe
+  .row
+    .col-md-12
       .text-center
-        = link_to 'Retour', :back
+        = link_to 'Retour', travel_groups_path

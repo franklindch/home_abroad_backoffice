@@ -20,7 +20,7 @@ section
                     / / p = "Retour: #{retour_travel_group.start_date} jusqu'à #{retour_travel_group.end_date}"
 
                     h4.mt-4.mb-4 Modifier l'aller ou le retour
-                    = f.input :nature, collection: OffSetTravel.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0
+                    = f.input :nature, collection: OffSetTravel.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature'
                     = f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?', checked_value: true
                     = f.input :mode, collection: OffSetTravel.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
                     = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Partenaire'), include_blank: "Merci de sélectionner la compagnie du vol...", label: false, label_method: lambda { |partner_company| "#{partner_company&.name&.capitalize} " }
@@ -32,7 +32,6 @@ section
                         = f.input :departure_location, label: 'Départ de'
                         = f.input :start_date, label: 'Date de départ'
                         = f.input :start_time, label: 'Heure de départ'
-                        = f.input :meeting_time, label: 'Heure de rendez-vous'
                         / = f.input :father_name, label: 'Nom'
                       .col-md-6
                         h4.mt-3 Arrivée

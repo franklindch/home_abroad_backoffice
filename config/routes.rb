@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       resources :off_set_travels, only: [:new, :create, :edit, :update]
     end
 
-    get 'static', to: 'excels#static'
+
     get 'enrollment_form', to: 'language_stays#enrollment_form'
     get 'language_stay_certificate', to: 'language_stays#certificate', format: 'docx'
     get 'invoice_pdf', to: 'invoices#invoice'
@@ -59,6 +59,12 @@ Rails.application.routes.draw do
   end
 
   get 'all_families', to: 'excels#all_families'
+  get 'all_clients', to: 'excels#all_clients'
+  get 'all_partners', to: 'excels#all_partners'
+  get 'all_programs', to: 'excels#all_programs'
+  get 'all_attendants', to: 'excels#all_attendants'
+  get 'all_child_details', to: 'excels#all_child_details'
+
   get 'close_prospect', to: 'qualifications#close_prospect'
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
   get 'cancel_language_stay', to: 'language_stays#cancel_language_stay'

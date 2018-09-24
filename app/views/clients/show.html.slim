@@ -27,7 +27,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	.mt-5
 		- @language_stays.each do |language_stay|
 			.d-flex.justify-content-between.card-header
-				h5 = "Séjour - #{language_stay&.program&.name}, #{language_stay&.partner_company&.name&.humanize}, #{language_stay&.location}"
+				h5 = "Séjour - #{language_stay&.program&.name} | #{language_stay&.partner_company&.name&.humanize&.upcase} | #{language_stay&.location}"
 
 			- if language_stay.travel.nil? && language_stay.invoice == nil
 				.row.mb-3
@@ -67,9 +67,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/travel_details', language_stay: language_stay
-                                .mt-5.edit-delete-links.ml-3
-                                  = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
-                                  = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
+
 
 			- elsif language_stay.travel && language_stay.invoice
 				.row.mb-3
@@ -92,10 +90,6 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 							.card-body
 								.row
 									= render 'clients/show_details/travel_details', language_stay: language_stay
-                                .mt-5.edit-delete-links.ml-3
-                                  = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
-                                  = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
-
 			.row.mb-3
 				.col-sm-12
 					.card

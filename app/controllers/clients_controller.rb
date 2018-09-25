@@ -36,12 +36,13 @@ class ClientsController < ApplicationController
 
 	def update
     @client.update(client_params)
-  	flash[:notice] = "Client édité avec succès !"
-  	redirect_to client_path(@client)
-	end
+    flash[:notice] = "Client édité avec succès !"
+    redirect_to client_path(@client)
+  end
 
-	def destroy
-	 	@client.destroy
+  def destroy
+    @client.destroy
+  	flash[:notice] = "Client supprimé avec succès !"
 	 	redirect_to clients_path
 	end
 

@@ -16,7 +16,7 @@ class ChildDetailsController < ApplicationController
   def destroy
     @child_detail.destroy
     flash[:notice] = "Prospect supprimé avec succès !"
-    redirect_to families_path
+    redirect_to child_details_path
   end
 
   def create

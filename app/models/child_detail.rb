@@ -10,8 +10,24 @@ class ChildDetail < ApplicationRecord
 
   has_and_belongs_to_many :partner_companies
 	enum gender: { Male: 1, Female: 2 }
-	enum school_grade: { Prépa: 0, Césure: 1, Terminale: 2, Première: 3, Seconde: 4, Troisième: 5, Quatrième: 6, Cinquième: 7, Sixième: 8, Etudes_supérieures: 9 }
-	enum month: {
+	enum school_grade: {
+    CP: 0,
+    CE1: 1,
+    CE2: 2,
+    CM1: 3,
+    CM2: 4,
+    Sixième: 5,
+    Cinquième: 6,
+    Quatrième: 7,
+    Troisième: 8,
+    Seconde: 9,
+    Première: 10,
+    Terminale: 11,
+    Prépa: 12,
+    Césure: 13,
+    Etudes_supérieures: 14
+  }
+  enum month: {
 		Janvier: 0,
 		Février: 1,
 		Mars: 2,

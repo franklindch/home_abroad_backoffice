@@ -35,7 +35,7 @@ class Client < ApplicationRecord
 
 
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
-  validates :first_name, :birth_date, presence: true
+  validates :first_name, :birth_date, :family_id, presence: true
   # after_save :check_if_family_is_client
 
   # before_save :capitalize_fields

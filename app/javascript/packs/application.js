@@ -6,6 +6,7 @@ let Turbolinks = require("turbolinks")
 Turbolinks.start()
 
 import { Conditionals } from '../style/conditionals';
+import { calendar, calendarBirthDate } from '../style/flatpicker';
 import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberClientFields } from '../libraries/initialize-intl-number';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
@@ -15,6 +16,12 @@ import { select2Attendants, select2PartnerCompanies } from '../style/select2_att
 
 
 document.addEventListener("turbolinks:load", () => {
+  if ($('.calendar_birth_date')) {
+    calendarBirthDate();
+  }
+  if ($('#range_end')) {
+    calendar();
+  }
   if ($('#invoice_total_price_cents')) {
     autocompleteInvoiceFieldTotal();
   }

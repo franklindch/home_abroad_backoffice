@@ -8,11 +8,11 @@ class LanguageStay < ApplicationRecord
   has_one :off_set_travel, through: :travel, dependent: :destroy
   has_many :payments, through: :invoice, dependent: :destroy
 
-  enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
+  enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7, Franklin: 8 }
   enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
   enum accomodation: {
-    Without_accomodation: 1,
-    With_accomodation: 2
+    Without_accommodation: 1,
+    With_accommodation: 2
   }
   enum pension: {
     No_meal: 1,

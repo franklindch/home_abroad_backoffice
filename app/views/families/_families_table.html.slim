@@ -7,7 +7,7 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Nom
+          th NOM
           th Ajout
           th Email
           th Téléphone
@@ -27,7 +27,7 @@
               td
                 span = family&.email
               td
-                span = number_to_phone(family&.intl_number) if family.intl_number != nil
+                / span = number_to_phone(family&.intl_number) if family&.intl_number != nil
               td
                 span = family&.address_1
               td

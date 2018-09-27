@@ -91,7 +91,7 @@ class LanguageStaysController < ApplicationController
 
   def language_stay_params
     params.require(:language_stay).permit(
-      :option_1_fr, :option_2_fr, :program_detail_fr, :program_detail, :accomodation_type, :transfer_aller, :transfer_retour, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
+      :other_pension, :other_transfer, :option_3, :option_3_fr, :country, :option_1_fr, :option_2_fr, :program_detail_fr, :program_detail, :accomodation_type, :transfer_aller, :transfer_retour, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id
     )
   end
 

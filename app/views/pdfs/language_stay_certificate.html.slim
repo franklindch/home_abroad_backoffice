@@ -1,9 +1,9 @@
 - client = @language_stay.client
 
 .invoice-box.margin-top-navbar
-  table cellpadding="0" cellspacing="0" 
+  table cellpadding="0" cellspacing="0"
     tr.top
-      td colspan="2" 
+      td colspan="2"
         table
           tr
             td.title
@@ -20,7 +20,7 @@
       td
     tr.item
       td
-        = "Surname : #{client.last_name}"
+        = "Surname : #{c(client.last_name)}"
       td
         = "Gender : #{client.gender}"
     tr.item
@@ -63,7 +63,7 @@
       td
 
 
-    
+
     - if client.age_category == 'Junior' || client.age_category == 'Etudiant'
     tr.heading
       td
@@ -71,7 +71,7 @@
       td
     tr.item
       td
-        = "Mother name : #{client.family.mother_name}"
+        = "Mother name : #{c(client.family.mother_name)}"
     tr.item
       td
         = "Cellphone : #{client.family.mother_phone}"
@@ -79,7 +79,7 @@
         = "Email : #{client.family.mother_email}"
     tr.item
       td
-        = "Father name : #{client.family.father_name}"
+        = "Father name : #{c(client.family.father_name)}"
     tr.item.last
       td
         = "Cellphone : #{client.family.father_phone}"
@@ -92,7 +92,7 @@
       td
     tr.item
       td
-        = "Applying with : #{@language_stay.partner_company.name}"
+        = "Applying with : #{c(@language_stay.partner_company.name)}"
       td
         = "Program : #{@language_stay.program.name}"
     tr.item

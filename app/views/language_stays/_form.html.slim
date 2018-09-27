@@ -3,7 +3,7 @@ section
     .col-md-6.mx-auto
       .card.mt-5
         .card-header
-          h2 Formulaire Séjour Linguistique
+          h2 Formulaire Séjour
         .card-body
           = simple_form_for [@client, @language_stay] do |f|
             .form-inputs
@@ -11,31 +11,37 @@ section
             		.row
             			.col-md-12
                     h4.mt-4.mb-4 Séjour
-                    = f.input :data_entry_responsible, label: 'Responsable de saisie', collection: LanguageStay.data_entry_responsibles.keys.map { |w| [w.humanize, w] }
+                    = f.hidden_field :data_entry_responsible, value: "#{current_user&.first_name}"
                     - if @language_stay.id.nil?
-                      = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Responsable commercial', selected: current_user
+                      = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Agent commercial', selected: current_user
                     - else
-                      = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Responsable commercial'
+                      = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Agent commercial'
                     = f.input :program_id, collection: Program.all, include_blank: "Merci de sélectionner le type de séjour concerné...", label: false
                     = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                     h4.mt-4.mb-4 Détails
                     = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
+                    = f.hidden_field :country, class: 'country_field'
                     = f.input :program_detail_fr, label: 'Détails du programme'
                     = f.input :option_1_fr, label: 'Option 1'
                     = f.input :option_2_fr, label: 'Option 2'
-                    = f.input :start_date, label: 'Début'
-                    = f.input :end_date, label: 'Fin'
+                    = f.input :option_3_fr, label: 'Option 3'
+                    = f.input :start_date, as: :string, label: 'Début', input_html: {id: "range_start"}
+                    = f.input :end_date, as: :string, label: 'Fin', input_html: {id: "range_end"}
                     = f.input :class_hours, label: 'Nombre de leçons (par semaine)'
                     = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement'
                     = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [t("views.accomodation_types.#{w}"), w] }, label: 'Type de logement'
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
+                    = f.input :other_pension, label: 'Autre type de pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
                     - if @language_stay.id.nil?
                       = f.input :transfer_aller, label: 'Transfert Aller', input_html: { checked: true }
+                      = f.input :transfer_retour, label: 'Transfert Retour', input_html: { checked: true }
+                      = f.input :other_transfer, label: 'Autre type de transfert'
                     - else
                       = f.input :transfer_aller, label: 'Transfert Aller'
-                    = f.input :transfer_retour, label: 'Transfert Retour'
+                      = f.input :transfer_retour, label: 'Transfert Retour'
+                      = f.input :other_transfer, label: 'Autre type de transfert'
                     = f.input :fee, label: 'Payment en direct à l\'organisme étranger', as: :radio_buttons
 
                     h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :
@@ -43,6 +49,7 @@ section
                     = f.input :precisions, label: 'Specific requests'
                     = f.input :option_1, label: 'Option 1'
                     = f.input :option_2, label: 'Option 2'
+                    = f.input :option_3, label: 'Option 3'
 
 
             .form-actions.text-center

@@ -18,8 +18,9 @@ section
                   = f.input :first_name, label: 'Prénom'
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], as: :string, include_blank: true, input_html: { class: 'calendar_birth_date' }
                   = f.input :email, label: 'Email'
+                  = f.hidden_field :country, class: 'country_field'
 
                   h4.mt-4.mb-4 Autres
                   = f.input :smoker, as: :radio_buttons, label: 'Fumeur ?'
@@ -38,25 +39,28 @@ section
                   = f.input :first_name, label: 'Prénom'
                   = f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family&.name&.capitalize} | #{family&.address_1&.capitalize}" }
                   = link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], as: :string, include_blank: true, input_html: { class: 'calendar_birth_date' }
                   = f.input :email, label: 'Email'
+                  = f.hidden_field :country, class: 'country_field'
 
   								// calculer l'âge à partir de la date de naissance et le stocker dans la DB
 
 
                 h4.mt-4.mb-4 Passeport / Carte d'identité
                 = f.input :passport_number, label: 'Numéro'
-                = f.input :passport_expiration_date, label: 'Date d\'expiration', start_year: Time.now.year, end_year: Time.now.year + 15, include_blank: true
+                = f.input :passport_expiration_date, label: 'Date d\'expiration', start_year: Time.now.year, end_year: Time.now.year + 15, include_blank: true, as: :string, input_html: { class: 'calendar_birth_date' }
                 = f.input :country_of_issue, label: 'Pays d\'émission', locale: 'en', wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                 h4.mt-4.mb-4 Langues
                 .row
-                    .col-md-6
-                        = f.input :first_language, collection: Client.first_languages.keys.map { |w| [w.humanize, w] }, label: false
-                        = f.input :first_language_level, collection: Client.first_language_levels.keys.map { |w| [w.humanize, w] }, label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
-                    .col-md-6
-                        = f.input :second_language, collection: Client.second_languages.keys.map { |w| [w.humanize, w] }, label: false, include_blank: true
-                        = f.input :second_language_level, collection: Client.second_language_levels.keys.map { |w| [w.humanize, w] }, label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
+                  .col-md-6
+                      h6 LV1
+                      = f.input :first_language, collection: Client.first_languages.keys.map { |w| [w.humanize, w] }, label: false
+                      = f.input :first_language_level, collection: Client.first_language_levels.keys.map { |w| [w.humanize, w] }, label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
+                  .col-md-6
+                      h6 LV2
+                      = f.input :second_language, collection: Client.second_languages.keys.map { |w| [w.humanize, w] }, label: false, include_blank: true
+                      = f.input :second_language_level, collection: Client.second_language_levels.keys.map { |w| [w.humanize, w] }, label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
 
             h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :

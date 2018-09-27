@@ -1,4 +1,4 @@
-- if clients.empty?
+- if @clients.empty?
   .card
     .card-body
       p Aucun client trouvé pour cette recherche, merci de réessayer.
@@ -18,26 +18,25 @@
           th
           th
       tbody
-      - Family.all.each do |family|
-        - family.clients.each do |client|
-          div id="accordion"
-            tr data-toggle="collapse" data-target="#collapse#{client.id}" aria-expanded="true" aria-controls="#collapse#{client.id}" id="heading#{client.id}"
-              td
-                span = c(client&.last_name)
-              td
-                span = client&.first_name
-              td
-                span = client&.season&.humanize
-              td
-                span = client&.age_category
-              td
-                span = date_format(client&.birth_date)
-              td
-                span = date_format(client&.created_at)
-              td
-                span = number_to_phone(client&.intl_number) if client.intl_number != nil
-              td
-                span = client&.email
-              td
-              td
-                span = link_to 'Vers sa fiche client', family_client_path(client.family, client)
+      - @clients.each do |client|
+        div id="accordion"
+          tr data-toggle="collapse" data-target="#collapse#{client.id}" aria-expanded="true" aria-controls="#collapse#{client.id}" id="heading#{client.id}"
+            td
+              span = c(client&.last_name)
+            td
+              span = client&.first_name
+            td
+              span = client&.season&.humanize
+            td
+              span = client&.age_category
+            td
+              span = date_format(client&.birth_date)
+            td
+              span = date_format(client&.created_at)
+            td
+              span = number_to_phone(client&.intl_number) if client.intl_number != nil
+            td
+              span = client&.email
+            td
+            td
+              span = link_to 'Vers sa fiche client', family_client_path(client.family, client)

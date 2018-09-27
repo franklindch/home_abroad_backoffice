@@ -21,24 +21,27 @@ section
                     = f.input :zip_code, label: 'Code Postal', input_html: { class: 'zip_code_field '}
                     = f.input :family_situation, collection: Family.family_situations.keys.map { |w| [w.humanize, w] }, label: 'Situation familiale'
                     = f.hidden_field :prospect, value: params[:prospect]
+                    = f.hidden_field :country,  class: 'country_field '
 
             .form-inputs.border-top.pt-4
               .container-fluid
                 .row
                   .col-md-6
-                    h4.mt-3.text-center Père
-                    = f.input :father_name, label: 'Nom'
-                    = f.input :father_first_name, label: 'Prénom'
-                    = f.input :father_phone, label: 'Tél père', input_html: { class: 'father_phone' }
-                    = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
-                    = f.input :father_email, label: 'Email'
-                  .col-md-6
-                    h4.mt-3.text-center Mère
+                    h4.mt-3.text-center Contact Mère
+                    = f.input :mother_main_contact, label: 'Contact principal ?', as: :radio_buttons
                     = f.input :mother_name, label: 'Nom'
                     = f.input :mother_first_name, label: 'Prénom'
-                    = f.input :mother_phone, as: :tel, label: 'Tél mère', input_html: { class: 'mother_phone' }
+                    = f.input :mother_phone, as: :tel, label: 'Portable', input_html: { class: 'mother_phone' }
                     = f.input :mother_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'mother_office_phone' }
                     = f.input :mother_email, as: :tel, label: 'Email'
+                  .col-md-6
+                    h4.mt-3.text-center Contact Père
+                    = f.input :father_main_contact, label: 'Contact principal ?', as: :radio_buttons
+                    = f.input :father_name, label: 'Nom'
+                    = f.input :father_first_name, label: 'Prénom'
+                    = f.input :father_phone, label: 'Portable', input_html: { class: 'father_phone' }
+                    = f.input :father_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'father_office_phone' }
+                    = f.input :father_email, label: 'Email'
 
             .form-actions.text-center.mt-4
               = f.button :button, "Valider", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i> Chargement".html_safe}, id: 'submit_with_phone'

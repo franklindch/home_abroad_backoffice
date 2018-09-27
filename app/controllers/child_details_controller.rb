@@ -37,12 +37,7 @@ class ChildDetailsController < ApplicationController
       format.html
       format.js
     end
-
-    if params[:query].present?
-      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_first_name(params[:query]).page params[:page]
-    else
-      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
-    end
+    search_child_details
   end
 
   def update
@@ -58,6 +53,14 @@ class ChildDetailsController < ApplicationController
   end
 
 	private
+
+  def search_child_details
+    if params[:query].present?
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_first_name(params[:query]).page params[:page]
+    else
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
+    end
+  end
 
   def generate_relaunch_word(child_detail)
     respond_to do |format|
@@ -77,7 +80,7 @@ class ChildDetailsController < ApplicationController
 
   def child_detail_params
     params.require(:child_detail).permit(
-      :commercial_responsible, :reference_name, :refered_by, :contact_mode, :data_entry_responsible, :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
+      :follow_up, :existing_family, :commercial_responsible, :reference_name, :refered_by, :contact_mode, :data_entry_responsible, :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
     )
   end
 

@@ -95,7 +95,7 @@ class ClientsController < ApplicationController
 
 	def client_params
 	  params.require(:client).permit(
-	  	:school, :school_grade, :season, :status, :age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
+	  	:country, :city, :school, :school_grade, :season, :status, :age_category, :gender, :intl_number, :address_1, :address_2, :zip_code, :passport_expiration_date, :first_name, :last_name, :birth_date, :email, :phone_number, :passport_number, :country_of_issue, :nationality, :first_language_level, :second_language_level, :first_language, :second_language, :preferred_hobbies, :smoker, :medical_issue, :comment, :family_id
 	  )
 	end
 end

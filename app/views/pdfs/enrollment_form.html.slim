@@ -24,7 +24,7 @@
       td
     tr.item
       td
-        = "Surname : <b>#{client.last_name.upcase}</b>".html_safe
+        = "Surname : <b>#{c(client.last_name)}</b>".html_safe
       td
         = "Gender : #{client.gender}"
     tr.item
@@ -84,7 +84,7 @@
       td
     tr.item
       td
-        = "<b>Mother</b> - SURNAME : #{client.family.mother_name}".html_safe
+        = "<b>Mother</b> - SURNAME : #{c(client.family.mother_name)}".html_safe
       td
         = "First name : #{client.family.mother_first_name}"
 
@@ -98,7 +98,7 @@
         = "Email : #{client.family.mother_email}"
     tr.item
       td
-        = "<b>Father</b> - SURNAME : #{client.family.father_name}".html_safe
+        = "<b>Father</b> - SURNAME : #{c(client.family.father_name)}".html_safe
       td
         = "First name : #{client.family.father_first_name}"
     tr.item
@@ -117,7 +117,7 @@
 
     tr.heading
       td
-        = "APPLYING WITH : #{@language_stay.partner_company.name}"
+        = "APPLYING WITH : #{c(@language_stay.partner_company.name)}"
       td
     tr.heading
       td

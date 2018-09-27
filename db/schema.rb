@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924133651) do
+ActiveRecord::Schema.define(version: 20180927091255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.integer "refered_by"
     t.string "reference_name"
     t.integer "commercial_responsible"
+    t.integer "follow_up"
+    t.boolean "existing_family", default: true
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
@@ -97,7 +99,7 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.integer "gender"
     t.string "nationality", default: "French"
     t.integer "client_identifier"
-    t.string "city"
+    t.string "country"
     t.index ["family_id"], name: "index_clients_on_family_id"
   end
 
@@ -159,7 +161,9 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.string "father_office_intl_number"
     t.boolean "prospect", default: false
     t.integer "family_identifier"
-    t.string "city"
+    t.string "country"
+    t.boolean "mother_main_contact", default: true
+    t.boolean "father_main_contact", default: false
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
   end
 
@@ -186,6 +190,8 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.string "camp_fee_total_price_currency", default: "EUR", null: false
     t.integer "total_price_cents", default: 0, null: false
     t.string "total_price_currency", default: "EUR", null: false
+    t.integer "option_3_price_cents"
+    t.string "option_3_price_currency"
     t.index ["language_stay_id"], name: "index_invoices_on_language_stay_id"
   end
 
@@ -217,6 +223,11 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.string "option_1_fr"
     t.string "option_2_fr"
     t.text "program_detail_fr"
+    t.string "country"
+    t.string "option_3_fr"
+    t.string "option_3"
+    t.text "other_pension"
+    t.text "other_transfer"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -255,6 +266,7 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.string "nature"
     t.string "urgence_intl_phone_number"
     t.string "code"
+    t.string "country"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -281,6 +293,7 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.datetime "updated_at", null: false
     t.boolean "prospect", default: true
     t.text "family_comment"
+    t.integer "refered_by"
   end
 
   create_table "transits", force: :cascade do |t|
@@ -344,6 +357,7 @@ ActiveRecord::Schema.define(version: 20180924133651) do
     t.bigint "travel_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "u_m", default: false
     t.index ["language_stay_id"], name: "index_travels_on_language_stay_id"
     t.index ["travel_group_id"], name: "index_travels_on_travel_group_id"
   end

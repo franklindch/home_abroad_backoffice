@@ -1,33 +1,62 @@
 - travel = language_stay.travel
 
 - if travel.nature == 'Groupe'
-  .col-md-3
-    = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group)
+  - travel_detail_aller = travel.travel_group.travel_details.first
+  .row
+    .col-md-3
+      = link_to "Associé à un voyage groupe", travel_group_path(travel.travel_group)
+      p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
+      p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
+      p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')
+      p = "#{travel_detail_aller.departure_location} - #{travel_detail_aller.arrival_location}"
+  .row
+    = render 'transits/transit_details', travel: travel
+  .row
+    .mt-5.edit-delete-links.ml-3
+      = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
+      = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
-  = render 'transits/transit_details', travel: travel
 
 - elsif travel.nature == 'Groupe_décalé'
-  .col-md-3
-    = link_to "Associé à un voyage groupe décalé", travel_group_path(travel.travel_group)
-  .col-md-3
-    - if travel.off_set_travel.present?
-      = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
-    - else
-      p Pas de voyage modifié sur le voyage groupe. Veuillez modifier le voyage pour ce séjour.
-
-  = render 'transits/transit_details', travel: travel
-
+  - travel_detail_aller = travel.travel_group.travel_details.first
+  .row
+    .col-md-3
+      = link_to "Associé à un voyage groupe décalé", travel_group_path(travel.travel_group)
+      p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
+      p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
+      p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')
+      p = "#{travel_detail_aller.departure_location} - #{travel_detail_aller.arrival_location}"
+  .row
+    = render 'transits/transit_details', travel: travel
+  .row
+    .col-md-3
+      - if travel.off_set_travel.present?
+        = link_to "<i class='fa fas fa-edit'> Editer #{travel.off_set_travel.nature} modifé</i>".html_safe, edit_travel_off_set_travel_path(travel, travel.off_set_travel)
+      - else
+        p Pas de voyage modifié sur le voyage groupe. Veuillez modifier le voyage pour ce séjour.
+  .row
+    .mt-5.edit-delete-links.ml-3
+      / = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
+      = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
 - else
-  .col-md-3
-    - if travel.travel_details
-      = link_to "Voir les détails du voyage", travel_path(travel)
-    - else
-      p Pas de travel_details
-  .col-md-3
+  - if travel.travel_details
+    - travel_detail_aller = travel.travel_details.first
+    .row
+      .col-md-3
+        = link_to "Voir les détails du voyage", travel_path(travel)
+        p = "#{travel_detail_aller.departure_location} - #{travel_detail_aller.arrival_location}"
+      / p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
+      / p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
+      / p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')
+  - else
+    p Pas de travel_details
+  .row
+    = render 'transits/transit_details', travel: travel
 
-  = render 'transits/transit_details', travel: travel
+  .row
+    .mt-5.edit-delete-links.ml-3
+      = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
+      = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
-.mt-5.edit-delete-links.ml-3
-  = link_to "<i class='fa fas fa-edit'> Editer le voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
-  = link_to "<i class='fa fas fa-trash-alt'> Supprimer le voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
+

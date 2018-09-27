@@ -49,5 +49,5 @@
           - if @client&.comment != ""
             = show_attribute_empty_string(@client&.comment, 'Remarque')
       .mt-5.edit-delete-links.ml-3
-        = link_to "<i class='fa fas fa-trash-alt'> Editer le client</i>".html_safe, edit_family_client_path(@client.family, @client)
-        = link_to "<i class='fa fas fa-trash-alt'> Supprimer le client</i>".html_safe, family_client_path(@client.family, @client), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id
+        = link_to "<i class='fa fas fa-edit'> Client</i>".html_safe, edit_family_client_path(@client.family, @client)
+        = link_to "<i class='fa fas fa-trash-alt'> Client</i>".html_safe, family_client_path(@client.family, @client), method: :delete, class: 'delete-link ml-4',  data: {'confirm-swal': 'Are you sure?'}, id: @client.id

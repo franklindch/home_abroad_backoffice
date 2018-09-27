@@ -15,22 +15,29 @@ function initAutocomplete() {
 
   function onPlaceChanged() {
     const place = this.getPlace();
-    console.log(place);
-    const zipCode = document.querySelector('.zip_code_field')
+    console.log(place.address_components);
+    const zipCode = document.querySelector('.zip_code_field');
+    const countryField = document.querySelector('.country_field');
     const placeZipCode6 = place.address_components[6];
     const placeZipCode7 = place.address_components[7];
     const placeZipCode8 = place.address_components[8];
+    const placecountryField = place.address_components[5];
+    console.log(placecountryField)
 
-    if (placeZipCode6) {
-      zipCode.value = placeZipCode6.short_name
+    if (zipCode) {
+      if (placeZipCode6) {
+        zipCode.value = placeZipCode6.short_name
+      }
+      if (placeZipCode7) {
+        zipCode.value = placeZipCode7.short_name
+      }
+      if (placeZipCode8) {
+        zipCode.value = placeZipCode8.short_name
+      }
     }
-    if (placeZipCode7) {
-      zipCode.value = placeZipCode7.short_name
+    if (placecountryField) {
+      countryField.value = placecountryField.long_name
     }
-    if (placeZipCode8) {
-      zipCode.value = placeZipCode8.short_name
-    }
-
   }
 }
 

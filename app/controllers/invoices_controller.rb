@@ -72,6 +72,8 @@ class InvoicesController < ApplicationController
 		  :camp_fee_amount_price_cents,
 		  :camp_fee_total_price_cents,
 		  :total_price_cents,
+      :option_3_price_cents,
+      :option_3_price_currency,
 		  :camp_fee_percentage,
 	    payments_attributes: [
 	    	:payment_date, :id, :amount_price_cents, :nature, :comment, :_destroy

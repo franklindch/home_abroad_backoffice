@@ -10,11 +10,12 @@
             td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
             br/
-            td.text-left.convocation-title
-              = "<b>Convocation aéroport</b>".html_safe
-            br/
+            td
+              h3.text-left
+                = "<b>Convocation Voyage</b>".html_safe
+              br/
             td.text-left
-              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s)<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
+              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s) | #{c(travel_detail_aller&.partner_company&.name)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
     tr.heading
       td
@@ -22,7 +23,7 @@
       td
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
+        = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Moyen de transport')
       td
         = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
     tr.item
@@ -37,9 +38,8 @@
         = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
     tr.item
       td
-        = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
-      td
         = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
+      td
     tr.item.last
       td
         = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
@@ -52,7 +52,7 @@
       td
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
+        = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Moyen de transport')
       td
         = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
     tr.item
@@ -67,9 +67,8 @@
         = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
     tr.item
       td
-        = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
-      td
         = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
+      td
     tr.item.last
       td
         = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')

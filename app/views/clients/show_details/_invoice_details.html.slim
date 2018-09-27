@@ -41,5 +41,5 @@
     .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_payments} euros à payer"
 
 .mt-5.edit-delete-links.ml-3
-  = link_to "<i class='fa fas fa-trash-alt'> Editer la facture ou ajouter règlement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
-  = link_to "<i class='fa fas fa-trash-alt'> Supprimer la facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.invoice.id
+  = link_to "<i class='fa fas fa-edit'> Facture</i> <i class='fa fas fa-plus-circle'>Règlement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
+  = link_to "<i class='fa fas fa-trash-alt'> Facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.invoice.id

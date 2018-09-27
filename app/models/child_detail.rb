@@ -25,19 +25,26 @@ class ChildDetail < ApplicationRecord
 		Novembre: 10,
 		Décembre: 11
 	}
-  enum refered_by: { Ami: 1, Salon: 2, Rencontre_Home_Abroad: 3, Recherche_google: 4, Rien: 4 }
-  enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7 }
+  enum refered_by: { Ami: 1, Salon: 2, Rencontre_Home_Abroad: 3, Recherche_google: 4, Office: 5 }
+  enum follow_up: { A_faire: 1, Doc_envoyé: 2, A_relancer: 3, Clôturé: 4 }
+  enum data_entry_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7, Franklin: 8 }
   enum contact_mode: { Appel_entrant: 1, Webcontact: 2, Par_Office: 3, Email_en_direct: 4, Visite: 5 }
   enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
 
   enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
-  validates :first_name, presence: true
+  validates :first_name, :last_name, :age, presence: true
+
+  after_save :prospect_clôturé
+
+  def prospect_clôturé
+    update_columns(status: 'Prospect_clôturé') if self.follow_up == 'Clôturé'
+  end
 
   def status_to_close
-    update_columns(status: 'Prospect_clôturé')
+    update_columns(status: 'Prospect_clôturé', follow_up: 'Clôturé')
   end
 
   def status_to_open
-    update_columns(status: 'Prospect')
+    update_columns(status: 'Prospect', follow_up: 'A_faire')
   end
 end

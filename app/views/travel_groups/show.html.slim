@@ -3,26 +3,82 @@
 - travel_detail_retour = @travel_group.travel_details.second
 - correspondence_retour = travel_detail_retour.correspondences.first
 
+
 .container-fluid
   .row.mt-5
     .col-md-6.mx-auto.text-center
-      h6.card-title.pt-3 = "Voyage Groupe"
+      h2.card-title.pt-3 = "Voyage Groupe"
       p = show_attribute_empty_string(@travel_group&.capacity, 'Capacité')
       p = show_attribute_nil(@travel_group&.season&.humanize, 'Saison')
+  .invoice-box.margin-top-navbar.mt-5
+    table cellpadding="0" cellspacing="0"
+      tr.heading
+        td
+          = "Voyage #{travel_detail_aller.nature}"
+        td
+      tr.item
+        td
+          = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Moyen de transport')
+        td
+          = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
+      tr.item
+        td
+          = show_attribute_nil(travel_detail_aller&.companies, 'Compagnie')
+        td
+          = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Départ de')
+      tr.item
+        td
+          = show_attribute_empty_string(date_format(travel_detail_aller&.start_date), 'Date de départ')
+        td
+          = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
+      tr.item
+        td
+          = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
+        td
+      tr.item.last
+        td
+          = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
+        td
+          = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
+
+      tr.heading
+        td
+          = "Voyage #{travel_detail_retour.nature}"
+        td
+      tr.item
+        td
+          = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Moyen de transport')
+        td
+          = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
+      tr.item
+        td
+          = show_attribute_nil(travel_detail_retour&.companies, 'Compagnie')
+        td
+          = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Départ de')
+      tr.item
+        td
+          = show_attribute_empty_string(date_format(travel_detail_retour&.start_date), 'Date de départ')
+        td
+          = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
+      tr.item
+        td
+          = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
+        td
+      tr.item.last
+        td
+          = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
+        td
+          = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
+  .row.mt-5
+    .col-md-12
+      .text-center
+        = link_to 'Retour', :back
+
+
+.container-fluid
   .row.mt-5
     .col-md-6.mx-auto.text-center
-      h6.card-title.pt-3.border-top = "Voyage #{travel_detail_aller.nature}"
-      p = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Mode')
-      p = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
-      p = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
-      p = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Départ de')
-      p = show_attribute_empty_string(date_format(travel_detail_aller&.start_date), 'Date de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_aller&.meeting_time), 'Rendez-vous')
-      p = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
-      p = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date de retour')
-      p = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure de retour')
-
+      h6.card-title.pt-3.border-top = "Correspondance #{travel_detail_aller.nature}"
       - if correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
         h6.card-title.card-title.pt-2.border-top = "Correspondance Aller"
         p = show_attribute_empty_string(correspondence_aller&.reference, 'Référence')
@@ -35,18 +91,7 @@
       - else
         p.card-title.card-title.pt-2.border-top = '<b>Aucun voyage Aller en correspondance renseigné.</b>'.html_safe
     .col-md-6.mx-auto.text-center
-      h6.card-title.pt-3.border-top = "Voyage #{travel_detail_retour.nature}"
-      p = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Mode')
-      p = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
-      p = show_attribute_nil(travel_detail_retour&.partner_company&.name, 'Compagnie')
-      p = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Départ de')
-      p = show_attribute_empty_string(date_format(travel_detail_retour&.start_date), 'Date de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
-      p = show_attribute_empty_string(time_format(travel_detail_retour&.meeting_time), 'Rendez-vous')
-      p = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
-      p = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date de retour')
-      p = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure de retour')
-
+      h6.card-title.pt-3.border-top = "Correspondance #{travel_detail_retour.nature}"
       - if  correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
         h6.card-title.card-title.pt-2.border-top = "Correspondance Retour"
         p = show_attribute_empty_string(correspondence_retour&.reference, 'Référence')
@@ -58,7 +103,4 @@
         p = show_attribute_empty_string(time_format(correspondence_retour&.end_time), 'Heure de retour')
       - else
         p.card-title.card-title.pt-2.border-top = '<b>Aucun voyage Retour en correspondance renseigné.</b>'.html_safe
-  .row
-    .col-md-12
-      .text-center
-        = link_to 'Retour', travel_groups_path
+

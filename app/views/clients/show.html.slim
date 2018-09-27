@@ -12,7 +12,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
           = "#{@client&.first_name.capitalize} #{@client&.family&.name.upcase}"
         .btn-toolbar.mb-2.mb-md-0
           .mr-2.d-flex.justify-content-around
-            = link_to ('<i class="fa fas fa-plus-circle">Ajouter un séjour</i>').html_safe, new_client_language_stay_path(@client), class: 'btn btn-primary'
+            = link_to ('<i class="fa fas fa-plus-circle">Séjour</i>').html_safe, new_client_language_stay_path(@client), class: 'btn btn-primary'
 
             = link_to 'Retour', :back, class: 'btn btn-outline-primary'
 
@@ -65,8 +65,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 					.col-sm-12
 						.card.height
 							.card-body
-								.row
-									= render 'clients/show_details/travel_details', language_stay: language_stay
+								= render 'clients/show_details/travel_details', language_stay: language_stay
 
 
 			- elsif language_stay.travel && language_stay.invoice
@@ -88,8 +87,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 					.col-sm-12
 						.card.height
 							.card-body
-								.row
-									= render 'clients/show_details/travel_details', language_stay: language_stay
+								= render 'clients/show_details/travel_details', language_stay: language_stay
 			.row.mb-3
 				.col-sm-12
 					.card

@@ -13,7 +13,7 @@
             td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
             td.text-right
-              = "Mr ou Mme #{family.name.upcase}"
+              = "Mr ou Mme #{c(family.name)}"
               br/
               = "#{family.address_1}"
 
@@ -27,11 +27,11 @@
               = "Versailles, le #{date_format(Date.today)}"
           tr
             td.text-left
-              = "#{client.first_name} #{client.last_name}"
+              = "#{client.first_name} #{c(client.last_name)}"
               br/
               = "Du #{date_format(language_stay.start_date)} au #{date_format(language_stay.end_date)} - durée de #{language_stay.duration} semaines"
               br/
-              = "Séjour #{language_stay.program.name} à #{language_stay.location}"
+              = "Séjour #{c(language_stay.program.name)} à #{language_stay.location}"
               br/
               br/
               = "<u>Détails du programme</u><br> #{language_stay&.program_detail_fr}".html_safe
@@ -83,7 +83,7 @@
         = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
     tr.item
       td
-        | Frais de dossier
+        | Frais de dossier / Assurance santé RC
       td
         = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
 
@@ -107,7 +107,7 @@
   br/
   br/
   .text-left
-    = "Par la présente, nous attestons que le client #{client.first_name} #{client.last_name} est bien inscrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur #{family.name} s'est acquitté(e) du montant total du séjour."
+    = "Par la présente, nous attestons que le client #{client.first_name} #{c(client.last_name)} est bien inscrit(e) au séjour cité en référence, et que Madame ou Monsieur #{c(family.name)} s'est acquitté(e) du montant total du séjour."
   .text-left
     = "#{current_user&.first_name} #{current_user&.last_name&.upcase} de Séjours HOME ABROAD"
 

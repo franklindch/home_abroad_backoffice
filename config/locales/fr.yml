@@ -18,7 +18,7 @@ fr:
       Host_family: "Famille d'accueil"
       Residence: "En résidence"
       Summer_camp: "Summer Camp"
-      Teacher's_home: "Chez le professeur"
+      Teacher_s_home: "Chez le professeur"
 
     pagination:
       first: "Premier"

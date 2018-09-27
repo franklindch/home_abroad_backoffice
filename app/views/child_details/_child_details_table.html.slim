@@ -7,13 +7,15 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Statut
-          th Nom
+          th Agent
+          th Date
+          th NOM
           th Prénom
           th Âge
+          th Famille existante
+          th Tél CP
           th Email
-          th Famille
-          th
+          th Suivi
           th
           th
           th
@@ -22,24 +24,35 @@
       - @child_details.each do |child_detail|
         tr
           td
-            span = child_detail&.status.humanize
+            span = child_detail&.commercial_responsible
+          td
+            span = date_format(child_detail&.created_at)
           td
             span = c(child_detail&.last_name)
           td
             span = child_detail&.first_name
           td
             span = "#{child_detail.age} ans" if child_detail.age != nil
+          - if child_detail&.existing_family == false
+            td
+              span Non
+          - else
+            td
+              span Oui
+          - family = child_detail&.qualification&.family
+          - if family&.mother_main_contact == true
+            td
+              span = number_to_phone(family&.mother_office_intl_number)
+          - elsif family&.father_main_contact == true
+            td
+              span = number_to_phone(family&.father_office_intl_number)
           td
-            span = child_detail.email
+            span = child_detail&.email
           td
-            span = "Famille #{child_detail.qualification.family.name}"
-          td
-            span = link_to 'Texte de relance', relaunch_path(child_detail: child_detail), format: :html
+            span = child_detail&.follow_up&.humanize
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
           td
-            span  = link_to 'Passer en client', new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
-
-// souhaits de séjour et organismes et durée envisagée
+            span  = link_to "<i class='fa fas fa-money-bill-alt'></i>".html_safe, new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'

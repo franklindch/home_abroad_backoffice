@@ -34,15 +34,14 @@ section
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
                     = f.input :other_pension, label: 'Autre type de pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
+                    = f.input :included_transfers, label: 'Tranferts A/R inclus ?'
                     - if @language_stay.id.nil?
-                      = f.input :transfer_aller, label: 'Transfert Aller requis', input_html: { checked: true }
-                      = f.input :transfer_retour, label: 'Transfert Retour requis', input_html: { checked: true }
-                      = f.input :included_transfers, label: 'ou Tranferts A/R inclus ?'
+                      = f.input :transfer_aller, label: 'ou Transfert Aller requis', input_html: { checked: true }
+                      = f.input :transfer_retour, label: 'et/ou Transfert Retour requis', input_html: { checked: true }
                       = f.input :other_transfer, label: 'Autre type de transfert'
                     - else
                       = f.input :transfer_aller, label: 'Transfert Aller requis'
                       = f.input :transfer_retour, label: 'Transfert Retour requis'
-                      = f.input :included_transfers, label: 'ou Tranferts A/R inclus ?'
                       = f.input :other_transfer, label: 'Autre type de transfert'
                     = f.input :fee, label: 'Payment en direct à l\'organisme étranger', as: :radio_buttons, input_html: { checked: false }
 

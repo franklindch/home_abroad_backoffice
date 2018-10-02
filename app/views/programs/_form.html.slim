@@ -3,7 +3,7 @@ section
     .col-md-6.mx-auto
       .card.mt-5
         .card-header
-          h2 Formulaire Programme
+          h2 Formulaire Séjour
         .card-body
           = simple_form_for @program do |f|
             .form-inputs
@@ -13,4 +13,4 @@ section
                     = f.input :name, label: 'Nom'
                     = f.input :program_code, label: 'Code'
             .form-actions.text-center
-              = f.button :button, "Valider le séjour", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe} 
+              = f.button :button, "Valider le séjour", class: 'btn btn-primary', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe}

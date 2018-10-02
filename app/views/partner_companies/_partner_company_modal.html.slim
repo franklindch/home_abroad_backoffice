@@ -30,10 +30,10 @@
           - employees.each do |employee|
             .card-modal.mt-3
               .card-category
-                h6 = "#{employee.first_name} #{c(employee.last_name)}"
-                p = "Contact pricipal: #{employee.main_contact}"
-                p = "Job: #{employee.job_position}"
-                p = "Email: #{employee.email}"
+                h6 = "#{employee.first_name} #{c(employee&.last_name)}"
+                p = "Contact pricipal: #{employee&.main_contact}"
+                p = "Job: #{employee&.job_position}"
+                p = "Email: #{employee&.email}"
                 p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee.intl_number != nil
 
               .card-user

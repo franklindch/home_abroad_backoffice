@@ -29,7 +29,7 @@ class PartnerCompaniesController < ApplicationController
 	end
 
 	def index
-	  @partner_companies = PartnerCompany.order(:name).page(params[:page])
+	  @partner_companies = PartnerCompany.none
 	  respond_to do |format|
 	    format.html
 	    format.js
@@ -38,7 +38,7 @@ class PartnerCompaniesController < ApplicationController
 	  if params[:query].present?
 	    @partner_companies = PartnerCompany.search_by_name(params[:query]).page(params[:query])
 	  else
-	    @partner_companies = PartnerCompany.order(:name).page params[:page]
+	    @partner_companies = PartnerCompany.none
 	  end
 	end
 

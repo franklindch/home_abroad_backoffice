@@ -19,7 +19,7 @@
       tbody
       - partner_companies.each do |partner_company|
         tr data-toggle="modal" data-target="#modal#{partner_company.id}"
-          td
+          td.w-25
             span = c(partner_company.name)
           td
             span = partner_company&.code

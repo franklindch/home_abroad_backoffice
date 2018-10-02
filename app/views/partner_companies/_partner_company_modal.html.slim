@@ -10,15 +10,15 @@
 
       .modal-body
         h6 Type
-        p.pb-2 = "#{partner_company&.nature}" if partner_company.nature != ""
+        p.pb-2 = "#{partner_company&.nature}" if partner_company&.nature != ""
         h6 Nom
-        p.pb-2 = "#{partner_company&.name}" if partner_company.name != ""
+        p.pb-2 = "#{partner_company&.name}" if partner_company&.name != ""
         h6 Email
-        p.pb-2 = "#{partner_company&.email}" if partner_company.email != ""
+        p.pb-2 = "#{partner_company&.email}" if partner_company&.email != ""
         h6 Téléphone
-        p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
+        p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company&.intl_number != nil
         h6 Adresse
-        p.pb-2 = "#{partner_company&.address}" if partner_company.address != ""
+        p.pb-2 = "#{partner_company&.address}" if partner_company&.address != ""
         = link_to "Ajouter Employé".html_safe, new_partner_company_employee_path(partner_company), class: 'btn btn-outline-primary'
 
         .mt-3
@@ -30,11 +30,11 @@
           - employees.each do |employee|
             .card-modal.mt-3
               .card-category
-                h6 = "#{employee.first_name} #{c(employee&.last_name)}"
-                p = "Contact pricipal: #{employee&.main_contact}"
+                h6 = "#{employee&.first_name} #{c(employee&.last_name)}"
+                p = "Contact principal: #{employee&.main_contact}"
                 p = "Job: #{employee&.job_position}"
                 p = "Email: #{employee&.email}"
-                p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee.intl_number != nil
+                p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee&.intl_number != nil
 
               .card-user
                 / = "#{client.age} ans"

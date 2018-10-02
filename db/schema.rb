@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181001181948) do
+ActiveRecord::Schema.define(version: 20181002171212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 20181001181948) do
   end
 
   create_table "clients", force: :cascade do |t|
+    t.integer "age_category"
     t.string "first_name"
     t.string "last_name"
-    t.integer "age_category"
     t.date "birth_date"
     t.string "email"
     t.string "phone_number"
@@ -140,29 +140,29 @@ ActiveRecord::Schema.define(version: 20181001181948) do
     t.string "address_1"
     t.string "address_2"
     t.string "zip_code"
-    t.string "country"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.string "email"
     t.string "father_name"
-    t.string "father_email"
-    t.string "father_intl_number"
-    t.string "father_office_intl_number"
     t.string "mother_name"
     t.string "mother_phone"
     t.string "father_phone"
     t.string "mother_email"
+    t.string "father_email"
     t.string "mother_intl_number"
+    t.string "father_intl_number"
     t.string "intl_number"
     t.string "mother_first_name"
     t.string "father_first_name"
     t.string "mother_office_phone"
     t.string "father_office_phone"
     t.string "mother_office_intl_number"
+    t.string "father_office_intl_number"
     t.boolean "prospect", default: false
     t.integer "family_identifier"
+    t.string "country"
     t.boolean "mother_main_contact", default: true
     t.boolean "father_main_contact", default: false
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20181001181948) do
     t.integer "data_entry_responsible"
     t.integer "commercial_responsible"
     t.integer "duration"
-    t.boolean "fee"
+    t.boolean "fee", default: false
     t.bigint "program_id"
     t.bigint "client_id"
     t.datetime "created_at", null: false

@@ -37,7 +37,7 @@ section
                   = f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie'
                   = f.input :gender, collection: Client.genders.keys.map { |w| [t("views.genders.#{w}"), w] }, label: 'Sexe'
                   = f.input :first_name, label: 'Prénom'
-                  = f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family&.name&.capitalize} | #{family&.address_1&.capitalize}" }
+                  = f.input :family_id, collection: Family.order('name ASC'), include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family&.name&.capitalize} | #{family&.address_1&.capitalize}" }
                   = link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'
                   = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'

@@ -6,18 +6,21 @@ class ExcelsController < ApplicationController
 		@families = Family.all
 	end
 
+  def all_partner_companies
+    @partner_companies = PartnerCompany.all
+  end
+
 	def all_clients
 		@clients = Client.all
 	end
-
-	def all_partners
-    @partner_companies = PartnerCompany.all
-  end
 
   def all_programs
     @programs = Program.all
   end
 
+  def all_travel_groups
+    @travel_groups = TravelGroup.all
+  end
 
   def all_attendants
     @attendants = Attendant.all

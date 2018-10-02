@@ -10,7 +10,7 @@ import { calendar, calendarBirthDate } from '../style/flatpicker';
 import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberClientFields } from '../libraries/initialize-intl-number';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
-import { travelConditionnal, travelGroupConditionnal } from '../style/conditional_form';
+import { travelSelectConditionnal, travelGroupConditionnal } from '../style/conditional_form';
 import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
 import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
 
@@ -32,7 +32,7 @@ document.addEventListener("turbolinks:load", () => {
 	formSubmit.init();
 	AlertDisa();
   travelGroupConditionnal.init();
-  travelConditionnal.init();
+  travelSelectConditionnal.init();
   if ($('#travel_group_attendant_ids')) {
     select2Attendants();
   }

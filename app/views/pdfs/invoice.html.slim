@@ -84,10 +84,27 @@
         td
           = "#{@invoice.option_3_price_cents} #{@invoice.option_3_price_currency}"
     tr.item
-      td
-        | Transferts
-      td
-        = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+      - if language_stay.transfer_aller == true && language_stay.transfer_retour == true
+        td
+          | Transferts Aller / Retour
+        td
+          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+      - elsif language_stay.transfer_aller == true
+        td
+          | Transferts Aller
+        td
+          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+      - elsif language_stay.transfer_retour == true
+        td
+          | Transferts Retour
+        td
+          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+      - elsif language_stay.included_transfers == true
+        td
+          | Transferts Inclus
+      - elsif language_stay.other_transfer != ''
+        td
+          = "Transferts : #{language_stay.other_transfer}"
     tr.item
       td
         | Frais de dossier / Assurance santé RC
@@ -101,11 +118,10 @@
         td
     - else
       tr.item
-      - payments.each_with_index do |payment, i|
-          td
-            = "Règlement #{i + 1} - #{payment.nature}"
-          td
-            = "#{payment.amount_price_cents} #{payment.amount_price_currency}"
+        td
+          | Total réglé
+        td
+          = "#{payment.amount_price_cents} #{payment.amount_price_currency}"
     tr.total
       td
        |

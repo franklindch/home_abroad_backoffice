@@ -17,8 +17,8 @@ section
                   = f.input :phone_number, label: 'Téléphone mobile', input_html: { class: 'phone_number' }
                   = f.input :first_name, label: 'Prénom'
                   = f.input :school, label: 'Etablissement scolaire'
-                  = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], as: :string, include_blank: true, input_html: { class: 'calendar_birth_date' }
+                  = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau d\'études'
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'
                   = f.hidden_field :country, class: 'country_field'
 
@@ -33,13 +33,13 @@ section
                     = f.input :season,  collection: Client.seasons.keys.map { |w| [w.humanize, w] },label: 'Saison'
                   = f.input :phone_number, label: 'Téléphone mobile', input_html: { class: 'phone_number' }
                   = f.input :school, label: 'Etablissement scolaire'
-                  = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
+                  = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau d\'études'
                   = f.input :age_category, collection: Client.age_categories.keys.map { |w| [w.humanize, w] }, label: 'Catégorie'
                   = f.input :gender, collection: Client.genders.keys.map { |w| [t("views.genders.#{w}"), w] }, label: 'Sexe'
                   = f.input :first_name, label: 'Prénom'
                   = f.input :family_id, collection: Family.all, include_blank: "Merci de sélectionner la famille du client...", label: false, label_method: lambda { |family| "Famille #{family&.name&.capitalize} | #{family&.address_1&.capitalize}" }
                   = link_to ("<i class=\"fa fas fa-plus-circle\">ou créer d\'abord sa famille si non existante</i>").html_safe, new_family_path(prospect: false), class: 'btn mb-4'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], as: :string, include_blank: true, input_html: { class: 'calendar_birth_date' }
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'
                   = f.hidden_field :country, class: 'country_field'
 
@@ -48,7 +48,7 @@ section
 
                 h4.mt-4.mb-4 Passeport / Carte d'identité
                 = f.input :passport_number, label: 'Numéro'
-                = f.input :passport_expiration_date, label: 'Date d\'expiration', start_year: Time.now.year, end_year: Time.now.year + 15, include_blank: true, as: :string, input_html: { class: 'calendar_birth_date' }
+                = f.input :passport_expiration_date, label: 'Date d\'expiration', start_year: Time.now.year, end_year: Time.now.year + 15, include_blank: true
                 = f.input :country_of_issue, label: 'Pays d\'émission', locale: 'en', wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                 h4.mt-4.mb-4 Langues

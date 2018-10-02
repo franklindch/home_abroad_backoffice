@@ -13,13 +13,6 @@ section
 										= f.input :application_fee_price_cents, label: 'Frais de dossier', selected: '200', id: 'application_fee_price_cents'
 										= f.input :language_stay_price_cents, label: 'Prix séjours', id: 'language_stay_price_cents'
 										= f.input :travel_price_cents, label: 'Prix voyage', id: 'travel_price_cents', wrapper_html: {class: ['pb-5', 'border-bottom']}
-										- if @language_stay.fee
-											h4.mt-4.mb-4 Fee
-											= f.input :camp_fee_amount_price_cents, label: 'Montant commission', id: 'camp_fee_amount_price_cents'
-											= f.input :camp_fee_percentage, label: 'Pourcentage', id: 'camp_fee_percentage'
-											= f.input :camp_fee_total_price_cents, label: 'Total fee', id: 'camp_fee_total_price_cents', wrapper_html: {class: ['pb-5', 'border-bottom']}
-										- else
-											p Pas de fee
 
                                         - if @language_stay.transfer_aller == true &&  @language_stay.transfer_retour == true
                                           = f.input :transfer_price_cents, label: "Prix transfert Aller & Retour"
@@ -28,7 +21,7 @@ section
                                         - elsif @language_stay.transfer_aller == true
                                           = f.input :transfer_price_cents, label: "Prix transfert Aller"
                                         - else
-                                          p Aucun transfert ajouté pour ce séjour
+                                          p Aucun transfert requis pour ce séjour
 										- if @language_stay.option_1_fr != ""
 											= f.input :option_1_price_cents, label: "Quel montant pour l'option 1 - #{@language_stay.option_1_fr}"
 										- else

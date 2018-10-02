@@ -66,10 +66,10 @@
           = '<p><u>Smoker</u> No</p>'.html_safe
         - else
           = '<p><u>Smoker</u> Yes</p>'.html_safe
-    tr.item
-      td
-        = "Medical issues / allergies / diet... : #{client.medical_issue}"
-      td
+    / tr.item
+    /   td
+    /     = "Medical issues / allergies / diet... : #{client.medical_issue}"
+    /   td
     tr.item.last
       td.pb-3
         = "Comment : #{client.comment}"
@@ -157,21 +157,26 @@
       td
         = "Special requests : #{@language_stay.precisions}"
       td
-    tr.item.last
-      - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
+    - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
+      tr.item.last
         td.pb-3
           = "<b>Pickup & Dropoff requested</b>".html_safe
-      - elsif @language_stay.transfer_aller == true
+    - elsif @language_stay.transfer_aller == true
+      tr.item.last
         td.pb-3
           = "<b>Pickup requested</b>".html_safe
-      - elsif @language_stay.transfer_retour == true
+    - elsif @language_stay.transfer_retour == true
+      tr.item.last
         td.pb-3
           = "<b>Dropoff requested</b>".html_safe
-      - else
+    - elsif @language_stay.included_transfers == true
+      tr.item.last
+        td.pb-3
+          = "<b>Transfers already included</b>".html_safe
+    - else
+      tr.item.last
         td.pb-3
           = "<b>No transfer requested</b>".html_safe
-      td
-
     - if travel.nil?
       tr.heading
         td

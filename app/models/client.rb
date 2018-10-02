@@ -25,7 +25,8 @@ class Client < ApplicationRecord
     Terminale: 11,
     Prépa: 12,
     Césure: 13,
-    Etudes_supérieures: 14
+    Etudes_supérieures: 14,
+    Professionnel: 15
   }
   enum age_category: { Junior: 0, Adulte: 1 }
   enum first_language: { English: 0, Spanish: 1, German: 2 }

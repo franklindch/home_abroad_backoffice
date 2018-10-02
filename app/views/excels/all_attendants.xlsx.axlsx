@@ -1,0 +1,34 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Accompagnateurs") do |sheet|
+    sheet.add_row [
+      'NOM',
+      'Prénom',
+      'Email',
+      'Tél',
+      'Date de naissance',
+      'Adresse',
+      'Code Postal',
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @attendants.each do |attendant|
+      sheet.add_row [
+        attendant.last_name,
+        attendant.first_name,
+        attendant.email,
+        attendant.intl_number,
+        attendant.birth_date,
+        attendant.address,
+        attendant.zip_code,
+      ]
+    end
+  end
+end

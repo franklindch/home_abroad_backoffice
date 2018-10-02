@@ -19,6 +19,7 @@ fr:
       Residence: "En résidence"
       Summer_camp: "Summer Camp"
       Teacher_s_home: "Chez le professeur"
+      Itinerant: "Itinérant"
 
     pagination:
       first: "Premier"

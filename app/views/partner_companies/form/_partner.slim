@@ -10,8 +10,8 @@ section
             	.container-fluid
             		.row
             			.col-md-12
+                    = f.input :code, label: 'Code compta', input_html: { class: 'box_width' }
                     = f.input :name, label: 'Nom'
-                    = f.input :code, label: 'Code compta'
                     = f.input :email, label: 'Email'
                     = f.input :phone_number, label: 'Téléphone', input_html: { class: 'phone_number' }
                     = f.input :urgence_phone_number, label: 'Téléphone d\'urgence', input_html: { class: 'urgence_phone_number' }
@@ -19,6 +19,7 @@ section
                     = f.hidden_field :nature, value: 'Partenaire'
                     = f.input :address, label: 'Adresse', input_html: {class: 'google_map'}
                     = f.input :zip_code, label: 'Code Postal', input_html: { class: 'zip_code_field '}
+                    = f.hidden_field :country, class: 'country_field'
 
             .form-actions.text-center
               = f.button :button, "Valider le partenaire", class: 'btn btn-primary submit_with_phone', data: {disable_with: "<i class='fa fas fa-spinner fa-spin olivier'></i>Chargement".html_safe}

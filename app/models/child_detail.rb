@@ -25,7 +25,8 @@ class ChildDetail < ApplicationRecord
     Terminale: 11,
     Prépa: 12,
     Césure: 13,
-    Etudes_supérieures: 14
+    Etudes_supérieures: 14,
+    Professionnel: 15
   }
   enum month: {
 		Janvier: 0,
@@ -48,7 +49,7 @@ class ChildDetail < ApplicationRecord
   enum commercial_responsible: { Christine: 1, Jéremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
 
   enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
-  validates :first_name, :last_name, :age, presence: true
+  validates :first_name, :last_name, presence: true
 
   after_save :prospect_clôturé
 

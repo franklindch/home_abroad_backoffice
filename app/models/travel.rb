@@ -10,8 +10,8 @@ class Travel < ApplicationRecord
   # accepts_nested_attributes_for :off_set_travels, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
-  
-  enum nature: { 
-    Groupe: 0, Groupe_décalé: 1, Indépendant: 2, Individuel: 3 
+
+  enum nature: {
+    Groupe: 0, Groupe_décalé: 1, Indépendant: 2, Individuel: 3, Individuel_rattaché: 4
   }
 end

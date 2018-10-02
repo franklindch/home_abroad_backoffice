@@ -80,7 +80,7 @@ class ChildDetailsController < ApplicationController
 
   def child_detail_params
     params.require(:child_detail).permit(
-      :follow_up, :existing_family, :commercial_responsible, :reference_name, :refered_by, :contact_mode, :data_entry_responsible, :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
+      :birth_date, :follow_up, :existing_family, :commercial_responsible, :reference_name, :refered_by, :contact_mode, :data_entry_responsible, :partner_company_ids, :first_name, :last_name, :age, :comment, :qualification_id, :email, :gender, :school_grade, :school, :duration, :month, :status
     )
   end
 

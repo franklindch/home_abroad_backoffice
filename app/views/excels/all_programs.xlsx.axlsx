@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Séjours") do |sheet|
+    sheet.add_row [
+      'NOM',
+      'Code'
+    ], style: [
+      highlight_cell,
+      highlight_cell
+    ]
+    @programs.each do |program|
+      sheet.add_row [
+        program.name,
+        program.program_code
+      ]
+    end
+  end
+end

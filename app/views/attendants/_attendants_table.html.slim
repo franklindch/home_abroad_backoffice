@@ -7,7 +7,7 @@
     table.table.table-sm.table-hover
       thead
         tr
-          th Nom
+          th NOM
           th Prénom
           th Date de naissance
           th Âge
@@ -32,7 +32,7 @@
             span = attendant.email
           td
             span = number_to_phone(attendant.intl_number) if attendant.intl_number != nil
-          td
+          td.w-25
             span = attendant.address if attendant.address != nil
           td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_attendant_path(attendant)

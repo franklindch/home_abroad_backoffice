@@ -7,13 +7,13 @@
     table.table.table-sm.table-hover.cursor-pointer
       thead
         tr
-          th Nom
-          th Code compta
+          th NOM
+          th Code
           th Nature
           th Email
           th Tél
           th Tél urgence
-          th Adresse
+          th Pays
           th
           th
       tbody
@@ -23,14 +23,16 @@
             span = c(partner_company.name)
           td
             span = partner_company&.code
-          td
+          td.w-25
             span = partner_company.nature
           td
             span = partner_company.email
-          td
+          td.w-25
             span = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
+          td.w-25
+            span = number_to_phone(partner_company&.urgence_intl_phone_number)  if partner_company.urgence_intl_phone_number != nil
           td
-            span = partner_company.address
+            span = partner_company&.country
           td
             - if partner_company.nature == 'Organisme'
               span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company, camp: true)

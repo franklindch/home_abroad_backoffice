@@ -7,11 +7,11 @@ const formSubmit = {
 	},
 
 	prevent(input) {
-		google.maps.event.addDomListener(input, 'keydown', function(event) { 
-		if (event.keyCode === 13) { 
-		    event.preventDefault(); 
+		google.maps.event.addDomListener(input, 'keydown', function(event) {
+		if (event.keyCode === 13) {
+		    event.preventDefault();
 		}
-		}); 
+		});
 	}
 }
 
@@ -21,7 +21,7 @@ function slowAlertDisappears() {
 	$('.alert').fadeOut('slow');
 }
 
-function AlertDisa(){setTimeout(slowAlertDisappears, 3000)}
+function AlertDisa(){}
 
 
 

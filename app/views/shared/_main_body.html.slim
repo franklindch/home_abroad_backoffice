@@ -37,7 +37,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
-					= link_to 'Exporter Groupes', all_families_path(format: :xlsx), class: 'btn btn-outline-primary'
+					= link_to 'Exporter Groupes', all_travel_groups_path(format: :xlsx), class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag travel_groups_path, method: :get do
 		      = text_field_tag :query,
@@ -53,7 +53,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
 					= link_to ("<i class=\"fa fas fa-plus-circle\">Créer un organisme</i>").html_safe, new_partner_company_path(camp: true), class: 'btn btn-primary'
-					= link_to 'Exporter Partenaires', all_partners_path(format: :xlsx), class: 'btn btn-outline-primary'
+					= link_to 'Exporter Partenaires', all_partner_companies_path(format: :xlsx), class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag partner_companies_path, method: :get do
 		      = text_field_tag :query,

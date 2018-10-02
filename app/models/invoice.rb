@@ -9,8 +9,6 @@ class Invoice < ApplicationRecord
 			 :transfer_price_cents,
 			 :option_1_price_cents,
 			 :option_2_price_cents,
-			 :camp_fee_amount_price_cents,
-			 :camp_fee_total_price_cents,
 			 :total_price_cents
 
 	has_many :payments, dependent: :destroy, inverse_of: :invoice

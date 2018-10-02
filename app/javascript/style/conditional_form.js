@@ -1,4 +1,4 @@
-const travelConditionnal = {
+const travelSelectConditionnal = {
   init() {
     const $travelNatureSelect = $("[name='travel[nature]']");
     const $travelGroupIdSection = $(".travel_travel_group_id");
@@ -31,16 +31,18 @@ const travelConditionnal = {
     } else {
       $childDetails.hide();
     }
-    // if($('.travel_travel_code')) {
-    //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
-    //   $("#travel_travel_details_is_correspondence_true").prop("checked", true);
-    // };
   }
 };
 
 const travelGroupConditionnal = {
   init() {
+    if($("#travel_group_travel_details_attributes_0_is_correspondence_false").prop("checked", true)){
+      $('.correspondence:eq(0)').hide();
+    }
+    if($("#travel_group_travel_details_attributes_1_is_correspondence_false").prop("checked", true)){
+      $('.correspondence:eq(1)').hide();
+    }
   }
 }
 
-export { travelConditionnal, travelGroupConditionnal };
+export { travelSelectConditionnal, travelGroupConditionnal };

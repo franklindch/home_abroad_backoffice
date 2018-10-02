@@ -46,7 +46,7 @@
           - elsif family&.father_main_contact == true
             td
               span = number_to_phone(family&.father_intl_number)
-          td
+          td.w-25
             span = child_detail&.email
           td
             span = child_detail&.follow_up&.humanize

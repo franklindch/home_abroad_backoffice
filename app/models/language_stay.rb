@@ -28,7 +28,8 @@ class LanguageStay < ApplicationRecord
     Host_family: 1,
     Residence: 2,
     Summer_camp: 3,
-    Teacher_s_home: 4
+    Teacher_s_home: 4,
+    Itinérant: 5
   }
 
 
@@ -44,6 +45,10 @@ class LanguageStay < ApplicationRecord
   	attributes.each do |attr|
   		return false if self[attr].nil?
   	end
+  end
+
+  def transfers_coherence
+    self.included_transfers && (self.transfer_aller || self.transfer_retour)
   end
 
   def cancel

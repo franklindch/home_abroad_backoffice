@@ -6,6 +6,8 @@
 	.card-text
     p = show_attribute_nil(invoice&.language_stay_price_cents, 'Prix du séjour (EUR)')
     p = show_attribute_nil(invoice&.travel_price_cents, 'Prix du voyage (EUR)')
+    p = show_attribute_nil(invoice&.transfer_price_cents, 'Prix transfert(s) (EUR)')
+    p = show_attribute_nil(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
     - if language_stay&.option_1_fr != ''
       p = show_attribute_nil(invoice&.option_1_price_cents, 'Prix option 1 (EUR)')
     - else
@@ -14,8 +16,10 @@
       p = show_attribute_nil(invoice&.option_2_price_cents, 'Prix option 2 (EUR)')
     - else
       p Pas d'option 2 renseignée.
-    p = show_attribute_nil(invoice&.transfer_price_cents, 'Prix transfert(s) (EUR)')
-    p = show_attribute_nil(invoice&.application_fee_price_cents, 'Frais de dossier (EUR)')
+    - if language_stay&.option_3_fr != ''
+      p = show_attribute_nil(invoice&.option_3_price_cents, 'Prix option 3 (EUR)')
+    - else
+      p Pas d'option 3 renseignée.
     p = "<b>Total - #{invoice.total_price_cents} euros</b>".html_safe
 
 .col-md-3

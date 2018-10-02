@@ -45,9 +45,9 @@
               span = c(family&.name)
             td
               span = "#{date_format(family&.qualification.created_at)}"
-            td
+            td.w-25
               span = family&.email
-            td
+            td.w-25
               span = number_to_phone(family&.intl_number) if family.intl_number != nil
             td
               span = family&.address_1

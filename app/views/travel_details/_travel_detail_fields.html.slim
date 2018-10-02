@@ -1,13 +1,14 @@
 / = f.input :nature, collection: TravelDetail.natures.keys.map { |w| [w.humanize, w] }, selected: 0
 
-= f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?', checked_value: true
+= f.input :is_correspondence, as: :radio_buttons, label: 'Avec correspondance ?'
 = f.input :mode, collection: TravelDetail.modes.keys.map { |w| [w.humanize, w] }, label: 'Mode de transport', selected: 0
 - if @travel_group
-  = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Partenaire'), include_blank: "Merci de sélectionner la compagnie du vol...", label: false, label_method: lambda { |partner_company| "#{partner_company&.name&.capitalize} " }
+  = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Partenaire'), include_blank: "Merci de sélectionner la compagnie...", label: false, label_method: lambda { |partner_company| "#{partner_company&.name&.capitalize} " }
 - else
   = f.input :companies, label: 'Compagnie'
+  = f.input :u_m, label: 'UM ?'
 
-= f.input :reference, label: 'Référence'
+= f.input :reference, label: 'Numéro / référence'
 
 .row
   .col-md-6

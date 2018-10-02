@@ -19,10 +19,11 @@ section
                     = f.input :gender, collection: ChildDetail.genders.keys.map { |w| [t("views.genders.#{w}"), w] }, label: 'Sexe', include_blank: false
                     = f.input :first_name, label: 'Prénom'
                     = f.input :last_name, label: 'Nom de famille'
-                    = f.input :age, label: 'Âge', collection: 10..50, include_blank: false
+                    = f.input :age, label: 'Âge..', collection: 6..50, include_blank: true
+                    = f.input :birth_date, label: '..et/ou date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
                     = f.input :email, label: 'Email'
                     = f.input :school, label: 'Etablissement Scolaire'
-                    = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau scolaire'
+                    = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau d\'études'
                     = f.input :duration, label: 'Durée envisagée (en s)'
                     = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois'
                     = f.input :follow_up, collection: ChildDetail.follow_ups.keys.map { |w| [w.humanize, w] }, label: 'Statut'

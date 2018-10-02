@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180927091255) do
+ActiveRecord::Schema.define(version: 20181001181948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.integer "commercial_responsible"
     t.integer "follow_up"
     t.boolean "existing_family", default: true
+    t.date "birth_date"
     t.index ["qualification_id"], name: "index_child_details_on_qualification_id"
   end
 
@@ -69,9 +70,9 @@ ActiveRecord::Schema.define(version: 20180927091255) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.integer "age_category"
     t.string "first_name"
     t.string "last_name"
+    t.integer "age_category"
     t.date "birth_date"
     t.string "email"
     t.string "phone_number"
@@ -120,7 +121,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.boolean "main_contact"
+    t.boolean "main_contact", default: false
     t.string "job_position"
     t.string "first_name"
     t.string "last_name"
@@ -139,29 +140,29 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.string "address_1"
     t.string "address_2"
     t.string "zip_code"
+    t.string "country"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.string "email"
     t.string "father_name"
+    t.string "father_email"
+    t.string "father_intl_number"
+    t.string "father_office_intl_number"
     t.string "mother_name"
     t.string "mother_phone"
     t.string "father_phone"
     t.string "mother_email"
-    t.string "father_email"
     t.string "mother_intl_number"
-    t.string "father_intl_number"
     t.string "intl_number"
     t.string "mother_first_name"
     t.string "father_first_name"
     t.string "mother_office_phone"
     t.string "father_office_phone"
     t.string "mother_office_intl_number"
-    t.string "father_office_intl_number"
     t.boolean "prospect", default: false
     t.integer "family_identifier"
-    t.string "country"
     t.boolean "mother_main_contact", default: true
     t.boolean "father_main_contact", default: false
     t.index ["qualification_id"], name: "index_families_on_qualification_id"
@@ -171,7 +172,6 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "language_stay_id"
-    t.integer "camp_fee_percentage"
     t.integer "application_fee_price_cents", default: 0, null: false
     t.string "application_fee_price_currency", default: "EUR", null: false
     t.integer "language_stay_price_cents", default: 0, null: false
@@ -184,10 +184,6 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.string "option_1_price_currency", default: "EUR", null: false
     t.integer "option_2_price_cents", default: 0, null: false
     t.string "option_2_price_currency", default: "EUR", null: false
-    t.integer "camp_fee_amount_price_cents", default: 0, null: false
-    t.string "camp_fee_amount_price_currency", default: "EUR", null: false
-    t.integer "camp_fee_total_price_cents", default: 0, null: false
-    t.string "camp_fee_total_price_currency", default: "EUR", null: false
     t.integer "total_price_cents", default: 0, null: false
     t.string "total_price_currency", default: "EUR", null: false
     t.integer "option_3_price_cents"
@@ -228,6 +224,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.string "option_3"
     t.text "other_pension"
     t.text "other_transfer"
+    t.boolean "included_transfers", default: false
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -238,7 +235,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.datetime "updated_at", null: false
     t.integer "nature"
     t.integer "mode"
-    t.boolean "is_correspondence", default: true
+    t.boolean "is_correspondence", default: false
     t.string "departure_location"
     t.string "arrival_location"
     t.time "start_time"
@@ -326,7 +323,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.time "end_time"
     t.date "start_date"
     t.date "end_date"
-    t.boolean "is_correspondence", default: true
+    t.boolean "is_correspondence", default: false
     t.string "departure_location"
     t.string "arrival_location"
     t.string "reference"
@@ -338,6 +335,7 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.time "meeting_time"
     t.integer "mode"
     t.bigint "travel_id"
+    t.boolean "u_m", default: false
     t.index ["partner_company_id"], name: "index_travel_details_on_partner_company_id"
     t.index ["travel_group_id"], name: "index_travel_details_on_travel_group_id"
     t.index ["travel_id"], name: "index_travel_details_on_travel_id"
@@ -357,7 +355,6 @@ ActiveRecord::Schema.define(version: 20180927091255) do
     t.bigint "travel_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "u_m", default: false
     t.index ["language_stay_id"], name: "index_travels_on_language_stay_id"
     t.index ["travel_group_id"], name: "index_travels_on_travel_group_id"
   end

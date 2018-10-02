@@ -12,12 +12,12 @@ section
             			.col-md-12
                     = f.hidden_field :season, value: 'Saison_2018_2019'
                     = f.input :travel_code, label: 'Code Groupe'
-                    = f.input :capacity, label: 'Capacité', collection: 20..100, selected: 10
+                    = f.input :capacity, label: 'Capacité', collection: 10..100, selected: 10
                     = f.input :attendant_ids, as: :select2, collection: Attendant.all, label_method: lambda { |attendant| "#{attendant.first_name.capitalize} #{attendant.last_name.capitalize}" }, multiple: true, value_method: :id, include_blank: false, label: 'Choisir le(s) accompagnateur(s) sur le vol'
 
                 .child_details_section.pt-3
                   .col-md-12
-                    h3.mt-3 Remplir l'Aller & le Retour du voyage
+                    h3.mt-3.pb-3.border-bottom Remplir l'Aller puis le Retour du voyage
                     .child_details_2.mt-5
                       = f.simple_fields_for :travel_details do |travel_detail|
                         = render 'travel_details/travel_detail_fields', f: travel_detail, travel_group: @travel_group

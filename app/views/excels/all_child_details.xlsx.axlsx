@@ -1,0 +1,71 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Prospects") do |sheet|
+    sheet.add_row [
+      'NOM',
+      'Prénom'
+      'Situation Familiale',
+      'Adresse',
+      'Complément',
+      'Code Postal',
+      'Pays',
+      'Téléphone',
+      'Email',
+      'Père',
+      'Email Père',
+      'Portable Père',
+      'Tél bureau Père',
+      'Contact Principal Père',
+      'Mère',
+      'Email Mère',
+      'Portable Mère',
+      'Tél Bureau Mère',
+      'Contact Principal Mère'
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @child_details.each do |child_detail|
+      sheet.add_row [
+        child_detail.first_name,
+        child_detail.age,
+        child_detail.age_category,
+        child_detail.birth_date,
+        child_detail.email,
+        child_detail.comment,
+        child_detail.gender,
+        child_detail.school_grade,
+        child_detail.school,
+        child_detail.season,
+        child_detail.nationality,
+        child_detail.refered_by,
+        child_detail.reference_name,
+        child_detail.follow_up,
+        child_detail.commercial_responsible,
+        child_detail.existing_family,
+        child_detail.duration,
+        child_detail.month,
+        child_detail.status,
+        child_detail.data_entry_responsible,
+        child_detail.contact_mode
+      ]
+    end
+  end
+end

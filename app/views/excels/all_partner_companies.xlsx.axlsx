@@ -1,0 +1,40 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Partenaires") do |sheet|
+    sheet.add_row [
+      'Type',
+      'NOM',
+      'Email',
+      'Tél',
+      'Tél urgence',
+      'Adresse',
+      'Code Postal',
+      'Pays',
+      'Code'
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @partner_companies.each do |partner_company|
+      sheet.add_row [
+        partner_company.nature,
+        partner_company.name,
+        partner_company.email,
+        partner_company.intl_number,
+        partner_company.urgence_intl_phone_number,
+        partner_company.address,
+        partner_company.zip_code,
+        partner_company.country,
+        partner_company.code,
+      ]
+    end
+  end
+end

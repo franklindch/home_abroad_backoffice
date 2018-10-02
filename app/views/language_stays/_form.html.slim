@@ -16,8 +16,8 @@ section
                       = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Agent commercial', selected: current_user
                     - else
                       = f.input :commercial_responsible, collection: LanguageStay.commercial_responsibles.keys.map { |w| [w.humanize, w] }, label: 'Agent commercial'
-                    = f.input :program_id, collection: Program.all, include_blank: "Merci de sélectionner le type de séjour concerné...", label: false
-                    = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
+                    = f.input :program_id, collection: Program.order('name ASC'), include_blank: "Merci de sélectionner le type de séjour concerné...", label: false
+                    = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme').order('name ASC'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
                     h4.mt-4.mb-4 Détails
                     = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
@@ -35,14 +35,16 @@ section
                     = f.input :other_pension, label: 'Autre type de pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
                     - if @language_stay.id.nil?
-                      = f.input :transfer_aller, label: 'Transfert Aller', input_html: { checked: true }
-                      = f.input :transfer_retour, label: 'Transfert Retour', input_html: { checked: true }
+                      = f.input :transfer_aller, label: 'Transfert Aller requis', input_html: { checked: true }
+                      = f.input :transfer_retour, label: 'Transfert Retour requis', input_html: { checked: true }
+                      = f.input :included_transfers, label: 'ou Tranferts A/R inclus ?'
                       = f.input :other_transfer, label: 'Autre type de transfert'
                     - else
-                      = f.input :transfer_aller, label: 'Transfert Aller'
-                      = f.input :transfer_retour, label: 'Transfert Retour'
+                      = f.input :transfer_aller, label: 'Transfert Aller requis'
+                      = f.input :transfer_retour, label: 'Transfert Retour requis'
+                      = f.input :included_transfers, label: 'ou Tranferts A/R inclus ?'
                       = f.input :other_transfer, label: 'Autre type de transfert'
-                    = f.input :fee, label: 'Payment en direct à l\'organisme étranger', as: :radio_buttons
+                    = f.input :fee, label: 'Payment en direct à l\'organisme étranger', as: :radio_buttons, input_html: { checked: false }
 
                     h6.mt-5.mb-4 A remplir en Anglais pour Enrollment Form :
                     = f.input :program_detail, label: 'Program details'

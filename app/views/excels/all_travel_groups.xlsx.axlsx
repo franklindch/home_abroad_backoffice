@@ -1,0 +1,34 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Voyages Groupes") do |sheet|
+    sheet.add_row [
+      'NOM',
+      'Prénom',
+      'Email',
+      'Tél',
+      'Date de naissance',
+      'Adresse',
+      'Code Postal',
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @travel_groups.each do |travel_group|
+      sheet.add_row [
+        travel_group.last_name,
+        travel_group.first_name,
+        travel_group.email,
+        travel_group.intl_number,
+        travel_group.birth_date,
+        travel_group.address,
+        travel_group.zip_code,
+      ]
+    end
+  end
+end

@@ -18,9 +18,6 @@
 
     = render 'families/modal/qualification_is_prospect', qualification: qualification
 
-    / = render 'families/modal/qualification_is_client', qualification: qualification, family: qualification.family
-
-    / = render 'families/modal/qualification_is_sleeping', qualification: qualification
 
     span.badge.badge-info.mt-3
         = count_prospects(qualification)

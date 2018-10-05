@@ -29,7 +29,7 @@ class AttendantsController < ApplicationController
 	end
 
 	def index
-	  @attendants = Attendant.order(:first_name).page(params[:page])
+	  @attendants = Attendant.none
 	  respond_to do |format|
 	    format.html
 	    format.js
@@ -38,7 +38,7 @@ class AttendantsController < ApplicationController
 	  if params[:query].present?
 	    @attendants = Attendant.search_by_full_name(params[:query]).page(params[:query])
 	  else
-	    @attendants = Attendant.order(:first_name).page params[:page]
+	    @attendants = Attendant.none
 	  end
 	end
 

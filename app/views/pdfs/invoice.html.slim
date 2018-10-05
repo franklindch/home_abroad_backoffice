@@ -91,12 +91,12 @@
           = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.transfer_aller == true
         td
-          | Transferts Aller
+          | Transfert Aller
         td
           = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.transfer_retour == true
         td
-          | Transferts Retour
+          | Transfert Retour
         td
           = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.included_transfers == true

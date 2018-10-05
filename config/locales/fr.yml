@@ -1,4 +1,6 @@
 fr:
+  date:
+    day_names: [Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi]
   views:
     genders:
       Male: "Masculin"
@@ -18,7 +20,7 @@ fr:
       Host_family: "Famille d'accueil"
       Residence: "En résidence"
       Summer_camp: "Summer Camp"
-      Teacher_s_home: "Chez le professeur"
+      Tejeudiacher_s_home: "Chez le professeur"
       Itinerant: "Itinérant"
 
     pagination:

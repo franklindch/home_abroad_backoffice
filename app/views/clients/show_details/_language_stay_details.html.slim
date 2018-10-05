@@ -3,7 +3,8 @@
 	.card-text
     - if language_stay.canceled_language_stay == false
       .mb-4
-        = "<b>Du #{language_stay&.start_date.strftime('%A')} #{date_format(language_stay&.start_date)}<br>au #{language_stay&.end_date.strftime('%A')} #{date_format(language_stay&.end_date)}</b>".html_safe
+        =
+        = "<b>Du #{week_day(language_stay&.start_date)} #{date_format(language_stay&.start_date)}<br>au #{week_day(language_stay&.end_date)} #{date_format(language_stay&.end_date)}</b>".html_safe
         br/
         = "(#{language_stay&.duration} semaine(s))"
       p = show_attribute_empty_string(language_stay&.data_entry_responsible, 'Responsable de saisie')

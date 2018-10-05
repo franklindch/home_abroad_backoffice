@@ -136,18 +136,20 @@
       td
     tr.item
       td
-        = "Accomodation : #{@language_stay&.accomodation&.humanize}"
+        = "Accommodation : #{@language_stay&.accomodation&.humanize}"
       td
-    - if @language_stay&.accomodation == 'With_accomodation'
+    - if @language_stay&.accomodation == 'With_accommodation'
       tr.item
         td
-          = "Accomodation type : #{@language_stay&.accomodation_type&.humanize}"
-        td
-      tr.item
+          = "Accommodation type : #{@language_stay&.accomodation_type&.humanize}"
         td
           = "Room : #{@language_stay&.room&.humanize}"
+      tr.item
         td
           = "Meals : #{@language_stay&.pension.humanize}"
+        - if @language_stay&.other_pension != ""
+          td
+            = "Details : #{@language_stay&.other_pension}"
     tr.item
       td
         = "OPTION 1 : #{@language_stay.option_1}"

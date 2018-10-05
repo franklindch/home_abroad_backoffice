@@ -1,7 +1,7 @@
 - if families.empty?
   .card
     .card-body
-      p Aucune famille trouvée pour cette recherche, merci de réessayer.
+      p = search_message
 - else
   .table-responsive
     table.table.table-sm.table-hover
@@ -27,7 +27,7 @@
               td
                 span = family&.email
               td
-                / span = number_to_phone(family&.intl_number) if family&.intl_number != nil
+                span = number_to_phone(family&.intl_number) if family&.intl_number != nil
               td
                 span = family&.address_1
               td
@@ -37,7 +37,7 @@
               td
                 span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, family_path(family), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: family.id
               td
-                span = link_to "+", family_qualification_path(family)
+                span  = link_to "<i class='fa fas fa-exchange-alt'></i>".html_safe, family_qualification_path(family), class: 'btn-sm btn-outline-primary'
 
         - else
           tr.cursor-pointer data-toggle="modal" data-target="#modal#{family.id}"
@@ -45,11 +45,11 @@
               span = c(family&.name)
             td
               span = "#{date_format(family&.qualification.created_at)}"
-            td.w-25
+            td
               span = family&.email
-            td.w-25
+            td
               span = number_to_phone(family&.intl_number) if family.intl_number != nil
-            td.w-25
+            td
               span = family&.address_1
             td
               span = family&.zip_code

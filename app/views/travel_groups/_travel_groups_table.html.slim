@@ -33,9 +33,9 @@
           td
             span = link_to "Générer", airport_convocation_path(travel_group: travel_group), format: :pdf
           td
-            span = link_to "Voir", travel_group_path(travel_group), class: 'btn-sm btn-outline-primary'
-          td
             span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_travel_group_path(travel_group, groupe: 'Groupe')
 
           td
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, travel_group_path(travel_group), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: travel_group.id
+          td
+            span = link_to "<i class='fa fas fa-eye'></i>".html_safe, travel_group_path(travel_group), class: 'btn-sm btn-outline-primary'

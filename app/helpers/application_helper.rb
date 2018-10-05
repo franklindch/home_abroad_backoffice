@@ -17,6 +17,10 @@ module ApplicationHelper
     end
 	end
 
+  def search_message
+    "Merci de lancer votre recherche"
+  end
+
 	def number_to_phone(number)
 		return number[0..2] + ' ' + number [3..-1]
 	end
@@ -75,5 +79,10 @@ module ApplicationHelper
 
   def get_comercial_responsible_name(list)
     list.first {|commercial_responsible| commercial_responsible == current_user.first_name }
+  end
+
+  def week_day(date)
+    wday = date.wday
+    I18n.t('date.day_names')[wday].capitalize
   end
 end

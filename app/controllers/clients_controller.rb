@@ -47,7 +47,7 @@ class ClientsController < ApplicationController
 	end
 
 	def index
-		@clients = Client.order('created_at ASC').page params[:page]
+		@clients = Client.none
 		respond_to do |format|
 			format.html
 	    format.js
@@ -55,7 +55,7 @@ class ClientsController < ApplicationController
 	  if params[:query].present?
 	    @clients = Client.search_by_full_name(params[:query]).page params[:page]
 	  else
-	    @clients = Client.order('created_at ASC').page params[:page]
+	    @clients = Client.none
 	  end
 	end
 

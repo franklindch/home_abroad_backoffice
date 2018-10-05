@@ -60,7 +60,7 @@ class FamiliesController < ApplicationController
     if params[:query].present?
       @families = Family.search_by_name(params[:query]).page(params[:query])
     else
-      @families = Family.order('created_at ASC').page params[:page]
+      @families = Family.none
     end
   end
 

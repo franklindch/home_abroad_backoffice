@@ -19,11 +19,11 @@
         p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company&.intl_number != nil
         h6 Adresse
         p.pb-2 = "#{partner_company&.address}" if partner_company&.address != ""
-        = link_to "Ajouter Employé".html_safe, new_partner_company_employee_path(partner_company), class: 'btn btn-outline-primary'
+        = link_to "Ajouter Contact".html_safe, new_partner_company_employee_path(partner_company), class: 'btn btn-outline-primary'
 
         .mt-3
         - if employees == []
-          p = '<b>Pas d\'employés associés à ce partenaire</b>'.html_safe
+          p = '<b>Pas de contacts associés à ce partenaire</b>'.html_safe
 
         - else
           h5.mt-4.border-top.pt-4 Employers

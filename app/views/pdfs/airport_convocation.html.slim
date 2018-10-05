@@ -15,7 +15,7 @@
                 = "<b>Convocation Voyage</b>".html_safe
               br/
             td.text-left
-              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s) | #{c(travel_detail_aller&.partner_company&.name)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
+              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)} | #{c(travel_detail_aller&.partner_company&.name)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
     tr.heading
       td

@@ -45,44 +45,42 @@ require 'csv'
 # end
 
 
-puts 'Importation des organismes/partenaires de l\'autre base...'
-csv_text = File.read(Rails.root.join('partner_companies.csv'))
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
-csv.each do |row|
-  PartnerCompany.create!(
-    name: row['name'],
-    email: row['email'],
-    country: row['country'],
-    address: row['address'],
-    nature: 'Organisme'
-  )
-  puts "Organisme créée"
-end
-
-# puts 'Importation des clients de l\'autre base...'
-# csv_text = File.read(Rails.root.join('clients.csv'))
+# puts 'Importation des organismes/partenaires de l\'autre base...'
+# csv_text = File.read(Rails.root.join('partner_companies.csv'))
 # csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
-# csv.each do |row, i|
-#   client_i = Client.create!(
-#     client_identifier: row['client_identifier']
-#     gender: row['gender'],
-#     first_name: row['first_name'],
-#     city: row['city'],
-#     last_name: row['last_name'],
-#     address_1: row['address_1'],
-#     intl_number: row['intl_number'],
-#     zip_code: row['zip_code'],
-#     family_id: Family.find(family_identifier: row['family_identifier']),
-#     # last_name: "",
-#     # birth_date: Wed, 21 Aug 1968,
-#     # passport_expiration_date: Sat, 25 Dec 2021,
+# csv.each do |row|
+#   PartnerCompany.create!(
+#     name: row['name'],
 #     email: row['email'],
-#     passport_number: row['passport_number'],
-#     country_of_issue: row['country_of_issue'],
-
+#     country: row['country'],
+#     address: row['address'],
+#     nature: 'Organisme'
 #   )
-#   puts "Client créée"
+#   puts "Organisme créée"
 # end
+
+puts 'Importation des clients de l\'autre base...'
+csv_text = File.read(Rails.root.join('clients.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv.each do |row, i|
+  client_i = Client.create!(
+    client_identifier: row['client_identifier'],
+    gender: row['gender'],
+    first_name: row['first_name'],
+    last_name: row['last_name'],
+    address_1: row['address_1'],
+    intl_number: row['intl_number'],
+    zip_code: row['zip_code'],
+    family_id: Family.where(family_identifier: row['family_identifier']).first&.id,
+    # last_name: "",
+    # birth_date: Wed, 21 Aug 1968,
+    # passport_expiration_date: Sat, 25 Dec 2021,
+    email: row['email'],
+    passport_number: row['passport_number'],
+    country_of_issue: row['country_of_issue']
+  )
+  puts "Client créée"
+end
 
 
 

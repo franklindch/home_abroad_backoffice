@@ -39,4 +39,5 @@
               span = client&.email
             td
             td
-              span = link_to 'Vers sa fiche client', family_client_path(client.family, client)
+              - if client.family
+                span = link_to 'Vers sa fiche client', family_client_path(client.family, client)

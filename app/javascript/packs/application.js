@@ -14,7 +14,6 @@ import { travelSelectConditionnal, travelGroupConditionnal } from '../style/cond
 import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
 import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
 
-
 document.addEventListener("turbolinks:load", () => {
   if ($('.calendar_birth_date')) {
     calendarBirthDate();

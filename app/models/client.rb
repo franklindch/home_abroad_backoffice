@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
   include PgSearch
-  belongs_to :family
+  belongs_to :family, optional: true
   has_many :language_stays, dependent: :destroy
   has_many :travels, through: :language_stays, dependent: :destroy
 
@@ -35,8 +35,14 @@ class Client < ApplicationRecord
   enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, NA: 4 }, _suffix: true
 
 
+  # after_destroy :delete_from_family
+
+  # def delete_from_family
+  #   family.clients.find(id: self.id).destroy
+  # end
+
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
-  validates :first_name, :birth_date, :family_id, presence: true
+  validates :first_name, presence: true
   # after_save :check_if_family_is_client
 
   # before_save :capitalize_fields

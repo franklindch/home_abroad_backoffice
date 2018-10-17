@@ -41,9 +41,21 @@ module ApplicationHelper
     end
   end
 
+  def bold(string)
+    "<b>#{string}</b>".html_safe
+  end
+
   def show_attribute_empty_string(attribute, label)
     if attribute != ''
       "<p><u>#{label}</u> #{attribute}</p>".html_safe
+    else
+      return ''
+    end
+  end
+
+  def show_attribute_empty_string_no_underline(attribute, label)
+    if attribute != ''
+      "<p>#{label} <b>#{attribute}</b></p>".html_safe
     else
       return ''
     end

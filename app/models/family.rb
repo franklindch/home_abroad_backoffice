@@ -2,7 +2,9 @@ class Family < ApplicationRecord
 	include PgSearch
 	belongs_to :qualification, optional: true
   has_many :clients, dependent: :destroy, inverse_of: :family
-	has_many :child_details, through: :qualifications, dependent: :destroy
+
+  # Attention : ligne commentée mais à remettre quand ce sera bon !
+	# has_many :child_details, through: :qualifications, dependent: :destroy
 
 	pg_search_scope :search_by_name,
 					against: [:name],
@@ -23,8 +25,4 @@ class Family < ApplicationRecord
 			Family.find(family)
 		end
 	end
-
-	# def prospect?
-	# 	prospect == true
-	# end
 end

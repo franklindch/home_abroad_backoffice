@@ -15,7 +15,7 @@
                 = "<b>Convocation Voyage</b>".html_safe
               br/
             td.text-left
-              = "Rendez-vous au comptoir d'enregistrement à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)} | #{c(travel_detail_aller&.partner_company&.name)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
+              = "Rendez-vous au comptoir d'enregistrement <b>#{c(travel_detail_aller&.partner_company&.name)}</b> à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
     tr.heading
       td
@@ -23,28 +23,28 @@
       td
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_aller&.mode.humanize, 'Moyen de transport')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.mode.humanize, 'Moyen de transport')
       td
-        = show_attribute_empty_string(travel_detail_aller&.reference, 'Référence')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.reference, 'Référence')
     tr.item
       td
-        = show_attribute_nil(travel_detail_aller&.partner_company&.name, 'Compagnie')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.partner_company&.name.upcase, 'Compagnie')
       td
-        = show_attribute_empty_string(travel_detail_aller&.departure_location, 'Départ de')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.departure_location, 'Départ de')
     tr.item
       td
-        = show_attribute_empty_string(date_format(travel_detail_aller&.start_date), 'Date de départ')
+        = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.start_date), 'Date de départ')
       td
-        = show_attribute_empty_string(time_format(travel_detail_aller&.start_time), 'Heure de départ')
+        = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.start_time), 'Heure de départ')
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_aller&.arrival_location, 'Arrivée à')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.arrival_location, 'Arrivée à')
       td
     tr.item.last
       td
-        = show_attribute_empty_string(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
+        = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
       td
-        = show_attribute_empty_string(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
+        = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
     tr.heading
       td
@@ -52,32 +52,32 @@
       td
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_retour&.mode.humanize, 'Moyen de transport')
+        = show_attribute_empty_string_no_underline(travel_detail_retour&.mode.humanize, 'Moyen de transport')
       td
-        = show_attribute_empty_string(travel_detail_retour&.reference, 'Référence')
+        = show_attribute_empty_string_no_underline(travel_detail_retour&.reference, 'Référence')
     tr.item
       td
         = show_attribute_nil(travel_detail_retour&.companies, 'Compagnie')
       td
-        = show_attribute_empty_string(travel_detail_retour&.departure_location, 'Départ de')
+        = show_attribute_empty_string_no_underline(travel_detail_retour&.departure_location, 'Départ de')
     tr.item
       td
-        = show_attribute_empty_string(date_format(travel_detail_retour&.start_date), 'Date de départ')
+        = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.start_date), 'Date de départ')
       td
-        = show_attribute_empty_string(time_format(travel_detail_retour&.start_time), 'Heure de départ')
+        = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.start_time), 'Heure de départ')
     tr.item
       td
-        = show_attribute_empty_string(travel_detail_retour&.arrival_location, 'Arrivée à')
+        = show_attribute_empty_string_no_underline(travel_detail_retour&.arrival_location, 'Arrivée à')
       td
     tr.item.last
       td
-        = show_attribute_empty_string(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
+        = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
       td
-        = show_attribute_empty_string(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
+        = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
 
   br/
   .text-left
-    = "<b>IMPORTANT : En cas d'urgence, merci de contacter le 06 65 16 40 80. Veuillez vous reporter au document 'INFORMATIONS GENERALES HOME ABROAD' pour les conditions de voyage de votre enfant (poids des bagages, douanes, ...)</b>".html_safe
+    = "<b>IMPORTANT : En cas d'urgence, merci de contacter le 06 65 16 40 80.<br>Veuillez vous reporter au document 'INFORMATIONS GENERALES HOME ABROAD' pour les conditions de voyage de votre enfant (poids des bagages, douanes, ...)</b>".html_safe
 
   .pdf-footer
     = wicked_pdf_image_tag('bas_de_page.png', width: '95%')

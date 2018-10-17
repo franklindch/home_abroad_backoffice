@@ -27,6 +27,7 @@ section
                   = f.input :comment, label: 'Commentaire'
 
                 - else
+                  p Assurez-vous avant que cette personne n'a pas déjà été rentrée en prospect en consultant sa famille !
                   - if @client.id.nil?
                     = f.input :season,  collection: Client.seasons.keys.map { |w| [w.humanize, w] },label: 'Saison', selected: 1
                   - else

@@ -36,9 +36,10 @@ class LanguageStay < ApplicationRecord
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
 
   def get_duration
+    # quand pile 7 jours ça marche bien, voir les cas ou 6 jours par exemple.. / A tester, à voir si bien ok maintenant !
     s = self.start_date
     e = self.end_date
-    return s.step(e, 7).count
+    return ((e-s).to_i/6.5).round(2)
   end
 
   def all_attributes?

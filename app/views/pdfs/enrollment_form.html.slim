@@ -10,9 +10,9 @@
             td.title.text-left
               = wicked_pdf_image_tag 'logo.png'
             td
-              br/
+
               h3.text-left = '<b>Enrollment Form</b>'.html_safe
-              br/
+
               p.text-right
                 = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
                 br/
@@ -30,6 +30,13 @@
     tr.item
       td
         = "First name : <b>#{client.first_name}</b>".html_safe
+      - if client&.birth_date != nil
+        td
+         = "Age : <b>#{show_the_age_at_language(client&.birth_date, @language_stay)} years</b>".html_safe
+    tr.item
+      - if client&.birth_date != nil
+        td
+          = "Birthdate (dd/mm/yr) : <b>#{date_format(client&.birth_date)}</b>".html_safe
       td
     tr.item
       td
@@ -48,16 +55,10 @@
       td
         = "Cellphone : #{client.intl_number}"
     tr.item
-      - if client&.birth_date != nil
-        td
-          = "Birthdate (dd/mm/yr) : #{date_format(client&.birth_date)}"
-        td
-         = "Age : #{show_the_age_at_language(client&.birth_date, @language_stay)} years"
-    tr.item
       td
         = "Nationality : #{client.nationality}"
       td
-        = "Language : #{client.first_language} | Level : #{client.first_language_level}"
+        = "Language : <b>#{client.first_language}</b> | Level : <b>#{client.first_language_level}</b>".html_safe
     tr.item
       td
         = "Preferred hobbies : #{client.preferred_hobbies}"
@@ -136,17 +137,17 @@
       td
     tr.item
       td
-        = "Accommodation : #{@language_stay&.accomodation&.humanize}"
+        = "Accommodation : <b>#{@language_stay&.accomodation&.humanize}</b>".html_safe
       td
     - if @language_stay&.accomodation == 'With_accommodation'
       tr.item
         td
-          = "Accommodation type : #{@language_stay&.accomodation_type&.humanize}"
+          = "Accommodation type : <b>#{@language_stay&.accomodation_type&.humanize}</b>".html_safe
         td
-          = "Room : #{@language_stay&.room&.humanize}"
+          = "Room : <b>#{@language_stay&.room&.humanize}</b>".html_safe
       tr.item
         td
-          = "Meals : #{@language_stay&.pension.humanize}"
+          = "Meals : <b>#{@language_stay&.pension&.humanize}</b>".html_safe
         - if @language_stay&.other_pension != ""
           td
             = "Details : #{@language_stay&.other_pension}"
@@ -157,7 +158,7 @@
         = "OPTION 2 : #{@language_stay.option_2}"
     tr.item
       td
-        = "Special requests : #{@language_stay.precisions}"
+        = "Special requests : #{@language_stay&.precisions}"
       td
     - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
       tr.item.last

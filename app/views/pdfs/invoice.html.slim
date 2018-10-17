@@ -121,7 +121,7 @@
         td
           | Total réglé
         td
-          = "#{payment.amount_price_cents} #{payment.amount_price_currency}"
+          = "#{@invoice.total_payments} #{@invoice.total_price_currency}"
     tr.total
       td
        |

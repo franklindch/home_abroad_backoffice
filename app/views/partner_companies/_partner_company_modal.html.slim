@@ -34,7 +34,7 @@
                 p = "Contact principal: #{employee&.main_contact}"
                 p = "Job: #{employee&.job_position}"
                 p = "Email: #{employee&.email}"
-                p = "Tél: #{number_to_phone(employee&.intl_number)}"if employee&.intl_number != nil
+                p = "Tél: #{number_to_phone(employee&.intl_number)}" if employee&.intl_number != nil
 
               .card-user
                 / = "#{client.age} ans"

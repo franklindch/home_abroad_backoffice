@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181021100811) do
+ActiveRecord::Schema.define(version: 20181021122659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,7 +227,6 @@ ActiveRecord::Schema.define(version: 20181021100811) do
     t.text "other_transfer"
     t.boolean "included_transfers", default: false
     t.boolean "confirmation_language_stay", default: false
-    t.boolean "passport_cni", default: false
     t.boolean "picture", default: false
     t.boolean "family_file", default: false
     t.boolean "school_notes", default: false
@@ -241,6 +240,7 @@ ActiveRecord::Schema.define(version: 20181021100811) do
     t.boolean "justice_record", default: false
     t.boolean "rules_and_regulations", default: false
     t.boolean "teacher_reference", default: false
+    t.boolean "passport_cni", default: false
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"

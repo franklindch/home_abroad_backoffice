@@ -73,7 +73,8 @@ class ClientsController < ApplicationController
 	  	gender: @child_detail.gender,
 	  	email: @child_detail.email,
 	  	school: @child_detail.school,
-	  	school_grade: @child_detail.school_grade
+	  	school_grade: @child_detail.school_grade,
+      birth_date: @child_detail.birth_date
 	  )
 	  respond_to do |format|
 	    format.html # new.html.erb

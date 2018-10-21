@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :language_stays, only: [:new, :create, :edit, :update, :destroy]
     end
 
-    resources :language_stays, only: [:show] do
+    resources :language_stays, only: [:show, :index] do
       resources :invoices, only: [:new, :create, :edit, :update, :destroy]
       resources :travels, only: [:new, :create, :edit, :update, :destroy]
     end
@@ -65,6 +65,8 @@ Rails.application.routes.draw do
   get 'all_attendants', to: 'excels#all_attendants'
   get 'all_child_details', to: 'excels#all_child_details'
   get 'all_travel_groups', to: 'excels#all_travel_groups'
+
+  get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
 
   get 'close_prospect', to: 'qualifications#close_prospect'
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'

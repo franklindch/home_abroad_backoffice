@@ -17,32 +17,32 @@
 # LanguageStay.destroy_all
 # Travel.destroy_all
 
-require 'csv'
+# require 'csv'
 
 
-puts 'Importation des familles de l\'autre base...'
-csv_text = File.read(Rails.root.join('families.csv'))
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
-csv.each do |row|
-  Family.create!(
-    family_identifier: row['family_identifier'],
-    name: row['name'],
-    address_1: row['Address₁'],
-    zip_code: row['zip_code'],
-    city: row['city'],
-    intl_number: row['intl_number'],
-    email: row['email'],
-    father_name: row['father_name'],
-    mother_name: row['mother_name'],
-    father_email: row['father_email'],
-    mother_email: row['mother_email'],
-    mother_intl_number: row['mother_intl_number'],
-    father_intl_number: row['father_intl_number'],
-    mother_office_intl_number: row['mother_office_intl_number'],
-    father_office_intl_number: row['father_office_intl_number']
-  )
-  puts "Famille créée"
-end
+# puts 'Importation des familles de l\'autre base...'
+# csv_text = File.read(Rails.root.join('families.csv'))
+# csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+# csv.each do |row|
+#   Family.create!(
+#     family_identifier: row['family_identifier'],
+#     name: row['name'],
+#     address_1: row['Address₁'],
+#     zip_code: row['zip_code'],
+#     city: row['city'],
+#     intl_number: row['intl_number'],
+#     email: row['email'],
+#     father_name: row['father_name'],
+#     mother_name: row['mother_name'],
+#     father_email: row['father_email'],
+#     mother_email: row['mother_email'],
+#     mother_intl_number: row['mother_intl_number'],
+#     father_intl_number: row['father_intl_number'],
+#     mother_office_intl_number: row['mother_office_intl_number'],
+#     father_office_intl_number: row['father_office_intl_number']
+#   )
+#   puts "Famille créée"
+# end
 
 
 # puts 'Importation des organismes/partenaires de l\'autre base...'
@@ -83,6 +83,10 @@ end
 # end
 
 
+
+state_of_progresses.each do |state_of_progress|
+  StateOfProgress.create!(name: state_of_progress)
+end
 
 
 puts ""

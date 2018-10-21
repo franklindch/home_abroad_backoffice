@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181017073950) do
+ActiveRecord::Schema.define(version: 20181021100811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,21 @@ ActiveRecord::Schema.define(version: 20181017073950) do
     t.text "other_pension"
     t.text "other_transfer"
     t.boolean "included_transfers", default: false
+    t.boolean "confirmation_language_stay", default: false
+    t.boolean "passport_cni", default: false
+    t.boolean "picture", default: false
+    t.boolean "family_file", default: false
+    t.boolean "school_notes", default: false
+    t.boolean "language_test", default: false
+    t.boolean "junior_waiver", default: false
+    t.boolean "parent_consent", default: false
+    t.boolean "medical_form", default: false
+    t.boolean "english_cv", default: false
+    t.boolean "motivation_letter", default: false
+    t.boolean "agreement_welcome_school", default: false
+    t.boolean "justice_record", default: false
+    t.boolean "rules_and_regulations", default: false
+    t.boolean "teacher_reference", default: false
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -292,6 +307,21 @@ ActiveRecord::Schema.define(version: 20181017073950) do
     t.boolean "prospect", default: true
     t.text "family_comment"
     t.integer "refered_by"
+  end
+
+  create_table "state_of_progress_language_stays", force: :cascade do |t|
+    t.bigint "language_stay_id"
+    t.bigint "state_of_progress_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_stay_id"], name: "index_state_of_progress_language_stays_on_language_stay_id"
+    t.index ["state_of_progress_id"], name: "index_state_of_progress_language_stays_on_state_of_progress_id"
+  end
+
+  create_table "state_of_progresses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "transits", force: :cascade do |t|
@@ -394,6 +424,8 @@ ActiveRecord::Schema.define(version: 20181017073950) do
   add_foreign_key "off_set_travels", "partner_companies"
   add_foreign_key "off_set_travels", "travels"
   add_foreign_key "payments", "invoices"
+  add_foreign_key "state_of_progress_language_stays", "language_stays"
+  add_foreign_key "state_of_progress_language_stays", "state_of_progresses"
   add_foreign_key "transits_travels", "transits"
   add_foreign_key "travel_details", "partner_companies"
   add_foreign_key "travel_details", "travel_groups"

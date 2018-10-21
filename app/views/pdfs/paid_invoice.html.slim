@@ -16,13 +16,14 @@
               = "Mr ou Mme #{c(family.name)}"
               br/
               = "#{family.address_1}"
+              = "#{family&.zip_code}"
 
     tr.information
       td colspan="2"
         table
           tr
             td.text-left
-              = "<b>Facture Acquittée N° 2018-2019 / #{@invoice.id}</b>".html_safe
+              = "<b>Facture Acquittée N° #{@invoice.id} / 2018-2019</b>".html_safe
               br/
               = "Versailles, le #{date_format(Date.today)}"
           tr

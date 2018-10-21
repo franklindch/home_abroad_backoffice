@@ -10,7 +10,7 @@
           th NOM
           th Ajout
           th Email
-          th Téléphone
+          th Tél CP
           th Adresse
           th Code Postal
           th
@@ -47,8 +47,13 @@
               span = "#{date_format(family&.qualification.created_at)}"
             td
               span = family&.email
-            td
-              span = number_to_phone(family&.intl_number) if family&.intl_number != nil
+            - if family&.mother_main_contact == true
+              td
+                span = number_to_phone(family&.mother_intl_number)
+            - elsif family&.father_main_contact == true
+              td
+                span = number_to_phone(family&.father_intl_number)
+              / span = number_to_phone(family&.intl_number) if family&.intl_number != nil
             td
               span = family&.address_1
             td

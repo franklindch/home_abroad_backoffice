@@ -32,6 +32,7 @@ class LanguageStay < ApplicationRecord
     Itinérant: 5
   }
 
+  scope :ordered_by_end_date, -> { order(end_date: :desc) }
 
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
 
@@ -40,6 +41,11 @@ class LanguageStay < ApplicationRecord
     s = self.start_date
     e = self.end_date
     return ((e-s).to_i/6.5).round(2)
+  end
+
+  def confirmation_date
+    s = self.start_date
+    (s - Date.today).to_i
   end
 
   def all_attributes?

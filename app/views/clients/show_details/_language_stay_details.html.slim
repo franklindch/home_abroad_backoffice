@@ -39,7 +39,7 @@
     - if language_stay&.other_transfer != ''
       p = show_attribute_empty_string(language_stay&.other_transfer, 'Autre transfert')
 
-.col-md-3
+.col-md-2
   h6.card-title Autres
   .card-text
     p = show_attribute_empty_string(language_stay&.accomodation_type&.humanize, 'Type de logement')
@@ -49,8 +49,11 @@
       p = show_attribute_empty_string(show_the_age_at_language(language_stay&.client&.birth_date, language_stay), 'Âge pendant le séjour (ans)')
     p = show_attribute_empty_string(language_stay&.precisions, 'Précisions')
 
+.col-md-2
+  = render 'language_stays/state_of_progress', language_stay: language_stay
+
 - if language_stay.travel.nil? && language_stay.invoice == nil
-  .col-md-3
+  .col-md-2
     .btn-toolbar.mb-2.mb-md-0
       = link_to ('<i class="fa fas fa-plus-circle">Voyage</i>').html_safe, new_language_stay_travel_path(language_stay), class: 'btn btn-outline-info mt-2'
       = link_to ('<i class="fa fas fa-plus-circle">Facture</i>').html_safe, new_language_stay_invoice_path(language_stay), class: 'btn btn-outline-info mt-2'

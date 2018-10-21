@@ -16,13 +16,14 @@
               = "Mr ou Mme #{c(family.name)}"
               br/
               = "#{family.address_1}"
+              = "#{family&.zip_code}"
 
     tr.information
       td colspan="2"
         table
           tr
             td.text-left
-              = "<b>Facture N° 2018-2019 / #{@invoice.id}</b>".html_safe
+              = "<b>Facture N° #{@invoice.id} / 2018-2019</b>".html_safe
               br/
               = "Versailles, le #{date_format(Date.today)}"
           tr
@@ -37,14 +38,13 @@
               - if language_stay&.program_detail_fr != ''
                 = "<u>Détails du programme</u><br> #{language_stay&.program_detail_fr}".html_safe
               br/
-              - if language_stay&.accomodation == 'With_accomodation'
-                = "<u>Détails du logement</u><br>".html_safe
-                = t("views.accomodation_types.#{language_stay&.accomodation_type}")
-                br/
-                = t("views.rooms.#{language_stay&.room}")
-                br/
-                = t("views.pensions.#{language_stay&.pension}")
-                br/
+              = "<u>Détails du logement</u><br>".html_safe
+              = t("views.accomodation_types.#{language_stay&.accomodation_type}")
+              br/
+              = t("views.rooms.#{language_stay&.room}")
+              br/
+              = t("views.pensions.#{language_stay&.pension}")
+              br/
 
     tr.heading
       td

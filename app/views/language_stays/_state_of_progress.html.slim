@@ -1,0 +1,33 @@
+h6 Documents envoyés
+ul
+- if language_stay&.confirmation_language_stay == true
+  li CS envoyée
+- if language_stay&.passport_cni == true
+  li Passeport ou CNI
+- if language_stay&.picture == true
+  li Photo
+- if language_stay&.family_file == true
+  li Dossier famille
+- if language_stay&.school_notes == true
+  li Bulletins scolaires
+- if language_stay&.language_test == true
+  li Test de langue
+- if language_stay&.junior_waiver == true
+  li Photo
+- if language_stay&.parent_consent == true
+  li Parent consent
+- if language_stay&.medical_form == true
+  li Formulaire médical
+- if language_stay&.english_cv == true
+  li CV en anglais
+- if language_stay&.motivation_letter == true
+  li Lettre de motivation
+- if language_stay&.agreement_welcome_school == true
+  li Accord accueil école
+- if language_stay&.justice_record == true
+  li Casier judiciaire
+- if language_stay&.rules_and_regulations == true
+  li Rules & regulations
+- if language_stay&.teacher_reference == true
+  li Référence teacher
+

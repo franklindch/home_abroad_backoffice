@@ -15,7 +15,7 @@
             td.text-right
               = "Mr ou Mme #{c(family.name)}"
               br/
-              = "#{family.address_1}"
+              = "#{family.address_1} "
               = "#{family&.zip_code}"
 
     tr.information
@@ -41,7 +41,8 @@
                 = "<u>Détails du logement</u><br>".html_safe
                 = t("views.accomodation_types.#{language_stay&.accomodation_type}")
                 br/
-                = t("views.rooms.#{language_stay&.room}")
+                - if language_stay&.room != ''
+                  = t("views.rooms.#{language_stay&.room}")
                 br/
                 = t("views.pensions.#{language_stay&.pension}")
                 br/
@@ -77,6 +78,12 @@
           = "Prix Option 2 : #{language_stay&.option_2_fr}"
         td
           = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
+    tr.item
+      - if language_stay.option_3_fr != ''
+        td
+          = "Prix Option 3 : #{language_stay&.option_3_fr}"
+        td
+          = "#{@invoice.option_3_price_cents} EUR"
     tr.item
       td
         | Transferts Voyage

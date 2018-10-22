@@ -45,8 +45,8 @@
         - else
           = "Address : #{client.family.address_1}"
       td
-        - if family&.zip_code != ''
-          = "Zip Code: #{family.zip_code}"
+        - if client&.family&.zip_code != ''
+          = "Zip Code: #{client.family.zip_code}"
     tr.item
       td
         = "Email : #{client.email}"

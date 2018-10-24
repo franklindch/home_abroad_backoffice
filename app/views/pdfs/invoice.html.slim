@@ -128,7 +128,7 @@
       td
        |
       td
-        = "Solde à payer TTC : #{@invoice.total_price_cents - @invoice.total_payments} EUR"
+        = "Solde à payer TTC : #{@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements} EUR"
   br/
   br/
   .text-left

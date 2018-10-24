@@ -47,6 +47,8 @@ class LanguageStay < ApplicationRecord
        agreement_welcome_school = true OR
        rules_and_regulations = true OR
        teacher_reference = true OR
+       visa = true OR
+       flight = true OR
        passport_cni = true"
     )
   end

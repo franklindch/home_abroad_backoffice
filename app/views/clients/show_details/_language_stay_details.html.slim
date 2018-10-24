@@ -37,6 +37,7 @@
 .col-md-2
   h6.card-title Autres
   .card-text
+    p = show_attribute_empty_string(language_stay&.accomodation&.humanize, '')
     p = show_attribute_empty_string(language_stay&.accomodation_type&.humanize, 'Type de logement')
     p = show_attribute_empty_string(language_stay&.room&.humanize, 'Chambre')
     p = show_attribute_empty_string(language_stay&.pension&.humanize, 'Pension')

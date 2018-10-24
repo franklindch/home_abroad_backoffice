@@ -6,10 +6,12 @@
         th Nom
         th Prénom
         th Séjour
+        th Organisme
+        th Destination
         th Départ
         th Arrivée
+        th Jusqu'au départ
         th
-        th Durée jusqu'au départ
         th
         th
         th
@@ -27,11 +29,13 @@
           td
             span = language_stay&.program&.name
           td
+            span = language_stay&.partner_company&.name
+          td
+            span = language_stay&.travel&.travel_details&.first&.arrival_location
+          td
             span = date_format(language_stay&.start_date)
           td
             span = date_format(language_stay&.end_date)
-          td
-            span = link_to 'Vers client', client_path(language_stay.client)
           td
             span = "#{language_stay&.confirmation_date} jours"
           - if language_stay&.confirmation_language_stay == false && language_stay&.confirmation_date < 50
@@ -40,4 +44,6 @@
           - elsif language_stay&.confirmation_language_stay == true && language_stay&.confirmation_date < 50
             td
               span = link_to 'CS envoyée', language_stay_cancel_confirmation_path(language_stay: language_stay), class: 'btn-sm btn-outline-primary', remote: true
+          td
+            span = link_to 'Vers client', client_path(language_stay.client)
 

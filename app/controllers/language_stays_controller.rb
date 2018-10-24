@@ -124,6 +124,7 @@ class LanguageStaysController < ApplicationController
 
   def language_stay_params
     params.require(:language_stay).permit(:picture,
+      :flight, :visa,
       :passport_cni, :family_file, :school_notes,
       :language_test, :junior_waiver, :medical_form, :english_cv,
       :motivation_letter, :agreement_welcome_school, :justice_record, :rules_and_regulations,

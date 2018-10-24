@@ -38,7 +38,10 @@ class Client < ApplicationRecord
   # after_destroy :delete_from_family
 
   # def delete_from_family
-  #   family.clients.find(id: self.id).destroy
+  #   # raise
+  #   raise
+  #   family.clients.delete(self)
+  #   # && family.qualification.child_details.find_by(first_name: self.first_name).update_columns(status: 'Prospect')
   # end
 
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }

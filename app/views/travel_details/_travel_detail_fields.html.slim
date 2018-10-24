@@ -25,13 +25,11 @@
     = f.input :end_date, label: 'Date d\'arrivée'
     = f.input :end_time, label: 'Heure d\'arrivée'
     / = f.input :end_time, label: 'Heure d\'arrivée'
-.row.pb-5.mb-5.border-bottom
-  .col-md-6
-    .child_details_section.pt-3.correspondence
-      h3.mt-3 Correspondance
-      .child_details.mt-3
-        = f.simple_fields_for :correspondences do |correspondence|
-          = render 'travel_details/correspondence_fields', f: correspondence
+.pb-5.mb-5.border-bottom
+  .child_details_section.pt-3.correspondence
+    .child_details.mt-3
+      = f.simple_fields_for :correspondences do |correspondence|
+        = render 'travel_details/correspondence_fields', f: correspondence
 
 
 ruby:

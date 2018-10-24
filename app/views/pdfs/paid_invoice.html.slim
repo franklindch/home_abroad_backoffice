@@ -28,7 +28,7 @@
               = "Versailles, le #{date_format(Date.today)}"
           tr
             td.text-left
-              = "#{client.first_name} #{c(client.last_name)}"
+              = "#{client.first_name.upcase} #{c(client.last_name)}"
               br/
               = "Du #{date_format(language_stay.start_date)} au #{date_format(language_stay.end_date)} - durée de #{language_stay.duration} semaines"
               br/
@@ -37,7 +37,7 @@
               br/
               = "<u>Détails du programme</u><br> #{language_stay&.program_detail_fr}".html_safe
               br/
-              - if language_stay&.accomodation == 'With_accomodation'
+              - if language_stay&.accomodation == 'With_accommodation'
                 = "<u>Détails du logement</u><br>".html_safe
                 = t("views.accomodation_types.#{language_stay&.accomodation_type}")
                 br/
@@ -46,6 +46,9 @@
                 br/
                 = t("views.pensions.#{language_stay&.pension}")
                 br/
+              - else
+                = "<u>Détails du logement</u><br>".html_safe
+                p Sans logement
 
     tr.heading
       td
@@ -58,10 +61,10 @@
       td
         = "#{@invoice.language_stay_price_cents} #{@invoice.language_stay_price_currency}"
     tr.item
-      - if travel.nature == 'Groupe' || travel.nature == 'Groupe_décalé'
+      - if travel && travel&.nature == 'Groupe' || travel&.nature == 'Groupe_décalé'
         td
           = "Prix du voyage #{travel.nature.humanize.capitalize} #{travel.travel_group.travel_code}"
-      - else
+      - elsif travel
         td
           = "Prix du voyage #{travel.nature.humanize.capitalize} - Départ : #{travel.travel_details.first.departure_location}"
       td

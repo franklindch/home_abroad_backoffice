@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get 'all_travel_groups', to: 'excels#all_travel_groups'
 
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
+  get 'language_stay_cancel_confirmation', to: 'language_stays#cancel_confirmation'
 
   get 'close_prospect', to: 'qualifications#close_prospect'
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
@@ -77,5 +78,6 @@ Rails.application.routes.draw do
   get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
   post "families/:id/qualification", to: "qualifications#create"
   post "qualifications/:id/child_detail", to: "child_details#create"
+  get 'incomplete_files', to: "language_stays#incomplete_files"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

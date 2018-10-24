@@ -1,11 +1,13 @@
 .nested-fields.form-row.mt-3
   .field.form-group.col-md-2
-    = f.input :nature, collection: Payment.natures.keys.map { |w| [w.humanize, w] }, selected: 0, label: 'Type'
+    = f.input :category, collection: Payment.categories.keys.map { |w| [w.humanize, w] }, label: 'Type'
+  .field.form-group.col-md-2
+    = f.input :nature, collection: Payment.natures.keys.map { |w| [w.humanize, w] }, label: 'Source'
 
   .field.form-group.col-md-2
-    = f.input :amount_price_cents, label: 'Montant'
+    = f.input :amount_price_cents, label: 'Montant', value: number_with_precision(f.object.amount_price_cents, precision: 2)
 
-  .field.form-group.col-md-8
+  .field.form-group.col-md-6
     = f.input :payment_date, label: 'Date'
 
 .row.border-bottom.pb-3

@@ -11,4 +11,9 @@ class Payment < ApplicationRecord
 		Chèque: 3,
 		Virement: 4
 	}
+
+  enum category: {
+    Règlement: 0,
+    Remboursement: 1
+  }
 end

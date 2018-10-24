@@ -38,14 +38,18 @@
               - if language_stay&.program_detail_fr != ''
                 = "<u>Détails du programme</u><br> #{language_stay&.program_detail_fr}".html_safe
               br/
-              = "<u>Détails du logement</u><br>".html_safe
-              = t("views.accomodation_types.#{language_stay&.accomodation_type}")
-              br/
-              - if language_stay&.room != ''
-                = t("views.rooms.#{language_stay&.room}")
-              br/
-              = t("views.pensions.#{language_stay&.pension}")
-              br/
+              - if language_stay&.accomodation == 'With_accommodation'
+                = "<u>Détails du logement</u><br>".html_safe
+                = t("views.accomodation_types.#{language_stay&.accomodation_type}")
+                br/
+                - if language_stay&.room != ''
+                  = t("views.rooms.#{language_stay&.room}")
+                br/
+                = t("views.pensions.#{language_stay&.pension}")
+                br/
+              - else
+                = "<u>Détails du logement</u><br>".html_safe
+                p Sans logement
 
     tr.heading
       td
@@ -100,9 +104,6 @@
           | Transfert Retour
         td
           = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
-      - elsif language_stay.included_transfers == true
-        td
-          | Transferts Inclus
       - elsif language_stay.other_transfer != ''
         td
           = "Transferts : #{language_stay.other_transfer}"

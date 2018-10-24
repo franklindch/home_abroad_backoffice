@@ -29,7 +29,7 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(
-      :payment_date, :id, :amount_price_cents, :nature, :comment
+      :category, :payment_date, :id, :amount_price_cents, :nature, :comment
     )
   end
 end

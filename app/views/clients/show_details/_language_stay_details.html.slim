@@ -23,18 +23,13 @@
     p = show_attribute_empty_string(language_stay&.class_hours, 'Nombre de leçons')
     p = show_attribute_empty_string(language_stay&.option_1_fr, 'Option 1')
     p = show_attribute_empty_string(language_stay&.option_2_fr, 'Option 2')
-    - if language_stay&.transfer_aller == true && language_stay&.included_transfers == false
+
+    - if language_stay&.transfer_aller == true && language_stay&.transfer_retour == true
+      = '<p><u>Transfert Aller / Retour requis</u> Oui</p>'.html_safe
+    - elsif language_stay&.transfer_aller == true && language_stay&.other_transfer == ''
       = '<p><u>Transfert Aller requis</u> Oui</p>'.html_safe
-    - elsif language_stay&.transfer_aller == false && language_stay&.included_transfers == false && language_stay&.other_transfer == ''
-      = '<p><u>Transfert Aller requis</u> Non</p>'.html_safe
-
-    - if language_stay&.transfer_retour == true && language_stay&.included_transfers == false
-      = '<p><u>Transfert Retour requis</u> Oui</p>'.html_safe
-    - elsif language_stay&.transfer_retour == false && language_stay&.included_transfers == false && language_stay&.other_transfer == ''
+    - elsif language_stay&.transfer_retour == true && language_stay&.other_transfer == ''
       = '<p><u>Transfert Retour requis</u> Non</p>'.html_safe
-
-    - if language_stay&.included_transfers == true
-      = '<p><u>Transferts A/R inclus</u></p>'.html_safe
 
     - if language_stay&.other_transfer != ''
       p = show_attribute_empty_string(language_stay&.other_transfer, 'Autre transfert')

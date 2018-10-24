@@ -3,14 +3,15 @@ section
     .col-md-6.mx-auto
       .card.mt-5
         .card-header
-          h2 Formulaire Payment
+          h2 Formulaire Paiement/Remboursement
         .card-body
           = simple_form_for [@invoice, @payment] do |f|
             .form-inputs
               .container-fluid
                 .row
                   .col-md-12
-                    = f.input :nature, collection: Payment.natures.keys.map { |w| [w.humanize, w] }, selected: 0, label: 'Type'
+                    = f.input :category, collection: Payment.categories.keys.map { |w| [w.humanize, w] },label: 'Type'
+                    = f.input :nature, collection: Payment.natures.keys.map { |w| [w.humanize, w] }, label: 'Source'
                     = f.input :amount_price_cents, label: 'Montant'
                     = f.input :payment_date, label: 'Date'
                     = f.input :comment, label: 'Commentaire'

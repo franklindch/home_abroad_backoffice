@@ -1,6 +1,4 @@
 class Invoice < ApplicationRecord
-	after_update :verify_payment_coherence
-
 	register_currency :eur
 
 	monetize :application_fee_price_cents,
@@ -15,13 +13,28 @@ class Invoice < ApplicationRecord
 	accepts_nested_attributes_for :payments, reject_if: :all_blank, allow_destroy: true
 	belongs_to :language_stay
 
-	def total_payments
+  def remboursements
+    payments.where(category: 'Remboursement')
+  end
+
+
+  def règlements
+    payments.where(category: 'Règlement')
+  end
+
+  def total_règlements
+    sum = 0
+    règlements.each { |payment| sum += payment.amount_price_cents}
+    return sum
+  end
+
+	def total_remboursements
 		sum = 0
-		payments.each { |payment| sum += payment.amount_price_cents}
+		remboursements.each { |payment| sum += payment.amount_price_cents}
 		return sum
 	end
 
-  def verify_payment_coherence
-  	self.total_payments > self.total_price_cents
+  def acquittée?
+    (self.total_règlements - self.total_remboursements) == self.total_price_cents
   end
 end

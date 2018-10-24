@@ -1,5 +1,6 @@
 - invoice = language_stay.invoice
-- payments = invoice.payments
+- payments = invoice.règlements
+- payments_back = invoice.remboursements
 
 .col-md-3
 	h6.card-title Décomptes
@@ -28,22 +29,38 @@
     .badge.badge-warning Encore aucun règlement à ce jour
   - else
     .card-text
-    - payments.all.each_with_index do |payment, index|
+    - payments.each_with_index do |payment, index|
       p.mb-0 = "<u>Règlement #{index + 1} (EUR)</u>".html_safe
-      p.mb-0 = "#{payment.amount_price_cents} #{payment.amount_price_currency} le #{date_format(payment.payment_date)} | Nature - #{payment.nature.humanize} | Commentaire - #{payment.comment}"
+      p.mb-0 = "#{payment.amount_price_cents} #{payment.amount_price_currency} le #{date_format(payment.payment_date)} | Nature - #{payment&.nature&.humanize} | Commentaire - #{payment&.comment}"
       = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_invoice_payment_path(invoice, payment)
       = link_to "<i class='fa fas fa-trash'></i>".html_safe, invoice_payment_path(invoice, payment), class: 'ml-2', method: :delete, data: {confirm: 'Êtes-vous sur ?'}
 
 
-    p.mt-3 = "<b>Total - #{invoice.total_payments} euros</b>".html_safe
+    p.mt-3 = "<b>Total - #{invoice.total_règlements} euros</b>".html_safe
 
-.col-md-4
+.col-md-3
+  h6.card-title Remboursements
+  - if payments_back.empty?
+    .badge.badge-warning Encore aucun remboursement à ce jour
+  - else
+    .card-text
+    - payments_back.each_with_index do |payment_back, index|
+      p.mb-0 = "<u>Remboursement #{index + 1} (EUR)</u>".html_safe
+      p.mb-0 = "#{payment_back.amount_price_cents} #{payment_back.amount_price_currency} le #{date_format(payment_back&.payment_date)} | Nature - #{payment_back&.nature&.humanize} | Commentaire - #{payment_back&.comment}"
+      = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_invoice_payment_path(invoice, payment_back)
+      = link_to "<i class='fa fas fa-trash'></i>".html_safe, invoice_payment_path(invoice, payment_back), class: 'ml-2', method: :delete, data: {confirm: 'Êtes-vous sur ?'}
+
+
+    p.mt-3 = "<b>Total - #{invoice.total_remboursements} euros</b>".html_safe
+
+
+.col-md-3
   h6.card-title Etat
-  - if invoice.total_payments == invoice.total_price_cents
+  - if invoice.acquittée?
     .badge.badge-success Facture acquittée et disponible.
   - else
-    .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_payments} euros à payer"
+    .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements} euros à payer"
 
 .mt-5.edit-delete-links.ml-3
-  = link_to "<i class='fa fas fa-edit'> Facture</i> <i class='fa fas fa-plus-circle'>Règlement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
+  = link_to "<i class='fa fas fa-edit'> Facture</i> <i class='fa fas fa-plus-circle'>Règlement/remboursement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)
   = link_to "<i class='fa fas fa-trash-alt'> Facture</i>".html_safe, language_stay_invoice_path(language_stay, id: language_stay.invoice), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.invoice.id

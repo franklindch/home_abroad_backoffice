@@ -37,11 +37,11 @@ section
                                         = f.input :total_price_cents, label: 'Grand total', wrapper_html: {class: 'mt-4'}, id: 'total_price_cents'
 
 
-										- if @invoice.total_payments == @invoice.total_price_cents && @invoice.total_payments != 0
+										- if @invoice.acquittée? && @invoice.total_règlements != 0
 											p Facture acquittée et disponible. Aucun règlement à ajouter.
 										- else
 
-											h4.mt-4.mb-4 Règlements
+											h4.mt-4.mb-4 Règlements / remboursements
 											.child_details.mt-3
 												= f.simple_fields_for :payments do |payment|
 													/ = render 'qualifications/payment_fields', f: payment

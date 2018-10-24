@@ -1,0 +1,42 @@
+- if @incomplete_files.empty?
+  .card
+    .card-body
+      p Il ne manque aucun document pour les séjours
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Responsable
+          th Nom
+          th Prénom
+          th Séjour
+          th Départ
+          th Arrivée
+          th
+          th Durée jusqu'au départ
+          th Documents manquants
+          th
+          th
+      tbody
+      - @incomplete_files.each do |language_stay|
+        div
+          tr
+            td
+              span = language_stay&.commercial_responsible&.capitalize
+            td
+              span = language_stay&.client&.last_name&.upcase
+            td
+              span = language_stay&.client&.first_name
+            td
+              span = language_stay&.program&.name
+            td
+              span = date_format(language_stay&.start_date)
+            td
+              span = date_format(language_stay&.end_date)
+            td
+              span = link_to 'Vers client', client_path(language_stay.client)
+            td
+              span = "#{language_stay&.confirmation_date} jours"
+            td
+              = render 'state_of_progress', language_stay: language_stay, incomplete_files: @incomplete_files

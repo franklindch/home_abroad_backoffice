@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181021122659) do
+ActiveRecord::Schema.define(version: 20181023145257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,21 +173,21 @@ ActiveRecord::Schema.define(version: 20181021122659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "language_stay_id"
-    t.integer "application_fee_price_cents", default: 0, null: false
+    t.decimal "application_fee_price_cents", default: "0.0", null: false
     t.string "application_fee_price_currency", default: "EUR", null: false
-    t.integer "language_stay_price_cents", default: 0, null: false
+    t.decimal "language_stay_price_cents", default: "0.0", null: false
     t.string "language_stay_price_currency", default: "EUR", null: false
-    t.integer "travel_price_cents", default: 0, null: false
+    t.decimal "travel_price_cents", default: "0.0", null: false
     t.string "travel_price_currency", default: "EUR", null: false
-    t.integer "transfer_price_cents", default: 0, null: false
+    t.decimal "transfer_price_cents", default: "0.0", null: false
     t.string "transfer_price_currency", default: "EUR", null: false
-    t.integer "option_1_price_cents", default: 0, null: false
+    t.decimal "option_1_price_cents", default: "0.0", null: false
     t.string "option_1_price_currency", default: "EUR", null: false
-    t.integer "option_2_price_cents", default: 0, null: false
+    t.decimal "option_2_price_cents", default: "0.0", null: false
     t.string "option_2_price_currency", default: "EUR", null: false
-    t.integer "total_price_cents", default: 0, null: false
+    t.decimal "total_price_cents", default: "0.0", null: false
     t.string "total_price_currency", default: "EUR", null: false
-    t.integer "option_3_price_cents"
+    t.decimal "option_3_price_cents"
     t.string "option_3_price_currency"
     t.index ["language_stay_id"], name: "index_invoices_on_language_stay_id"
   end
@@ -225,14 +225,12 @@ ActiveRecord::Schema.define(version: 20181021122659) do
     t.string "option_3"
     t.text "other_pension"
     t.text "other_transfer"
-    t.boolean "included_transfers", default: false
     t.boolean "confirmation_language_stay", default: false
     t.boolean "picture", default: false
     t.boolean "family_file", default: false
     t.boolean "school_notes", default: false
     t.boolean "language_test", default: false
     t.boolean "junior_waiver", default: false
-    t.boolean "parent_consent", default: false
     t.boolean "medical_form", default: false
     t.boolean "english_cv", default: false
     t.boolean "motivation_letter", default: false
@@ -291,6 +289,7 @@ ActiveRecord::Schema.define(version: 20181021122659) do
     t.integer "amount_price_cents", default: 0, null: false
     t.string "amount_price_currency", default: "EUR", null: false
     t.date "payment_date"
+    t.integer "category"
     t.index ["invoice_id"], name: "index_payments_on_invoice_id"
   end
 

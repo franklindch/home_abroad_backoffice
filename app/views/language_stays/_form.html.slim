@@ -34,7 +34,6 @@ section
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
                     = f.input :other_pension, label: 'Autre type de pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
-                    = f.input :included_transfers, label: 'Tranferts A/R inclus ?'
                     - if @language_stay.id.nil?
                       = f.input :transfer_aller, label: 'ou Transfert Aller requis', input_html: { checked: true }
                       = f.input :transfer_retour, label: 'et/ou Transfert Retour requis', input_html: { checked: true }
@@ -52,27 +51,24 @@ section
                     = f.input :option_2, label: 'Option 2'
                     = f.input :option_3, label: 'Option 3'
 
-                    h6.mt-5.mb-4 Etat d'avancement
+                    h6.mt-5.mb-4 Document(s) manquant(s)
                     .row
                       .col-md-4
                         = f.input :passport_cni, label: 'Passeport ou CNI'
                         = f.input :picture, label: 'Photo'
-                        = f.input :family_file, label: 'Dossier famille'
-                      .col-md-4
-                        = f.input :school_notes, label: 'Bulletins scolaire'
-                        = f.input :language_test, label: 'Test de langue'
-                        = f.input :junior_waiver, label: 'Junior Waiver'
-                      .col-md-4
-                        = f.input :parent_consent, label: 'Parent consent'
+                        = f.input :junior_waiver, label: 'Junior Waiver / Parent consent'
                         = f.input :medical_form, label: 'Medical Form'
-                        = f.input :english_cv, label: 'CV anglais'
+                        = f.input :language_test, label: 'Test de langue'
+                      .col-md-4
+                        = f.input :rules_and_regulations, label: 'Règlement programme'
+                        = f.input :family_file, label: 'Dossier famille'
+                        = f.input :school_notes, label: 'Bulletins scolaire'
+                        = f.input :teacher_reference, label: 'Teacher Reference'
                       .col-md-4
                         = f.input :motivation_letter, label: 'Lettre de motivation'
+                        = f.input :english_cv, label: 'CV anglais'
                         = f.input :agreement_welcome_school, label: 'Accord accueil école'
                         = f.input :justice_record, label: 'Casier judiciaire'
-                      .col-md-4
-                        = f.input :rules_and_regulations, label: 'Règles ou CNI'
-                        = f.input :teacher_reference, label: 'Teacher Reference'
 
 
             .form-actions.text-center

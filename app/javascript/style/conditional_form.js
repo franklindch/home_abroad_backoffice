@@ -6,12 +6,13 @@ const travelSelectConditionnal = {
     const $childDetails = $('.child_details_1');
     const $travelGroup = $('.travel-form');
     const $travelId = $('#travel_travel_id');
+    const $oh = $('.ohoh');
     if($travelNatureSelect) {
-      this.travelConditionnalExecute($travelNatureSelect, $childDetails, $travelGroupIdSection, $travelGroup, $travelId)
+      this.travelConditionnalExecute($travelNatureSelect, $childDetails, $travelGroupIdSection, $travelGroup, $travelId, $oh)
     }
   },
 
-  travelConditionnalExecute($travelNatureSelect, $childDetails, $travelGroupIdSection, $travelGroup, $travelId) {
+  travelConditionnalExecute($travelNatureSelect, $childDetails, $travelGroupIdSection, $travelGroup, $travelId, $oh) {
     if($travelGroup) {
       $childDetails.hide();
       $travelNatureSelect.change(event => {
@@ -30,6 +31,9 @@ const travelSelectConditionnal = {
       });
     } else {
       $childDetails.hide();
+    }
+    if ($oh) {
+      $childDetails.show();
     }
   }
 };

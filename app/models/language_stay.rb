@@ -3,10 +3,9 @@ class LanguageStay < ApplicationRecord
   belongs_to :program, optional: true
   belongs_to :client, optional: true
   belongs_to :partner_company, optional: true
-  has_one :invoice, dependent: :destroy
 
   has_one :off_set_travel, through: :travel, dependent: :destroy
-  has_many :payments, through: :invoice, dependent: :destroy
+  has_one :invoice, dependent: :destroy
 
   enum data_entry_responsible: { Christine: 1, Jeremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7, Franklin: 8 }
   enum commercial_responsible: { Christine: 1, Jeremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
@@ -33,8 +32,24 @@ class LanguageStay < ApplicationRecord
   }
 
   scope :ordered_by_end_date, -> { order(end_date: :desc) }
-
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, :location, presence: true
+
+  def self.incomplete_files
+    where(
+      "picture = true OR
+       family_file = true OR
+       language_test = true OR
+       school_notes = true OR
+       junior_waiver = true OR
+       medical_form = true OR
+       english_cv = true OR
+       motivation_letter = true OR
+       agreement_welcome_school = true OR
+       rules_and_regulations = true OR
+       teacher_reference = true OR
+       passport_cni = true"
+    )
+  end
 
   def get_duration
     # quand pile 7 jours ça marche bien, voir les cas ou 6 jours par exemple.. / A tester, à voir si bien ok maintenant !

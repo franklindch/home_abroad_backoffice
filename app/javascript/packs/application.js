@@ -11,7 +11,7 @@ import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, in
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelSelectConditionnal, travelGroupConditionnal } from '../style/conditional_form';
-import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal } from '../style/autocomplete_fields';
+import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal, f } from '../style/autocomplete_fields';
 import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
 
 document.addEventListener("turbolinks:load", () => {
@@ -21,9 +21,7 @@ document.addEventListener("turbolinks:load", () => {
   if ($('#range_end')) {
     calendar();
   }
-  if ($('#invoice_total_price_cents')) {
-    autocompleteInvoiceFieldTotal();
-  }
+
   if ($('.google_map')){
     initAutocomplete();
   }

@@ -13,20 +13,21 @@ class InvoicesController < ApplicationController
 	  @invoice.language_stay = @language_stay
 	  client = @language_stay.client
 	  if @invoice.save
-	  	flash[:notice] = "Facture ajoutée avec succès !"
-	    redirect_to client_path(client)
-	  else
-	  	flash[:alert] = "Merci de lire les messages d'erreur."
-	    render :new
-	  end
-	end
+      flash[:notice] = "Facture ajoutée avec succès !"
+      redirect_to client_path(client)
+    else
+      flash[:alert] = "Merci de lire les messages d'erreur."
+      render :new
+    end
+  end
 
-	def edit; end
+  def edit; end
 
-	def update
-	  @invoice.update(invoice_params)
-	  return payments_coherence
-	end
+  def update
+    @invoice.update(invoice_params)
+    redirect_to client_path(@invoice.language_stay.client)
+	  	flash[:notice] = "Facture éditée avec succès !"
+  end
 
 	def destroy
 	  @invoice.destroy
@@ -73,18 +74,18 @@ class InvoicesController < ApplicationController
       :option_3_price_cents,
       :option_3_price_currency,
 	    payments_attributes: [
-	    	:payment_date, :id, :amount_price_cents, :nature, :comment, :_destroy
+	    	:category, :payment_date, :id, :amount_price_cents, :nature, :comment, :_destroy
 	    ]
 	  )
 	end
 
-	def payments_coherence
-		if @invoice.verify_payment_coherence
-      flash[:alert] = "Montant des payments supérieur à montant de la facture"
-      render :new
-    else
-			flash[:notice] = "Facture éditée avec succès !"
-      redirect_to client_path(@invoice.language_stay.client)
-		end
-	end
+	# def payments_coherence
+	# 	if @invoice.verify_payment_coherence
+ #      flash[:alert] = "Montant des payments supérieur à montant de la facture"
+ #      render :new
+ #    else
+	# 		flash[:notice] = "Facture éditée avec succès !"
+ #      redirect_to client_path(@invoice.language_stay.client)
+	# 	end
+	# end
 end

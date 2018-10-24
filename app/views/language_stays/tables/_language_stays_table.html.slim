@@ -2,6 +2,7 @@
   table.table.table-sm.table-hover
     thead
       tr
+        th Responsable
         th Nom
         th Prénom
         th Séjour
@@ -14,9 +15,11 @@
         th
     tbody
     - @language_stays.each do |language_stay|
-      div id="accordion"
-        tr data-toggle="collapse" data-target="#collapse#{language_stay.id}" aria-expanded="true" aria-controls="#collapse#{language_stay.id}" id="heading#{language_stay.id}"
-        - if language_stay&.confirmation_date < 45 && language_stay&.confirmation_date > 0
+      div
+        tr
+        - if language_stay&.confirmation_date < 50 && language_stay&.confirmation_date > 0
+          td
+            span = language_stay&.commercial_responsible&.capitalize
           td
             span = language_stay&.client&.last_name&.upcase
           td
@@ -31,13 +34,10 @@
             span = link_to 'Vers client', client_path(language_stay.client)
           td
             span = "#{language_stay&.confirmation_date} jours"
-          - if language_stay&.confirmation_language_stay == false && language_stay&.confirmation_date < 45
+          - if language_stay&.confirmation_language_stay == false && language_stay&.confirmation_date < 50
             td
               span = link_to 'CS à envoyer', language_stay_confirmation_sent_path(language_stay: language_stay), class: 'btn-sm btn-outline-danger', remote: true
-          - elsif language_stay&.confirmation_language_stay == true && language_stay&.confirmation_date < 45
+          - elsif language_stay&.confirmation_language_stay == true && language_stay&.confirmation_date < 50
             td
-              span.btn-sm.btn-outline-primary CS envoyée
-          - else
-            .card
-              .card-body
-                p Aucun séjour imminent
+              span = link_to 'CS envoyée', language_stay_cancel_confirmation_path(language_stay: language_stay), class: 'btn-sm btn-outline-primary', remote: true
+

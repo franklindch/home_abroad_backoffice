@@ -4,8 +4,6 @@ module ApplicationHelper
 	def create_a_model(model)
 		if model == "famille"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer une #{model.capitalize}</i>").html_safe, new_family_path, class: 'btn btn-primary'
-		elsif model == "client"
-			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize}</i>").html_safe, new_client_path, class: 'btn btn-primary'
 		elsif model == "voyage"
 			link_to ("<i class=\"fa fas fa-plus-circle\">Créer un #{model.capitalize} Groupe</i>").html_safe, new_travel_group_path, class: 'btn btn-primary'
 		elsif model == "partenaire"

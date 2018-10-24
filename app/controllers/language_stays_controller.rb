@@ -96,9 +96,10 @@ class LanguageStaysController < ApplicationController
 
   def reestablish_language_stay
     @language_stay = LanguageStay.find(params[:language_stay])
+    @language_stay.reestablish
     respond_to do |format|
       format.html
-      format.js
+      format.js { render :js => "window.location = '/dashboard/clients/#{@language_stay.client.id}'" }
     end
     flash[:notice] = 'Séjour correctement rétabli.'
   end

@@ -4,24 +4,26 @@ wb.styles do |style|
   wb.add_worksheet(name: "Clients") do |sheet|
     sheet.add_row [
       'NOM',
-      'Prénom'
-      'Situation Familiale',
-      'Adresse',
-      'Complément',
-      'Code Postal',
-      'Pays',
-      'Téléphone',
+      'Prénom',
+      'Age catégory',
+      'Date de naissance',
       'Email',
-      'Père',
-      'Email Père',
-      'Portable Père',
-      'Tél bureau Père',
-      'Contact Principal Père',
-      'Mère',
-      'Email Mère',
-      'Portable Mère',
-      'Tél Bureau Mère',
-      'Contact Principal Mère'
+      'Téléphone',
+      'N° passeport',
+      'Pays d emission',
+      'Date d expiration',
+      'Hobbies',
+      'Problemes medicaux',
+      'Fumeur',
+      'Commentaire',
+      'Adresse',
+      'LV1',
+      'level LV1',
+      'Niveau scolaire',
+      'Ecole',
+      'Saison',
+      'Sexe',
+      'Nationalité'
     ], style: [
       highlight_cell,
       highlight_cell,
@@ -42,31 +44,30 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @families.each do |client|
+    @clients.each do |client|
       sheet.add_row [
-        client.first_name,
         client.last_name,
+        client.first_name,
         client.age_category,
         client.birth_date,
         client.email,
-        client.phone_number,
+        client.intl_number,
         client.passport_number,
         client.country_of_issue,
+        client.passport_expiration_date,
         client.preferred_hobbies,
         client.medical_issue,
         client.smoker,
         client.comment,
-        client.family.address_1,
-        client.passport_expiration_date,
+        client.address_1,
         client.first_language,
         client.first_language_level,
-        client.intl_number,
         client.school_grade,
         client.school,
         client.season,
         client.gender,
         client.nationality
       ]
+      end
     end
   end
-end

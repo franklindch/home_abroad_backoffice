@@ -28,7 +28,7 @@
         = show_attribute_empty_string_no_underline(travel_detail_aller&.reference, 'Référence')
     tr.item
       td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.partner_company&.name.upcase, 'Compagnie')
+        = show_attribute_empty_string_no_underline(travel_detail_aller&.partner_company&.name&.upcase, 'Compagnie')
       td
         = show_attribute_empty_string_no_underline(travel_detail_aller&.departure_location, 'Départ de')
     tr.item
@@ -57,7 +57,7 @@
         = show_attribute_empty_string_no_underline(travel_detail_retour&.reference, 'Référence')
     tr.item
       td
-        = show_attribute_empty_string_no_underline(travel_detail_retour&.partner_company&.name.upcase, 'Compagnie')
+        = show_attribute_empty_string_no_underline(travel_detail_retour&.partner_company&.name&.upcase, 'Compagnie')
       td
         = show_attribute_empty_string_no_underline(travel_detail_retour&.departure_location, 'Départ de')
     tr.item

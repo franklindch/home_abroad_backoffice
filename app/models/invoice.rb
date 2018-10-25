@@ -13,6 +13,13 @@ class Invoice < ApplicationRecord
 	accepts_nested_attributes_for :payments, reject_if: :all_blank, allow_destroy: true
 	belongs_to :language_stay
 
+  after_save :calculate_total
+
+  def calculate_total
+    result = self&.transfer_price_cents.to_i + self&.option_1_price_cents.to_i + self&.travel_price_cents.to_i + self&.application_fee_price_cents.to_i + self&.language_stay_price_cents.to_i + self&.option_2_price_cents.to_i + self&.option_3_price_cents.to_i
+    self.update_columns(total_price_cents: result)
+  end
+
   def remboursements
     payments.where(category: 'Remboursement')
   end

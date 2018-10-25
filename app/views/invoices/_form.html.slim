@@ -34,7 +34,7 @@ section
                                             = f.input :option_3_price_cents, label: "Quel montant pour l'option 3 - #{@language_stay&.option_3_fr}"
                                         - else
                                             p Aucune option 3 choisie pour ce séjour
-                                        = f.input :total_price_cents, label: 'Grand total', wrapper_html: {class: 'mt-4'}, id: 'total_price_cents'
+                                        / = f.input :total_price_cents, label: 'Grand total', wrapper_html: {class: 'mt-4'}, id: 'total_price_cents'
 
 
 										- if @invoice.acquittée? && @invoice.total_règlements != 0

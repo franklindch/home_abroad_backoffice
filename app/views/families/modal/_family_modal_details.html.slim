@@ -14,7 +14,7 @@
 
     .btn-group.mr-2.d-flex
       = link_to 'Ajouter prospect', new_qualification_child_detail_path(qualification), class: 'btn btn-outline-primary'
-      = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
+      / = link_to 'Ajouter client', new_family_client_path(family), class: 'btn btn-outline-primary'
 
     = render 'families/modal/qualification_is_prospect', qualification: qualification
 

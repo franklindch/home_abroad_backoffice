@@ -15,10 +15,6 @@ class Invoice < ApplicationRecord
 
   after_save :calculate_total
 
-  def self.still_need_payment
-
-  end
-
   def calculate_total
     result = self&.transfer_price_cents.to_f + self&.option_1_price_cents.to_f + self&.travel_price_cents.to_f + self&.application_fee_price_cents.to_f + self&.language_stay_price_cents.to_f + self&.option_2_price_cents.to_f + self&.option_3_price_cents.to_f
     self.update_columns(total_price_cents: result)

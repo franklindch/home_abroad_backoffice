@@ -8,8 +8,8 @@
       thead
         tr
           th Nom
-          th Prénom
           th Saison
+          th Prénom
           th Catégorie
           th Date de naissance
           th Date de saisie
@@ -24,9 +24,9 @@
             td
               span = c(client&.last_name)
             td
-              span = client&.first_name
-            td
               span = client&.season&.humanize
+            td
+              span = client&.first_name
             td
               span = client&.age_category
             td

@@ -22,16 +22,16 @@
         td
           = show_attribute_empty_string_no_underline(travel_detail_aller&.companies, 'Compagnie')
         td
+      tr.item
+        td
           = show_attribute_empty_string_no_underline(travel_detail_aller&.departure_location, 'Départ de')
+        td
+          = show_attribute_empty_string_no_underline(travel_detail_aller&.arrival_location, 'Arrivée à')
       tr.item
         td
           = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.start_date), 'Date de départ')
         td
           = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.start_time), 'Heure de départ')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_aller&.arrival_location, 'Arrivée à')
-        td
       tr.item
         td
           = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
@@ -71,17 +71,16 @@
       tr.item
         td
           = show_attribute_empty_string_no_underline(travel_detail_retour&.companies, 'Compagnie')
+      tr.item
         td
           = show_attribute_empty_string_no_underline(travel_detail_retour&.departure_location, 'Départ de')
+        td
+          = show_attribute_empty_string_no_underline(travel_detail_retour&.arrival_location, 'Arrivée à')
       tr.item
         td
           = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.start_date), 'Date de départ')
         td
           = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.start_time), 'Heure de départ')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.arrival_location, 'Arrivée à')
-        td
       tr.item
         td
           = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')

@@ -26,7 +26,7 @@ class InvoicesController < ApplicationController
   def update
     @invoice.update(invoice_params)
     redirect_to client_path(@invoice.language_stay.client)
-	  	flash[:notice] = "Facture éditée avec succès !"
+	  flash[:notice] = "Facture éditée avec succès !"
   end
 
 	def destroy
@@ -45,6 +45,14 @@ class InvoicesController < ApplicationController
 	  generate_paid_invoice_pdf(@invoice)
 		# fields_filled(@language_stay)
 	end
+
+  def still_need_payment
+    @invoices = Invoice.order(created_at: :asc).still_need_payment
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
 	private
 
@@ -78,14 +86,4 @@ class InvoicesController < ApplicationController
 	    ]
 	  )
 	end
-
-	# def payments_coherence
-	# 	if @invoice.verify_payment_coherence
- #      flash[:alert] = "Montant des payments supérieur à montant de la facture"
- #      render :new
- #    else
-	# 		flash[:notice] = "Facture éditée avec succès !"
- #      redirect_to client_path(@invoice.language_stay.client)
-	# 	end
-	# end
 end

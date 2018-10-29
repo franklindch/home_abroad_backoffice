@@ -79,5 +79,6 @@ Rails.application.routes.draw do
   post "families/:id/qualification", to: "qualifications#create"
   post "qualifications/:id/child_detail", to: "child_details#create"
   get 'incomplete_files', to: "language_stays#incomplete_files"
+  get 'still_need_payment', to: "invoices#still_need_payment"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

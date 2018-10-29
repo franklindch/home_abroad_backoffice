@@ -21,6 +21,8 @@
     = paginate @child_details
 - elsif @incomplete_files
     = render 'language_stays/tables/incomplete_files_table', incomplete_files: @incomplete_files
+- elsif @invoices
+    = render 'invoices/still_need_payment_table', invoices: @incomplete_files
 - elsif @language_stays
     = render 'language_stays/tables/language_stays_table', language_stays: @language_stays
 		/ .created_at.strftime('%A %d %B %Y')

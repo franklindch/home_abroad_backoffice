@@ -19,7 +19,7 @@
           th
           th
       tbody
-      - @incomplete_files.each do |language_stay|
+      - @incomplete_files.order(start_date: :asc).each do |language_stay|
         div
           tr
             td

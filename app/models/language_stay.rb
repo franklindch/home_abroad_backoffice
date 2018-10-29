@@ -57,7 +57,8 @@ class LanguageStay < ApplicationRecord
     # quand pile 7 jours ça marche bien, voir les cas ou 6 jours par exemple.. / A tester, à voir si bien ok maintenant !
     s = self.start_date
     e = self.end_date
-    return ((e-s).to_i/6.5).round(2)
+    # raise
+    return ((e-s).to_i/6.7).round(2)
   end
 
   def confirmation_date

@@ -30,9 +30,9 @@ class Client < ApplicationRecord
   }
   enum age_category: { Junior: 0, Adulte: 1 }
   enum first_language: { English: 0, Spanish: 1, German: 2 }
-  enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, NA: 4 }
+  enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }
   enum second_language: { English: 0, Spanish: 1, German: 2 }, _suffix: true
-  enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, NA: 4 }, _suffix: true
+  enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }, _suffix: true
 
 
   # after_destroy :delete_from_family
@@ -45,7 +45,7 @@ class Client < ApplicationRecord
   # end
 
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
-  validates :first_name, presence: true
+  validates :first_name, :birth_date, presence: true
   # after_save :check_if_family_is_client
 
   # before_save :capitalize_fields

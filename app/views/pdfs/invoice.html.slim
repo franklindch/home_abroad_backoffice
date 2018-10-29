@@ -41,7 +41,7 @@
               - if language_stay&.accomodation == 'With_accommodation'
                 = "<u>Détails du logement</u><br>".html_safe
                 = t("views.accomodation_types.#{language_stay&.accomodation_type}")
-                br/
+                p = ' '
                 - if language_stay&.room != ''
                   = t("views.rooms.#{language_stay&.room}")
                 br/
@@ -128,7 +128,7 @@
       td
        |
       td
-        = "Solde à payer TTC : #{@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements} EUR"
+        = "Solde TTC : #{@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements} EUR"
   br/
   br/
   .text-left

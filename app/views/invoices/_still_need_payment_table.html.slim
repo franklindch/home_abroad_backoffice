@@ -1,0 +1,42 @@
+- if @invoices.empty?
+  .card
+    .card-body
+      p Il n'y a aucun séjour non soldé
+- else
+  .table-responsive
+    table.table.table-sm.table-hover
+      thead
+        tr
+          th Responsable
+          th Nom
+          th Prénom
+          th Séjour
+          th Départ
+          th Arrivée
+          th
+          th Total
+          th A régler
+          th
+          th
+      tbody
+      - @invoices.each do |invoice|
+        div
+          tr
+            td
+              span = invoice&.language_stay&.commercial_responsible&.capitalize
+            td
+              span = invoice&.language_stay&.client&.last_name&.upcase
+            td
+              span = invoice&.language_stay&.client&.first_name
+            td
+              span = invoice&.language_stay&.program&.name
+            td
+              span = date_format(invoice&.language_stay&.start_date)
+            td
+              span = date_format(invoice&.language_stay&.end_date)
+            td
+              span = link_to 'Vers client', client_path(invoice.language_stay.client)
+            td
+              span = invoice&.total_price_cents
+            td
+              = "#{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements}"

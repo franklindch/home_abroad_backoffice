@@ -8,6 +8,7 @@
         th Séjour
         th Organisme
         th Destination
+        th Voyage
         th Départ
         th Arrivée
         th Jusqu'au départ
@@ -31,7 +32,9 @@
           td
             span = language_stay&.partner_company&.name
           td
-            span = language_stay&.travel&.travel_details&.first&.arrival_location
+            span = language_stay&.country
+          td
+            span = language_stay&.travel&.nature&.humanize
           td
             span = date_format(language_stay&.start_date)
           td

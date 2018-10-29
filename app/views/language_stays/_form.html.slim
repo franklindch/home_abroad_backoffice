@@ -29,14 +29,17 @@ section
                     = f.input :start_date, as: :string, label: 'Début', input_html: {id: "range_start"}
                     = f.input :end_date, as: :string, label: 'Fin', input_html: {id: "range_end"}
                     = f.input :class_hours, label: 'Nombre de leçons (par semaine)'
-                    = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement'
+                    - if @language_stay.id.nil?
+                      = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement', input_html: { checked: true }
+                    - else
+                      = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement'
                     = f.input :accomodation_type, collection: LanguageStay.accomodation_types.keys.map { |w| [t("views.accomodation_types.#{w}"), w] }, label: 'Type de logement'
                     = f.input :pension, collection: LanguageStay.pensions.keys.map { |w| [t("views.pensions.#{w}"), w] }, label: 'Pension'
                     = f.input :other_pension, label: 'Autre type de pension'
                     = f.input :room, collection: LanguageStay.rooms.keys.map { |w| [t("views.rooms.#{w}"), w] }, label: 'Chambre'
                     - if @language_stay.id.nil?
-                      = f.input :transfer_aller, label: 'ou Transfert Aller requis', input_html: { checked: true }
-                      = f.input :transfer_retour, label: 'et/ou Transfert Retour requis', input_html: { checked: true }
+                      = f.input :transfer_aller, label: 'Transfert Aller requis', input_html: { checked: true }
+                      = f.input :transfer_retour, label: 'Transfert Retour requis', input_html: { checked: true }
                       = f.input :other_transfer, label: 'Autre type de transfert'
                     - else
                       = f.input :transfer_aller, label: 'Transfert Aller requis'

@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
 	def number_to_phone(number)
-		number != nil ? number[0..2] + ' ' + number [3..-1] : ''
+		number != nil ? number[0..2] + ' ' + number[3..-1] : ''
 	end
 
   def show_attribute_nil(attribute, label)

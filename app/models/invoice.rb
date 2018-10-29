@@ -15,8 +15,12 @@ class Invoice < ApplicationRecord
 
   after_save :calculate_total
 
+  def self.still_need_payment
+
+  end
+
   def calculate_total
-    result = self&.transfer_price_cents.to_i + self&.option_1_price_cents.to_i + self&.travel_price_cents.to_i + self&.application_fee_price_cents.to_i + self&.language_stay_price_cents.to_i + self&.option_2_price_cents.to_i + self&.option_3_price_cents.to_i
+    result = self&.transfer_price_cents.to_f + self&.option_1_price_cents.to_f + self&.travel_price_cents.to_f + self&.application_fee_price_cents.to_f + self&.language_stay_price_cents.to_f + self&.option_2_price_cents.to_f + self&.option_3_price_cents.to_f
     self.update_columns(total_price_cents: result)
   end
 
@@ -44,4 +48,9 @@ class Invoice < ApplicationRecord
   def acquittée?
     (self.total_règlements - self.total_remboursements) == self.total_price_cents
   end
+
+  def self.still_need_payment
+    all.select{|invoice| !(invoice.acquittée?)}
+  end
 end
+

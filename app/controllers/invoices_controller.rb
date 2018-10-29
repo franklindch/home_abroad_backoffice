@@ -47,7 +47,7 @@ class InvoicesController < ApplicationController
 	end
 
   def still_need_payment
-    @invoices = Invoice.order(total_price_cents: :asc).still_need_payment
+    @invoices = Invoice.order(total_price_cents: :desc).still_need_payment
     respond_to do |format|
       format.html
       format.js

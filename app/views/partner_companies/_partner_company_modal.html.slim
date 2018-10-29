@@ -16,7 +16,7 @@
         h6 Email
         p.pb-2 = "#{partner_company&.email}" if partner_company&.email != ""
         h6 Téléphone
-        p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company&.intl_number != nil
+        / p.pb-2 = number_to_phone(partner_company&.intl_number) if partner_company&.intl_number != nil
         h6 Adresse
         p.pb-2 = "#{partner_company&.address}" if partner_company&.address != ""
         = link_to "Ajouter Contact".html_safe, new_partner_company_employee_path(partner_company), class: 'btn btn-outline-primary'

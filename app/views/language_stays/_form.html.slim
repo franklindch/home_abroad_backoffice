@@ -19,15 +19,17 @@ section
                     = f.input :program_id, collection: Program.order('name ASC'), include_blank: "Merci de sélectionner le type de séjour concerné...", label: false
                     = f.input :partner_company_id, collection: PartnerCompany.where(nature: 'Organisme').order('name ASC'), include_blank: "Merci de sélectionner l'organisme concerné...", label: false, wrapper_html: {class: ['pb-5', 'border-bottom']}
 
+                    h4.mt-4.mb-4 Destination
+                    = f.input :city, label: 'Ville'
+                    = f.input :country, label: 'Pays', wrapper_html: {class: ['pb-5', 'border-bottom']}
                     h4.mt-4.mb-4 Détails
-                    = f.input :location, label: 'Lieu', input_html: {class: 'google_map'}
-                    = f.hidden_field :country, class: 'country_field'
                     = f.input :program_detail_fr, label: 'Détails du programme'
                     = f.input :option_1_fr, label: 'Option 1'
                     = f.input :option_2_fr, label: 'Option 2'
                     = f.input :option_3_fr, label: 'Option 3'
                     = f.input :start_date, as: :string, label: 'Début', input_html: {id: "range_start"}
                     = f.input :end_date, as: :string, label: 'Fin', input_html: {id: "range_end"}
+                    = f.input :duration, label: 'Durée (en semaines)'
                     = f.input :class_hours, label: 'Nombre de leçons (par semaine)'
                     - if @language_stay.id.nil?
                       = f.input :accomodation, collection: LanguageStay.accomodations.keys.map { |w| [t("views.accomodations.#{w}"), w] }, label: 'Logement', input_html: { checked: true }

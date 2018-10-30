@@ -19,7 +19,7 @@ br
 = "<b>OBJET : Attestation de séjour</b>".html_safe
 
 br
-= "Je soussigné(e); #{current_user&.first_name} #{current_user&.last_name&.upcase}, #{current_user&.job_description}, atteste que #{client.first_name.capitalize} #{client.last_name.upcase} est inscrit(e) / a effectué un séjour, #{@language_stay.program.name} - #{@language_stay.location}, du #{week_day(@language_stay.start_date)} #{date_format(@language_stay.start_date)} au #{week_day(@language_stay.end_date)} #{date_format(@language_stay.end_date)}."
+= "Je soussigné(e); #{current_user&.first_name} #{current_user&.last_name&.upcase}, #{current_user&.job_description}, atteste que #{client.first_name.capitalize} #{client.last_name.upcase} est inscrit(e) / a effectué un séjour, #{@language_stay.program.name} - #{@language_stay&.city}, #{@language_stay&.country}, du #{week_day(@language_stay.start_date)} #{date_format(@language_stay.start_date)} au #{week_day(@language_stay.end_date)} #{date_format(@language_stay.end_date)}."
 br
 br
 br

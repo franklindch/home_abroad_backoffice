@@ -13,13 +13,11 @@ class TravelGroupsController < ApplicationController
 
   def create
     @travel_group = TravelGroup.new(travel_group_params)
-    @travel_group_detail_aller = @travel_group.travel_details.first
-    @travel_group_detail_retour = @travel_group.travel_details.second
 
     if @travel_group.save
       flash[:notice] = "Voyage créé avec succès !"
-      @travel_group_detail_aller.update_columns(nature: 'Aller')
-      @travel_group_detail_retour.update_columns(nature: 'Retour')
+      @travel_group.travel_details.first.update_columns(nature: 'Aller')
+      @travel_group.travel_details.second.update_columns(nature: 'Retour')
       @travel_group.update(attendant_ids: @attendants)
       redirect_to travel_groups_path
     else
@@ -30,9 +28,17 @@ class TravelGroupsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    @travel_group_detail_aller = @travel_group.travel_details.first
+    @correspondence_aller = @travel_group_detail_aller&.correspondences&.first
+    @travel_group_detail_retour = @travel_group.travel_details.second
+    @correspondence_aller = @travel_group_detail_retour&.correspondences&.first
+  end
 
   def update
+    @travel_group_detail_aller = @travel_group.travel_details.first
+    @travel_group_detail_retour = @travel_group.travel_details.second
+    binding.pry
     @travel_group.update(travel_group_params)
     @travel_group.update(attendant_ids: @attendants)
     flash[:notice] = "Voyage édité avec succès !"

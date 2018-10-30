@@ -32,7 +32,7 @@
               br/
               = "Du #{date_format(language_stay.start_date)} au #{date_format(language_stay.end_date)} - durée de #{language_stay.duration} semaines"
               br/
-              = "Séjour #{c(language_stay.program.name)} à #{language_stay.location}"
+              = "Séjour #{c(language_stay.program.name)} - #{language_stay&.city}, #{language_stay&.country}"
               br/
               br/
               - if language_stay&.program_detail_fr != ''

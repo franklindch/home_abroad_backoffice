@@ -62,8 +62,8 @@ Rails.application.routes.draw do
   get 'all_clients', to: 'excels#all_clients'
   get 'all_partner_companies', to: 'excels#all_partner_companies'
   get 'all_programs', to: 'excels#all_programs'
-  get 'all_attendants', to: 'excels#all_attendants'
-  get 'all_child_details', to: 'excels#all_child_details'
+  get 'all_group_leaders', to: 'excels#all_group_leaders'
+  get 'all_prospects', to: 'excels#all_prospects'
   get 'all_travel_groups', to: 'excels#all_travel_groups'
 
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'

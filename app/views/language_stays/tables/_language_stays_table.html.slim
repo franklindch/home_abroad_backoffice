@@ -47,6 +47,12 @@
           - elsif language_stay&.confirmation_language_stay == true && language_stay&.confirmation_date < 50
             td
               span = link_to 'CS envoyée', language_stay_cancel_confirmation_path(language_stay: language_stay), class: 'btn-sm btn-outline-primary', remote: true
+            td
+              span = "le #{date_format(language_stay&.confirmation_language_stay_date)}"
+              / span
+              /   = form_for language_stay, url: , remote: true do |f|
+              /     = f.text_field :confirmation_language_stay_date
+              /     = f.submit "Valider"
           td
             span = link_to 'Vers client', client_path(language_stay.client)
 

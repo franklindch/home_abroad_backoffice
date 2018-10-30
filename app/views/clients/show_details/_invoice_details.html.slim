@@ -41,7 +41,7 @@
 .col-md-3
   h6.card-title Remboursements
   - if payments_back.empty?
-    .badge.badge-warning Encore aucun remboursement à ce jour
+    .badge.badge-warning Aucun remboursement à ce jour
   - else
     .card-text
     - payments_back.each_with_index do |payment_back, index|

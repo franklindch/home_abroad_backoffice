@@ -29,7 +29,7 @@ class PartnerCompaniesController < ApplicationController
 	end
 
 	def index
-	  @partner_companies = PartnerCompany.all
+	  @partner_companies = PartnerCompany.order(country: :asc)
 	  respond_to do |format|
 	    format.html
 	    format.js

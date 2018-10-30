@@ -22,11 +22,11 @@ class ExcelsController < ApplicationController
     @travel_groups = TravelGroup.all
   end
 
-  def all_attendants
+  def all_group_leaders
     @attendants = Attendant.all
   end
 
-  def all_child_details
+  def all_prospects
     @child_details = ChildDetail.where(
       status: 'Prospect'
       ).or(ChildDetail.where(

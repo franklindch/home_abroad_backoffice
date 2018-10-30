@@ -69,7 +69,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
 					= create_a_model(model)
-					= link_to 'Exporter Accompagnateurs', all_attendants_path(format: :xlsx), class: 'btn btn-outline-primary'
+					= link_to 'Exporter Accompagnateurs', all_group_leaders_path(format: :xlsx), class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag attendants_path, method: :get do
 		      = text_field_tag :query,
@@ -84,7 +84,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 		  h1.h2 = "Tous les #{model}s"
 		  .btn-toolbar.mb-2.mb-md-0
 		    .mr-2.d-flex.justify-content-around
-				  = link_to 'Exporter Prospects', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+				  = link_to 'Exporter Prospects', all_prospects_path(format: :xlsx), class: 'btn btn-outline-primary'
 	  	.form-inline.pb-4.mb-5.border-bottom
 		    = form_tag child_details_path, method: :get do
 		      = text_field_tag :query,
@@ -113,7 +113,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
             h1.h2 = "Tous les dossiers incomplets"
             .btn-toolbar.mb-2.mb-md-0
                 .mr-2.d-flex.justify-content-around
-                = link_to 'Exporter Séjours', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+                = link_to 'Exporter Séjours', all_prospects_path(format: :xlsx), class: 'btn btn-outline-primary'
         .form-inline.pb-4.mb-5.border-bottom
 
     - elsif model == 'invoice'
@@ -121,7 +121,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
             h1.h2 = "Tous les séjours non soldés"
             .btn-toolbar.mb-2.mb-md-0
                 .mr-2.d-flex.justify-content-around
-                = link_to 'Exporter liste', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+                / = link_to 'Exporter liste', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
         .form-inline.pb-4.mb-5.border-bottom
 
     - else
@@ -129,7 +129,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
             h1.h2 = "Tous les séjours imminents"
             .btn-toolbar.mb-2.mb-md-0
                 .mr-2.d-flex.justify-content-around
-                = link_to 'Exporter Séjours', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+                = link_to 'Exporter Séjours', all_prospects_path(format: :xlsx), class: 'btn btn-outline-primary'
         .form-inline.pb-4.mb-5.border-bottom
 
 

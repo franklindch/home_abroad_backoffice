@@ -27,7 +27,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	.mt-5
 		- @language_stays.each do |language_stay|
 			.d-flex.justify-content-between.card-header
-				h5 = "Séjour - #{language_stay&.program&.name} | #{language_stay&.partner_company&.name&.humanize&.upcase} | #{language_stay&.location}"
+				h5 = "Séjour - #{language_stay&.program&.name} | #{language_stay&.partner_company&.name&.humanize&.upcase} | #{language_stay&.city} | #{language_stay&.country}"
 
 			- if language_stay.travel.nil? && language_stay.invoice == nil
 				.row.mb-3

@@ -97,7 +97,7 @@
         = "Program : #{@language_stay.program.name}"
     tr.item
       td
-        = "Location : #{@language_stay.location}"
+        = "Location : #{@language_stay&.country}"
       td
         = "Durée : #{@language_stay.duration}"
     tr.item

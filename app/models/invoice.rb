@@ -24,6 +24,9 @@ class Invoice < ApplicationRecord
     payments.where(category: 'Remboursement')
   end
 
+  def self.order_by_language_stays_start_date
+    joins(:language_stay).merge(LanguageStay.order(start_date: :asc))
+  end
 
   def règlements
     payments.where(category: 'Règlement')

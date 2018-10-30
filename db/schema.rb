@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181024145101) do
+ActiveRecord::Schema.define(version: 20181030104445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,7 +195,6 @@ ActiveRecord::Schema.define(version: 20181024145101) do
   create_table "language_stays", force: :cascade do |t|
     t.integer "data_entry_responsible"
     t.integer "commercial_responsible"
-    t.integer "duration"
     t.boolean "fee", default: false
     t.bigint "program_id"
     t.bigint "client_id"
@@ -204,7 +203,7 @@ ActiveRecord::Schema.define(version: 20181024145101) do
     t.bigint "partner_company_id"
     t.date "start_date"
     t.date "end_date"
-    t.string "location"
+    t.string "city"
     t.integer "pension"
     t.integer "accomodation"
     t.string "option_1"
@@ -241,6 +240,8 @@ ActiveRecord::Schema.define(version: 20181024145101) do
     t.boolean "passport_cni", default: false
     t.boolean "flight", default: false
     t.boolean "visa", default: false
+    t.date "confirmation_language_stay_date"
+    t.decimal "duration"
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"

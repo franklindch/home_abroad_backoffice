@@ -68,7 +68,7 @@
     li Casier judiciaire
 
   - if language_stay&.confirmation_language_stay == true
-    p.mt-4.pt-2.border-top.border-success CS envoyée
+    p.mt-4.pt-2.border-top.border-success = "CS envoyée le #{date_format(language_stay&.confirmation_language_stay_date)}"
 
 
 

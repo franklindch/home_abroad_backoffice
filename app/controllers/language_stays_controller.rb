@@ -12,8 +12,8 @@ class LanguageStaysController < ApplicationController
     @language_stay = LanguageStay.new(language_stay_params)
     @language_stay.client = @client
     if @language_stay.save
-      result = @language_stay.get_duration
-      @language_stay.update_columns(duration: result)
+      # result = @language_stay.get_duration
+      # @language_stay.update_columns(duration: result)
       flash[:notice] = "Séjour ajouté avec succès !"
       redirect_to client_path(@client)
     else
@@ -24,7 +24,7 @@ class LanguageStaysController < ApplicationController
 
   def send_confirmation
     @language_stay = LanguageStay.find(params[:language_stay])
-    @language_stay.update_columns(confirmation_language_stay: true)
+    @language_stay.update_columns(confirmation_language_stay: true, confirmation_language_stay_date: Date.today)
     respond_to do |format|
       format.html
       format.js { render :js => "window.location = '/dashboard/language_stays'" }
@@ -44,9 +44,9 @@ class LanguageStaysController < ApplicationController
 
   def update
     @language_stay.update(language_stay_params)
-    result = @language_stay.get_duration
+    # result = @language_stay.get_duration
     # raise
-    @language_stay.update_columns(duration: result)
+    # @language_stay.update_columns(duration: result)
     flash[:notice] = 'Séjour édité avec succès !'
     redirect_to client_path(@client)
   end
@@ -124,11 +124,11 @@ class LanguageStaysController < ApplicationController
 
   def language_stay_params
     params.require(:language_stay).permit(:picture,
-      :flight, :visa,
+      :flight, :visa, :confirmation_language_stay_date,
       :passport_cni, :family_file, :school_notes,
       :language_test, :junior_waiver, :medical_form, :english_cv,
       :motivation_letter, :agreement_welcome_school, :justice_record, :rules_and_regulations,
-      :teacher_reference, :other_pension, :other_transfer, :option_3, :option_3_fr, :country, :option_1_fr, :option_2_fr, :program_detail_fr, :program_detail, :accomodation_type, :transfer_aller, :transfer_retour, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :location, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id)
+      :teacher_reference, :other_pension, :other_transfer, :option_3, :option_3_fr, :option_1_fr, :option_2_fr, :program_detail_fr, :program_detail, :accomodation_type, :transfer_aller, :transfer_retour, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :city, :country, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id)
   end
 
   def date_format(language_stay_params, date)

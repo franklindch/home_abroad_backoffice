@@ -4,35 +4,42 @@
       p = search_message
 - else
   .table-responsive
-    table.table.table-sm.table-hover.cursor-pointer
+    table.table.table-sm.table-hover
       thead
         tr
           th NOM
           th Code
           th Nature
           th Email
-          / th Tél
-          / th Tél urgence
+          th Tél
+          th Tél urgence
           th Pays
+          / th Contact
+          / th
+          th
           th
           th
       tbody
       - partner_companies.each do |partner_company|
-        tr data-toggle="modal" data-target="#modal#{partner_company.id}"
-          td.w-25
+        tr
+          td
             span = c(partner_company.name)
           td
             span = partner_company&.code
-          td.w-25
+          td
             span = partner_company.nature
           td
             span = partner_company.email
           td
+            span = "#{partner_company&.intl_number}" if partner_company.intl_number != nil
+          td
+            span = "#{partner_company&.urgence_intl_phone_number}" if partner_company.urgence_intl_phone_number != nil
+          td
             span = partner_company&.country&.capitalize
-          td.w-25
-            / span = number_to_phone(partner_company&.intl_number) if partner_company.intl_number != nil
-          td.w-25
-            / span = number_to_phone(partner_company&.urgence_intl_phone_number)  if partner_company.urgence_intl_phone_number != nil
+          / td
+          /   span = "#{partner_company&.employees&.first&.first_name} #{partner_company&.employees&.first&.last_name}"
+          / td
+          /   span = "#{partner_company&.employees&.first&.email} #{partner_company&.employees&.first&.intl_number}"
           td
             - if partner_company.nature == 'Organisme'
               span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company, camp: true)
@@ -42,4 +49,4 @@
             span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, partner_company_path(partner_company), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: partner_company.id
 
 
-          = render 'partner_companies/partner_company_modal', partner_company: partner_company
+          / = render 'partner_companies/partner_company_modal', partner_company: partner_company

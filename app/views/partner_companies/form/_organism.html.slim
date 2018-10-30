@@ -7,9 +7,9 @@ section
         .card-body
           = simple_form_for @partner_company  do |f|
             .form-inputs
-            	.container-fluid
-            		.row
-            			.col-md-12
+              .container-fluid
+                .row
+                  .col-md-12
                     = f.input :code, label: 'Code compta', input_html: { class: 'box_width' }
                     = f.input :name, label: 'Nom'
                     = f.input :email, label: 'Email'

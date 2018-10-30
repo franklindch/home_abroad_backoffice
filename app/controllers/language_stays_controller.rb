@@ -87,7 +87,7 @@ class LanguageStaysController < ApplicationController
   end
 
   def index
-    @language_stays = LanguageStay.ordered_by_en_date
+    @language_stays = LanguageStay.ordered_by_start_date
     respond_to do |format|
       format.html
       format.js

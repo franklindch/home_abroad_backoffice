@@ -29,9 +29,9 @@ class Client < ApplicationRecord
     Professionnel: 15
   }
   enum age_category: { Junior: 0, Adulte: 1 }
-  enum first_language: { English: 0, Spanish: 1, German: 2 }
+  enum first_language: { English: 0, Spanish: 1, German: 2, Italian: 3, Russian: 4, Chinese: 5, Japanese: 6, Korean: 7, Portuguese: 8 }
   enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }
-  enum second_language: { English: 0, Spanish: 1, German: 2 }, _suffix: true
+  enum second_language: { English: 0, Spanish: 1, German: 2, Italian: 3, Russian: 4, Chinese: 5, Japanese: 6, Korean: 7, Portuguese: 8  }, _suffix: true
   enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }, _suffix: true
 
 

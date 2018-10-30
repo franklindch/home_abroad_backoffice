@@ -15,7 +15,7 @@ section
 
                     .child_details_section.pt-3
                       .child_details_1.mt-3
-                        h3.mt-3.pb-3.border-bottom Remplir l'Aller puis le Retour du voyage
+                        h3.mt-3.pb-3.border-bottom Remplir l'Aller puis le Retour du voyage (si non voyage groupe ou groupe décalé)
                         = f.simple_fields_for :travel_details do |travel_detail|
                           = render 'travel_details/travel_detail_fields', f: travel_detail
                       .form-actions.text-center

@@ -31,7 +31,7 @@ class LanguageStay < ApplicationRecord
     Itinérant: 5
   }
 
-  scope :ordered_by_end_date, -> { order(end_date: :desc) }
+  scope :ordered_by_start_date, -> { order(start_date: :asc) }
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, presence: true
 
   def self.incomplete_files

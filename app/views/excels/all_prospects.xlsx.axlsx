@@ -3,6 +3,7 @@ wb.styles do |style|
   highlight_cell = style.add_style(bg_color: "f2f2f2")
   wb.add_worksheet(name: "Prospects") do |sheet|
     sheet.add_row [
+      'Sexe',
       'NOM',
       'Prénom',
       'Age',
@@ -11,10 +12,9 @@ wb.styles do |style|
       'Partenaire 1',
       'Partenaire 2',
       'Email',
-      'Sexe',
       'Niveau scolaire',
       'Etablissement scolaire',
-      'Durée',
+      'Durée (semaines)',
       'Mois',
       'Statut',
       'Responsable de saisie',
@@ -40,10 +40,12 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell,
       highlight_cell,
+      highlight_cell,
       highlight_cell
     ]
     @child_details.each do |child_detail|
       sheet.add_row [
+        child_detail&.gender,
         child_detail&.last_name,
         child_detail&.first_name,
         child_detail&.age,
@@ -52,7 +54,6 @@ wb.styles do |style|
         child_detail&.partner_companies&.first&.name,
         child_detail&.partner_companies&.second&.name,
         child_detail&.email,
-        child_detail&.gender,
         child_detail&.school_grade,
         child_detail&.school,
         child_detail&.duration,

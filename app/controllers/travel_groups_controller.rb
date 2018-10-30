@@ -38,7 +38,6 @@ class TravelGroupsController < ApplicationController
   def update
     @travel_group_detail_aller = @travel_group.travel_details.first
     @travel_group_detail_retour = @travel_group.travel_details.second
-    binding.pry
     @travel_group.update(travel_group_params)
     @travel_group.update(attendant_ids: @attendants)
     flash[:notice] = "Voyage édité avec succès !"

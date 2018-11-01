@@ -82,7 +82,7 @@ class TravelGroupsController < ApplicationController
       travel_details_attributes: [
         :start_date, :end_date, :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy,
         correspondences_attributes: [
-          :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :_destroy
+          :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :_destroy, :start_date, :end_date
         ]
       ]
     )

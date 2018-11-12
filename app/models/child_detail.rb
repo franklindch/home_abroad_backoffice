@@ -2,8 +2,8 @@ class ChildDetail < ApplicationRecord
   include PgSearch
 	belongs_to :qualification
 
-  pg_search_scope :search_by_first_name,
-          against: [:first_name],
+  pg_search_scope :search_by_full_name,
+          against: [:first_name, :last_name],
           using: {
             tsearch: { prefix: true, negation: true, any_word: true}
           }
@@ -49,7 +49,7 @@ class ChildDetail < ApplicationRecord
   enum commercial_responsible: { Christine: 1, Jeremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
 
   enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :follow_up, presence: true
 
   after_save :prospect_clôturé
 

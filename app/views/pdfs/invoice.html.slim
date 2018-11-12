@@ -41,11 +41,11 @@
               - if language_stay&.accomodation == 'With_accommodation'
                 = "<u>Détails du logement</u><br>".html_safe
                 = t("views.accomodation_types.#{language_stay&.accomodation_type}")
-                p = ' '
-                - if language_stay&.room != ''
+                - if language_stay&.room != nil
                   = t("views.rooms.#{language_stay&.room}")
                 br/
-                = t("views.pensions.#{language_stay&.pension}")
+                - if language_stay&.pension != nil
+                  = t("views.pensions.#{language_stay&.pension}")
                 br/
               - else
                 = "<u>Détails du logement</u><br>".html_safe

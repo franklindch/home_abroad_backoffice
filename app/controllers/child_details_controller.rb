@@ -56,7 +56,7 @@ class ChildDetailsController < ApplicationController
 
   def search_child_details
     if params[:query].present?
-      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_first_name(params[:query]).page params[:page]
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_full_name(params[:query]).page params[:page]
     else
       @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
     end

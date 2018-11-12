@@ -18,14 +18,14 @@
 
 
 - elsif travel.nature == 'Groupe_décalé'
-  - travel_detail_aller = travel.travel_group.travel_details.first
+  - travel_detail_aller = travel&.travel_group&.travel_details&.first
   .row
     .col-md-3
-      = link_to "Associé à un voyage groupe décalé", travel_group_path(travel.travel_group)
+      = link_to "Associé à un voyage groupe décalé", travel_group_path(travel&.travel_group)
       p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
       p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
       p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')
-      p = "#{travel_detail_aller.departure_location} - #{travel_detail_aller.arrival_location}"
+      p = "#{travel_detail_aller&.departure_location} - #{travel_detail_aller&.arrival_location}"
   .row
     = render 'transits/transit_details', travel: travel
   .row

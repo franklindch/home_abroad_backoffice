@@ -32,7 +32,7 @@ class ChildDetailsController < ApplicationController
   end
 
   def index
-    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
+    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:commercial_responsible).page params[:page]
     respond_to do |format|
       format.html
       format.js

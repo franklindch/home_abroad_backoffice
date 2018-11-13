@@ -32,7 +32,7 @@ class ChildDetailsController < ApplicationController
   end
 
   def index
-    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:commercial_responsible).page params[:page]
+    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(commercial_responsible: :asc, created_at: :desc).page params[:page]
     respond_to do |format|
       format.html
       format.js
@@ -58,7 +58,7 @@ class ChildDetailsController < ApplicationController
     if params[:query].present?
       @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).search_by_full_name(params[:query]).page params[:page]
     else
-      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page]
+      @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(commercial_responsible: :asc, created_at: :desc)).page params[:page]
     end
   end
 

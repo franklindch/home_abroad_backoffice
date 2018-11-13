@@ -44,7 +44,7 @@
   .row
     .col-md-3
       = link_to "Voir les détails du voyage", travel_path(travel)
-      p = "#{travel.&travel_details&.first.departure_location} - #{travel.&travel_details&.first.arrival_location}"
+      p = "#{travel&.travel_details&.first.departure_location} - #{travel&.travel_details&.first.arrival_location}"
     / p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
     / p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
     / p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')

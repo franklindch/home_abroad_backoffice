@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     resources :families do
       resources :clients, only: [:edit, :create, :update, :destroy, :show, :new]
     end
-    # resources :employees, only: [:index]
     resources :partner_companies, only: [:new, :index, :create, :edit, :destroy, :update] do
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
@@ -41,7 +40,6 @@ Rails.application.routes.draw do
     resources :travels, only: [:show] do
       resources :off_set_travels, only: [:new, :create, :edit, :update]
     end
-
 
     get 'enrollment_form', to: 'language_stays#enrollment_form'
     get 'language_stay_certificate', to: 'language_stays#certificate', format: 'docx'

@@ -56,6 +56,9 @@ Rails.application.routes.draw do
     root to: "devise/sessions#new"
   end
 
+
+  resources :excels, only: :index
+
   get 'all_families', to: 'excels#all_families'
   get 'all_clients', to: 'excels#all_clients'
   get 'all_partner_companies', to: 'excels#all_partner_companies'

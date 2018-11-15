@@ -11,3 +11,4 @@ nav.col-md-2.d-none.d-md-block.bg-light.sidebar
       = link_to ('<u class="pl-4">Tous les séjours imminents</u>').html_safe, language_stays_path, remote: true, class: 'item'
       = link_to ('<u class="pl-5">Dossiers incomplets</u>').html_safe, incomplete_files_path, remote: true, class: 'item'
       = link_to ('<u class="pl-5">Soldes séjours</u>').html_safe, still_need_payment_path, remote: true, class: 'item'
+      = link_to 'Familles', excels_path(ressource: 'families'), class: 'item'

@@ -59,14 +59,6 @@ Rails.application.routes.draw do
 
   resources :excels, only: :index
 
-  get 'all_families', to: 'excels#all_families'
-  get 'all_clients', to: 'excels#all_clients'
-  get 'all_partner_companies', to: 'excels#all_partner_companies'
-  get 'all_programs', to: 'excels#all_programs'
-  get 'all_group_leaders', to: 'excels#all_group_leaders'
-  get 'all_prospects', to: 'excels#all_prospects'
-  get 'all_travel_groups', to: 'excels#all_travel_groups'
-
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
   get 'language_stay_cancel_confirmation', to: 'language_stays#cancel_confirmation'
 

@@ -23,7 +23,7 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @partner_companies.each do |partner_company|
+    @ressource.each do |partner_company|
       sheet.add_row [
         partner_company.nature,
         partner_company.name,

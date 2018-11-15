@@ -41,7 +41,7 @@ wb.styles do |style|
 			highlight_cell,
 			highlight_cell
 		]
-	  @families.each do |family|
+	  @ressource.each do |family|
 	    sheet.add_row [
         family.name,
 	    	family.family_situation,

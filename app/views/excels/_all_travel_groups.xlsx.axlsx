@@ -35,7 +35,7 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @travel_groups.each do |travel_group|
+    @ressource.each do |travel_group|
       sheet.add_row [
         travel_group.capacity,
         travel_group.travel_code,

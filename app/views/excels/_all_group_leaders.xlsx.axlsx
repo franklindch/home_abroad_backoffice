@@ -19,7 +19,7 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @attendants.each do |attendant|
+    @ressource.each do |attendant|
       sheet.add_row [
         attendant.last_name,
         attendant.first_name,

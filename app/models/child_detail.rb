@@ -51,6 +51,8 @@ class ChildDetail < ApplicationRecord
   enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
   validates :first_name, :last_name, :follow_up, presence: true
 
+  scope :real_prospects, -> { where(state: 'Prospect_clôturé').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page] }
+
   after_save :prospect_clôturé
 
   def prospect_clôturé

@@ -9,7 +9,6 @@ class AttendantsController < ApplicationController
 	def create
 	  @attendant = Attendant.new(attendant_params)
 	  if @attendant.save
-	    # attendantMailer.with(attendant: @attendant).welcome_email.deliver_now
 	    redirect_to attendants_path
 	  else
 	    render :new
@@ -29,17 +28,12 @@ class AttendantsController < ApplicationController
 	end
 
 	def index
-	  @attendants = Attendant.none
-	  respond_to do |format|
-	    format.html
-	    format.js
-	  end
-
-	  if params[:query].present?
-	    @attendants = Attendant.search_by_full_name(params[:query]).page(params[:query])
-	  else
-	    @attendants = Attendant.none
-	  end
+    @attendants = Attendant.none
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    params[:query].present? ? @attendants = Attendant.search_by_full_name(params[:query]).page(params[:query]) : @attendants = Attendant.none
 	end
 
 	private

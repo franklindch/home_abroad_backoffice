@@ -25,7 +25,8 @@ gem 'puma'
 gem 'pg_search'
 gem 'rails', '5.1.6'
 gem 'redis'
-gem  'bootstrap', '>= 4.1.3'
+gem 'bootstrap', '>= 4.1.3'
+gem 'render_anywhere', :require => false
 gem 'responders'
 gem "select2-rails"
 gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
@@ -54,4 +55,5 @@ group :development, :test do
   gem 'pry-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rspec-rails'
 end

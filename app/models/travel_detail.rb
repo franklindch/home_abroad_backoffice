@@ -4,7 +4,6 @@ class TravelDetail < ApplicationRecord
   belongs_to :travel, optional: true
   has_many :correspondences, dependent: :destroy
 
-  # validates :nature, uniqueness: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
 
   enum mode: {
@@ -14,5 +13,4 @@ class TravelDetail < ApplicationRecord
     Aller: 0, Retour: 1
   }
 
-  # validates :companies, presence: true, if: :not_travel_group
 end

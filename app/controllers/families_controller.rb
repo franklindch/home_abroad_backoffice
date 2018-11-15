@@ -3,7 +3,6 @@ class FamiliesController < ApplicationController
   before_action :retrieve_family, only: [:edit, :update, :destroy, :show]
 
   def new
-    # ClientMailer.with(language_stay: LanguageStay.first, client: LanguageStay.first.client).send_language_stay_feedback.deliver_now
     @family = Family.new
     @qualification = Qualification.new
   end

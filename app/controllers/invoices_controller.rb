@@ -35,9 +35,8 @@ class InvoicesController < ApplicationController
 	end
 
 	def invoice
-		@invoice = Invoice.find(params[:invoice])
-	  generate_invoice_pdf(@invoice)
-		# fields_filled(@language_stay)
+    @invoice = Invoice.find(params[:invoice])
+    generate_invoice_pdf(@invoice)
 	end
 
 	def paid_invoice

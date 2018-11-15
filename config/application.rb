@@ -13,7 +13,7 @@ module HomeAbroadBackoffice
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
     # config.assets.paths << "#{Rails}/vendor/assets/fonts"
-
+    # config.middleware.use WickedPdf::Middleware
     config.generators do |generate|
       generate.assets false
       generate.helper false

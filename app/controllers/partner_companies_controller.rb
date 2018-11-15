@@ -7,7 +7,6 @@ class PartnerCompaniesController < ApplicationController
 	end
 
 	def create
-		# raise
 	  @partner_company = PartnerCompany.new(partner_company_params)
 	  if @partner_company.save
 	    redirect_to partner_companies_path

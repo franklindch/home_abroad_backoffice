@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :employees, only: [:new, :create, :edit, :update, :destroy]
     end
 
-    resources :clients, only: [:show] do
+    resources :clients, only: :show do
       resources :language_stays, only: [:new, :create, :edit, :update, :destroy]
     end
 
@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   get 'cancel_language_stay', to: 'language_stays#cancel_language_stay'
   get 'reestablish_language_stay', to: 'language_stays#reestablish_language_stay'
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
+
   get 'relaunch', to: 'child_details#relaunch'
   get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
   post "families/:id/qualification", to: "qualifications#create"

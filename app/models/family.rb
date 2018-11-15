@@ -15,14 +15,8 @@ class Family < ApplicationRecord
 	enum family_situation: { Mariés: 1, Divorcés: 2, En_couple: 3, Veuf: 4, Vie_maritale: 5, Célibataire: 6, Ne_sait_pas: 7 }
 
   paginates_per 10000
-	# validates :name, :email, :phone, presence: true
-	# validates :phone, uniqueness: true
 
 	def self.retrieve_family(family_associated, family)
-		if family_associated
-			Family.find(family_associated)
-		else
-			Family.find(family)
-		end
+		family_associated ? Family.find(family_associated) : Family.find(family)
 	end
 end

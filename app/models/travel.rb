@@ -7,7 +7,6 @@ class Travel < ApplicationRecord
   has_many :travel_details, dependent: :destroy, inverse_of: :travel
   has_many :correspondences, through: :travel_details, dependent: :destroy
 
-  # accepts_nested_attributes_for :off_set_travels, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
 

@@ -33,27 +33,7 @@ class Client < ApplicationRecord
   enum first_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }
   enum second_language: { English: 0, Spanish: 1, German: 2, Italian: 3, Russian: 4, Chinese: 5, Japanese: 6, Korean: 7, Portuguese: 8  }, _suffix: true
   enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }, _suffix: true
-
-
-  # after_destroy :delete_from_family
-
-  # def delete_from_family
-  #   # raise
-  #   raise
-  #   family.clients.delete(self)
-  #   # && family.qualification.child_details.find_by(first_name: self.first_name).update_columns(status: 'Prospect')
-  # end
-
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
+
   validates :first_name, :birth_date, presence: true
-  # after_save :check_if_family_is_client
-
-  # before_save :capitalize_fields
-
-  # def check_if_family_is_client
-  #   if self.family.prospect?
-  #     qualification = self.family.qualification
-  #     qualification.check
-  #   end
-  # end
 end

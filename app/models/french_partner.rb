@@ -1,2 +1,0 @@
-class FrenchPartner < PartnerCompany
-end

@@ -44,9 +44,6 @@ class LanguageStaysController < ApplicationController
 
   def update
     @language_stay.update(language_stay_params)
-    # result = @language_stay.get_duration
-    # raise
-    # @language_stay.update_columns(duration: result)
     flash[:notice] = 'Séjour édité avec succès !'
     redirect_to client_path(@client)
   end

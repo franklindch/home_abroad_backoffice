@@ -1,18 +1,12 @@
 class TravelGroup < ApplicationRecord
 	include PgSearch
-  # belongs_to :attendants, through: :attendants_travel
+
   has_many :travel_details, dependent: :destroy, inverse_of: :travel_group
   has_many :correspondences, through: :travel_details, dependent: :destroy
-  # has_many :travels, dependent: :destroy, if: :travel_group_present
-
   has_many :travels, dependent: :destroy, inverse_of: :travel_group
   belongs_to :language_stay, optional: true
   has_and_belongs_to_many :attendants
-  # belongs_to :travel, class_name: 'Travel', foreign_key: "travel_group_id", optional: true
-  # has_one :travel_group, class_name: 'Travel', foreign_key: "travel_group_id", dependent: :destroy
-  # belongs_to :travel, class_name: 'Travel', optional: true
-  # has_many :travels, class_name: 'Travel', dependent: :destroy
-  # validates :travel_group_id, if: :travel_group_id_params
+
 
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true
@@ -22,16 +16,8 @@ class TravelGroup < ApplicationRecord
   				using: {
   					tsearch: { prefix: true, negation: true, any_word: true}
   				}
+
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
-
-  # after_save :correspondences
-
-  # def correspondences
-  #   correspondence_aller = self.travel_details.first.correspondences.first
-  #   correspondence_retour = self.travel_details.second.correspondences.first
-  #   correspondence_aller.destroy if correspondence_aller.departure_location == '' && correspondence_aller
-  #   correspondence_retour.destroy if correspondence_retour.departure_location == '' && correspondence_retour
-  # end
 
   def travel_group_present
     travels != []
@@ -46,16 +32,4 @@ class TravelGroup < ApplicationRecord
   def travel_group_id_params
     params[:travel][:travel_group_id]
   end
-
-  # def verify_uniqueness_pre_acheminement!
-  #   throw(:abort) if (language_stay.travels.where(acheminement: 'Pré_acheminement').length > 0)
-  # end
-
-  # def verify_uniqueness_post_acheminement!
-  #   throw(:abort) if (language_stay.travels.where(acheminement: 'Post_acheminement').length > 0)
-  # end
-
-  # def verify_uniqueness_travel_group_id!
-  #   throw(:abort) if travel_group
-  # end
 end

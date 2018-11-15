@@ -22,8 +22,6 @@ class ClientsController < ApplicationController
     if @client.save
       retrieve_child_detail && @child_detail.update_columns(status: 'Client') if params[:child_detail_id]
       @client.update_columns(last_name: @family.name)
-			# ClientMailer.with(client: @client).send_language_stay_feedback.deliver_later
-
 		  flash[:notice] = "Client ajouté avec succès !"
 		  redirect_to new_client_language_stay_path(@client)
 		else

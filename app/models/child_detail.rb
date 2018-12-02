@@ -44,12 +44,14 @@ class ChildDetail < ApplicationRecord
 	}
   enum refered_by: { Ami: 1, Salon: 2, Rencontre_Home_Abroad: 3, Recherche_google: 4, Office: 5 }
   enum follow_up: { A_faire: 1, Doc_envoyé: 2, A_relancer: 3, Clôturé: 4 }
-  enum data_entry_responsible: { Christine: 1, Jeremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6, Stagiaire: 7, Franklin: 8 }
+  enum data_entry_responsible: { cdc: 1, je: 2, oc: 3, ms: 4, mg: 5, jo: 6, Stagiaire: 7, Franklin: 8 }
   enum contact_mode: { Appel_entrant: 1, Webcontact: 2, Par_Office: 3, Email_en_direct: 4, Visite: 5 }
-  enum commercial_responsible: { Christine: 1, Jeremy: 2, Jeanne: 3, Marie: 4, Marlène: 5, Olivia: 6 }, _suffix: true
+  enum commercial_responsible: { cdc: 1, je: 2, oc: 3, ms: 4, mg: 5, jo: 6 }, _suffix: true
 
   enum status: { Prospect: 0, Prospect_clôturé: 1, Client: 2, Dormant: 3 }
   validates :first_name, :last_name, :follow_up, presence: true
+
+  scope :real_prospects, -> { where(state: 'Prospect_clôturé').or(ChildDetail.where(status: 'Prospect_clôturé')).order(:first_name).page params[:page] }
 
   after_save :prospect_clôturé
 

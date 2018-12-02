@@ -67,7 +67,7 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @clients.each do |client|
+    @ressource.each do |client|
       sheet.add_row [
         client.gender,
         client.last_name,

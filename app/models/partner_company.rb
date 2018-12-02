@@ -4,6 +4,8 @@ class PartnerCompany < ApplicationRecord
 	has_many :travel_details, dependent: :destroy
 	has_many :language_stays, dependent: :destroy
 
+  default_scope { order(name: :asc) }
+
   has_and_belongs_to_many :child_details
 
 	pg_search_scope :search_by_name,

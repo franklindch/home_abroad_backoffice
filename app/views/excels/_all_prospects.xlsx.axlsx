@@ -43,7 +43,7 @@ wb.styles do |style|
       highlight_cell,
       highlight_cell
     ]
-    @child_details.each do |child_detail|
+    @ressource.each do |child_detail|
       sheet.add_row [
         child_detail&.gender,
         child_detail&.last_name,

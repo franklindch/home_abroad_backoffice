@@ -1,0 +1,12 @@
+- if @ressource == Family.all
+  = render 'excels/all_families', ressource: @ressource
+- elsif @ressource == Client.all
+  = render 'excels/all_clients', ressource: @ressource
+- elsif @ressource == TravelGroup.all
+  = render 'excels/all_travel_groups', ressource: @ressource
+- elsif @ressource == Attendant.all
+  = render 'excels/all_group_leaders', ressource: @ressource
+- elsif @ressource == PartnerCompany.all
+  = render 'excels/all_partner_companies', ressource: @ressource
+- else
+  = render 'excels/all_child_details', ressource: @ressource

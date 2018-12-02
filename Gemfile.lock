@@ -84,6 +84,7 @@ GEM
       rails (>= 3.1)
     builder (3.2.3)
     byebug (10.0.2)
+    chronic (0.10.2)
     cocoon (1.2.12)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
@@ -316,6 +317,12 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    to_spreadsheet (1.0.6)
+      axlsx
+      chronic
+      nokogiri
+      rails
+      responders
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.2.0)
@@ -388,6 +395,7 @@ DEPENDENCIES
   slim_lint
   spring
   spring-watcher-listen (~> 2.0.0)
+  to_spreadsheet
   turbolinks (~> 5.1.0)
   uglifier
   web-console (>= 3.3.0)
@@ -396,7 +404,7 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.4.4p296
 
 BUNDLED WITH
    1.16.4

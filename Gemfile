@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.4.3'
+ruby '2.4.4'
 
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'rubyzip', '>= 1.2.1'
@@ -37,6 +37,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'slim_lint'
 gem 'slim-rails'
+gem 'to_spreadsheet'
 gem 'turbolinks', '~> 5.1.0'
 gem 'uglifier'
 gem 'webpacker'

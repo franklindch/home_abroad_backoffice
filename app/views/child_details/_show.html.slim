@@ -1,0 +1,96 @@
+- if child_detail&.follow_up == 'A_faire'
+  tr.red
+    td
+      span = child_detail&.data_entry_responsible
+    td
+      span = child_detail&.commercial_responsible
+    td
+      span = date_format(child_detail&.created_at)
+    td
+      span = c(child_detail&.last_name)
+    td
+      span = child_detail&.first_name
+    td
+      span = "#{child_detail.age} ans" if child_detail.age != nil
+    - family = child_detail&.qualification&.family
+    - if family&.mother_main_contact == true
+      td
+        span = number_to_phone(family&.mother_intl_number)
+    - elsif family&.father_main_contact == true
+      td
+        span = number_to_phone(family&.father_intl_number)
+    td.w-25
+      span = child_detail&.email
+    td
+      span = child_detail&.follow_up&.humanize
+    td
+      span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
+    td
+      span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
+    td
+      span  = link_to "<i class='fa fas fa-user'></i>".html_safe, new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
+
+- elsif child_detail&.follow_up == 'A_relancer'
+  tr.orange
+    td
+      span = child_detail&.data_entry_responsible
+    td
+      span = child_detail&.commercial_responsible
+    td
+      span = date_format(child_detail&.created_at)
+    td
+      span = c(child_detail&.last_name)
+    td
+      span = child_detail&.first_name
+    td
+      span = "#{child_detail.age} ans" if child_detail.age != nil
+    - family = child_detail&.qualification&.family
+    - if family&.mother_main_contact == true
+      td
+        span = number_to_phone(family&.mother_intl_number)
+    - elsif family&.father_main_contact == true
+      td
+        span = number_to_phone(family&.father_intl_number)
+    td.w-25
+      span = child_detail&.email
+    td
+      span = child_detail&.follow_up&.humanize
+    td
+      span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
+    td
+      span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
+    td
+      span  = link_to "<i class='fa fas fa-user'></i>".html_safe, new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
+
+- elsif child_detail&.follow_up == 'Doc_envoyé'
+  tr.green
+    td
+      span = child_detail&.data_entry_responsible
+    td
+      span = child_detail&.commercial_responsible
+    td
+      span = date_format(child_detail&.created_at)
+    td
+      span = c(child_detail&.last_name)
+    td
+      span = child_detail&.first_name
+    td
+      span = "#{child_detail.age} ans" if child_detail.age != nil
+    - family = child_detail&.qualification&.family
+    - if family&.mother_main_contact == true
+      td
+        span = number_to_phone(family&.mother_intl_number)
+    - elsif family&.father_main_contact == true
+      td
+        span = number_to_phone(family&.father_intl_number)
+    td.w-25
+      span = child_detail&.email
+    td
+      span = child_detail&.follow_up&.humanize
+    td
+      span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_qualification_child_detail_path(child_detail.qualification, child_detail)
+    td
+      span = link_to "<i class='fa fas fa-trash-alt'></i>".html_safe, qualification_child_detail_path(child_detail.qualification, child_detail), method: :delete, class: 'delete-link ml-4', data: {confirm: 'Êtes-vous sûr ?'}, id: child_detail.id
+    td
+      span  = link_to "<i class='fa fas fa-user'></i>".html_safe, new_client_path(child_detail_id: child_detail.id), class: 'btn-sm btn-outline-primary'
+

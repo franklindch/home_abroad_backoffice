@@ -28,6 +28,7 @@ section
                     = f.input :month, collection: ChildDetail.months.keys.map { |w| [w.humanize, w] }, label: 'Mois'
                     = f.input :follow_up, collection: ChildDetail.follow_ups.keys.map { |w| [w.humanize, w] }, label: 'Statut'
                     = f.input :comment, label: 'Souhaits de séjours'
+                    = f.input :ls_comments, label: 'Commentaires'
                     = f.hidden_field :status, value: 'Prospect'
                     = f.input :partner_company_ids, as: :select2, collection: PartnerCompany.where(nature: 'Organisme'), label_method: lambda { |partner_company| "#{c(partner_company.name)}" }, multiple: true, value_method: :id, include_blank: false, label: 'Choisir le(s) organisme(s)', input_html: {class: 'oli'}
             .form-actions.text-center

@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 ruby '2.4.4'
 
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'rubyzip', '>= 1.2.1'
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'rubyzip', '= 1.0.0'
+gem 'axlsx', '= 2.0.1'
 gem 'axlsx_rails'
 gem 'country_select'
 gem 'cocoon'

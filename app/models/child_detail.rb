@@ -8,6 +8,7 @@ class ChildDetail < ApplicationRecord
             tsearch: { prefix: true, negation: true, any_word: true}
           }
 
+  paginates_per 300
   has_and_belongs_to_many :partner_companies
 	enum gender: { Male: 1, Female: 2 }
 	enum school_grade: {

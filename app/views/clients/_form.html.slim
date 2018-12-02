@@ -18,7 +18,7 @@ section
                   = f.input :first_name, label: 'Prénom'
                   = f.input :school, label: 'Etablissement scolaire'
                   = f.input :school_grade, collection: Client.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau d\'études'
-                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
+                  = f.input :birth_date, label: 'Date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 5, order: [:day, :month, :year], include_blank: true
                   = f.input :email, label: 'Email'
                   = f.hidden_field :country, class: 'country_field'
 

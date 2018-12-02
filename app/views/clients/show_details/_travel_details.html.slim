@@ -1,6 +1,6 @@
 - travel = language_stay&.travel
 
-- if travel.nature == 'Groupe'
+- if travel.nature == 'Groupe' && travel.travel_group != nil
   - travel_detail_aller = travel&.travel_group&.travel_details&.first
   .row
     .col-md-3

@@ -4,9 +4,10 @@ class ExcelsController < ApplicationController
 
 	def index
     @excel = Excel.new(ressource)
+    # raise
     respond_to do |format|
       format.html
-      format.xlsx { render xlsx: :index, filename: "#{params[:ressource]}" }
+      format.xlsx { render xlsx: :index, filename: "#{params[:ressource]}"}
     end
 	end
 

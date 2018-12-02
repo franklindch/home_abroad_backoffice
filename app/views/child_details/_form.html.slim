@@ -20,7 +20,7 @@ section
                     = f.input :first_name, label: 'Prénom'
                     = f.input :last_name, label: 'Nom de famille'
                     = f.input :age, label: 'Âge..', collection: 6..50, include_blank: true
-                    = f.input :birth_date, label: '..et/ou date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 8, order: [:day, :month, :year], include_blank: true
+                    = f.input :birth_date, label: '..et/ou date de naissance', start_year: Time.now.year - 50, end_year: Time.now.year - 5, order: [:day, :month, :year], include_blank: true
                     = f.input :email, label: 'Email'
                     = f.input :school, label: 'Etablissement Scolaire'
                     = f.input :school_grade, collection: ChildDetail.school_grades.keys.map { |w| [w.humanize, w] }, label: 'Niveau d\'études'

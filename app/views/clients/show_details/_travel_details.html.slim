@@ -1,4 +1,4 @@
-- travel = language_stay.travel
+- travel = language_stay&.travel
 
 - if travel.nature == 'Groupe'
   - travel_detail_aller = travel&.travel_group&.travel_details&.first
@@ -40,7 +40,7 @@
       = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
 - else
-  - if travel&.travel_details
+  - if travel && travel&.travel_details
     .row
       .col-md-3
         = link_to "Voir les détails du voyage", travel_path(travel)

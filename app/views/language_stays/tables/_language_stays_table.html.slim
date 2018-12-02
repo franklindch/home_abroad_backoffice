@@ -20,7 +20,7 @@
     - @language_stays.each do |language_stay|
       div
         tr
-        - if language_stay&.confirmation_date < 60 && language_stay&.confirmation_date > 0
+        - if language_stay&.canceled_language_stay == false && language_stay&.confirmation_date < 60 && language_stay&.confirmation_date > 0
           td
             span = language_stay&.commercial_responsible&.capitalize
           td

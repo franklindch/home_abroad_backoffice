@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.4.3'
+ruby '2.4.4'
 
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'rubyzip', '>= 1.2.1'

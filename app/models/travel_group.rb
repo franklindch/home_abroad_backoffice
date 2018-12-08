@@ -7,6 +7,7 @@ class TravelGroup < ApplicationRecord
   belongs_to :language_stay, optional: true
   has_and_belongs_to_many :attendants
 
+  paginates_per 400
 
   accepts_nested_attributes_for :travel_details, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :correspondences, reject_if: :all_blank, allow_destroy: true

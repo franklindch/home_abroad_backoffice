@@ -12,7 +12,7 @@
 
 .row
   .col-md-6
-    h4.mt-3 Départ
+    h4.mt-3.travel-type Départ
     = f.input :departure_location, label: 'Départ de'
     = f.input :start_date, label: 'Date de départ'
     = f.input :start_time, label: 'Heure de départ'
@@ -20,7 +20,7 @@
       = f.input :meeting_time, label: 'Heure de rendez-vous'
     / = f.input :father_name, label: 'Nom'
   .col-md-6
-    h4.mt-3 Arrivée
+    h4.mt-3.travel-type Arrivée
     = f.input :arrival_location, label: 'Arrivée à'
     = f.input :end_date, label: 'Date d\'arrivée'
     = f.input :end_time, label: 'Heure d\'arrivée'

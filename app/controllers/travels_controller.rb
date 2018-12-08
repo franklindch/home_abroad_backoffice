@@ -20,7 +20,7 @@ class TravelsController < ApplicationController
     	@travel.travel_group = @travel_group
     end
 
-    # binding.pry
+
     client = @language_stay.client
     if @travel.save
     	if @travel.nature == 'Groupe_décalé'
@@ -44,6 +44,7 @@ class TravelsController < ApplicationController
 
   def update
     @travel.update(travel_params)
+    binding.pry
     flash[:notice] = 'Voyage édité avec succès'
 		redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
   end

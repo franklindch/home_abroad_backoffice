@@ -190,8 +190,8 @@
           = "TRANSPORTATION DETAILS"
         td
       - if travel.nature == 'Groupe' || travel.nature == 'Groupe_décalé'
-        - travel_detail_aller = travel.travel_group.travel_details.first
-        - travel_detail_retour = travel.travel_group.travel_details.second
+        - travel_detail_aller = travel.travel_group.travel_details.find_by_nature('Aller')
+        - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')
         tr.item
           td
             = "<b>Departure</b>".html_safe
@@ -235,8 +235,8 @@
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
       - else
-        - travel_detail_aller = travel.travel_details.first
-        - travel_detail_retour = travel.travel_details.second
+        - travel_detail_aller = travel.travel_details.find_by_nature('Aller')
+        - travel_detail_retour = travel.travel_details.find_by_nature('Retour')
         tr.item
           td
             = "<b>Departure</b>".html_safe

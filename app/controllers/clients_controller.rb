@@ -59,6 +59,14 @@ class ClientsController < ApplicationController
 
 	def show; end
 
+  def download
+    @clients = Client.all
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Clients au #{Date.today}" }
+    end
+  end
+
 	private
 
 	def search_for_child_detail

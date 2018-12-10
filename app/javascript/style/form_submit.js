@@ -18,14 +18,14 @@ const formSubmit = {
 
 
 function slowAlertDisappears() {
-	$('.alert').fadeOut('slow');
+  setTimeout(function(){ $('.alert').fadeOut('slow'); }, 2500);
 }
 
 function AlertDisa(){}
 
 
 
-export { formSubmit, AlertDisa };
+export { formSubmit, AlertDisa, slowAlertDisappears };
 
 
 

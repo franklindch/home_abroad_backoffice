@@ -13,6 +13,7 @@ import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelSelectConditionnal, travelGroupConditionnal } from '../style/conditional_form';
 import { autocompleteFamilyFields, autocompleteInvoiceFieldTotal, f } from '../style/autocomplete_fields';
 import { select2Attendants, select2PartnerCompanies } from '../style/select2_attendants';
+import { slowAlertDisappears } from '../style/form_submit';
 
 document.addEventListener("turbolinks:load", () => {
   if ($('.calendar_birth_date')) {
@@ -22,6 +23,9 @@ document.addEventListener("turbolinks:load", () => {
     calendar();
   }
 
+  if ($('.alert')) {
+    slowAlertDisappears();
+  }
   if ($('.google_map')){
     initAutocomplete();
   }

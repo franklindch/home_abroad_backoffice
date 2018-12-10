@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   resources :excels, only: :index
 
+  get 'download', to: 'clients#download'
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
   get 'language_stay_cancel_confirmation', to: 'language_stays#cancel_confirmation'
 

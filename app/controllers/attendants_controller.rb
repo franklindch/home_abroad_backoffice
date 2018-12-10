@@ -15,7 +15,9 @@ class AttendantsController < ApplicationController
 	  end
 	end
 
-	def edit; end
+	def edit
+    flash[:alert] = 'Le pays du numéro de téléphone a changé si numéro étranger'
+  end
 
 	def update
 	  @attendant.update(attendant_params)

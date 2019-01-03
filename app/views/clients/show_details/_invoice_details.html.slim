@@ -59,7 +59,7 @@
   - if invoice.acquittée?
     .badge.badge-success Facture acquittée et disponible.
   - else
-    .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements} euros à payer"
+    / .badge.badge-warning = "Il reste encore #{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements} euros à payer"
 
 .mt-5.edit-delete-links.ml-3
   = link_to "<i class='fa fas fa-edit'> Facture</i> <i class='fa fas fa-plus-circle'>Règlement/remboursement</i>".html_safe, edit_language_stay_invoice_path(language_stay, id: language_stay.invoice)

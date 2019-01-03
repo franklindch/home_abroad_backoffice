@@ -49,7 +49,7 @@ class Invoice < ApplicationRecord
 	end
 
   def acquittée?
-    (self.total_règlements - self.total_remboursements) == self.total_price_cents
+    # (self.total_règlements - self.total_remboursements) == self.total_price_cents
   end
 
   def self.still_need_payment

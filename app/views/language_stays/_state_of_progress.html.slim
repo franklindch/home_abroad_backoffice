@@ -29,9 +29,8 @@
     li Accord accueil école
   - if language_stay&.justice_record == true
     li Casier judiciaire
-
-  / - if language_stay&.confirmation_language_stay == true
-  /   p.mt-4.pt-2.border-top.border-success CS envoyée
+  - if language_stay&.um == true
+    li Contact UM
 
 - else
   h6 Document(s) manquant(s)
@@ -66,6 +65,8 @@
     li Accord accueil école
   - if language_stay&.justice_record == true
     li Casier judiciaire
+  - if language_stay&.um == true
+    li Contact UM
 
   - if language_stay&.confirmation_language_stay == true
     p.mt-4.pt-2.border-top.border-success = "CS envoyée le #{date_format(language_stay&.confirmation_language_stay_date)}"

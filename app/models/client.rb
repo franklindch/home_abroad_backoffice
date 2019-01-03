@@ -35,5 +35,5 @@ class Client < ApplicationRecord
   enum second_language_level: { Beginner: 0, Intermediate: 1, Fluent: 2, Bilingual: 3, A1: 4, A2: 5, B1: 6, B2: 7, C1: 8, C2: 9, NA: 10 }, _suffix: true
   enum season: { Saison_2018_2019: 0, Saison_2019_2020: 1 }
 
-  validates :first_name, :birth_date, presence: true
+  validates :first_name, :birth_date, :age_category, presence: true
 end

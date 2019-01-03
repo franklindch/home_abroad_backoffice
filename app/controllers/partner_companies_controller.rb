@@ -27,6 +27,14 @@ class PartnerCompaniesController < ApplicationController
 	  redirect_to partner_companies_path
 	end
 
+  def download_partenaires
+    @partner_companies = PartnerCompany.all
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Partenaires au #{Date.today}" }
+    end
+  end
+
 	def index
 	  @partner_companies = PartnerCompany.order(country: :asc)
 	  respond_to do |format|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181202083307) do
+ActiveRecord::Schema.define(version: 20190103105928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,8 @@ ActiveRecord::Schema.define(version: 20181202083307) do
     t.boolean "visa", default: false
     t.date "confirmation_language_stay_date"
     t.decimal "duration"
+    t.string "country_code"
+    t.boolean "um", default: false
     t.index ["client_id"], name: "index_language_stays_on_client_id"
     t.index ["partner_company_id"], name: "index_language_stays_on_partner_company_id"
     t.index ["program_id"], name: "index_language_stays_on_program_id"
@@ -290,10 +292,10 @@ ActiveRecord::Schema.define(version: 20181202083307) do
     t.bigint "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "amount_price_cents", default: 0, null: false
     t.string "amount_price_currency", default: "EUR", null: false
     t.date "payment_date"
     t.integer "category"
+    t.decimal "amount_price_cents"
     t.index ["invoice_id"], name: "index_payments_on_invoice_id"
   end
 

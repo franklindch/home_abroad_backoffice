@@ -26,7 +26,6 @@ class TransitsController < ApplicationController
     @transit.update(transit_params)
     flash[:notice] = "Acheminement édité avec succès !"
     redirect_to client_path(client)
-    # redirect_to families_path
   end
 
   def destroy
@@ -35,6 +34,11 @@ class TransitsController < ApplicationController
 	  flash[:notice] = "Acheminement supprimé avec succès !"
 	  redirect_to client_path(client)
 	end
+
+  def transit_pdf
+    @travel = Travel.find(params[:travel])
+    generate_transits_pdf(@travel)
+  end
 
 	private
 

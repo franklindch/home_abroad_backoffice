@@ -60,7 +60,7 @@ class ClientsController < ApplicationController
 	def show; end
 
   def download
-    @clients = Client.all
+    @clients = Client.all[0..3]
     respond_to do |format|
       format.html
       format.xlsx { render filename: "Clients au #{Date.today}" }

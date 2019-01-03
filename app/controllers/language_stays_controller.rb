@@ -122,7 +122,7 @@ class LanguageStaysController < ApplicationController
   def language_stay_params
     params.require(:language_stay).permit(:picture,
       :flight, :visa, :confirmation_language_stay_date,
-      :passport_cni, :family_file, :school_notes,
+      :passport_cni, :family_file, :school_notes, :um,
       :language_test, :junior_waiver, :medical_form, :english_cv,
       :motivation_letter, :agreement_welcome_school, :justice_record, :rules_and_regulations,
       :teacher_reference, :other_pension, :other_transfer, :option_3, :option_3_fr, :option_1_fr, :option_2_fr, :program_detail_fr, :program_detail, :accomodation_type, :transfer_aller, :transfer_retour, :room, :data_entry_responsible, :commercial_responsible, :precisions, :duration, :fee, :travel_id, :program_id, :start_date, :end_date, :city, :country, :pension, :accomodation, :option_1, :option_2, :class_hours,:partner_company_id, :client_id, :invoice_id)

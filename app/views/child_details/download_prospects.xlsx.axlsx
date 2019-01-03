@@ -1,0 +1,64 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Prospects") do |sheet|
+    sheet.add_row [
+      'Agent',
+      'Date de saisie',
+      'NOM',
+      'Prénom',
+      'Age',
+      'Date de naissance',
+      'Email',
+      'Suivi',
+      'Souhaits de séjours',
+      'Partenaire 1',
+      'Partenaire 2',
+      'Partenaire 3',
+      'Niveau scolaire',
+      'Etablissement scolaire',
+      'Durée (semaines)',
+      'Mois'
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @child_details.each do |child_detail|
+      sheet.add_row [
+        child_detail&.commercial_responsible,
+        child_detail&.created_at,
+        child_detail&.last_name,
+        child_detail&.first_name,
+        child_detail&.age,
+        child_detail&.birth_date,
+        child_detail&.email,
+        child_detail&.follow_up,
+        child_detail&.comment,
+        child_detail&.partner_companies&.first&.name,
+        child_detail&.partner_companies&.second&.name,
+        child_detail&.partner_companies&.third&.name,
+        child_detail&.school_grade,
+        child_detail&.school,
+        child_detail&.duration,
+        child_detail&.month
+      ]
+    end
+  end
+end

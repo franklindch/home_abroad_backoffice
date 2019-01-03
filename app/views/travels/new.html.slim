@@ -11,7 +11,7 @@ section
                 .row
                   .col-md-12
                     = f.input :nature, collection: Travel.natures.keys.map { |w| [w.humanize, w] }, label: 'Nature', selected: 0
-                    = f.input :travel_group_id, collection: TravelGroup.all.map { |w| [w.travel_code, w.id] }, include_blank: "Merci de sélectionner le voyage de groupe...", label: false
+                    = f.input :travel_group_id, collection: TravelGroup.all.map { |w| [w.travel_code, w.id] }, include_blank: "Merci de sélectionner le voyage de groupe si groupe...", label: false
 
                     .child_details_section.pt-3
                       .child_details_1.mt-3

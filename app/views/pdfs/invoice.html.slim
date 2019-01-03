@@ -122,13 +122,22 @@
       tr.item
         td
           | Total réglé
-        td
-          = "#{@invoice.total_règlements} #{@invoice.total_price_currency}"
+        - if @invoice.total_règlements.to_s.split('.').second == '0'
+
+          td
+            = "#{@invoice.total_règlements.to_i} #{@invoice.total_price_currency}"
+        - else
+          td
+            = "#{@invoice.total_règlements} #{@invoice.total_price_currency}"
     tr.total
       td
        |
-      td
-        = "Solde TTC : #{@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements} EUR"
+      - if (@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements).to_s.split('.').second == '0'
+        td
+          = "Solde TTC : #{(@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements).to_i} EUR"
+      - else
+        td
+          = "Solde TTC : #{(@invoice.total_price_cents - @invoice.total_règlements + @invoice.total_remboursements)} EUR"
   br/
   br/
   .text-left

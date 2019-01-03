@@ -31,6 +31,14 @@ class ChildDetailsController < ApplicationController
     end
   end
 
+  def download_prospects
+    @child_details = ChildDetail.all
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Prospects au #{Date.today}" }
+    end
+  end
+
   def index
     @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé')).order(commercial_responsible: :asc, created_at: :desc).page params[:page]
     respond_to do |format|

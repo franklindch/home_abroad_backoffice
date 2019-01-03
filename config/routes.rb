@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     get 'invoice_pdf', to: 'invoices#invoice'
     get 'paid_invoice', to: 'invoices#paid_invoice'
     get 'airport_convocation', to: 'travel_groups#airport_convocation'
+    get 'transit_pdf', to: 'transits#transit_pdf'
   end
 
   devise_for :users, controllers: {
@@ -60,6 +61,9 @@ Rails.application.routes.draw do
   resources :excels, only: :index
 
   get 'download', to: 'clients#download'
+  get 'download_prospects', to: 'child_details#download_prospects'
+  get 'download_partenaires', to: 'partner_companies#download_partenaires'
+
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
   get 'language_stay_cancel_confirmation', to: 'language_stays#cancel_confirmation'
 
@@ -70,6 +74,7 @@ Rails.application.routes.draw do
   get 'reestablish_prospect', to: 'qualifications#reestablish_prospect'
 
   get 'relaunch', to: 'child_details#relaunch'
+
   get "families/:id/qualification", to: "qualifications#new", as: :family_qualification
   post "families/:id/qualification", to: "qualifications#create"
   post "qualifications/:id/child_detail", to: "child_details#create"
@@ -77,3 +82,15 @@ Rails.application.routes.draw do
   get 'still_need_payment', to: "invoices#still_need_payment"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
+
+# resources :unpaid_invoices, only: :index
+# resources :unpaid_invoices, only: :index
+# scope :send_confirmation do
+# scope :send_confirmation do
+# scope :send_confirmation do
+#
+# end
+#
+# .where(picture: true).or(...)
+#

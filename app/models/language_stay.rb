@@ -1,4 +1,8 @@
 class LanguageStay < ApplicationRecord
+  EUROPE = ['FR', 'GB',
+    'IE', 'MT', 'IT',
+    'DE', 'ES', 'CY', 'AT']
+
   has_one :travel, dependent: :destroy
   belongs_to :program, optional: true
   belongs_to :client, optional: true
@@ -7,8 +11,8 @@ class LanguageStay < ApplicationRecord
   has_one :off_set_travel, through: :travel, dependent: :destroy
   has_one :invoice, dependent: :destroy
 
-  enum data_entry_responsible: { cdc: 1, je: 2, oc: 3, ms: 4, mg: 5, jo: 6, Stagiaire: 7, Franklin: 8 }
-  enum commercial_responsible: { cdc: 1, je: 2, oc: 3, ms: 4, mg: 5, jo: 6 }, _suffix: true
+  enum data_entry_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6, Stagiaire: 7, Franklin: 8 }
+  enum commercial_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6 }, _suffix: true
   enum accomodation: {
     Without_accommodation: 1,
     With_accommodation: 2
@@ -33,6 +37,7 @@ class LanguageStay < ApplicationRecord
 
   scope :ordered_by_start_date, -> { order(start_date: :asc) }
   validates :data_entry_responsible, :commercial_responsible, :program_id, :partner_company_id, :start_date, :end_date, presence: true
+  after_save :fill_country_code
 
   def self.incomplete_files
     where(
@@ -43,6 +48,7 @@ class LanguageStay < ApplicationRecord
        junior_waiver = true OR
        medical_form = true OR
        english_cv = true OR
+       um = true OR
        motivation_letter = true OR
        agreement_welcome_school = true OR
        rules_and_regulations = true OR
@@ -74,5 +80,9 @@ class LanguageStay < ApplicationRecord
 
   def reestablish
     update_columns(canceled_language_stay: false)
+  end
+
+  def fill_country_code
+    LanguageStay::EUROPE.include?(self.country) ? self.update_columns(country_code: '7061000') : self.update_columns(country_code: '7061100')
   end
 end

@@ -1,0 +1,46 @@
+.invoice-box.margin-top-navbar
+  table cellpadding="0" cellspacing="0"
+    tr.top
+      td colspan="2"
+        table
+          tr
+            td.title.text-left
+              = wicked_pdf_image_tag 'logo.png'
+            br/
+            td
+              h3.text-left
+                = "<b>Acheminements</b>".html_safe
+              br/
+
+    - @travel.transits.each do |transit|
+      tr.heading
+        td
+          = "Voyage #{transit.nature}"
+        td
+      tr.item
+        td
+          = show_attribute_empty_string_no_underline(transit&.mode.humanize, 'Moyen de transport')
+        td
+          = show_attribute_empty_string_no_underline(transit&.reference, 'Référence')
+      tr.item
+        td
+          = show_attribute_empty_string_no_underline(transit&.partner_company, 'Compagnie')
+        td
+      tr.item
+        td
+          = show_attribute_empty_string_no_underline(transit&.departure_location, 'Départ de')
+        td
+          = show_attribute_empty_string_no_underline(transit&.arrival_location, 'Arrivée à')
+      tr.item
+        td
+          = show_attribute_empty_string_no_underline(date_format(transit&.start_date), 'Date de départ')
+        td
+          = show_attribute_empty_string_no_underline(time_format(transit&.start_time), 'Heure de départ')
+      tr.item
+        td
+          = show_attribute_empty_string_no_underline(date_format(transit&.end_date), 'Date d\'arrivée')
+        td
+          = show_attribute_empty_string_no_underline(time_format(transit&.end_time), 'Heure d\'arrivée')
+
+  .pdf-footer
+    = wicked_pdf_image_tag('bas_de_page.png', width: '95%')

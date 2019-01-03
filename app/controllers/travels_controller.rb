@@ -32,7 +32,6 @@ class TravelsController < ApplicationController
         flash[:notice] = 'Voyage ajouté avec succès'
         redirect_to family_client_path(client.family, client)
       end
-
     else
       render :new
     end

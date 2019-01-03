@@ -20,6 +20,10 @@ class Invoice < ApplicationRecord
     self.update_columns(total_price_cents: result)
   end
 
+  def ls_amount
+    self&.option_1_price_cents.to_f + self&.transfer_price_cents.to_f + self&.language_stay_price_cents.to_f + self&.option_2_price_cents.to_f + self&.option_3_price_cents.to_f
+  end
+
   def remboursements
     payments.where(category: 'Remboursement')
   end

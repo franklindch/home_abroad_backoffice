@@ -106,6 +106,12 @@
         td
     - else
       tr.item
+      - if (@invoice.total_règlements + @invoice.total_remboursements).to_s.split('.').second == '0'
+        td
+          | Total réglé
+        td
+          = "#{(@invoice.total_règlements + @invoice.total_remboursements).to_i} EUR"
+      - else
         td
           | Total réglé
         td
@@ -113,8 +119,12 @@
     tr.total
       td
        |
-      td
-        = "Total: #{@invoice.total_price_cents} #{@invoice.total_price_currency}"
+      - if @invoice.total_price_cents.to_s.split('.').second == '0'
+        td
+          = "#{@invoice.total_price_cents.to_i} #{@invoice.total_price_currency}"
+      - else
+        td
+          = "#{@invoice.total_price_cents} #{@invoice.total_price_currency}"
   br/
   br/
   .text-left

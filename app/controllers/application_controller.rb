@@ -45,6 +45,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def generate_transits_pdf(travel)
+    respond_to do |format|
+      format.html do
+        render pdf: "Pré/post Acheminements",
+               template: 'pdfs/transits.html.slim',
+               disposition: 'attachment',
+               layout: 'pdf'
+      end
+    end
+  end
+
   def generate_paid_invoice_pdf(invoice)
     respond_to do |format|
       format.html do

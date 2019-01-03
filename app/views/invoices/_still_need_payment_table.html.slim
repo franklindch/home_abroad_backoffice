@@ -7,6 +7,7 @@
     table.table.table-sm.table-hover
       thead
         tr
+          th Partenaire
           th Responsable
           th Nom
           th Prénom
@@ -22,6 +23,8 @@
       - @invoices.each do |invoice|
         div
           tr
+            td
+              span = invoice&.language_stay&.partner_company&.name
             td
               span = invoice&.language_stay&.commercial_responsible&.capitalize
             td

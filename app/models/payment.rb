@@ -16,4 +16,6 @@ class Payment < ApplicationRecord
     Règlement: 0,
     Remboursement: 1
   }
+
+  validate :amount_price_cents, :nature
 end

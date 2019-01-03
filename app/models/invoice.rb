@@ -37,15 +37,15 @@ class Invoice < ApplicationRecord
   end
 
   def total_règlements
-    sum = 0
-    règlements.each { |payment| sum += payment.amount_price_cents}
-    return sum
+    # sum = 0
+    # règlements.each { |payment| sum += payment.amount_price_cents}
+    # return sum
   end
 
 	def total_remboursements
-		sum = 0
-		remboursements.each { |payment| sum += payment.amount_price_cents}
-		return sum
+		# sum = 0
+		# remboursements.each { |payment| sum += payment.amount_price_cents}
+		# return sum
 	end
 
   def acquittée?

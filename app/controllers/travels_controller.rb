@@ -39,11 +39,12 @@ class TravelsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    @travel_details = @travel.travel_details.reverse
+  end
 
   def update
     @travel.update(travel_params)
-    binding.pry
     flash[:notice] = 'Voyage édité avec succès'
 		redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
   end

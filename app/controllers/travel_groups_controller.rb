@@ -29,15 +29,17 @@ class TravelGroupsController < ApplicationController
   def show; end
 
   def edit
-    @travel_group_detail_aller = @travel_group.travel_details.first
-    @correspondence_aller = @travel_group_detail_aller&.correspondences&.first
-    @travel_group_detail_retour = @travel_group.travel_details.second
-    @correspondence_aller = @travel_group_detail_retour&.correspondences&.first
+    @travel_details = @travel_group.travel_details
+    # @travel_details = @travel.travel_details.reverse
+    # @travel_group_detail_aller = @travel_group.travel_details.first
+    # @correspondence_aller = @travel_group_detail_aller&.correspondences&.first
+    # @travel_group_detail_retour = @travel_group.travel_details.second
+    # @correspondence_aller = @travel_group_detail_retour&.correspondences&.first
   end
 
   def update
-    @travel_group_detail_aller = @travel_group.travel_details.first
-    @travel_group_detail_retour = @travel_group.travel_details.second
+    @travel_group_detail_aller = @travel_group.travel_details.where(nature: 'Aller').first
+    @travel_group_detail_retour = @travel_group.travel_details.where(nature: 'Retour').first
     @travel_group.update(travel_group_params)
     @travel_group.update(attendant_ids: @attendants)
     flash[:notice] = "Voyage édité avec succès !"

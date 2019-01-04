@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get 'download', to: 'clients#download'
   get 'download_prospects', to: 'child_details#download_prospects'
   get 'download_partenaires', to: 'partner_companies#download_partenaires'
+  get 'download_acc', to: 'attendants#download_acc'
 
   get 'language_stay_confirmation_sent', to: 'language_stays#send_confirmation'
   get 'language_stay_cancel_confirmation', to: 'language_stays#cancel_confirmation'

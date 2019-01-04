@@ -32,7 +32,7 @@ class ChildDetailsController < ApplicationController
   end
 
   def download_prospects
-    @child_details = ChildDetail.all
+    @child_details = ChildDetail.where(status: 'Prospect').or(ChildDetail.where(status: 'Prospect_clôturé'))
     respond_to do |format|
       format.html
       format.xlsx { render filename: "Prospects au #{Date.today}" }

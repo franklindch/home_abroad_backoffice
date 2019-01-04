@@ -24,6 +24,14 @@ class AttendantsController < ApplicationController
 	  redirect_to attendants_path
 	end
 
+  def download_acc
+    @attendants = Attendant.all
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Accompagnateurs au #{Date.today}" }
+    end
+  end
+
 	def destroy
 	  @attendant.destroy
 	  redirect_to attendants_path

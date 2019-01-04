@@ -176,7 +176,7 @@ wb.styles do |style|
         client&.language_stays&.second&.transfer_retour,
         'VTE',
         "CD#{client.last_name}",
-        client&.language_stays&.first&.start_date,
+        client&.language_stays&.first&.start_date&.strftime("%d%m%y"),
         client&.language_stays&.first&.country_code,
         client&.language_stays&.first&.invoice&.ls_amount,
         client&.language_stays&.first&.invoice&.remboursements,

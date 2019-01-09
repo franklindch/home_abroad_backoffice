@@ -37,19 +37,19 @@ class Invoice < ApplicationRecord
   end
 
   def total_règlements
-    # sum = 0
-    # règlements.each { |payment| sum += payment.amount_price_cents}
-    # return sum
+    sum = 0
+    règlements.each { |payment| sum += payment.amount_price_cents if !payment.amount_price_cents.nil? }
+    return sum
   end
 
 	def total_remboursements
-		# sum = 0
-		# remboursements.each { |payment| sum += payment.amount_price_cents}
-		# return sum
+		sum = 0
+		remboursements.each { |payment| sum += payment.amount_price_cents if !payment.amount_price_cents.nil?}
+		return sum
 	end
 
   def acquittée?
-    # (self.total_règlements - self.total_remboursements) == self.total_price_cents
+    (self.total_règlements - self.total_remboursements) == self.total_price_cents
   end
 
   def self.still_need_payment

@@ -59,8 +59,13 @@
     tr.item
       td
         | Prix du séjour
-      td
-        = "#{@invoice.language_stay_price_cents} #{@invoice.language_stay_price_currency}"
+        - if @invoice.language_stay_price_cents.to_s.split('.').second == '0'
+          td
+            = "#{@invoice.language_stay_price_cents.to_i} #{@invoice.language_stay_price_currency}"
+        - else
+          td
+            = "#{@invoice.language_stay_price_cents} #{@invoice.language_stay_price_currency}"
+
     tr.item
       - if travel && (travel&.nature == 'Groupe' || travel&.nature == 'Groupe_décalé')
         td
@@ -68,50 +73,82 @@
       - else
         td
           = "Prix du voyage #{travel&.nature&.humanize&.capitalize}"
-      td
-        = "#{@invoice.travel_price_cents} #{@invoice.travel_price_currency}"
+      - if @invoice.travel_price_cents.to_s.split('.').second == '0'
+        td
+          = "#{@invoice.travel_price_cents.to_i} #{@invoice.travel_price_currency}"
+      - else
+        td
+          = "#{@invoice.travel_price_cents} #{@invoice.travel_price_currency}"
     tr.item
       - if language_stay.option_1_fr != ''
         td
           = "Prix Option 1 : #{language_stay&.option_1_fr}"
-        td
-          = "#{@invoice.option_1_price_cents} #{@invoice.option_1_price_currency}"
+          - if @invoice.option_1_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.option_1_price_cents.to_i} #{@invoice.option_1_price_currency}"
+          - else
+            td
+              = "#{@invoice.option_1_price_cents} #{@invoice.option_1_price_currency}"
     tr.item
       - if language_stay.option_2_fr != ''
         td
           = "Prix Option 2 : #{language_stay&.option_2_fr}"
-        td
-          = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
+          - if @invoice.option_2_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.option_2_price_cents.to_i} #{@invoice.option_2_price_currency}"
+          - else
+            td
+              = "#{@invoice.option_2_price_cents} #{@invoice.option_2_price_currency}"
     tr.item
       - if language_stay.option_3_fr != ''
         td
           = "Prix Option 3 : #{language_stay&.option_3_fr}"
-        td
-          = "#{@invoice.option_3_price_cents} EUR"
+          - if @invoice.option_3_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.option_3_price_cents.to_i} EUR"
+          - else
+            td
+              = "#{@invoice.option_3_price_cents} EUR"
     tr.item
       - if language_stay.transfer_aller == true && language_stay.transfer_retour == true
         td
           | Transferts Aller / Retour
-        td
-          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+          - if @invoice.transfer_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.transfer_price_cents.to_i} #{@invoice.transfer_price_currency}"
+          - else
+            td
+              = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.transfer_aller == true
         td
           | Transfert Aller
-        td
-          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+          - if @invoice.transfer_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.transfer_price_cents.to_i} #{@invoice.transfer_price_currency}"
+          - else
+            td
+              = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.transfer_retour == true
         td
           | Transfert Retour
-        td
-          = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
+          - if @invoice.transfer_price_cents.to_s.split('.').second == '0'
+            td
+              = "#{@invoice.transfer_price_cents.to_i} #{@invoice.transfer_price_currency}"
+          - else
+            td
+              = "#{@invoice.transfer_price_cents} #{@invoice.transfer_price_currency}"
       - elsif language_stay.other_transfer != ''
         td
           = "Transferts : #{language_stay.other_transfer}"
     tr.item
       td
         | Frais de dossier / Assurance santé RC
-      td
-        = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
+        - if @invoice.application_fee_price_cents.to_s.split('.').second == '0'
+          td
+            = "#{@invoice.application_fee_price_cents.to_i} #{@invoice.application_fee_price_currency}"
+        - else
+          td
+            = "#{@invoice.application_fee_price_cents} #{@invoice.application_fee_price_currency}"
 
     - if payments.empty?
       tr.item.last
@@ -123,7 +160,6 @@
         td
           | Total réglé
         - if @invoice.total_règlements.to_s.split('.').second == '0'
-
           td
             = "#{@invoice.total_règlements.to_i} #{@invoice.total_price_currency}"
         - else
@@ -144,14 +180,3 @@
     = "Cette facture doit être réglée au plus tard 30 jours avant le départ: par carte bancaire en vous rendant sur le lien sécurisé de notre site: <u>https://sejours-homeabroad.com/paiement/</u> ou par chèque à HOME ABROAD. Si vous souhaitez recevoir une facture spéciale Comité d'entreprise, merci de nous adresser un mail décrivant le modèle de document désiré.".html_safe
 
   = render 'pdfs/footer'
-
-    / tr.information
-    /   td colspan="2"
-    /     table
-    /       tr
-    /         td
-    /           br/
-    /           = "Par la présente, nous attestons que le client #{client.first_name} #{client.last_name} est bien inscrit(e) au séjour linguistique cité en référence, et que Madame ou Monsieur #{family.name} s'est acquitté(e) du montant total du séjour."
-    /           br/
-    /           br/
-    /           | Christine de Chanaud de Séjour Home Abroad

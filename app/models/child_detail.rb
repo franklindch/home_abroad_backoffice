@@ -45,7 +45,7 @@ class ChildDetail < ApplicationRecord
 	}
   enum refered_by: { Ami: 1, Salon: 2, Rencontre_Home_Abroad: 3, Recherche_google: 4, Office: 5 }
   enum follow_up: { A_faire: 1, Doc_envoyé: 2, A_relancer: 3, Clôturé: 4 }
-  enum data_entry_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6, Stagiaire: 7, Franklin: 8 }
+  enum data_entry_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6, stagiaire1: 7, Franklin: 8, stagiaire2: 9 }
   enum contact_mode: { Appel_entrant: 1, Webcontact: 2, Par_Office: 3, Email_en_direct: 4, Visite: 5 }
   enum commercial_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6 }, _suffix: true
 

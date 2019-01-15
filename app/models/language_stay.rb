@@ -11,7 +11,7 @@ class LanguageStay < ApplicationRecord
   has_one :off_set_travel, through: :travel, dependent: :destroy
   has_one :invoice, dependent: :destroy
 
-  enum data_entry_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6, Stagiaire: 7, Franklin: 8 }
+  enum data_entry_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6, stagiaire1: 7, Franklin: 8, stagiaire2: 9 }
   enum commercial_responsible: { cdc: 1, vd: 2, oc: 3, ms: 4, mg: 5, jo: 6 }, _suffix: true
   enum accomodation: {
     Without_accommodation: 1,

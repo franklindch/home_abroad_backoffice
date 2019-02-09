@@ -279,3 +279,55 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
 
+        // Acheminements
+      tr.heading
+        td
+          = "TRANSITS"
+        td
+      - pre_transit = travel.transits.find_by(nature: 'Pré_acheminement')
+      - post_transit = travel.transits.find_by(nature: 'Post_acheminement')
+      - if pre_transit
+        tr.item
+          td
+            = "<b>Pre Transit</b>".html_safe
+          td
+            = "Mode : #{pre_transit.mode}, N° #{pre_transit.reference}"
+        tr.item
+          td
+            = "Departure : #{pre_transit.departure_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(pre_transit.start_date)} | Time : #{time_format(pre_transit.start_time)}"
+          td
+        tr.item
+          td
+            = "Arrival : #{pre_transit.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(pre_transit.end_date)} | Time : #{time_format(pre_transit.end_time)}"
+          td
+      - if post_transit
+        tr.item
+          td
+            = "<b>Post Transit</b>".html_safe
+          td
+            = "Mode : #{post_transit.mode}, N° #{post_transit.reference}"
+        tr.item
+          td
+            = "Departure : #{post_transit.departure_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(post_transit.start_date)} | Time : #{time_format(post_transit.start_time)}"
+          td
+        tr.item
+          td
+            = "Arrival : #{post_transit.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(post_transit.end_date)} | Time : #{time_format(post_transit.end_time)}"
+
+

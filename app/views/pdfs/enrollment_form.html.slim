@@ -234,7 +234,7 @@
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
 
-      - if travel.nature == 'Groupe_décalé'
+      - elsif travel.nature == 'Groupe_décalé'
         - off_set_travel = travel.off_set_travel
         - travel_detail_aller = travel.travel_group.travel_details.find_by_nature('Aller')
         - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')

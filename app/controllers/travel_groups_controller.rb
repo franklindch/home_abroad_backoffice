@@ -27,7 +27,7 @@ class TravelGroupsController < ApplicationController
   end
 
   def show
-    @off_set_travel = OffSetTravel.find(params[:off_set_travel_id])
+    @off_set_travel = OffSetTravel.find(params[:off_set_travel_id]) if params[:off_set_travel_id]
   end
 
   def edit

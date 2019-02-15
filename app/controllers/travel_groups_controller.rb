@@ -26,7 +26,9 @@ class TravelGroupsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @off_set_travel = OffSetTravel.find(params[:off_set_travel_id])
+  end
 
   def edit
     @travel_details = @travel_group.travel_details
@@ -54,6 +56,7 @@ class TravelGroupsController < ApplicationController
 
   def airport_convocation
     @travel_group = TravelGroup.find(params[:travel_group])
+    @travel = Travel.find(params[:travel_id])
     generate_airport_convocation_pdf(@travel_group)
     # fields_filled(@language_stay)
   end

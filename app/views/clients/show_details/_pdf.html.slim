@@ -3,7 +3,7 @@
   = link_to 'Attestation de séjour', language_stay_certificate_path(language_stay: language_stay), format: :html, class: 'btn btn-primary mr-3'
 
 - if language_stay.travel && (language_stay.travel.nature == 'Groupe' || language_stay.travel.nature == 'Groupe_décalé')
-  = link_to 'Convocation aéroport',  airport_convocation_path(travel_group: language_stay.travel.travel_group), format: :pdf, class: 'btn btn-primary mr-3'
+  = link_to 'Convocation aéroport',  airport_convocation_path(travel_group: language_stay.travel.travel_group, travel_id: language_stay.travel.id), format: :pdf, class: 'btn btn-primary mr-3'
 
 - if language_stay.travel && (language_stay.travel.nature == 'Groupe') && language_stay.travel.transits.any?
 

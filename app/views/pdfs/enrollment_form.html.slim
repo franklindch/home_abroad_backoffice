@@ -70,14 +70,13 @@
           = '<p><u>Smoker</u> No</p>'.html_safe
         - else
           = '<p><u>Smoker</u> Yes</p>'.html_safe
-    / tr.item
-    /   td
-    /     = "Medical issues / allergies / diet... : #{client.medical_issue}"
-    /   td
+    tr.item
+      td
+        = "Medical issues : #{client.medical_issue}"
+      td
     tr.item.last
       td.pb-3
         = "Comment : #{client.comment}"
-      td
 
 
 
@@ -189,7 +188,7 @@
         td
           = "TRANSPORTATION DETAILS"
         td
-      - if travel.nature == 'Groupe' || travel.nature == 'Groupe_décalé'
+      - if travel.nature == 'Groupe'
         - travel_detail_aller = travel.travel_group.travel_details.find_by_nature('Aller')
         - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')
         tr.item
@@ -234,6 +233,99 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
+
+      - if travel.nature == 'Groupe_décalé'
+        - off_set_travel = travel.off_set_travel
+        - travel_detail_aller = travel.travel_group.travel_details.find_by_nature('Aller')
+        - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')
+        - if off_set_travel.nature == 'Aller'
+          tr.item
+            td
+              = "<b>Departure</b>".html_safe
+            td
+              = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
+          tr.item
+            td
+              = "Departure : #{off_set_travel.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(off_set_travel.start_date)} | Time : #{time_format(off_set_travel.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{off_set_travel.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(off_set_travel.end_date)} | Time : #{time_format(off_set_travel.end_time)}"
+            td
+        - else
+          tr.item
+            td
+              = "<b>Departure</b>".html_safe
+            td
+              = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+          tr.item
+            td
+              = "Departure : #{travel_detail_aller.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.start_date)} | Time : #{time_format(travel_detail_aller.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{travel_detail_aller.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
+            td
+        - if off_set_travel.nature == 'Retour'
+          tr.item
+            td
+              = "<b>Arrival</b>".html_safe
+            td
+              = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
+          tr.item
+            td
+              = "Departure : #{off_set_travel.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(off_set_travel.start_date)} | Time : #{time_format(off_set_travel.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{off_set_travel.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(off_set_travel.end_date)} | Time : #{time_format(off_set_travel.end_time)}"
+            td
+        - else
+          tr.item
+            td
+              = "<b>Arrival</b>".html_safe
+            td
+              = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+          tr.item
+            td
+              = "Departure : #{travel_detail_retour.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.start_date)} | Time : #{time_format(travel_detail_retour.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{travel_detail_retour.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
+            td
       - else
         - travel_detail_aller = travel.travel_details.find_by_nature('Aller')
         - travel_detail_retour = travel.travel_details.find_by_nature('Retour')
@@ -280,12 +372,13 @@
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
 
         // Acheminements
-      tr.heading
-        td
-          = "TRANSITS"
-        td
       - pre_transit = travel.transits.find_by(nature: 'Pré_acheminement')
       - post_transit = travel.transits.find_by(nature: 'Post_acheminement')
+      - if pre_transit || post_transit
+        tr.heading
+          td
+            = "TRANSITS"
+          td
       - if pre_transit
         tr.item
           td

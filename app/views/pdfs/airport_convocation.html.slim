@@ -116,6 +116,56 @@
             p = show_attribute_empty_string_no_underline(date_format(correspondence_retour&.end_date), 'Date d\'arrivée')
           td
             p = show_attribute_empty_string_no_underline(time_format(correspondence_retour&.end_time), 'Heure d\'arrivée')
+      - pre_transit = @travel.transits.find_by(nature: 'Pré_acheminement')
+      - post_transit = @travel.transits.find_by(nature: 'Post_acheminement')
+      - if pre_transit || post_transit
+        tr.heading
+          td
+            = "Acheminements"
+          td
+      - if pre_transit
+        tr.item
+          td
+            = "<b>Pré Acheminement</b>".html_safe
+          td
+            = "Mode : #{pre_transit.mode}, N° #{pre_transit.reference}"
+        tr.item
+          td
+            = "Départ : #{pre_transit.departure_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(pre_transit.start_date)} | Heure : #{time_format(pre_transit.start_time)}"
+          td
+        tr.item
+          td
+            = "Arrivée : #{pre_transit.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(pre_transit.end_date)} | Heure : #{time_format(pre_transit.end_time)}"
+          td
+      - if post_transit
+        tr.item
+          td
+            = "<b>Post Acheminement</b>".html_safe
+          td
+            = "Mode : #{post_transit.mode}, N° #{post_transit.reference}"
+        tr.item
+          td
+            = "Départ : #{post_transit.departure_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(post_transit.start_date)} | Heure : #{time_format(post_transit.start_time)}"
+          td
+        tr.item
+          td
+            = "Arrival : #{post_transit.arrival_location}"
+          td
+        tr.item
+          td
+            = "Date (dd/mm/yr) : #{date_format(post_transit.end_date)} | Heure : #{time_format(post_transit.end_time)}"
 
   br/
   .text-left

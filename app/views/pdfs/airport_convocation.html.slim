@@ -19,103 +19,164 @@
             td.text-left
               = "Rendez-vous au comptoir d'enregistrement <b>#{c(travel_detail_aller&.partner_company&.name)}</b> à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
-    tr.heading
-      td
-        = "Voyage #{travel_detail_aller.nature}"
-      td
-    tr.item
-      td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.mode.humanize, 'Moyen de transport')
-      td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.reference, 'Référence')
-    tr.item
-      td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.partner_company&.name, 'Compagnie')
-      td
-    tr.item
-      td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.departure_location, 'Départ de')
-      td
-        = show_attribute_empty_string_no_underline(travel_detail_aller&.arrival_location, 'Arrivée à')
-    tr.item
-      td
-        = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.start_date), 'Date de départ')
-      td
-        = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.start_time), 'Heure de départ')
-    tr.item
-      td
-        = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
-      td
-        = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
+      - @travel = Travel.find(params[:travel_id])
+      - if @travel && @travel.off_set_travel && @travel.off_set_travel.nature == 'Aller'
+        tr.heading
+          td
+            = "Voyage #{@travel.off_set_travel.nature} décalé"
+          td
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.mode.humanize, 'Moyen de transport')
+          td
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.reference, 'Référence')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.partner_company&.name, 'Compagnie')
+          td
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.departure_location, 'Départ de')
+          td
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.arrival_location, 'Arrivée à')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(date_format(@travel.off_set_travel&.start_date), 'Date de départ')
+          td
+            = show_attribute_empty_string_no_underline(time_format(@travel.off_set_travel&.start_time), 'Heure de départ')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(date_format(@travel.off_set_travel&.end_date), 'Date d\'arrivée')
+          td
+            = show_attribute_empty_string_no_underline(time_format(@travel.off_set_travel&.end_time), 'Heure d\'arrivée')
 
-      - if correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
+      - else
+        tr.heading
+          td
+            = "Voyage #{travel_detail_aller.nature}"
+          td
         tr.item
           td
-            p = show_attribute_empty_string_no_underline(correspondence_aller&.reference, 'Référence')
+            = show_attribute_empty_string_no_underline(travel_detail_aller&.mode.humanize, 'Moyen de transport')
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_aller&.reference, 'Référence')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_aller&.partner_company&.name, 'Compagnie')
           td
         tr.item
           td
-            p = show_attribute_empty_string_no_underline(correspondence_aller&.departure_location, 'Départ de')
+            = show_attribute_empty_string_no_underline(travel_detail_aller&.departure_location, 'Départ de')
           td
-            p = show_attribute_empty_string_no_underline(correspondence_aller&.arrival_location, 'Arrivée à')
+            = show_attribute_empty_string_no_underline(travel_detail_aller&.arrival_location, 'Arrivée à')
         tr.item
           td
-            p = show_attribute_empty_string_no_underline(date_format(correspondence_aller&.start_date), 'Date de départ')
+            = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.start_date), 'Date de départ')
           td
-            p = show_attribute_empty_string_no_underline(time_format(correspondence_aller&.start_time), 'Heure de départ')
-        tr.item.last
+            = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.start_time), 'Heure de départ')
+        tr.item
           td
-            p = show_attribute_empty_string_no_underline(date_format(correspondence_aller&.end_date), 'Date d\'arrivée')
+            = show_attribute_empty_string_no_underline(date_format(travel_detail_aller&.end_date), 'Date d\'arrivée')
           td
-            p = show_attribute_empty_string_no_underline(time_format(correspondence_aller&.end_time), 'Heure d\'arrivée')
+            = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
-      tr.heading
-        td
-          = "Voyage #{travel_detail_retour.nature}"
-        td
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.mode.humanize, 'Moyen de transport')
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.reference, 'Référence')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.partner_company&.name, 'Compagnie')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.departure_location, 'Départ de')
-        td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.arrival_location, 'Arrivée à')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.start_date), 'Date de départ')
-        td
-          = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.start_time), 'Heure de départ')
-      tr.item
-        td
-          = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
-        td
-          = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
-      - if correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
-        tr.item
+          - if correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
+            tr.item
+              td
+                p = show_attribute_empty_string_no_underline(correspondence_aller&.reference, 'Référence')
+              td
+            tr.item
+              td
+                p = show_attribute_empty_string_no_underline(correspondence_aller&.departure_location, 'Départ de')
+              td
+                p = show_attribute_empty_string_no_underline(correspondence_aller&.arrival_location, 'Arrivée à')
+            tr.item
+              td
+                p = show_attribute_empty_string_no_underline(date_format(correspondence_aller&.start_date), 'Date de départ')
+              td
+                p = show_attribute_empty_string_no_underline(time_format(correspondence_aller&.start_time), 'Heure de départ')
+            tr.item.last
+              td
+                p = show_attribute_empty_string_no_underline(date_format(correspondence_aller&.end_date), 'Date d\'arrivée')
+              td
+                p = show_attribute_empty_string_no_underline(time_format(correspondence_aller&.end_time), 'Heure d\'arrivée')
+
+      - if @travel && @travel.off_set_travel && @travel.off_set_travel.nature == 'Retour'
+        tr.heading
           td
-            p = show_attribute_empty_string_no_underline(correspondence_retour&.reference, 'Référence')
+            = "Voyage #{@travel.off_set_travel.nature} décalé"
           td
         tr.item
           td
-            p = show_attribute_empty_string_no_underline(correspondence_retour&.departure_location, 'Départ de')
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.mode.humanize, 'Moyen de transport')
           td
-            p = show_attribute_empty_string_no_underline(correspondence_retour&.arrival_location, 'Arrivée à')
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.reference, 'Référence')
         tr.item
           td
-            p = show_attribute_empty_string_no_underline(date_format(correspondence_retour&.start_date), 'Date de départ')
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.partner_company&.name, 'Compagnie')
+        tr.item
           td
-            p = show_attribute_empty_string_no_underline(time_format(correspondence_retour&.start_time), 'Heure de départ')
-        tr.item.last
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.departure_location, 'Départ de')
           td
-            p = show_attribute_empty_string_no_underline(date_format(correspondence_retour&.end_date), 'Date d\'arrivée')
+            = show_attribute_empty_string_no_underline(@travel.off_set_travel&.arrival_location, 'Arrivée à')
+        tr.item
           td
-            p = show_attribute_empty_string_no_underline(time_format(correspondence_retour&.end_time), 'Heure d\'arrivée')
+            = show_attribute_empty_string_no_underline(date_format(@travel.off_set_travel&.start_date), 'Date de départ')
+          td
+            = show_attribute_empty_string_no_underline(time_format(@travel.off_set_travel&.start_time), 'Heure de départ')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(date_format(@travel.off_set_travel&.end_date), 'Date d\'arrivée')
+          td
+            = show_attribute_empty_string_no_underline(time_format(@travel.off_set_travel&.end_time), 'Heure d\'arrivée')
+      - else
+        tr.heading
+          td
+            = "Voyage #{travel_detail_retour.nature}"
+          td
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_retour&.mode.humanize, 'Moyen de transport')
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_retour&.reference, 'Référence')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_retour&.partner_company&.name, 'Compagnie')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_retour&.departure_location, 'Départ de')
+          td
+            = show_attribute_empty_string_no_underline(travel_detail_retour&.arrival_location, 'Arrivée à')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.start_date), 'Date de départ')
+          td
+            = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.start_time), 'Heure de départ')
+        tr.item
+          td
+            = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
+          td
+            = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
+        - if correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
+          tr.item
+            td
+              p = show_attribute_empty_string_no_underline(correspondence_retour&.reference, 'Référence')
+            td
+          tr.item
+            td
+              p = show_attribute_empty_string_no_underline(correspondence_retour&.departure_location, 'Départ de')
+            td
+              p = show_attribute_empty_string_no_underline(correspondence_retour&.arrival_location, 'Arrivée à')
+          tr.item
+            td
+              p = show_attribute_empty_string_no_underline(date_format(correspondence_retour&.start_date), 'Date de départ')
+            td
+              p = show_attribute_empty_string_no_underline(time_format(correspondence_retour&.start_time), 'Heure de départ')
+          tr.item.last
+            td
+              p = show_attribute_empty_string_no_underline(date_format(correspondence_retour&.end_date), 'Date d\'arrivée')
+            td
+              p = show_attribute_empty_string_no_underline(time_format(correspondence_retour&.end_time), 'Heure d\'arrivée')
       - pre_transit = @travel.transits.find_by(nature: 'Pré_acheminement')
       - post_transit = @travel.transits.find_by(nature: 'Post_acheminement')
       - if pre_transit || post_transit

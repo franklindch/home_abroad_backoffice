@@ -1,13 +1,11 @@
 import $ from "jquery";
 import "bootstrap";
-import "intl-tel-input";
 
 let Turbolinks = require("turbolinks")
 Turbolinks.start()
 
 import { Conditionals } from '../style/conditionals';
 import { calendar, calendarBirthDate } from '../style/flatpicker';
-import { initializeIntlNumberFamilyFields, initializeIntlNumberPartnerFields, initializeIntlNumberClientFields } from '../libraries/initialize-intl-number';
 import { initAutocomplete } from '../libraries/place_autocomplete';
 import { formSubmit, AlertDisa } from '../style/form_submit';
 import { travelSelectConditionnal, travelGroupConditionnal } from '../style/conditional_form';
@@ -40,15 +38,4 @@ document.addEventListener("turbolinks:load", () => {
   if ($('.oli')) {
 		select2PartnerCompanies();
   }
-	if($(".father_phone") || ($(".mother_phone"))){
-		initializeIntlNumberFamilyFields();
-		autocompleteFamilyFields();
-	}
-	if($(".partner_company_phone_number")){
-		initializeIntlNumberPartnerFields();
-	}
-
-	if ($('.client_phone_number')){
-		initializeIntlNumberClientFields();
-	}
 });

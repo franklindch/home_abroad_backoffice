@@ -5,10 +5,6 @@ class TravelsController < ApplicationController
 
 	def new
 	  @travel = Travel.new
-	  @travel_detail_aller = @travel.travel_details.build
-	  @correspondence_aller = @travel_detail_aller.correspondences.build
-    @travel_detail_retour = @travel.travel_details.build
-	  @correspondence_retour = @travel_detail_retour.correspondences.build
 	end
 
 	def create
@@ -27,10 +23,8 @@ class TravelsController < ApplicationController
         flash[:notice] = 'Voyage Groupe décalé ajouté avec succès'
         redirect_to new_travel_off_set_travel_path(@travel)
       else
-        @travel.travel_details.first.update_columns(nature: 'Aller')
-        @travel.travel_details.second.update_columns(nature: 'Retour')
         flash[:notice] = 'Voyage ajouté avec succès'
-        redirect_to family_client_path(client.family, client)
+        redirect_to new_travel_travel_detail_path(@travel)
       end
     else
       render :new
@@ -39,9 +33,7 @@ class TravelsController < ApplicationController
 
   def show; end
 
-  def edit
-    @travel_details = @travel.travel_details.reverse
-  end
+  def edit; end
 
   def update
     @travel.update(travel_params)
@@ -58,13 +50,8 @@ class TravelsController < ApplicationController
 	private
 
 	def travel_params
-	  params.require(:travel).permit(:nature, :language_stay_id, :travel_group_id, :travel_details,
-	    travel_details_attributes: [
-	      :u_m, :start_date, :end_date, :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy,
-	      correspondences_attributes: [
-	        :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :start_date, :end_date, :_destroy
-	      ]
-	    ]
+	  params.require(:travel).permit(
+      :nature, :language_stay_id, :travel_group_id
 	  )
 	end
 

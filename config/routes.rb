@@ -39,6 +39,11 @@ Rails.application.routes.draw do
     resources :travels, only: [:index, :destroy, :edit, :update]
     resources :travels, only: [:show] do
       resources :off_set_travels, only: [:new, :create, :edit, :update]
+      resources :travel_details, only: [:new, :create, :edit, :update]
+    end
+
+    resources :travel_details, only: [:show] do
+      resources :correspondences, only: [:new, :create, :edit, :update]
     end
 
     get 'enrollment_form', to: 'language_stays#enrollment_form'

@@ -39,7 +39,6 @@
         p Pas de voyage modifié sur le voyage groupe. Veuillez modifier le voyage pour ce séjour.
   .row
     .mt-5.edit-delete-links.ml-3
-      / = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
       = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
 - else
@@ -48,9 +47,6 @@
       .col-md-3
         = link_to "Voir les détails du voyage #{travel.nature}", travel_path(travel)
         p = "#{travel&.travel_details&.first&.departure_location} --- #{travel&.travel_details&.first&.arrival_location}"
-      / p = show_attribute_empty_string(travel&.travel_group.capacity, 'Capacité')
-      / p = show_attribute_empty_string(travel&.travel_group.travel_code, 'Code')
-      / p = show_attribute_nil(travel&.travel_group.season&.humanize, 'Saison')
   - else
     p Pas de travel details
   .row

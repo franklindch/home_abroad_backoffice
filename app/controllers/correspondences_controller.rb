@@ -17,7 +17,7 @@ class CorrespondencesController < ApplicationController
       redirect_to family_qualification_path(@family)
     elsif @correspondence.save
       flash[:notice] = "Correspondence ajoutée avec succès !"
-      redirect_to new_travel_travel_detail_path(@travel_detail)
+      redirect_to new_travel_travel_detail_path(@correspondence.travel_detail.travel)
     else
       render :new
     end

@@ -16,7 +16,7 @@
               p.text-right
                 = "Dated :  #{Date.today.strftime('%A %d %B %Y')}"
                 br/
-                = "Season 2018/2019"
+                = client&.season
 
     tr.heading
       td
@@ -193,7 +193,7 @@
         - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')
         tr.item
           td
-            = "<b>Departure</b>".html_safe
+            = "<b>Arriving</b>".html_safe
           td
             = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
         tr.item
@@ -214,7 +214,7 @@
           td
         tr.item
           td
-            = "<b>Arrival</b>".html_safe
+            = "<b>Returning</b>".html_safe
           td
             = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
         tr.item
@@ -241,7 +241,7 @@
         - if off_set_travel.nature == 'Aller'
           tr.item
             td
-              = "<b>Departure</b>".html_safe
+              = "<b>Arriving</b>".html_safe
             td
               = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
           tr.item
@@ -263,7 +263,7 @@
         - else
           tr.item
             td
-              = "<b>Departure</b>".html_safe
+              = "<b>Arriving</b>".html_safe
             td
               = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
           tr.item
@@ -285,7 +285,7 @@
         - if off_set_travel.nature == 'Retour'
           tr.item
             td
-              = "<b>Arrival</b>".html_safe
+              = "<b>Returning</b>".html_safe
             td
               = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
           tr.item
@@ -307,7 +307,7 @@
         - else
           tr.item
             td
-              = "<b>Arrival</b>".html_safe
+              = "<b>Returning</b>".html_safe
             td
               = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
           tr.item
@@ -331,7 +331,7 @@
         - travel_detail_retour = travel.travel_details.find_by_nature('Retour')
         tr.item
           td
-            = "<b>Departure</b>".html_safe
+            = "<b>Arriving</b>".html_safe
           td
             = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
         tr.item
@@ -352,7 +352,7 @@
           td
         tr.item
           td
-            = "<b>Arrival</b>".html_safe
+            = "<b>Returning</b>".html_safe
           td
             = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
         tr.item

@@ -25,7 +25,7 @@ class Invoice < ApplicationRecord
   end
 
   def remboursements
-    payments.where(category: 'Remboursement')
+    payments.where(category: 'Remboursement')&.first&.amount_price_cents
   end
 
   def self.order_by_language_stays_start_date

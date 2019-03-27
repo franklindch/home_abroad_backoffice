@@ -207,7 +207,7 @@ wb.styles do |style|
         client&.language_stays&.first&.start_date&.strftime("%d%m%y"),
         client&.language_stays&.first&.country_code,
         client&.language_stays&.first&.invoice&.ls_amount,
-        client&.language_stays&.first&.invoice&.remboursements,
+        client&.language_stays&.first&.invoice&.remboursements&.first&.amount_price_cents,
         '7585200',
         client&.language_stays&.first&.invoice&.travel_price_cents,
         '',

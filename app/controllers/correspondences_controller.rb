@@ -26,7 +26,7 @@ class CorrespondencesController < ApplicationController
 
   def update
     @correspondence.update(correspondence_params)
-    binding.pry
+    # binding.pry
     if @travel_detail.nature == 'Retour'
       flash[:notice] = "Correspondence éditée avec succès !"
       redirect_to family_client_path(@travel_detail.travel.language_stay.client.family, @travel_detail.travel.language_stay.client)

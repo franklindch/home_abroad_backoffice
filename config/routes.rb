@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   resources :excels, only: :index
 
   get 'download', to: 'clients#download'
+  get 'download_rest', to: 'clients#download_rest'
   get 'download_prospects', to: 'child_details#download_prospects'
   get 'download_partenaires', to: 'partner_companies#download_partenaires'
   get 'download_acc', to: 'attendants#download_acc'

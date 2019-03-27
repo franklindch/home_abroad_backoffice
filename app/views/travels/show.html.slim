@@ -40,7 +40,7 @@
           = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
         - if !correspondence_aller.nil? && correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
-          = link_to "<i class='fa fas fa-edit'></i> Editer correspondence".html_safe, edit_travel_detail_correspondence_path(travel_detail_aller, correspondence_aller)
+          / = link_to "<i class='fa fas fa-edit'></i> Editer correspondence".html_safe, edit_travel_detail_correspondence_path(travel_detail_aller, correspondence_aller)
           tr.item
             td
               p = show_attribute_empty_string_no_underline(correspondence_aller&.reference, 'Référence')

@@ -107,7 +107,7 @@ class LanguageStaysController < ApplicationController
     if language_stay.all_attributes?
       flash[:notice] = 'Tous les champs du séjour ont été remplis'
     else
-      flash[:alert] = 'Il reste sûrement des informations à compléter sur le séjour'
+      flash[:alert] = ''
     end
   end
 

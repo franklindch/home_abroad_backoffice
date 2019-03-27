@@ -160,6 +160,9 @@
         = "OPTION 2 : #{@language_stay.option_2}"
     tr.item
       td
+        = "OPTION 3 : #{@language_stay.option_3}"
+    tr.item
+      td
         = "Special requests : #{@language_stay&.precisions}"
       td
     - if @language_stay.transfer_aller == true && @language_stay.transfer_retour == true
@@ -191,6 +194,8 @@
       - if travel.nature == 'Groupe'
         - travel_detail_aller = travel.travel_group.travel_details.find_by_nature('Aller')
         - travel_detail_retour = travel.travel_group.travel_details.find_by_nature('Retour')
+        - correspondence_aller = travel_detail_aller&.correspondences&.first
+        - correspondence_retour = travel_detail_retour&.correspondences&.first
         tr.item
           td
             = "<b>Arriving</b>".html_safe
@@ -212,6 +217,26 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
+        - if !correspondence_aller.nil?
+          tr.item
+            td
+              = "<b>Correspondance</b>".html_safe
+          tr.item
+            td
+              = "Departure : #{correspondence_aller.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(correspondence_aller.start_date)} | Time : #{time_format(correspondence_aller.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{correspondence_aller.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(correspondence_aller.end_date)} | Time : #{time_format(correspondence_aller.end_time)}"
+            td
         tr.item
           td
             = "<b>Returning</b>".html_safe
@@ -233,6 +258,27 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
           td
+        - if !correspondence_retour.nil?
+          tr.item
+            td
+              = "<b>Correspondance</b>".html_safe
+          tr.item
+            td
+              = "Departure : #{correspondence_retour.departure_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(correspondence_retour.start_date)} | Time : #{time_format(correspondence_retour.start_time)}"
+            td
+          tr.item
+            td
+              = "Arrival : #{correspondence_retour.arrival_location}"
+            td
+          tr.item
+            td
+              = "Date (dd/mm/yr) : #{date_format(correspondence_retour.end_date)} | Time : #{time_format(correspondence_retour.end_time)}"
+            td
+
 
       - elsif travel.nature == 'Groupe_décalé'
         - off_set_travel = travel.off_set_travel
@@ -329,6 +375,8 @@
       - else
         - travel_detail_aller = travel.travel_details.find_by_nature('Aller')
         - travel_detail_retour = travel.travel_details.find_by_nature('Retour')
+        - correspondence_aller = travel_detail_aller&.correspondences&.first
+        - correspondence_retour = travel_detail_retour&.correspondences&.first
         tr.item
           td
             = "<b>Arriving</b>".html_safe
@@ -350,6 +398,27 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
+          - if !correspondence_aller.nil?
+            tr.item
+              td
+                = "<b>Correspondance</b>".html_safe
+            tr.item
+              td
+                = "Departure : #{correspondence_aller.departure_location}"
+              td
+            tr.item
+              td
+                = "Date (dd/mm/yr) : #{date_format(correspondence_aller.start_date)} | Time : #{time_format(correspondence_aller.start_time)}"
+              td
+            tr.item
+              td
+                = "Arrival : #{correspondence_aller.arrival_location}"
+              td
+            tr.item
+              td
+                = "Date (dd/mm/yr) : #{date_format(correspondence_aller.end_date)} | Time : #{time_format(correspondence_aller.end_time)}"
+              td
+
         tr.item
           td
             = "<b>Returning</b>".html_safe
@@ -370,6 +439,27 @@
         tr.item
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
+
+          - if !correspondence_retour.nil?
+            tr.item
+              td
+                = "<b>Correspondance</b>".html_safe
+            tr.item
+              td
+                = "Departure : #{correspondence_retour.departure_location}"
+              td
+            tr.item
+              td
+                = "Date (dd/mm/yr) : #{date_format(correspondence_retour.start_date)} | Time : #{time_format(correspondence_retour.start_time)}"
+              td
+            tr.item
+              td
+                = "Arrival : #{correspondence_retour.arrival_location}"
+              td
+            tr.item
+              td
+                = "Date (dd/mm/yr) : #{date_format(correspondence_retour.end_date)} | Time : #{time_format(correspondence_retour.end_time)}"
+              td
 
         // Acheminements
       - pre_transit = travel.transits.find_by(nature: 'Pré_acheminement')

@@ -1,7 +1,7 @@
-- travel_detail_aller = @travel.travel_details.find_by_nature('Aller')
-- correspondence_aller = travel_detail_aller.correspondences.first
-- travel_detail_retour = @travel.travel_details.find_by_nature('Retour')
-- correspondence_retour = travel_detail_retour.correspondences.first
+- travel_detail_aller = @travel&.travel_details&.find_by_nature('Aller')
+- correspondence_aller = travel_detail_aller&.correspondences&.first
+- travel_detail_retour = @travel.travel_details&.find_by_nature('Retour')
+- correspondence_retour = travel_detail_retour&.correspondences&.first
 
 .container-fluid
   .row.mt-5

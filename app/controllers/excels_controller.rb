@@ -3,24 +3,10 @@ class ExcelsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-    @excel = Excel.new(ressource)
-    # raise
+    @ressource = ExcelClientsJob.perform_now(params[:ressource])
     respond_to do |format|
       format.html
       format.xlsx { render xlsx: :index, filename: "#{params[:ressource]}"}
     end
 	end
-
-  private
-
-  def ressource
-    case params[:ressource]
-    when 'families' then @ressource = Family.all
-    when 'clients' then @ressource = Client.all
-    when 'voyages_groupes' then @ressource = TravelGroup.all
-    when 'partenaires' then @ressource = PartnerCompany.all
-    when 'accompagnateurs' then @ressource = Attendant.all
-    when 'prospects' then @ressource = ChildDetail.real_prospects
-    end
-  end
 end

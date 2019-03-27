@@ -10,24 +10,25 @@ class TravelDetailsController < ApplicationController
   def create
     @travel_detail = TravelDetail.new(travel_detail_params)
     @travel_detail.travel = @travel
-    # binding.pry
-    if params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Aller'
+    if params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Aller' && @travel.travel_details.where(nature:'Aller').any?
+      flash[:notice] = "Voyage Aller déjà ajouté ! "
+      render :new
+    elsif params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Aller' && @travel.travel_details.where(nature:'Aller').any?
+      flash[:notice] = "Voyage Aller déjà ajouté ! "
+      render :new
+    elsif params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Aller'
       @travel_detail.save
       flash[:notice] = "Voyage ajouté avec succès !"
       redirect_to new_travel_detail_correspondence_path(@travel_detail)
+    elsif params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Aller'
+      @travel_detail.save
+      flash[:notice] = "Voyage ajouté avec succès !"
+      redirect_to new_travel_travel_detail_path(@travel)
     elsif params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Retour'
       @travel_detail.save
       flash[:notice] = "Voyage ajouté avec succès !"
       redirect_to new_travel_detail_correspondence_path(@travel_detail)
     elsif params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Retour'
-      @travel_detail.save
-      flash[:notice] = "Voyage ajouté avec succès !"
-      redirect_to new_travel_travel_detail_path(@travel)
-    elsif params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Aller'
-      @travel_detail.save
-      flash[:notice] = "Voyage ajouté avec succès !"
-      redirect_to new_travel_travel_detail_path(@travel)
-    elsif
       @travel_detail.save
       flash[:notice] = "Voyage ajouté avec succès !"
       redirect_to family_client_path(@travel.language_stay.client.family,  @travel.language_stay.client)
@@ -39,13 +40,25 @@ class TravelDetailsController < ApplicationController
   def edit; end
 
   def update
-    @travel_detail.update(travel_detail_params)
-    if @travel_detail.correspondences.any?
-      @travel_detail = @travel.travel_details.find_by_nature('Retour')
-      flash[:notice] = 'Voyage édité avec succès'
+    # binding.pry
+    if params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Aller'
+      @travel_detail.update(travel_detail_params)
+      flash[:notice] = "Voyage édité avec succès !"
       redirect_to edit_travel_detail_correspondence_path(@travel_detail, @travel_detail.correspondences.first)
+    elsif params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Aller'
+      @travel_detail.update(travel_detail_params)
+      flash[:notice] = "Voyage édité avec succès !"
+      redirect_to edit_travel_travel_detail_path(@travel, @travel.travel_details.where(nature:'Retour').first)
+    elsif params[:travel_detail][:is_correspondence] == 'true' && params[:travel_detail][:nature] == 'Retour'
+      @travel_detail.update(travel_detail_params)
+      flash[:notice] = "Voyage édité avec succès !"
+      redirect_to edit_travel_detail_correspondence_path(@travel.travel_details.where(nature:'Retour').first, @travel.travel_details.where(nature:'Retour').first.correspondences.first)
+    elsif params[:travel_detail][:is_correspondence] == 'false' && params[:travel_detail][:nature] == 'Retour'
+      @travel_detail.update(travel_detail_params)
+      flash[:notice] = "Voyage édité avec succès !"
+      redirect_to family_client_path(@travel.language_stay.client.family,  @travel.language_stay.client)
     else
-      redirect_to edit_travel_travel_detail_path(@travel, @travel_detail)
+      render :edit
     end
   end
 

@@ -8,13 +8,12 @@ class CorrespondencesController < ApplicationController
   end
 
   def create
-    binding.pry
     @correspondence = Correspondence.new(correspondence_params)
     @correspondence.travel_detail = @travel_detail
 
-    if @correspondence.save && @correspondence.travel_detail.nature == 'Retour'
+    if @correspondence.save && @travel_detail.nature == 'Retour'
       flash[:notice] = "Correspondence ajoutée avec succès !"
-      redirect_to family_qualification_path(@family)
+      redirect_to family_client_path(@travel_detail.travel.language_stay.client.family,  @travel_detail.travel.language_stay.client)
     elsif @correspondence.save
       flash[:notice] = "Correspondence ajoutée avec succès !"
       redirect_to new_travel_travel_detail_path(@correspondence.travel_detail.travel)
@@ -27,8 +26,14 @@ class CorrespondencesController < ApplicationController
 
   def update
     @correspondence.update(correspondence_params)
-    flash[:notice] = 'Correspondence éditée avec succès'
-    redirect_to family_client_path(@language_stay.client.family,  @language_stay.client)
+    binding.pry
+    if @travel_detail.nature == 'Retour'
+      flash[:notice] = "Correspondence éditée avec succès !"
+      redirect_to family_client_path(@travel_detail.travel.language_stay.client.family, @travel_detail.travel.language_stay.client)
+    else
+      flash[:notice] = "Correspondence éditée avec succès !"
+      redirect_to edit_travel_travel_detail_path(@travel_detail.travel, @travel_detail.travel.travel_details.where(nature:'Retour').first)
+    end
   end
 
   def destroy
@@ -50,6 +55,6 @@ class CorrespondencesController < ApplicationController
   end
 
   def retrieve_correspondence
-    @correspondence ||= Correspondence.find(params[:correpondence_id])
+    @correspondence ||= Correspondence.find(params[:id])
   end
 end

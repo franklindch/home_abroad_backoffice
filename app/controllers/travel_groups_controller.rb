@@ -56,7 +56,6 @@ class TravelGroupsController < ApplicationController
 
   def airport_convocation
     @travel_group = TravelGroup.find(params[:travel_group])
-    @travel = Travel.find(params[:travel_id])
     generate_airport_convocation_pdf(@travel_group)
     # fields_filled(@language_stay)
   end

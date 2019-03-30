@@ -16,10 +16,8 @@ class TravelGroupsController < ApplicationController
 
     if @travel_group.save
       flash[:notice] = "Voyage créé avec succès !"
-      @travel_group.travel_details.first.update_columns(nature: 'Aller')
-      @travel_group.travel_details.second.update_columns(nature: 'Retour')
       @travel_group.update(attendant_ids: @attendants)
-      redirect_to travel_groups_path
+      redirect_to new_travel_travel_detail_path(@travel_group)
     else
       flash[:alert] = "Merci de lire les messages d'erreur."
       render :new

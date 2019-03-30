@@ -152,7 +152,7 @@ wb.styles do |style|
         client.age_category,
         client.birth_date,
         client.email,
-        client.intl_number,
+        client.phone_number,
         client.passport_number,
         client.country_of_issue,
         client.passport_expiration_date,

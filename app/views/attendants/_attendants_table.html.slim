@@ -31,7 +31,7 @@
           td
             span = attendant.email
           td
-            span = number_to_phone(attendant.intl_number) if attendant.intl_number != nil
+            span = number_to_phone(attendant.phone) if attendant.phone != nil
           td.w-25
             span = attendant.address if attendant.address != nil
           td

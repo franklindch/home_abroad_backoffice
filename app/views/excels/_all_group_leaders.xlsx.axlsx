@@ -24,7 +24,7 @@ wb.styles do |style|
         attendant.last_name,
         attendant.first_name,
         attendant.email,
-        attendant.intl_number,
+        attendant.phone,
         attendant.birth_date,
         attendant.address,
         attendant.zip_code,

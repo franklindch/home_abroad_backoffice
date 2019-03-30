@@ -120,17 +120,17 @@ wb.styles do |style|
         family.address_2,
         family.zip_code,
         family.country,
-        family.intl_number,
+        family.phone,
         family.email,
         family.father_name,
         family.father_email,
-        family.father_intl_number,
-        family.father_office_intl_number,
+        family.father_phone,
+        family.father_office_phone,
         family.father_main_contact,
         family.mother_name,
         family.mother_email,
-        family.mother_intl_number,
-        family.mother_office_intl_number,
+        family.mother_phone,
+        family.mother_office_phone,
         family.mother_main_contact
       ]
     end

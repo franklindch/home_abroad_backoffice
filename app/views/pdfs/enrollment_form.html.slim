@@ -54,9 +54,9 @@
         = "(please use <u>info@sejours-homeabroad.com</u>)".html_safe
     tr.item
       td
-        = "Home telephone : #{client.family.intl_number}"
+        = "Home telephone : #{client.family.phone}"
       td
-        = "Cellphone : #{client.intl_number}"
+        = "Cellphone : #{client.phone_number}"
     tr.item
       td
         = "Nationality : #{client.nationality}"
@@ -93,9 +93,9 @@
 
     tr.item
       td
-        = "Cellphone : #{client.family.mother_intl_number}"
+        = "Cellphone : #{client.family.mother_phone}"
       td
-        = "Workphone : #{client.family.mother_office_intl_number}"
+        = "Workphone : #{client.family.mother_office_phone}"
     tr.item
       td
         = "Email : #{client.family.mother_email}"
@@ -106,9 +106,9 @@
         = "First name : #{client.family.father_first_name}"
     tr.item
       td
-        = "Cellphone : #{client.family.father_intl_number}"
+        = "Cellphone : #{client.family.father_phone}"
       td
-        = "Workphone : #{client.family.father_office_intl_number}"
+        = "Workphone : #{client.family.father_office_phone}"
     tr.item
       td
         = "Email : #{client.family.father_email}"
@@ -220,7 +220,7 @@
         - if !correspondence_aller.nil?
           tr.item
             td
-              = "<b>Correspondance</b>".html_safe
+              = "<b>Connection</b>".html_safe
           tr.item
             td
               = "Departure : #{correspondence_aller.departure_location}"
@@ -261,7 +261,7 @@
         - if !correspondence_retour.nil?
           tr.item
             td
-              = "<b>Correspondance</b>".html_safe
+              = "<b>Connection</b>".html_safe
           tr.item
             td
               = "Departure : #{correspondence_retour.departure_location}"
@@ -401,7 +401,7 @@
           - if !correspondence_aller.nil?
             tr.item
               td
-                = "<b>Correspondance</b>".html_safe
+                = "<b>Connection</b>".html_safe
             tr.item
               td
                 = "Departure : #{correspondence_aller.departure_location}"
@@ -443,7 +443,7 @@
           - if !correspondence_retour.nil?
             tr.item
               td
-                = "<b>Correspondance</b>".html_safe
+                = "<b>Connection</b>".html_safe
             tr.item
               td
                 = "Departure : #{correspondence_retour.departure_location}"

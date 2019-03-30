@@ -31,15 +31,15 @@
           td
             span = partner_company.email
           td
-            span = "#{partner_company&.intl_number}" if partner_company.intl_number != nil
+            span = "#{partner_company&.phone_number}" if partner_company.phone_number != nil
           td
-            span = "#{partner_company&.urgence_intl_phone_number}" if partner_company.urgence_intl_phone_number != nil
+            span = "#{partner_company&.urgence_phone_number}" if partner_company.urgence_phone_number != nil
           td
             span = partner_company&.country&.capitalize
           / td
           /   span = "#{partner_company&.employees&.first&.first_name} #{partner_company&.employees&.first&.last_name}"
           / td
-          /   span = "#{partner_company&.employees&.first&.email} #{partner_company&.employees&.first&.intl_number}"
+          /   span = "#{partner_company&.employees&.first&.email} #{partner_company&.employees&.first&.phone_number}"
           td
             - if partner_company.nature == 'Organisme'
               span = link_to "<i class='fa fas fa-edit'></i>".html_safe, edit_partner_company_path(partner_company, camp: true)

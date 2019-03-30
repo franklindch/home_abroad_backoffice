@@ -34,7 +34,7 @@
             td
               span = date_format(client&.created_at)
             td
-              span = number_to_phone(client&.intl_number) if client.intl_number != nil
+              span = number_to_phone(client&.phone_number) if client.phone_number != nil
             td
               span = client&.email
             td

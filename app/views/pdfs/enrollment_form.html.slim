@@ -398,7 +398,7 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_aller.end_date)} | Time : #{time_format(travel_detail_aller.end_time)}"
           td
-          - if !correspondence_aller.nil?
+          - if !correspondence_aller.nil? && correspondence_aller&.departure_location != '' && correspondence_aller&.arrival_location != ''
             tr.item
               td
                 = "<b>Connection</b>".html_safe
@@ -440,7 +440,7 @@
           td
             = "Date (dd/mm/yr) : #{date_format(travel_detail_retour.end_date)} | Time : #{time_format(travel_detail_retour.end_time)}"
 
-          - if !correspondence_retour.nil?
+          - if !correspondence_retour.nil? && correspondence_retour&.departure_location != '' && correspondence_retour&.arrival_location != ''
             tr.item
               td
                 = "<b>Connection</b>".html_safe

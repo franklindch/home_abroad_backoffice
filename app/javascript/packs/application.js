@@ -38,4 +38,10 @@ document.addEventListener("turbolinks:load", () => {
   if ($('.oli')) {
 		select2PartnerCompanies();
   }
+  if($("#family_email")){
+    autocompleteFamilyFields();
+  }
+  if($('#invoice_language_stay_price_cents')){
+    autocompleteInvoiceFieldTotal();
+  }
 });

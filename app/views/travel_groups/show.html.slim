@@ -1,7 +1,7 @@
-- travel_detail_aller = @travel_group.travel_details.find_by_nature('Aller')
-- correspondence_aller = travel_detail_aller.correspondences.first
-- travel_detail_retour = @travel_group.travel_details.find_by_nature('Retour')
-- correspondence_retour = travel_detail_retour.correspondences.first
+- travel_detail_aller = @travel_group&.travel_details&.find_by_nature('Aller')
+- correspondence_aller = travel_detail_aller&.correspondences&.first
+- travel_detail_retour = @travel_group&.travel_details&.find_by_nature('Retour')
+- correspondence_retour = travel_detail_retour&.correspondences&.first
 
 .container-fluid
   .row.mt-5
@@ -13,11 +13,11 @@
     table cellpadding="0" cellspacing="0"
       tr.heading
         td
-          = "Voyage #{travel_detail_aller.nature}"
+          = "Voyage #{travel_detail_aller&.nature}"
         td
       tr.item
         td
-          = show_attribute_empty_string_no_underline(travel_detail_aller&.mode.humanize, 'Moyen de transport')
+          = show_attribute_empty_string_no_underline(travel_detail_aller&.mode&.humanize, 'Moyen de transport')
         td
           = show_attribute_empty_string_no_underline(travel_detail_aller&.reference, 'Référence')
       tr.item
@@ -63,11 +63,11 @@
 
       tr.heading
         td
-          = "Voyage #{travel_detail_retour.nature}"
+          = "Voyage #{travel_detail_retour&.nature}"
         td
       tr.item
         td
-          = show_attribute_empty_string_no_underline(travel_detail_retour&.mode.humanize, 'Moyen de transport')
+          = show_attribute_empty_string_no_underline(travel_detail_retour&.mode&.humanize, 'Moyen de transport')
         td
           = show_attribute_empty_string_no_underline(travel_detail_retour&.reference, 'Référence')
       tr.item
@@ -113,11 +113,11 @@
         table cellpadding="0" cellspacing="0"
           tr.heading
             td
-              = "Voyage #{@off_set_travel.nature} décalé"
+              = "Voyage #{@off_set_travel&.nature} décalé"
             td
           tr.item
             td
-              = show_attribute_empty_string_no_underline(@off_set_travel&.mode.humanize, 'Moyen de transport')
+              = show_attribute_empty_string_no_underline(@off_set_travel&.mode&.humanize, 'Moyen de transport')
             td
               = show_attribute_empty_string_no_underline(@off_set_travel&.reference, 'Référence')
           tr.item

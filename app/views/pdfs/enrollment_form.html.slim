@@ -221,6 +221,8 @@
           tr.item
             td
               = "<b>Connection</b>".html_safe
+            td
+              = "N° #{correspondence_aller&.reference}"
           tr.item
             td
               = "Departure : #{correspondence_aller.departure_location}"
@@ -262,6 +264,8 @@
           tr.item
             td
               = "<b>Connection</b>".html_safe
+            td
+              = "N° #{correspondence_retour&.reference}"
           tr.item
             td
               = "Departure : #{correspondence_retour.departure_location}"
@@ -402,6 +406,8 @@
             tr.item
               td
                 = "<b>Connection</b>".html_safe
+              td
+                = "N° #{correspondence_aller&.reference}"
             tr.item
               td
                 = "Departure : #{correspondence_aller.departure_location}"
@@ -444,10 +450,11 @@
             tr.item
               td
                 = "<b>Connection</b>".html_safe
+              td
+                = "N° #{correspondence_retour&.reference}"
             tr.item
               td
                 = "Departure : #{correspondence_retour.departure_location}"
-              td
             tr.item
               td
                 = "Date (dd/mm/yr) : #{date_format(correspondence_retour.start_date)} | Time : #{time_format(correspondence_retour.start_time)}"

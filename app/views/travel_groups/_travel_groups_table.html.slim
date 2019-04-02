@@ -27,9 +27,9 @@
             - travel_group.attendants.each do |attendant|
               span = "| #{attendant&.first_name} #{attendant&.last_name.upcase} "
           td
-            span = "#{date_format(travel_group.travel_details.first.start_date)}"
+            span = "#{date_format(travel_group&.travel_details&.first&.start_date)}"
           td
-            span = "#{date_format(travel_group.travel_details.second.start_date)}"
+            span = "#{date_format(travel_group&.travel_details&.second&.start_date)}"
           td
             span = link_to "Générer", airport_convocation_path(travel_group: travel_group), format: :pdf
           td

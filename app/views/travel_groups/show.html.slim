@@ -40,7 +40,7 @@
         td
           = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
-        - if correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
+        - if correspondence_aller && correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
           tr.item
             td
               p = show_attribute_empty_string_no_underline(correspondence_aller&.reference, 'Référence')
@@ -88,7 +88,7 @@
           = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
         td
           = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
-      - if  correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
+      - if correspondence_retour && correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
         tr.item
           td
             p = show_attribute_empty_string_no_underline(correspondence_retour&.reference, 'Référence')

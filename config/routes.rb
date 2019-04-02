@@ -23,7 +23,6 @@ Rails.application.routes.draw do
       resources :payments, only: [:edit, :destroy, :update]
     end
     resources :attendants
-    resources :travel_groups
 
     resources :travels, only: [:show] do
       resources :transits
@@ -36,11 +35,18 @@ Rails.application.routes.draw do
 
     resources :child_details, only: [:index]
 
+
     resources :travels, only: [:index, :destroy, :edit, :update]
+
+    resources :travel_groups
+    resources :travel_groups, only: [:show] do
+      resources :travel_details, only: [:new, :create, :edit, :update]
+    end
     resources :travels, only: [:show] do
       resources :off_set_travels, only: [:new, :create, :edit, :update]
       resources :travel_details, only: [:new, :create, :edit, :update]
     end
+
 
     resources :travel_details, only: [:show] do
       resources :correspondences, only: [:new, :create, :edit, :update]

@@ -11,7 +11,7 @@ section
             		.row
             			.col-md-4
                     = f.input :name, label: 'Nom de famille'
-                    = f.input :email, label: 'Email'
+                    = f.input :email, label: 'Email', input_html: { class: 'family_email_input' }
                     = f.input :phone, label: 'Téléphone fixe', input_html: { class: 'phone_field' }
 
                     h6.mt-5.mb-4 Informations secondaires, vous pourrez y revenir plus tard :
@@ -33,7 +33,7 @@ section
                     = f.input :mother_first_name, label: 'Prénom'
                     = f.input :mother_phone, as: :tel, label: 'Tél fixe ou portable', input_html: { class: 'mother_phone' }
                     = f.input :mother_office_phone, as: :tel, label: 'Tél bureau', input_html: { class: 'mother_office_phone' }
-                    = f.input :mother_email, as: :tel, label: 'Email'
+                    = f.input :mother_email, label: 'Email'
                   .col-md-6
                     h4.mt-3.text-center Contact Père
                     = f.input :father_main_contact, label: 'Contact principal ?', as: :radio_buttons

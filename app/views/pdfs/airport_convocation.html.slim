@@ -17,7 +17,8 @@
                 = "<b>Convocation Voyage</b>".html_safe
               br/
             td.text-left
-              = "Rendez-vous au comptoir d'enregistrement <b>#{c(travel_detail_aller&.partner_company&.name)}</b> à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
+              - if travel_detail_aller.meeting_time
+                = "Rendez-vous au comptoir d'enregistrement <b>#{c(travel_detail_aller&.partner_company&.name)}</b> à <b>#{time_format(travel_detail_aller.meeting_time)}</b> précise(s), le #{week_day(travel_detail_aller&.start_date)} #{date_format(travel_detail_aller&.start_date)}<br>L'accompagnateur portera un panneau HOME ABROAD.".html_safe
 
       - if params[:travel_id] && Travel.find(params[:travel_id]).off_set_travel && Travel.find(params[:travel_id]).off_set_travel.nature == 'Aller'
         - @travel = Travel.find(params[:travel_id])
@@ -80,7 +81,7 @@
           td
             = show_attribute_empty_string_no_underline(time_format(travel_detail_aller&.end_time), 'Heure d\'arrivée')
 
-          - if correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
+          - if correspondence_aller && correspondence_aller.departure_location != '' && correspondence_aller.arrival_location != ''
             tr.item
               td
                 p = show_attribute_empty_string_no_underline(correspondence_aller&.reference, 'Référence')
@@ -158,7 +159,7 @@
             = show_attribute_empty_string_no_underline(date_format(travel_detail_retour&.end_date), 'Date d\'arrivée')
           td
             = show_attribute_empty_string_no_underline(time_format(travel_detail_retour&.end_time), 'Heure d\'arrivée')
-        - if correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
+        - if correspondence_retour && correspondence_retour.departure_location != '' && correspondence_retour.arrival_location != ''
           tr.item
             td
               p = show_attribute_empty_string_no_underline(correspondence_retour&.reference, 'Référence')

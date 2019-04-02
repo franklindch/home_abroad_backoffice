@@ -10,15 +10,26 @@ class CorrespondencesController < ApplicationController
   def create
     @correspondence = Correspondence.new(correspondence_params)
     @correspondence.travel_detail = @travel_detail
-
-    if @correspondence.save && @travel_detail.nature == 'Retour'
-      flash[:notice] = "Correspondence ajoutée avec succès !"
-      redirect_to family_client_path(@travel_detail.travel.language_stay.client.family,  @travel_detail.travel.language_stay.client)
-    elsif @correspondence.save
-      flash[:notice] = "Correspondence ajoutée avec succès !"
-      redirect_to new_travel_travel_detail_path(@correspondence.travel_detail.travel)
+    if @travel_detail.travel_group
+      if @correspondence.save && @travel_detail.nature == 'Retour'
+        flash[:notice] = "Correspondence ajoutée avec succès !"
+        redirect_to travel_groups_path
+      elsif @correspondence.save
+        flash[:notice] = "Correspondence ajoutée avec succès !"
+        redirect_to new_travel_group_travel_detail_path(@correspondence.travel_detail.travel_group)
+      else
+        render :new
+      end
     else
-      render :new
+      if @correspondence.save && @travel_detail.nature == 'Retour'
+        flash[:notice] = "Correspondence ajoutée avec succès !"
+        redirect_to family_client_path(@travel_detail.travel.language_stay.client.family,  @travel_detail.travel.language_stay.client)
+      elsif @correspondence.save
+        flash[:notice] = "Correspondence ajoutée avec succès !"
+        redirect_to new_travel_travel_detail_path(@correspondence.travel_detail.travel)
+      else
+        render :new
+      end
     end
   end
 
@@ -26,13 +37,22 @@ class CorrespondencesController < ApplicationController
 
   def update
     @correspondence.update(correspondence_params)
-    # binding.pry
-    if @travel_detail.nature == 'Retour'
-      flash[:notice] = "Correspondence éditée avec succès !"
-      redirect_to family_client_path(@travel_detail.travel.language_stay.client.family, @travel_detail.travel.language_stay.client)
+    if @travel_detail.travel_group
+      if @travel_detail.nature == 'Retour'
+        flash[:notice] = "Correspondence éditée avec succès !"
+        redirect_to travel_groups_path
+      else
+        flash[:notice] = "Correspondence éditée avec succès !"
+        redirect_to edit_travel_group_travel_detail_path(@travel_detail.travel_group, @travel_detail.travel_group.travel_details.where(nature:'Retour').first)
+      end
     else
-      flash[:notice] = "Correspondence éditée avec succès !"
-      redirect_to edit_travel_travel_detail_path(@travel_detail.travel, @travel_detail.travel.travel_details.where(nature:'Retour').first)
+      if @travel_detail.nature == 'Retour'
+        flash[:notice] = "Correspondence éditée avec succès !"
+        redirect_to family_client_path(@travel_detail.travel.language_stay.client.family, @travel_detail.travel.language_stay.client)
+      else
+        flash[:notice] = "Correspondence éditée avec succès !"
+        redirect_to edit_travel_travel_detail_path(@travel_detail.travel, @travel_detail.travel.travel_details.where(nature:'Retour').first)
+      end
     end
   end
 

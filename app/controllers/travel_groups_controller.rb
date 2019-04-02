@@ -5,19 +5,15 @@ class TravelGroupsController < ApplicationController
 
   def new
     @travel_group = TravelGroup.new
-    @travel_detail_aller = @travel_group.travel_details.build
-    @correspondence_aller = @travel_detail_aller.correspondences.build
-    @travel_detail_retour = @travel_group.travel_details.build
-    @correspondence_retour = @travel_detail_retour.correspondences.build
   end
 
   def create
     @travel_group = TravelGroup.new(travel_group_params)
-
+    # binding.pry
     if @travel_group.save
       flash[:notice] = "Voyage créé avec succès !"
       @travel_group.update(attendant_ids: @attendants)
-      redirect_to new_travel_travel_detail_path(@travel_group)
+      redirect_to new_travel_group_travel_detail_path(@travel_group)
     else
       flash[:alert] = "Merci de lire les messages d'erreur."
       render :new
@@ -28,22 +24,13 @@ class TravelGroupsController < ApplicationController
     @off_set_travel = OffSetTravel.find(params[:off_set_travel_id]) if params[:off_set_travel_id]
   end
 
-  def edit
-    @travel_details = @travel_group.travel_details
-    # @travel_details = @travel.travel_details.reverse
-    # @travel_group_detail_aller = @travel_group.travel_details.first
-    # @correspondence_aller = @travel_group_detail_aller&.correspondences&.first
-    # @travel_group_detail_retour = @travel_group.travel_details.second
-    # @correspondence_aller = @travel_group_detail_retour&.correspondences&.first
-  end
+  def edit; end
 
   def update
-    @travel_group_detail_aller = @travel_group.travel_details.where(nature: 'Aller').first
-    @travel_group_detail_retour = @travel_group.travel_details.where(nature: 'Retour').first
     @travel_group.update(travel_group_params)
     @travel_group.update(attendant_ids: @attendants)
     flash[:notice] = "Voyage édité avec succès !"
-    redirect_to travel_groups_path
+    redirect_to edit_travel_group_travel_detail_path(@travel_group, @travel_group.travel_details.first)
   end
 
 
@@ -80,14 +67,7 @@ class TravelGroupsController < ApplicationController
   end
 
   def travel_group_params
-    params.require(:travel_group).permit(:season, :capacity, :attendant_ids, :travel_code, :language_stay_id,
-      travel_details_attributes: [
-        :start_date, :end_date, :id, :reference, :companies, :nature, :is_correspondence, :mode, :meeting_time, :start_time, :end_time, :departure_location, :arrival_location, :partner_company_id, :travel_id, :_destroy,
-        correspondences_attributes: [
-          :id, :reference, :start_time, :end_time, :departure_location, :arrival_location, :travel_detail_id, :_destroy, :start_date, :end_date
-        ]
-      ]
-    )
+    params.require(:travel_group).permit(:season, :capacity, :attendant_ids, :travel_code, :language_stay_id)
   end
 
   def retrieve_travel_group

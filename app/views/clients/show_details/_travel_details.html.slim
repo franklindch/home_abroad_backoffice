@@ -13,7 +13,7 @@
     = render 'transits/transit_details', travel: travel
   .row
     .mt-5.edit-delete-links.ml-3
-      = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
+      / = link_to "<i class='fa fas fa-edit'> Voyage</i>".html_safe, edit_language_stay_travel_path(language_stay, language_stay.travel)
       = link_to "<i class='fa fas fa-trash-alt'> Voyage</i>".html_safe, language_stay_travel_path(language_stay, language_stay.travel), method: :delete, class: 'delete-link ml-3', data: {confirm: 'Êtes-vous sûr ?'}, id: language_stay.travel.id
 
 

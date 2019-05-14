@@ -128,7 +128,7 @@ class TravelDetailsController < ApplicationController
 
   def travel_detail_params
     params.require(:travel_detail).permit(
-       :is_correspondence, :mode, :nature, :companies, :u_m, :partner_company_id, :start_date, :end_date, :travel_detail_id, :reference, :start_time, :end_time, :departure_location, :arrival_location
+       :is_correspondence, :mode, :nature, :companies, :u_m, :partner_company_id, :start_date, :end_date, :meeting_time, :travel_detail_id, :reference, :start_time, :end_time, :departure_location, :arrival_location
       )
   end
 

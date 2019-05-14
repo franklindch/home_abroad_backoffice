@@ -75,8 +75,16 @@ class ClientsController < ApplicationController
     end
   end
 
+  def download_900
+    @clients = Client.all[601..900]
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Clients au #{Date.today}" }
+    end
+  end
+
   def download_rest
-    @clients = Client.all[601..900].nil? ? Client.all[301..600] : Client.all[601..900]
+    @clients = Client.all[901..1200]
     respond_to do |format|
       format.html
       format.xlsx { render filename: "Clients au #{Date.today}" }

@@ -22,9 +22,11 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
 	 	  .btn-toolbar.mb-2.mb-md-0
 	 	    .mr-2.d-flex.justify-content-around
 	 				= create_a_model(model)
-	 				= link_to 'Exporter 300 premiers Clients', download_path(format: :xlsx), class: 'btn btn-outline-primary'
+	 				= link_to 'Exporter 0-300 Clients', download_path(format: :xlsx), class: 'btn btn-outline-primary'
           = link_to 'Exporter 300-600 Clients', download_600_path(format: :xlsx), class: 'btn btn-outline-primary'
-          = link_to 'Exporter 600-900 Clients', download_rest_path(format: :xlsx), class: 'btn btn-outline-primary'
+          = link_to 'Exporter 600-900 Clients', download_900_path(format: :xlsx), class: 'btn btn-outline-primary'
+          = link_to 'Exporter 900-1200 Clients', download_rest_path(format: :xlsx), class: 'btn btn-outline-primary'
+          = "#{LanguageStay.count} séjours vendus, bravo !"
 	   	.form-inline.pb-4.mb-5.border-bottom
 	 	    = form_tag clients_path, method: :get do
 	 	      = text_field_tag :query,

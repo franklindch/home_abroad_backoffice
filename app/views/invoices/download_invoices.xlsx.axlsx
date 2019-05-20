@@ -1,0 +1,47 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "f2f2f2")
+  wb.add_worksheet(name: "Clients") do |sheet|
+    sheet.add_row [
+      'Nom',
+      'Prénom',
+      'Email père',
+      'Email mère',
+      'Organisme',
+      'Date Départ',
+      'Total facture',
+      'Reste à régler',
+      'Total réglé',
+      'Total remboursé'
+    ], style: [
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell,
+      highlight_cell
+    ]
+    @invoices.each do |invoice|
+      sheet.add_row [
+        invoice.language_stay.client.last_name,
+        invoice.language_stay.client.first_name,
+        invoice.language_stay.client.family.father_email,
+        invoice.language_stay.client.family.mother_email,
+        invoice.language_stay.partner_company.name,
+        invoice.language_stay.start_date,
+        invoice.total_price_cents,
+        (invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements),
+        invoice.total_règlements,
+        invoice.total_remboursements
+      ]
+      end
+    end
+  end

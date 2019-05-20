@@ -125,7 +125,7 @@ main.col-md-9.ml-sm-auto.col-lg-10.px-4.main-div.margin-top-navbar role="main"
             h1.h2 = "Tous les séjours non soldés"
             .btn-toolbar.mb-2.mb-md-0
                 .mr-2.d-flex.justify-content-around
-                / = link_to 'Exporter liste', all_child_details_path(format: :xlsx), class: 'btn btn-outline-primary'
+                  = link_to 'Exporter Factures', download_invoices_path(format: :xlsx), class: 'btn btn-outline-primary'
         .form-inline.pb-4.mb-5.border-bottom
 
     - else

@@ -42,7 +42,6 @@ class InvoicesController < ApplicationController
 	def paid_invoice
 		@invoice = Invoice.find(params[:paid_invoice])
 	  generate_paid_invoice_pdf(@invoice)
-		# fields_filled(@language_stay)
 	end
 
   def still_need_payment
@@ -50,6 +49,14 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def download_invoices
+    @invoices = Invoice.order_by_language_stays_start_date.still_need_payment
+    respond_to do |format|
+      format.html
+      format.xlsx { render filename: "Récap factures au #{Date.today}" }
     end
   end
 

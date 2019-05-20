@@ -200,7 +200,7 @@
           td
             = "<b>Arriving</b>".html_safe
           td
-            = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+            = "Mode : #{travel_detail_aller&.mode}, N° #{travel_detail_aller&.reference}"
         tr.item
           td
             = "Departure : #{travel_detail_aller.departure_location}"
@@ -243,7 +243,7 @@
           td
             = "<b>Returning</b>".html_safe
           td
-            = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+            = "Mode : #{travel_detail_retour&.mode}, N° #{travel_detail_retour.reference}"
         tr.item
           td
             = "Departure : #{travel_detail_retour.departure_location}"
@@ -293,7 +293,7 @@
             td
               = "<b>Arriving</b>".html_safe
             td
-              = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
+              = "Mode : #{off_set_travel.&mode}, N° #{off_set_travel.&reference}"
           tr.item
             td
               = "Departure : #{off_set_travel.departure_location}"
@@ -315,7 +315,7 @@
             td
               = "<b>Arriving</b>".html_safe
             td
-              = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+              = "Mode : #{travel_detail_aller&.mode}, N° #{travel_detail_aller&.reference}"
           tr.item
             td
               = "Departure : #{travel_detail_aller.departure_location}"
@@ -337,7 +337,7 @@
             td
               = "<b>Returning</b>".html_safe
             td
-              = "Mode : #{off_set_travel.mode}, N° #{off_set_travel.reference}"
+              = "Mode : #{off_set_travel&.mode}, N° #{off_set_travel.&reference}"
           tr.item
             td
               = "Departure : #{off_set_travel.departure_location}"
@@ -359,7 +359,7 @@
             td
               = "<b>Returning</b>".html_safe
             td
-              = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+              = "Mode : #{travel_detail_retour&.mode}, N° #{travel_detail_retour.reference}"
           tr.item
             td
               = "Departure : #{travel_detail_retour.departure_location}"
@@ -385,7 +385,7 @@
           td
             = "<b>Arriving</b>".html_safe
           td
-            = "Mode : #{travel_detail_aller.mode}, N° #{travel_detail_aller.reference}"
+            = "Mode : #{travel_detail_aller&.mode}, N° #{travel_detail_aller.reference}"
         tr.item
           td
             = "Departure : #{travel_detail_aller.departure_location}"
@@ -429,7 +429,7 @@
           td
             = "<b>Returning</b>".html_safe
           td
-            = "Mode : #{travel_detail_retour.mode}, N° #{travel_detail_retour.reference}"
+            = "Mode : #{travel_detail_retour&.mode}, N° #{travel_detail_retour&.reference}"
         tr.item
           td
             = "Departure : #{travel_detail_retour.departure_location}"
@@ -481,7 +481,7 @@
           td
             = "<b>Pre Transit</b>".html_safe
           td
-            = "Mode : #{pre_transit.mode}, N° #{pre_transit.reference}"
+            = "Mode : #{pre_transit&.mode}, N° #{pre_transit.reference}"
         tr.item
           td
             = "Departure : #{pre_transit.departure_location}"
@@ -503,7 +503,7 @@
           td
             = "<b>Post Transit</b>".html_safe
           td
-            = "Mode : #{post_transit.mode}, N° #{post_transit.reference}"
+            = "Mode : #{post_transit&.mode}, N° #{post_transit&.reference}"
         tr.item
           td
             = "Departure : #{post_transit.departure_location}"

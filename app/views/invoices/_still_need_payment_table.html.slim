@@ -41,5 +41,6 @@
               span = link_to 'Vers client', client_path(invoice.language_stay.client)
             td
               span = invoice&.total_price_cents
+            - if invoice.total_règlements && invoice.total_remboursements
             td
-              / = "#{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements}"
+              = "#{invoice.total_price_cents - invoice.total_règlements + invoice.total_remboursements}"
